@@ -11,9 +11,9 @@
       q1: "Who’s behind the foundation?",
       a1:
         '<p class="role">Founder &amp; Patron</p>' +
-        '<p class="bio"><a href="https://www.linkedin.com/in/elena-bunina-738522eb/" target="_blank" rel="noopener">Elena Bunina</a>, a mathematics professor at Bar Ilan University, and CEO of the <a href="https://academy.nebius.com" target="_blank" rel="noopener">Nebius Academy</a>.</p>' +
+        '<p class="bio"><a href="https://www.linkedin.com/in/elena-bunina-738522eb/" target="_blank" rel="noopener">Elena Bunina</a>, a mathematics professor at Bar Ilan University, and head of the <a href="https://academy.nebius.com" target="_blank" rel="noopener">Nebius Academy</a>.</p>' +
         '<p class="role">Co-Founder &amp; CEO</p>' +
-        '<p class="bio"><a href="https://www.linkedin.com/in/utterstep/" target="_blank" rel="noopener">Vlad Stepanov</a>, ex-CEO of <a href="https://gradarius.com" target="_blank" rel="noopener">Gradarius</a>, ex-CTO and head of Informatics at Yandex. 13+ years of experience in EdTech in the US and CSI.</p>',
+        '<p class="bio"><a href="https://www.linkedin.com/in/utterstep/" target="_blank" rel="noopener">Vlad Stepanov</a>, ex-CEO of <a href="https://gradarius.com" target="_blank" rel="noopener">Gradarius</a>, ex-CTO and head of Informatika at Yandex Education. 13+ years of experience in EdTech in the US and CSI.</p>',
       q3: "How can I contact you?",
       a3:
         '<p class="bio">Write to us at <a href="mailto:contact@morim.foundation">contact@morim.foundation</a> and tell us a little about yourself.</p>'
@@ -28,9 +28,9 @@
       q1: "Кто стоит за фондом?",
       a1:
         '<p class="role">Основатель и попечитель</p>' +
-        '<p class="bio"><a href="https://www.linkedin.com/in/elena-bunina-738522eb/" target="_blank" rel="noopener">Елена Бунина</a>, профессор математики в Университете Бар-Илан и CEO <a href="https://academy.nebius.com" target="_blank" rel="noopener">Nebius Academy</a>.</p>' +
+        '<p class="bio"><a href="https://www.linkedin.com/in/elena-bunina-738522eb/" target="_blank" rel="noopener">Елена Бунина</a>, профессор математики в Университете Бар-Илан и руководитель <a href="https://academy.nebius.com" target="_blank" rel="noopener">Nebius Academy</a>.</p>' +
         '<p class="role">Сооснователь и CEO</p>' +
-        '<p class="bio"><a href="https://www.linkedin.com/in/utterstep/" target="_blank" rel="noopener">Влад Степанов</a>, экс-CEO <a href="https://gradarius.com" target="_blank" rel="noopener">Gradarius</a>, экс-CTO и руководитель Информатики в Яндексе. 13+ лет опыта в EdTech в США и СНГ.</p>',
+        '<p class="bio"><a href="https://www.linkedin.com/in/utterstep/" target="_blank" rel="noopener">Влад Степанов</a>, экс-CEO <a href="https://gradarius.com" target="_blank" rel="noopener">Gradarius</a>, экс-CTO и руководитель Информатики в Яндекс.Образовании. 13+ лет опыта в EdTech в США и СНГ.</p>',
       q3: "Как с вами связаться?",
       a3:
         '<p class="bio">Напишите нам на <a href="mailto:contact@morim.foundation">contact@morim.foundation</a> и немного расскажите о себе.</p>'
@@ -45,9 +45,9 @@
       q1: "מי עומד מאחורי הקרן?",
       a1:
         '<p class="role">מייסדת ופטרונית</p>' +
-        '<p class="bio"><a href="https://www.linkedin.com/in/elena-bunina-738522eb/" target="_blank" rel="noopener">אלנה בונינה</a>, פרופסור למתמטיקה באוניברסיטת בר-אילן ומנכ״לית <a href="https://academy.nebius.com" target="_blank" rel="noopener">Nebius Academy</a>.</p>' +
+        '<p class="bio"><a href="https://www.linkedin.com/in/elena-bunina-738522eb/" target="_blank" rel="noopener">אלנה בונינה</a>, פרופסור למתמטיקה באוניברסיטת בר-אילן וראש <a href="https://academy.nebius.com" target="_blank" rel="noopener">Nebius Academy</a>.</p>' +
         '<p class="role">מייסד שותף ומנכ״ל</p>' +
-        '<p class="bio"><a href="https://www.linkedin.com/in/utterstep/" target="_blank" rel="noopener">ולאד סטפנוב</a>, לשעבר מנכ״ל <a href="https://gradarius.com" target="_blank" rel="noopener">Gradarius</a>, לשעבר CTO וראש תחום האינפורמטיקה ב-Yandex. 13+ שנות ניסיון ב-EdTech בארה״ב ובחבר העמים.</p>',
+        '<p class="bio"><a href="https://www.linkedin.com/in/utterstep/" target="_blank" rel="noopener">ולאד סטפנוב</a>, לשעבר מנכ״ל <a href="https://gradarius.com" target="_blank" rel="noopener">Gradarius</a>, לשעבר CTO וראש תחום Informatika ב-Yandex Education. 13+ שנות ניסיון ב-EdTech בארה״ב ובחבר העמים.</p>',
       q3: "איך אפשר ליצור איתכם קשר?",
       a3:
         '<p class="bio">כיתבו אלינו ל- <a href="mailto:contact@morim.foundation">contact@morim.foundation</a> וספרו לנו קצת על עצמכם.</p>'
