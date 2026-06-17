@@ -75,11 +75,12 @@ a:hover { opacity: 0.55; }
   margin-inline-start: 4px;
 }
 .pilot-link {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
+  text-underline-offset: 3px;            /* inherited, so default + hover align */
 }
-.pilot-link:hover { text-decoration: underline; opacity: 1; }
-.pilot-link .arrow { text-decoration: underline; text-underline-offset: 3px; }
+.pilot-link .arrow { text-decoration: underline; }   /* arrow underline (its own, since it's inline-block) */
+.pilot-link:hover { text-decoration: underline; opacity: 1; }  /* same 3px offset → aligns with the arrow */
 
 /* ---------- FAQ / accordion ---------- */
 .faq {
