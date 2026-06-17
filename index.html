@@ -29,9 +29,9 @@
     <header class="hero">
       <p class="title" data-i18n="title">Morim Foundation</p>
       <p class="pilcrow" aria-hidden="true">¶</p>
-      <p class="tagline" data-i18n="tagline" data-i18n-html>We fund and train a new kind of teacher — to win a kid’s attention in the era of cheap dopamine</p>
+      <p class="tagline" data-i18n="tagline" data-i18n-html>We fund and train a new kind of&nbsp;teacher, to&nbsp;win a kid’s attention in&nbsp;the era of&nbsp;cheap dopamine</p>
       <p class="pilcrow" aria-hidden="true">¶</p>
-      <p class="pilot" data-i18n="pilot" data-i18n-html><a class="pilot-link" href="https://summer-pilot-2026.utterstep.app/">First pilot: Summer 2026 <span class="arrow" aria-hidden="true">↪</span></a></p>
+      <p class="pilot" data-i18n="pilot" data-i18n-html><a class="pilot-link" href="https://summer-pilot-2026.utterstep.app/">First pilot: Summer 2026 <span class="arrow" aria-hidden="true">↪&#xFE0E;</span></a></p>
     </header>
 
     <section class="faq" aria-label="About">
@@ -42,9 +42,9 @@
         </summary>
         <div class="answer" data-i18n="a1" data-i18n-html>
           <p class="role">Founder &amp; Patron</p>
-          <p class="bio"><a href="https://www.linkedin.com/in/elena-bunina-738522eb/" target="_blank" rel="noopener">Elena Bunina</a>, a mathematics professor at Bar Ilan University, and head of the <a href="https://academy.nebius.com" target="_blank" rel="noopener">Nebius Academy</a>.</p>
+          <p class="bio"><a href="https://www.linkedin.com/in/elena-bunina-738522eb/" target="_blank" rel="noopener">Elena Bunina</a>, a mathematics professor at&nbsp;Bar Ilan University, and head of&nbsp;the <a href="https://academy.nebius.com" target="_blank" rel="noopener">Nebius Academy</a>.</p>
           <p class="role">Co-Founder &amp; CEO</p>
-          <p class="bio"><a href="https://www.linkedin.com/in/utterstep/" target="_blank" rel="noopener">Vlad Stepanov</a>, ex-CEO of <a href="https://gradarius.com" target="_blank" rel="noopener">Gradarius</a>, ex-CTO and head of Informatika at Yandex Education. 13+ years of experience in EdTech in the US and CSI.</p>
+          <p class="bio"><a href="https://www.linkedin.com/in/utterstep/" target="_blank" rel="noopener">Vlad Stepanov</a>, ex-CEO of&nbsp;<a href="https://gradarius.com" target="_blank" rel="noopener">Gradarius</a>, ex-CTO and head of&nbsp;Informatika at&nbsp;Yandex Education. 13+ years of&nbsp;experience in&nbsp;EdTech in&nbsp;the US and CSI.</p>
         </div>
       </details>
 
@@ -54,7 +54,7 @@
           <span class="sign" aria-hidden="true"></span>
         </summary>
         <div class="answer" data-i18n="a3" data-i18n-html>
-          <p class="bio">Write to us at <a href="mailto:contact@morim.foundation">contact@morim.foundation</a> and tell us a little about yourself.</p>
+          <p class="bio">Write to&nbsp;us at&nbsp;<a href="mailto:contact@morim.foundation">contact@morim.foundation</a> and tell us a little about&nbsp;yourself.</p>
         </div>
       </details>
     </section>
@@ -75,9 +75,11 @@
     <img class="doodle" id="d5" src="static/img/clef.png"   alt="" />
     <img class="doodle" id="d6" src="static/img/burst.png"  alt="" />
     <img class="doodle" id="d7" src="static/img/scroll.png" alt="" />
-    <img class="doodle" id="d8" src="static/img/star.png"   alt="" />
     <img class="doodle" id="d9" src="static/img/burst.png"  alt="" />
   </div>
+
+  <!-- Star lives outside the fixed .doodles layer so it scrolls/reflows with the document -->
+  <img class="doodle" id="d8" src="static/img/star.png" alt="" aria-hidden="true" />
 
   <script src="static/js/i18n.js"></script>
 </body>

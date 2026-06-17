@@ -2,7 +2,7 @@
   --ink: #141414;
   --muted: #9a9a9a;
   --sign: #4a4a4a;
-  --max: 440px;
+  --max: 518px;   /* scaled with desktop font (440 × 20/17) */
 }
 
 * { box-sizing: border-box; }
@@ -11,7 +11,7 @@ html, body { margin: 0; padding: 0; background: #fff; }
 
 body {
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  font-size: 17px;
+  font-size: 20px;
   line-height: 1.55;
   color: var(--ink);
   position: relative;
@@ -80,7 +80,8 @@ a:hover { opacity: 0.55; }
   text-underline-offset: 3px;            /* inherited, so default + hover align */
 }
 .pilot-link .arrow { text-decoration: underline; }   /* arrow underline (its own, since it's inline-block) */
-.pilot-link:hover { text-decoration: underline; opacity: 1; }  /* same 3px offset → aligns with the arrow */
+.pilot-link:hover { opacity: 1; }                     /* no fade on hover */
+.pilot-link:hover .arrow { text-decoration: none; }   /* remove the arrow's underline on hover */
 
 /* ---------- FAQ / accordion ---------- */
 .faq {
@@ -137,8 +138,12 @@ details:not([open]) .sign::after { content: "+"; }
 
 /* ---------- Doodles ---------- */
 .doodles {
-  position: absolute;
-  inset: 0;
+  position: absolute;       /* scrolls with the page (not fixed) */
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;            /* fixed reference height: % positions resolve against a
+                              constant, so doodles don't shift when a section opens/closes */
   z-index: 1;
   pointer-events: none;
   overflow: hidden;
@@ -151,19 +156,51 @@ details:not([open]) .sign::after { content: "+"; }
   -webkit-user-drag: none;
 }
 
-#d1 { left: 12%;  top: 22%; width: 66px; transform: rotate(-4deg); }  /* atom  */
-#d2 { left: 30%;  top: 16%; width: 44px; transform: rotate(6deg); }   /* burst */
-#d3 { left: 50%;  top: 14%; width: 78px; transform: rotate(-3deg); }  /* leaf  */
-#d4 { left: 61%;  top: 27%; width: 80px; transform: rotate(4deg); }   /* fairy */
-#d5 { left: 13%;  top: 45%; width: 46px; }                            /* clef  */
-#d6 { left: 54%;  top: 47%; width: 28px; }                            /* burst */
-#d7 { left: 21%;  top: 67%; width: 50px; transform: rotate(176deg); } /* scroll*/
-#d8 { left: 45%;  top: 84%; width: 56px; transform: rotate(-8deg); }  /* star  */
-#d9 { left: 73%;  top: 47%; width: 28px; }                            /* burst */
+#d1 { left: 23%;  top: 22%; width: 66px; transform: rotate(-4deg); }  /* atom  */
+#d2 { left: 40%;  top: 11%; width: 44px; transform: rotate(6deg); }   /* burst */
+#d3 { left: 66%;  top: 18%; width: 78px; transform: rotate(-3deg); }  /* leaf  */
+#d4 { left: 85%;  top: 27%; width: 80px; transform: rotate(4deg); }   /* fairy */
+#d5 { left: 14%;  top: 46%; width: 46px; }                            /* clef  */
+#d6 { left: 74%;  top: 51%; width: 28px; }                            /* burst */
+#d7 { left: 25%;  top: 75%; width: 50px; transform: rotate(176deg); } /* scroll*/
+#d8 { left: 60%;  top: 92%; width: 56px; transform: rotate(-8deg);    /* star  */
+      z-index: 1; pointer-events: none; }                             /* outside .doodles: needs its own layer props */
+#d9 { left: 78%;  top: 73%; width: 28px; }                            /* burst */
+
+/* ---------- Doodle fade-in ---------- */
+@keyframes doodle-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.doodle {
+  opacity: 0;                                    /* hidden until its turn */
+  animation: doodle-in 0.35s ease-out forwards;
+}
+/* clockwise reveal starting from the clef (left mid), 0.7s step between each */
+#d5 { animation-delay: 0s;   }  /* left mid    */
+#d1 { animation-delay: 0.7s; }  /* upper left  */
+#d2 { animation-delay: 1.4s; }  /* top center  */
+#d3 { animation-delay: 2.1s; }  /* upper right */
+#d4 { animation-delay: 2.8s; }  /* right upper */
+#d6 { animation-delay: 3.5s; }  /* right mid   */
+#d9 { animation-delay: 4.2s; }  /* right lower */
+#d8 { animation-delay: 4.9s; }  /* bottom      */
+#d7 { animation-delay: 5.6s; }  /* lower left  */
+@media (prefers-reduced-motion: reduce) {
+  .doodle { opacity: 1; animation: none; }
+}
+
+/* ---------- Desktop type tweaks ---------- */
+@media (min-width: 721px) {
+  .lang,               /* language switcher */
+  .answer { font-size: 18px; }   /* FAQ answer text (roles + bios) */
+}
 
 /* ---------- Mobile ---------- */
 @media (max-width: 720px) {
-  body { font-size: 19px; line-height: 1.5; }
+  body { font-size: 16px; line-height: 1.5; }   /* sections' content + language stay 16 */
+  .hero { font-size: 18px; }                     /* main (hero) text */
+  summary { font-size: 18px; }                   /* section titles */
 
   .lang {
     position: static;
@@ -184,10 +221,17 @@ details:not([open]) .sign::after { content: "+"; }
   /* doodles: only the six from the reference; rest hidden */
   #d2, #d3, #d9 { display: none; }
 
-  #d1 { left: 5%;   top: 11%; width: 58px; transform: rotate(-4deg); }  /* atom  */
-  #d4 { left: 64%;  top: 6%;  width: 66px; transform: rotate(4deg); }   /* fairy */
-  #d5 { left: 10%;  top: 36%; width: 46px; }                            /* clef  */
-  #d6 { left: 80%;  top: 39%; width: 30px; }                            /* burst */
-  #d7 { left: 8%;   top: 82%; width: 40px; transform: rotate(176deg); } /* scroll*/
-  #d8 { left: 66%;  top: 85%; width: 50px; transform: rotate(-8deg); }  /* star  */
+  #d1 { left: 5%;   top: 7%;  width: 78px; transform: rotate(-4deg); scale: 70%; }  /* atom  */
+  #d4 { left: 77%;  top: 9%;  width: 90px; transform: rotate(4deg);  scale: 70%; }  /* fairy */
+  #d5 { left: 10%;  top: 40%; width: 52px; scale: 77%; }                            /* clef  */
+  #d6 { left: 86%;  top: 36%; width: 42px; }                                        /* burst */
+  #d7 { left: 14%;  top: 93%; width: 40px; transform: rotate(176deg); display: none; } /* scroll (hidden) */
+  #d8 { left: 53%;  top: 75%; width: 63px; transform: rotate(-8deg); }              /* star  */
+
+  /* re-step the cascade over only the visible doodles (skip the display:none ones) */
+  #d5 { animation-delay: 0s;   }
+  #d1 { animation-delay: 0.7s; }
+  #d4 { animation-delay: 1.4s; }
+  #d6 { animation-delay: 2.1s; }
+  #d8 { animation-delay: 2.8s; }
 }
