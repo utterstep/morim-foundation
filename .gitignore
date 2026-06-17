@@ -1,0 +1,15 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Logs & local tooling
+*.log
+.rodney/
+
+# Dependencies (none at runtime — static site)
+node_modules/
