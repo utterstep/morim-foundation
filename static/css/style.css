@@ -64,12 +64,17 @@ a:hover { opacity: 0.55; }
 /* ---------- Hero ---------- */
 .hero { text-align: center; }
 .hero p { margin: 0; }
-.title { }
-.pilcrow {
-  margin: 12px 0;
-  color: var(--ink);
+.title {
+  margin: 0 0 clamp(20px, 4vh, 40px);
+}
+.title img {
+  display: block;
+  width: min(100%, 440px);
+  height: auto;
+  margin-inline: auto;
 }
 .tagline { max-width: 24em; margin-inline: auto; }
+.hero .pilot { margin-top: 2.6em; }
 .pilot .arrow {
   display: inline-block;
   margin-inline-start: 4px;
@@ -114,12 +119,42 @@ details[open] .sign::after  { content: "–"; }
 details:not([open]) .sign::after { content: "+"; }
 
 .answer { padding-top: 18px; }
+/* text-only answers (no photo cards) read better at a narrower measure */
+.answer:not(:has(.cards)) { max-width: 90%; }
 .role {
   color: var(--muted);
   margin: 0 0 2px;
 }
 .bio { margin: 0 0 24px; }
 .answer .bio:last-child { margin-bottom: 0; }
+
+/* ---------- Team cards ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 16px;
+}
+.card-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 140 / 170;
+  object-fit: cover;
+  background: #f3f3f3;
+  border-radius: 65px;
+  margin-bottom: 18px;
+}
+.card > p { padding-left: 4px; }   /* nudge text in to visually align with the rounded photo */
+.card .role { margin: 0 0 2px; font-size: 14px; }
+.card .name {
+  margin: 0 0 2px;
+  font-size: 18px;
+  line-height: 1.2;
+}
+.card .name a { text-decoration: none; }
+.card .name a:hover { opacity: 0.55; }
+.card .bio { margin: 0; font-size: 14px; }
 
 /* ---------- Legal footer (intentionally low-key) ---------- */
 .legal {
@@ -135,6 +170,22 @@ details:not([open]) .sign::after { content: "+"; }
   color: #cfcfcf;
 }
 .legal p { margin: 0; }
+
+/* ---------- "Opens in a new tab" hint ---------- */
+.tab-tip {
+  position: fixed;
+  z-index: 10;
+  padding: 4px 8px;
+  background: #1a3cff;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.2;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+.tab-tip.is-visible { opacity: 1; }
 
 /* ---------- Doodles ---------- */
 .doodles {
@@ -156,9 +207,9 @@ details:not([open]) .sign::after { content: "+"; }
   -webkit-user-drag: none;
 }
 
-#d1 { left: 23%;  top: 22%; width: 66px; transform: rotate(-4deg); }  /* atom  */
-#d2 { left: 40%;  top: 11%; width: 44px; transform: rotate(6deg); }   /* burst */
-#d3 { left: 66%;  top: 18%; width: 78px; transform: rotate(-3deg); }  /* leaf  */
+#d1 { left: 23%;  top: 13%; width: 66px; transform: rotate(-4deg); }  /* atom  */
+#d2 { left: 40%;  top: 4%;  width: 44px; transform: rotate(6deg); }   /* burst */
+#d3 { left: 66%;  top: 9%;  width: 78px; transform: rotate(-3deg); }  /* leaf  */
 #d4 { left: 85%;  top: 27%; width: 80px; transform: rotate(4deg); }   /* fairy */
 #d5 { left: 14%;  top: 46%; width: 46px; }                            /* clef  */
 #d6 { left: 74%;  top: 51%; width: 28px; }                            /* burst */
@@ -213,18 +264,22 @@ details:not([open]) .sign::after { content: "+"; }
     padding: 100px 26px 150px;
   }
 
+  .title img { width: min(84%, 320px); }
+
   .tagline { max-width: none; }
 
   details + details { margin-top: 40px; }
   .bio { margin-bottom: 30px; }
+
+  .cards { gap: 16px; }
 
   /* doodles: only the six from the reference; rest hidden */
   #d2, #d3, #d9 { display: none; }
 
   #d1 { left: 5%;   top: 7%;  width: 78px; transform: rotate(-4deg); scale: 70%; }  /* atom  */
   #d4 { left: 77%;  top: 9%;  width: 90px; transform: rotate(4deg);  scale: 70%; }  /* fairy */
-  #d5 { left: 10%;  top: 40%; width: 52px; scale: 77%; }                            /* clef  */
-  #d6 { left: 86%;  top: 36%; width: 42px; }                                        /* burst */
+  #d5 { left: 10%;  top: 56%; width: 52px; scale: 77%; }                            /* clef  */
+  #d6 { left: 86%;  top: 28%; width: 42px; }                                        /* burst */
   #d7 { left: 14%;  top: 93%; width: 40px; transform: rotate(176deg); display: none; } /* scroll (hidden) */
   #d8 { left: 53%;  top: 75%; width: 63px; transform: rotate(-8deg); }              /* star  */
 

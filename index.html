@@ -27,10 +27,8 @@
 
   <main class="wrap">
     <header class="hero">
-      <p class="title" data-i18n="title">Morim Foundation</p>
-      <p class="pilcrow" aria-hidden="true">¶</p>
+      <h1 class="title"><img src="static/img/logo.svg" alt="Morim Foundation" width="434" height="176" /></h1>
       <p class="tagline" data-i18n="tagline" data-i18n-html>We fund and train a new kind of&nbsp;teacher, to&nbsp;win a kid’s attention in&nbsp;the era of&nbsp;cheap dopamine</p>
-      <p class="pilcrow" aria-hidden="true">¶</p>
       <p class="pilot" data-i18n="pilot" data-i18n-html><a class="pilot-link" href="https://summer-pilot-2026.utterstep.app/">First pilot: Summer 2026 <span class="arrow" aria-hidden="true">↪&#xFE0E;</span></a></p>
     </header>
 
@@ -41,10 +39,20 @@
           <span class="sign" aria-hidden="true"></span>
         </summary>
         <div class="answer" data-i18n="a1" data-i18n-html>
-          <p class="role">Founder &amp; Patron</p>
-          <p class="bio"><a href="https://www.linkedin.com/in/elena-bunina-738522eb/" target="_blank" rel="noopener">Elena Bunina</a>, a mathematics professor at&nbsp;Bar Ilan University, and head of&nbsp;the <a href="https://academy.nebius.com" target="_blank" rel="noopener">Nebius Academy</a>.</p>
-          <p class="role">Co-Founder &amp; CEO</p>
-          <p class="bio"><a href="https://www.linkedin.com/in/utterstep/" target="_blank" rel="noopener">Vlad Stepanov</a>, ex-CEO of&nbsp;<a href="https://gradarius.com" target="_blank" rel="noopener">Gradarius</a>, ex-CTO and head of&nbsp;Informatika at&nbsp;Yandex Education. 13+ years of&nbsp;experience in&nbsp;EdTech in&nbsp;the US and CSI.</p>
+          <div class="cards">
+            <div class="card">
+              <img class="card-photo" src="static/img/elena.jpg" alt="Elena Bunina" width="420" height="510" />
+              <p class="role">Founder &amp; Patron</p>
+              <p class="name"><a href="https://www.linkedin.com/in/elena-bunina-738522eb/" target="_blank" rel="noopener">Elena Bunina</a></p>
+              <p class="bio">Mathematics professor at&nbsp;Bar Ilan University, and head of&nbsp;the <a href="https://academy.nebius.com" target="_blank" rel="noopener">Nebius Academy</a>.</p>
+            </div>
+            <div class="card">
+              <img class="card-photo" src="static/img/vlad.jpg" alt="Vlad Stepanov" width="420" height="510" />
+              <p class="role">Co-Founder &amp; CEO</p>
+              <p class="name"><a href="https://www.linkedin.com/in/utterstep/" target="_blank" rel="noopener">Vlad Stepanov</a></p>
+              <p class="bio">Ex-CEO of&nbsp;<a href="https://gradarius.com" target="_blank" rel="noopener">Gradarius</a>, ex-CTO and head of&nbsp;Informatika at&nbsp;Yandex Education. 13+ years of&nbsp;experience in&nbsp;EdTech in&nbsp;the US and CSI.</p>
+            </div>
+          </div>
         </div>
       </details>
 
@@ -80,5 +88,6 @@
   <img class="doodle" id="d8" src="static/img/star.png" alt="" aria-hidden="true" />
 
   <script src="static/js/i18n.js"></script>
+  <script src="static/js/tooltip.js"></script>
 </body>
 </html>
