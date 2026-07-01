@@ -10,10 +10,20 @@
         "<a class=\"pilot-link\" href=\"https://summer-pilot-2026.utterstep.app/\">First pilot: Summer 2026 <span class=\"arrow\" aria-hidden=\"true\">↪︎</span></a>",
       q1: "Who’s behind the foundation?",
       a1:
-        '<p class="role">Founder &amp; Patron</p>' +
-        '<p class="bio"><a href="https://www.linkedin.com/in/elena-bunina-738522eb/" target="_blank" rel="noopener">Elena Bunina</a>, a mathematics professor at&nbsp;Bar Ilan University, and head of&nbsp;the <a href="https://academy.nebius.com" target="_blank" rel="noopener">Nebius Academy</a>.</p>' +
-        '<p class="role">Co-Founder &amp; CEO</p>' +
-        '<p class="bio"><a href="https://www.linkedin.com/in/utterstep/" target="_blank" rel="noopener">Vlad Stepanov</a>, ex-CEO of&nbsp;<a href="https://gradarius.com" target="_blank" rel="noopener">Gradarius</a>, ex-CTO and head of&nbsp;Informatika at&nbsp;Yandex Education. 13+ years of&nbsp;experience in&nbsp;EdTech in&nbsp;the US and CSI.</p>',
+        '<div class="cards">' +
+          '<div class="card">' +
+            '<img class="card-photo" src="static/img/elena.jpg" alt="Elena Bunina" width="420" height="510" />' +
+            '<p class="role">Founder &amp; Patron</p>' +
+            '<p class="name"><a href="https://www.linkedin.com/in/elena-bunina-738522eb/" target="_blank" rel="noopener">Elena Bunina</a></p>' +
+            '<p class="bio">Mathematics professor at&nbsp;Bar Ilan University, and head of&nbsp;the <a href="https://academy.nebius.com" target="_blank" rel="noopener">Nebius Academy</a>.</p>' +
+          '</div>' +
+          '<div class="card">' +
+            '<img class="card-photo" src="static/img/vlad.jpg" alt="Vlad Stepanov" width="420" height="510" />' +
+            '<p class="role">Co-Founder &amp; CEO</p>' +
+            '<p class="name"><a href="https://www.linkedin.com/in/utterstep/" target="_blank" rel="noopener">Vlad Stepanov</a></p>' +
+            '<p class="bio">Ex-CEO of&nbsp;<a href="https://gradarius.com" target="_blank" rel="noopener">Gradarius</a>, ex-CTO and head of&nbsp;Informatika at&nbsp;Yandex Education. 13+ years of&nbsp;experience in&nbsp;EdTech in&nbsp;the US and CSI.</p>' +
+          '</div>' +
+        '</div>',
       q3: "How can I contact you?",
       a3:
         '<p class="bio">Write to&nbsp;us at&nbsp;<a href="mailto:contact@morim.foundation">contact@morim.foundation</a> and tell us a little about&nbsp;yourself.</p>'
@@ -27,10 +37,20 @@
         "<a class=\"pilot-link\" href=\"https://summer-pilot-2026.utterstep.app/\">Первый пилот: лето 2026 <span class=\"arrow\" aria-hidden=\"true\">↪︎</span></a>",
       q1: "Кто стоит за фондом?",
       a1:
-        '<p class="role">Основатель и попечитель</p>' +
-        '<p class="bio"><a href="https://www.linkedin.com/in/elena-bunina-738522eb/" target="_blank" rel="noopener">Елена Бунина</a>, профессор математики в&nbsp;Университете Бар-Илан и&nbsp;руководитель <a href="https://academy.nebius.com" target="_blank" rel="noopener">Nebius Academy</a>.</p>' +
-        '<p class="role">Сооснователь и CEO</p>' +
-        '<p class="bio"><a href="https://www.linkedin.com/in/utterstep/" target="_blank" rel="noopener">Влад Степанов</a>, экс-CEO <a href="https://gradarius.com" target="_blank" rel="noopener">Gradarius</a>, экс-CTO и&nbsp;руководитель Информатики в&nbsp;Яндекс.Образовании. 13+ лет опыта в&nbsp;EdTech в&nbsp;США и&nbsp;СНГ.</p>',
+        '<div class="cards">' +
+          '<div class="card">' +
+            '<img class="card-photo" src="static/img/elena.jpg" alt="Елена Бунина" width="420" height="510" />' +
+            '<p class="role">Основатель и попечитель</p>' +
+            '<p class="name"><a href="https://www.linkedin.com/in/elena-bunina-738522eb/" target="_blank" rel="noopener">Елена Бунина</a></p>' +
+            '<p class="bio">профессор математики в&nbsp;Университете Бар-Илан и&nbsp;руководитель <a href="https://academy.nebius.com" target="_blank" rel="noopener">Nebius Academy</a>.</p>' +
+          '</div>' +
+          '<div class="card">' +
+            '<img class="card-photo" src="static/img/vlad.jpg" alt="Влад Степанов" width="420" height="510" />' +
+            '<p class="role">Сооснователь и CEO</p>' +
+            '<p class="name"><a href="https://www.linkedin.com/in/utterstep/" target="_blank" rel="noopener">Влад Степанов</a></p>' +
+            '<p class="bio">экс-CEO <a href="https://gradarius.com" target="_blank" rel="noopener">Gradarius</a>, экс-CTO и&nbsp;руководитель Информатики в&nbsp;Яндекс.Образовании. 13+ лет опыта в&nbsp;EdTech в&nbsp;США и&nbsp;СНГ.</p>' +
+          '</div>' +
+        '</div>',
       q3: "Как с вами связаться?",
       a3:
         '<p class="bio">Напишите нам на&nbsp;<a href="mailto:contact@morim.foundation">contact@morim.foundation</a> и&nbsp;немного расскажите о&nbsp;себе.</p>'
@@ -44,10 +64,20 @@
         "<a class=\"pilot-link\" href=\"https://summer-pilot-2026.utterstep.app/\">פילוט ראשון: קיץ 2026 <span class=\"arrow\" aria-hidden=\"true\">↪︎</span></a>",
       q1: "מי עומד מאחורי הקרן?",
       a1:
-        '<p class="role">מייסדת ופטרונית</p>' +
-        '<p class="bio"><a href="https://www.linkedin.com/in/elena-bunina-738522eb/" target="_blank" rel="noopener">אלנה בונינה</a>, פרופסור למתמטיקה באוניברסיטת בר-אילן וראש <a href="https://academy.nebius.com" target="_blank" rel="noopener">Nebius Academy</a>.</p>' +
-        '<p class="role">מייסד שותף ומנכ״ל</p>' +
-        '<p class="bio"><a href="https://www.linkedin.com/in/utterstep/" target="_blank" rel="noopener">ולאד סטפנוב</a>, לשעבר מנכ״ל <a href="https://gradarius.com" target="_blank" rel="noopener">Gradarius</a>, לשעבר CTO וראש תחום Informatika ב-Yandex Education. 13+ שנות ניסיון ב-EdTech בארה״ב ובחבר העמים.</p>',
+        '<div class="cards">' +
+          '<div class="card">' +
+            '<img class="card-photo" src="static/img/elena.jpg" alt="אלנה בונינה" width="420" height="510" />' +
+            '<p class="role">מייסדת ופטרונית</p>' +
+            '<p class="name"><a href="https://www.linkedin.com/in/elena-bunina-738522eb/" target="_blank" rel="noopener">אלנה בונינה</a></p>' +
+            '<p class="bio">פרופסור למתמטיקה באוניברסיטת בר-אילן וראש <a href="https://academy.nebius.com" target="_blank" rel="noopener">Nebius Academy</a>.</p>' +
+          '</div>' +
+          '<div class="card">' +
+            '<img class="card-photo" src="static/img/vlad.jpg" alt="ולאד סטפנוב" width="420" height="510" />' +
+            '<p class="role">מייסד שותף ומנכ״ל</p>' +
+            '<p class="name"><a href="https://www.linkedin.com/in/utterstep/" target="_blank" rel="noopener">ולאד סטפנוב</a></p>' +
+            '<p class="bio">לשעבר מנכ״ל <a href="https://gradarius.com" target="_blank" rel="noopener">Gradarius</a>, לשעבר CTO וראש תחום Informatika ב-Yandex Education. 13+ שנות ניסיון ב-EdTech בארה״ב ובחבר העמים.</p>' +
+          '</div>' +
+        '</div>',
       q3: "איך אפשר ליצור איתכם קשר?",
       a3:
         '<p class="bio">כיתבו אלינו ל-&nbsp;<a href="mailto:contact@morim.foundation">contact@morim.foundation</a> וספרו לנו קצת על&nbsp;עצמכם.</p>'

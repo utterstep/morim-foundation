@@ -10,6 +10,7 @@ Thumbs.db
 # Logs & local tooling
 *.log
 .rodney/
+.claude/
 
 # Dependencies (none at runtime — static site)
 node_modules/
