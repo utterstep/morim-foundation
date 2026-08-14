@@ -11,7 +11,7 @@
         '<p>We take approaches that already work well, learn to&nbsp;use them ourselves, and test them in&nbsp;practice. More than half of&nbsp;every program is practice: teaching real children and going over the lessons with a mentor.</p>' +
         '<p>What interests us is not what looks good at&nbsp;a workshop, but what works afterwards — in&nbsp;an&nbsp;ordinary class of&nbsp;35 on&nbsp;a Tuesday morning.</p>' +
         '<p class="label">What about AI?</p>' +
-        '<p>AI, to&nbsp;us, is a tool — not a replacement for the teacher. We teach teachers to&nbsp;use it themselves and to&nbsp;teach it to&nbsp;children, instead of&nbsp;training AI to&nbsp;replace teachers.</p>',
+        '<p>We teach teachers to&nbsp;use AI and to&nbsp;teach it to&nbsp;children — instead of&nbsp;training AI to&nbsp;replace teachers.</p>',
       q_teachers: "For teachers",
       a_teachers:
         '<p>We start with late primary and early middle school — the age when many children’s interest in&nbsp;learning begins to&nbsp;fade.</p>' +
@@ -25,12 +25,12 @@
       q_pilot: "The first pilot",
       a_pilot:
         '<p>In&nbsp;summer 2026, 17&nbsp;teachers finished our first intensive. 16&nbsp;of&nbsp;them are now continuing paid practice with children and meet a mentor every week; 14&nbsp;of&nbsp;the&nbsp;17 would recommend the program to&nbsp;colleagues.</p>' +
-        '<p>Two-thirds of&nbsp;the children we surveyed said they’d like to&nbsp;see lessons like these at&nbsp;their school. For now it’s an&nbsp;early signal from a very friendly setting. The really interesting question is whether it repeats in&nbsp;ordinary classrooms.</p>' +
+        '<p>Two-thirds of&nbsp;the children we surveyed said they’d like to&nbsp;see lessons like these at&nbsp;their school. For now it’s an&nbsp;early signal from a very friendly setting — we’ll see whether the result repeats in&nbsp;ordinary classrooms.</p>' +
         '<p><a href="https://summer-pilot-2026.utterstep.app/" target="_blank" rel="noopener">More about the first pilot</a></p>',
       q_paid: "Do participants get paid?",
       a_paid:
-        '<p>Yes. We pay both for the training and for the practice with children that follows.</p>' +
-        '<p>Teachers have more than enough work without us. If we believe their time matters, taking part shouldn’t rest on&nbsp;enthusiasm alone.</p>',
+        '<p>Yes. Teachers have more than enough work without us, so we pay participants both for the training and for the practice with children.</p>' +
+        '<p>If we believe a teacher’s time matters, it makes sense to&nbsp;act like it.</p>',
       q_who: "Who we are",
       a_who:
         '<div class="cards">' +
@@ -44,7 +44,7 @@
             '<img class="card-photo" src="static/img/vlad.jpg" alt="Vlad Stepanov" width="420" height="510" />' +
             '<p class="role">Co-Founder &amp; CEO</p>' +
             '<p class="name"><a href="https://www.linkedin.com/in/utterstep/" target="_blank" rel="noopener">Vlad Stepanov</a></p>' +
-            '<p class="bio">Ex-CEO of&nbsp;<a href="https://gradarius.com" target="_blank" rel="noopener">Gradarius</a>, ex-CTO and head of&nbsp;Informatika at&nbsp;Yandex Education. 13+ years of&nbsp;experience in&nbsp;EdTech in&nbsp;the US and CSI.</p>' +
+            '<p class="bio">Ex-CEO of&nbsp;<a href="https://gradarius.com" target="_blank" rel="noopener">Gradarius</a>, ex-CTO and head of&nbsp;Informatika at&nbsp;Yandex Education. 13+ years of&nbsp;experience in&nbsp;EdTech in&nbsp;the US and CIS.</p>' +
           '</div>' +
         '</div>',
       q_contact: "Let’s talk",
@@ -62,10 +62,10 @@
         '<p>Берём подходы, которые уже хорошо работают, учимся ими пользоваться и&nbsp;проверяем их на&nbsp;практике. Больше половины программы — практика с&nbsp;настоящими детьми и&nbsp;разбор занятий с&nbsp;ментором.</p>' +
         '<p>Нас интересует не&nbsp;то, что хорошо выглядит на&nbsp;воркшопе, а&nbsp;то, что работает потом — в&nbsp;обычном классе из&nbsp;35&nbsp;человек во&nbsp;вторник утром.</p>' +
         '<p class="label">А&nbsp;что с&nbsp;ИИ?</p>' +
-        '<p>ИИ для нас — инструмент, а&nbsp;не&nbsp;замена учителю. Мы учим учителей пользоваться им самим и&nbsp;учить этому детей — а&nbsp;не&nbsp;обучаем ИИ заменять учителей.</p>',
+        '<p>Мы учим учителей пользоваться ИИ и&nbsp;учить этому детей — а&nbsp;не&nbsp;обучаем ИИ заменять учителей.</p>',
       q_teachers: "Для учителей",
       a_teachers:
-        '<p>Начинаем с&nbsp;конца начальной и&nbsp;начала средней школы — возраста, когда интерес к&nbsp;учёбе у&nbsp;многих детей начинает угасать.</p>' +
+        '<p>Начинаем с&nbsp;конца начальной и&nbsp;начала средней школы — возраста, когда интерес к&nbsp;учёбе у&nbsp;многих детей начинает снижаться.</p>' +
         '<p>Работаем с&nbsp;очень практическими вещами: как собрать внимание класса, не&nbsp;повышая голоса; как строить мотивацию, которая не&nbsp;держится на&nbsp;оценках; как начинать урок с&nbsp;настоящего вопроса; как вести дискуссию, в&nbsp;которой дети отвечают друг другу, а&nbsp;не&nbsp;пытаются угадать, что хочет услышать учитель.</p>' +
         '<p>После интенсива участники несколько недель ведут занятия с&nbsp;детьми и&nbsp;каждую неделю разбирают их с&nbsp;ментором.</p>',
       q_leaders: "Для координаторов",
@@ -76,12 +76,12 @@
       q_pilot: "Первый пилот",
       a_pilot:
         '<p>Летом 2026 года первый интенсив закончили 17&nbsp;учителей. 16 из&nbsp;них сейчас продолжают оплачиваемую практику с&nbsp;детьми и&nbsp;каждую неделю встречаются с&nbsp;ментором; 14 из&nbsp;17 готовы рекомендовать программу коллегам.</p>' +
-        '<p>Среди опрошенных детей две трети сказали, что хотели&nbsp;бы видеть похожие уроки в&nbsp;своей школе. Пока это ранний сигнал из&nbsp;очень дружелюбной среды. По-настоящему интересно будет увидеть, повторится&nbsp;ли он в&nbsp;обычных школьных классах.</p>' +
+        '<p>Среди опрошенных детей две трети сказали, что хотели&nbsp;бы видеть похожие уроки в&nbsp;своей школе. Пока это ранний сигнал из&nbsp;очень дружелюбной среды. Посмотрим, повторится&nbsp;ли этот результат в&nbsp;обычных классах.</p>' +
         '<p><a href="https://summer-pilot-2026.utterstep.app/" target="_blank" rel="noopener">Подробнее о&nbsp;первом пилоте</a></p>',
       q_paid: "За участие платят?",
       a_paid:
-        '<p>Да. Мы платим и&nbsp;за&nbsp;обучение, и&nbsp;за&nbsp;последующую практику с&nbsp;детьми.</p>' +
-        '<p>У&nbsp;учителей и&nbsp;без нас достаточно работы. Если мы считаем их время важным, участие в&nbsp;программе не&nbsp;должно держаться только на&nbsp;энтузиазме.</p>',
+        '<p>Да. У&nbsp;учителей и&nbsp;без нас достаточно работы, поэтому мы платим участникам и&nbsp;за&nbsp;обучение, и&nbsp;за&nbsp;практику с&nbsp;детьми.</p>' +
+        '<p>Если мы считаем время учителя важным, логично вести себя соответственно.</p>',
       q_who: "Кто мы",
       a_who:
         '<div class="cards">' +
@@ -113,7 +113,7 @@
         '<p>אנחנו לוקחים גישות שכבר עובדות היטב, לומדים להשתמש בהן בעצמנו ובוחנים אותן בפועל. יותר ממחצית מכל תוכנית היא תרגול: הוראת ילדים אמיתיים וניתוח השיעורים עם מנטור.</p>' +
         '<p>מה שמעניין אותנו הוא לא מה שנראה טוב בסדנה, אלא מה שעובד אחר כך — בכיתה רגילה של 35 ילדים ביום שלישי בבוקר.</p>' +
         '<p class="label">ומה עם AI?</p>' +
-        '<p>AI בשבילנו הוא כלי, לא תחליף למורה. אנחנו מלמדים מורים להשתמש בו בעצמם וללמד אותו לילדים — במקום לאמן AI להחליף מורים.</p>',
+        '<p>אנחנו מלמדים מורים להשתמש ב-AI וללמד אותו לילדים — במקום לאמן AI להחליף מורים.</p>',
       q_teachers: "למורים",
       a_teachers:
         '<p>אנחנו מתחילים בסוף בית הספר היסודי ובתחילת חטיבת הביניים — הגיל שבו העניין בלמידה אצל ילדים רבים מתחיל לדעוך.</p>' +
@@ -127,12 +127,12 @@
       q_pilot: "הפיילוט הראשון",
       a_pilot:
         '<p>בקיץ 2026 סיימו 17 מורים ומורות את האינטנסיב הראשון שלנו. 16 מהם ממשיכים כעת בתרגול בתשלום עם ילדים ונפגשים עם מנטור מדי שבוע; 14 מתוך 17 היו ממליצים על התוכנית לעמיתים.</p>' +
-        '<p>שני שלישים מהילדים שנשאלו אמרו שהיו רוצים לראות שיעורים דומים בבית הספר שלהם. בינתיים זה סימן מוקדם מסביבה מאוד אוהדת. השאלה המעניינת באמת היא אם הוא יחזור על עצמו בכיתות רגילות.</p>' +
+        '<p>שני שלישים מהילדים שנשאלו אמרו שהיו רוצים לראות שיעורים דומים בבית הספר שלהם. בינתיים זה סימן מוקדם מסביבה מאוד אוהדת — נראה אם התוצאה הזאת תחזור על עצמה בכיתות רגילות.</p>' +
         '<p><a href="https://summer-pilot-2026.utterstep.app/" target="_blank" rel="noopener">עוד על הפיילוט הראשון</a></p>',
       q_paid: "האם משלמים על ההשתתפות?",
       a_paid:
-        '<p>כן. אנחנו משלמים גם על ההכשרה וגם על התרגול עם ילדים שבא אחריה.</p>' +
-        '<p>למורים יש מספיק עבודה גם בלעדינו. אם אנחנו מאמינים שהזמן שלהם חשוב, ההשתתפות בתוכנית לא צריכה להישען על התלהבות בלבד.</p>',
+        '<p>כן. למורים יש מספיק עבודה גם בלעדינו, ולכן אנחנו משלמים למשתתפים גם על ההכשרה וגם על התרגול עם ילדים.</p>' +
+        '<p>אם אנחנו מאמינים שזמנו של מורה חשוב, הגיוני להתנהג בהתאם.</p>',
       q_who: "מי אנחנו",
       a_who:
         '<div class="cards">' +
