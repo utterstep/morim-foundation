@@ -5,6 +5,7 @@
     en: {
       tagline:
         "We bet on&nbsp;teachers",
+      cta: "Want to take part in our work?",
       q_what: "What we do",
       a_what:
         '<p>One good teacher shapes hundreds of&nbsp;children over a career. Some shape not just their own class, but the work of&nbsp;a whole team. So we’re not trying to&nbsp;invent a new pedagogy — we help teachers and coordinators get stronger at&nbsp;their work.</p>' +
@@ -56,6 +57,7 @@
     ru: {
       tagline:
         "Мы делаем ставку на&nbsp;учителей",
+      cta: "Хотите участвовать в нашей работе?",
       q_what: "Что мы делаем",
       a_what:
         '<p>Один хороший учитель за&nbsp;свою карьеру влияет на&nbsp;сотни детей. Некоторые влияют не&nbsp;только на&nbsp;свой класс, но&nbsp;и&nbsp;на&nbsp;работу целой команды. Поэтому мы не&nbsp;пытаемся придумать новую педагогическую систему, а&nbsp;помогаем учителям и&nbsp;координаторам становиться сильнее в&nbsp;своей работе.</p>' +
@@ -107,6 +109,7 @@
     he: {
       tagline:
         "אנחנו מהמרים על&nbsp;המורים",
+      cta: "רוצים לקחת חלק בעבודה שלנו?",
       q_what: "מה אנחנו עושים",
       a_what:
         '<p>מורה טוב אחד משפיע במהלך הקריירה על מאות ילדים. יש מורים שמשפיעים לא רק על הכיתה שלהם, אלא גם על העבודה של צוות שלם. לכן אנחנו לא מנסים להמציא פדגוגיה חדשה — אנחנו עוזרים למורים ולרכזים להתחזק בעבודה שלהם.</p>' +
@@ -175,6 +178,11 @@
       } else {
         el.textContent = value;
       }
+    }
+
+    var ctas = document.querySelectorAll("a.cta");
+    for (var c = 0; c < ctas.length; c++) {
+      ctas[c].setAttribute("href", "https://survey.morim.foundation/s/join-v1?src=landing&lang=" + lang);
     }
 
     for (var j = 0; j < buttons.length; j++) {

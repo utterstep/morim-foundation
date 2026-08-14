@@ -75,6 +75,23 @@ a:hover { opacity: 0.55; }
 }
 .tagline { max-width: 24em; margin-inline: auto; }
 
+/* ---------- CTA ---------- */
+p.cta-wrap { text-align: center; margin: 38px 0 0; }   /* p-qualified: must out-rank `.hero p { margin: 0 }` */
+.cta-wrap.cta-bottom { margin: clamp(60px, 10vh, 110px) 0 0; }
+.cta {
+  display: inline-block;
+  padding: 12px 26px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.cta:hover {
+  background: var(--ink);
+  color: #fff;
+  opacity: 1;
+}
+
 /* ---------- FAQ / accordion ---------- */
 .faq {
   margin-top: clamp(80px, 14vh, 150px);
