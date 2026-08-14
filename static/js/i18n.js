@@ -8,8 +8,8 @@
         "We bet on&nbsp;teachers — serious training, real practice, lasting support",
       q_what: "What do you do?",
       a_what:
-        '<p class="bio">We build programs around the three capacities children will need most: curiosity — the energy to&nbsp;figure things out themselves; critical thinking — telling truth from noise; live communication — discussing, disagreeing, listening.</p>' +
-        '<p class="bio">Our core principle: teachers don’t merely study our methods — they live through them first. More than half of&nbsp;every program is practice. The toolkit is curated, not invented: an&nbsp;inquiry stance, structured discussion formats, the craft of&nbsp;teaching, mentored practice with real children.</p>' +
+        '<p class="bio">We build our programs around three things children need most: curiosity — the energy to&nbsp;figure things out on&nbsp;your own; critical thinking — telling what matters from what doesn’t; live communication — discussing, disagreeing, listening.</p>' +
+        '<p class="bio">One principle matters most to&nbsp;us: teachers don’t just study our methods — they live through them first. More than half of&nbsp;every program is practice. And we didn’t invent the toolkit — we gathered what works: inquiry, structured discussion, the craft of&nbsp;teaching, practice with real children alongside a mentor.</p>' +
         '<p class="role">On&nbsp;AI</p>' +
         '<p class="bio">We train teachers to&nbsp;use it, and to&nbsp;teach it — instead of&nbsp;training AI to&nbsp;replace teachers.</p>',
       q_pilot: "How did the first pilot go?",
@@ -20,9 +20,9 @@
       q_for: "Who are the programs for?",
       a_for:
         '<p class="role">For teachers</p>' +
-        '<p class="bio">Practicing teachers in&nbsp;late primary and early middle school — the years before motivation fades. The program opens with an&nbsp;intensive on the hardest parts of&nbsp;the craft: gathering a class’s attention without raising your voice; building motivation that doesn’t run on&nbsp;grades; leading discussions where children debate with each other instead of&nbsp;guessing what the teacher wants to&nbsp;hear. Then — weeks of&nbsp;teaching real children with weekly mentoring, and everything applied in&nbsp;participants’ own classes.</p>' +
+        '<p class="bio">Practicing teachers in&nbsp;late primary and early middle school — the years before motivation fades. The program opens with an&nbsp;intensive on the hardest parts of&nbsp;the craft: gathering a class’s attention without raising your voice; building motivation that doesn’t run on&nbsp;grades; leading discussions where children debate with each other instead of&nbsp;guessing what the teacher wants to&nbsp;hear. Then — weeks of&nbsp;teaching real children, with a mentor to&nbsp;talk to&nbsp;every week. And then teachers bring all of&nbsp;it into their own classrooms.</p>' +
         '<p class="role">For school leaders</p>' +
-        '<p class="bio">Rakazim — playing coaches who set a team’s culture while teaching themselves. We prepare them for the real struggles: informal leadership, building the systems a department runs on, and running projects end to&nbsp;end. The program is being designed together with rakazim; the first pilot starts this fall.</p>',
+        '<p class="bio">Rakazim — playing coaches who set the tone for a whole team while teaching themselves. We help with the struggles they actually face: leading a team that doesn’t report to&nbsp;you; communication that isn’t a WhatsApp flood; load that’s shared instead of&nbsp;carried alone; projects that don’t eat the time meant for teaching. We’re building the program together with rakazim; the first pilot starts this fall.</p>',
       q_paid: "Do participants get paid?",
       a_paid:
         '<p class="bio">Yes. A&nbsp;teacher’s time is precious, and there is already too much competing for it — so we pay our participants stipends, both for the training and for the practice with children. Joining shouldn’t rest on&nbsp;idealism alone.</p>',
@@ -53,8 +53,8 @@
         "Мы ставим на&nbsp;учителей — серьёзная подготовка, настоящая практика, долгосрочная&nbsp;поддержка",
       q_what: "Чем вы занимаетесь?",
       a_what:
-        '<p class="bio">Мы строим программы вокруг трёх способностей, которые нужнее всего сегодняшним детям: любопытство — энергия разбираться самостоятельно; критическое мышление — умение отличать правду от&nbsp;шума; живое общение — обсуждать, спорить, слушать.</p>' +
-        '<p class="bio">Наш главный принцип: учителя не&nbsp;просто изучают наши методы — сначала они проживают их сами. Больше половины каждой программы — практика. Инструменты мы не&nbsp;изобретаем, а&nbsp;бережно отбираем: исследовательский подход, структурированные форматы дискуссий, ремесло преподавания, работа с&nbsp;настоящими детьми под руководством менторов.</p>' +
+        '<p class="bio">Мы строим программы вокруг трёх вещей, которые нужнее всего детям: любопытство — энергия разбираться самому; критическое мышление — умение отличать важное от&nbsp;неважного; живое общение — обсуждать, спорить, слушать.</p>' +
+        '<p class="bio">Для нас важен один принцип: учителя не&nbsp;просто изучают наши методы — сначала они проживают их сами. Больше половины каждой программы — практика. А&nbsp;инструменты мы не&nbsp;придумывали — собрали то, что работает: исследовательский подход, живые форматы обсуждений, ремесло преподавания, занятия с&nbsp;настоящими детьми рядом с&nbsp;ментором.</p>' +
         '<p class="role">Про ИИ</p>' +
         '<p class="bio">Мы учим учителей пользоваться ИИ — и&nbsp;учить ему, — а&nbsp;не&nbsp;обучаем ИИ заменять учителей.</p>',
       q_pilot: "Как прошёл первый пилот?",
@@ -65,9 +65,9 @@
       q_for: "Для кого ваши программы?",
       a_for:
         '<p class="role">Учителям</p>' +
-        '<p class="bio">Практикующим учителям в&nbsp;конце начальной и&nbsp;начале средней школы — в&nbsp;те годы, пока мотивация ещё не&nbsp;угасла. Программа начинается с&nbsp;интенсива о&nbsp;самом сложном в&nbsp;ремесле: собрать внимание класса, не&nbsp;повышая голоса; строить мотивацию, которая не&nbsp;держится на&nbsp;оценках; вести дискуссии, где дети спорят друг с&nbsp;другом, а&nbsp;не&nbsp;угадывают, что хочет услышать учитель. Затем — недели занятий с&nbsp;настоящими детьми и&nbsp;еженедельный менторинг, а&nbsp;всё освоенное учителя применяют в&nbsp;собственных классах.</p>' +
+        '<p class="bio">Практикующим учителям в&nbsp;конце начальной и&nbsp;начале средней школы — в&nbsp;те годы, пока мотивация ещё не&nbsp;угасла. Программа начинается с&nbsp;интенсива о&nbsp;самом сложном в&nbsp;ремесле: собрать внимание класса, не&nbsp;повышая голоса; строить мотивацию, которая не&nbsp;держится на&nbsp;оценках; вести дискуссии, где дети спорят друг с&nbsp;другом, а&nbsp;не&nbsp;угадывают, что хочет услышать учитель. Затем — недели занятий с&nbsp;настоящими детьми и&nbsp;еженедельные встречи с&nbsp;ментором. А&nbsp;потом учителя приносят всё это в&nbsp;собственные классы.</p>' +
         '<p class="role">Школьным лидерам</p>' +
-        '<p class="bio">Раказим (координаторам) — играющим тренерам, которые задают культуру команды, продолжая преподавать сами. Мы готовим их к&nbsp;настоящим вызовам: неформальное лидерство, выстраивание систем, на&nbsp;которых держится работа команды, ведение проектов от&nbsp;начала до&nbsp;конца. Программа создаётся вместе с&nbsp;самими раказим; первый пилот стартует этой осенью.</p>',
+        '<p class="bio">Раказим (координаторам) — играющим тренерам: они задают тон всей команде и&nbsp;при этом продолжают преподавать сами. Мы помогаем с&nbsp;тем, с&nbsp;чем они сталкиваются на&nbsp;самом деле: вести за&nbsp;собой команду, которая тебе не&nbsp;подчиняется; переписка, которая не&nbsp;превращается в&nbsp;бесконечный WhatsApp; нагрузка, которую делят, а&nbsp;не&nbsp;тащат в&nbsp;одиночку; проекты, которые не&nbsp;съедают время, отведённое на&nbsp;преподавание. Программу мы делаем вместе с&nbsp;самими раказим; первый пилот стартует этой осенью.</p>',
       q_paid: "Участники получают оплату?",
       a_paid:
         '<p class="bio">Да. Время учителя — ценный ресурс, на&nbsp;который и&nbsp;так претендует слишком многое, поэтому мы платим участникам стипендию — и&nbsp;за&nbsp;обучение, и&nbsp;за&nbsp;практику с&nbsp;детьми. Участие не&nbsp;должно держаться на&nbsp;одном идеализме.</p>',
@@ -98,8 +98,8 @@
         "אנחנו מהמרים על&nbsp;המורים — הכשרה רצינית, תרגול אמיתי, ליווי מתמשך",
       q_what: "מה אתם עושים?",
       a_what:
-        '<p class="bio">אנחנו בונים תוכניות סביב שלוש היכולות שילדים יזדקקו להן יותר מכול: סקרנות — האנרגיה להבין דברים בעצמך; חשיבה ביקורתית — להבחין בין אמת לרעש; שיח חי — לדון, להתווכח, להקשיב.</p>' +
-        '<p class="bio">העיקרון המרכזי שלנו: מורים לא רק לומדים את השיטות שלנו — הם חווים אותן קודם בעצמם. יותר ממחצית מכל תוכנית היא תרגול. את הכלים אנחנו לא ממציאים אלא אוצרים בקפידה: גישת חקר, פורמטים מובנים של דיון, אומנות ההוראה, תרגול מודרך עם ילדים אמיתיים.</p>' +
+        '<p class="bio">אנחנו בונים תוכניות סביב שלושה דברים שילדים צריכים יותר מכול: סקרנות — האנרגיה להבין דברים בעצמך; חשיבה ביקורתית — להבחין בין עיקר לטפל; שיח חי — לדון, להתווכח, להקשיב.</p>' +
+        '<p class="bio">עיקרון אחד חשוב לנו במיוחד: מורים לא רק לומדים את השיטות שלנו — הם קודם חווים אותן בעצמם. יותר ממחצית מכל תוכנית היא תרגול. ואת הכלים לא המצאנו — אספנו את מה שעובד: למידת חקר, דיונים סביב שולחן, אומנות ההוראה, תרגול עם ילדים אמיתיים לצד מנטור.</p>' +
         '<p class="role">על AI</p>' +
         '<p class="bio">אנחנו מכשירים מורים להשתמש בו — וללמד אותו — במקום לאמן AI להחליף מורים.</p>',
       q_pilot: "איך עבר הפיילוט הראשון?",
@@ -110,9 +110,9 @@
       q_for: "למי מיועדות התוכניות?",
       a_for:
         '<p class="role">למורים</p>' +
-        '<p class="bio">מורים בפועל בסוף היסודי ובתחילת חטיבת הביניים — השנים שבהן המוטיבציה עוד לא דעכה. התוכנית נפתחת באינטנסיב על החלקים הקשים ביותר במקצוע: לאסוף את תשומת הלב של הכיתה בלי להרים את הקול; לבנות מוטיבציה שלא נשענת על ציונים; להוביל דיונים שבהם הילדים מתווכחים זה עם זה במקום לנחש מה המורה רוצה לשמוע. ואז — שבועות של הוראת ילדים אמיתיים עם ליווי שבועי, וכל מה שנלמד מיושם בכיתות של המשתתפים עצמם.</p>' +
+        '<p class="bio">מורים בפועל בסוף היסודי ובתחילת חטיבת הביניים — השנים שבהן המוטיבציה עוד לא דעכה. התוכנית נפתחת באינטנסיב על החלקים הקשים ביותר במקצוע: לאסוף את תשומת הלב של הכיתה בלי להרים את הקול; לבנות מוטיבציה שלא נשענת על ציונים; להוביל דיונים שבהם הילדים מתווכחים זה עם זה במקום לנחש מה המורה רוצה לשמוע. ואז — שבועות של הוראת ילדים אמיתיים, עם מנטור לצידם מדי שבוע. ואחר כך המורים מביאים את כל זה לכיתות שלהם.</p>' +
         '<p class="role">לרכזים ולרכזות</p>' +
-        '<p class="bio">רכזים — מאמנים-שחקנים שמעצבים את תרבות הצוות בזמן שהם עצמם מלמדים. אנחנו מכינים אותם לאתגרים האמיתיים: מנהיגות לא פורמלית, בניית המערכות שהצוות נשען עליהן, והובלת פרויקטים מקצה לקצה. התוכנית נבנית יחד עם רכזים; פיילוט ראשון יוצא לדרך בסתיו הקרוב.</p>',
+        '<p class="bio">רכזים ורכזות — מאמנים-שחקנים: נותנים את הטון לצוות שלם ובעצמם ממשיכים ללמד. אנחנו עוזרים במה שהם באמת מתמודדים איתו: להוביל צוות שלא כפוף לך; תקשורת שאינה הצפה בוואטסאפ; עומס שמתחלק במקום ליפול על אדם אחד; פרויקטים שלא אוכלים את הזמן שנועד להוראה. את התוכנית אנחנו בונים יחד עם רכזים; פיילוט ראשון יוצא לדרך בסתיו הקרוב.</p>',
       q_paid: "האם המשתתפים מקבלים תשלום?",
       a_paid:
         '<p class="bio">כן. זמנו של מורה הוא משאב יקר, וכבר עכשיו מתחרים עליו יותר מדי — ולכן אנחנו משלמים למשתתפים מלגה, גם על ההכשרה וגם על התרגול עם ילדים. הצטרפות לא צריכה להישען על אידיאליזם בלבד.</p>',
