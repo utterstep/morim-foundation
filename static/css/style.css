@@ -108,12 +108,12 @@ details:not([open]) .sign::after { content: "+"; }
 .answer { padding-top: 18px; }
 /* text-only answers (no photo cards) read better at a narrower measure */
 .answer:not(:has(.cards)) { max-width: 90%; }
-.role {
+.answer > .label {
   color: var(--muted);
   margin: 0 0 2px;
 }
-.bio { margin: 0 0 24px; }
-.answer .bio:last-child { margin-bottom: 0; }
+.answer > p { margin: 0 0 24px; }
+.answer > p:last-child { margin-bottom: 0; }
 
 /* ---------- Team cards ---------- */
 .cards {
@@ -133,7 +133,7 @@ details:not([open]) .sign::after { content: "+"; }
   margin-bottom: 18px;
 }
 .card > p { padding-left: 4px; }   /* nudge text in to visually align with the rounded photo */
-.card .role { margin: 0 0 2px; font-size: 14px; }
+.card .role { color: var(--muted); margin: 0 0 2px; font-size: 14px; }
 .card .name {
   margin: 0 0 2px;
   font-size: 18px;
@@ -231,7 +231,7 @@ details:not([open]) .sign::after { content: "+"; }
 /* ---------- Desktop type tweaks ---------- */
 @media (min-width: 721px) {
   .lang,               /* language switcher */
-  .answer { font-size: 18px; }   /* FAQ answer text (roles + bios) */
+  .answer { font-size: 18px; }   /* FAQ answer text */
 }
 
 /* ---------- Mobile ---------- */
@@ -256,7 +256,7 @@ details:not([open]) .sign::after { content: "+"; }
   .tagline { max-width: none; }
 
   details + details { margin-top: 40px; }
-  .bio { margin-bottom: 30px; }
+  .answer > p { margin-bottom: 30px; }
 
   .cards { gap: 16px; }
 
