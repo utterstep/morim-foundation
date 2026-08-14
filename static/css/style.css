@@ -74,19 +74,6 @@ a:hover { opacity: 0.55; }
   margin-inline: auto;
 }
 .tagline { max-width: 24em; margin-inline: auto; }
-.hero .pilot { margin-top: 2.6em; }
-.pilot .arrow {
-  display: inline-block;
-  margin-inline-start: 4px;
-}
-.pilot-link {
-  color: inherit;
-  text-decoration: none;
-  text-underline-offset: 3px;            /* inherited, so default + hover align */
-}
-.pilot-link .arrow { text-decoration: underline; }   /* arrow underline (its own, since it's inline-block) */
-.pilot-link:hover { opacity: 1; }                     /* no fade on hover */
-.pilot-link:hover .arrow { text-decoration: none; }   /* remove the arrow's underline on hover */
 
 /* ---------- FAQ / accordion ---------- */
 .faq {
