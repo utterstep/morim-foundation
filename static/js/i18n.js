@@ -161,7 +161,8 @@
 
   var buttons = Array.prototype.slice.call(document.querySelectorAll(".lang button"));
 
-  function setLang(lang) {
+  function setLang(lang, opts) {
+    opts = opts || {};
     var dict = I18N[lang];
     if (!dict) return;
 
@@ -190,16 +191,36 @@
       b.setAttribute("aria-current", b.getAttribute("data-lang") === lang ? "true" : "false");
     }
 
-    try { localStorage.setItem("lang", lang); } catch (e) {}
+    if (opts.persist) {
+      try { localStorage.setItem("lang", lang); } catch (e) {}
+    }
+
+    /* keep ?lang= in the address bar in sync, so copying the URL shares this language */
+    if (opts.updateUrl && window.history && history.replaceState) {
+      try {
+        var search = location.search;
+        if (/[?&]lang=/.test(search)) {
+          search = search.replace(/([?&]lang=)[^&]*/, "$1" + lang);
+        } else {
+          search = (search ? search + "&" : "?") + "lang=" + lang;
+        }
+        history.replaceState(null, "", location.pathname + search + location.hash);
+      } catch (e) {}
+    }
   }
 
   for (var k = 0; k < buttons.length; k++) {
     (function (b) {
-      b.addEventListener("click", function () { setLang(b.getAttribute("data-lang")); });
+      b.addEventListener("click", function () {
+        setLang(b.getAttribute("data-lang"), { persist: true, updateUrl: true });
+      });
     })(buttons[k]);
   }
 
+  /* a ?lang= in a shared link wins over the visitor's stored preference,
+     but doesn't overwrite it — only an explicit button click persists */
+  var urlLang = (location.search.match(/[?&]lang=(en|ru|he)(?:&|$)/) || [])[1];
   var saved;
   try { saved = localStorage.getItem("lang"); } catch (e) {}
-  setLang(I18N[saved] ? saved : "en");
+  setLang(urlLang || (I18N[saved] ? saved : "en"));
 })();
