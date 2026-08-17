@@ -8,11 +8,9 @@
       cta: "Want to do something together?",
       q_what: "What we do",
       a_what:
-        '<p>One good teacher shapes hundreds of&nbsp;children over a career. Some shape not just their own class, but the work of&nbsp;a whole team. So we’re not trying to&nbsp;invent a new pedagogy — we help teachers and coordinators get better at&nbsp;the work they already do.</p>' +
-        '<p>We take approaches that already work well, learn to&nbsp;use them ourselves, and test them in&nbsp;practice. More than half of&nbsp;every program is practice: participants teach children and then go over the lessons with a mentor.</p>' +
-        '<p>We care less about what looks good in&nbsp;a workshop than what still works afterwards — in&nbsp;a regular class of&nbsp;35 on&nbsp;a Tuesday morning.</p>' +
-        '<p class="label">What about AI?</p>' +
-        '<p>We teach teachers to&nbsp;use AI — and to&nbsp;teach children how to&nbsp;use it — instead of&nbsp;training AI to&nbsp;replace teachers.</p>',
+        '<p>The Foundation runs training programs for teachers and coordinators. Each one combines an&nbsp;intensive, hands-on practice, and work with a mentor: teachers teach children, while coordinators work in&nbsp;groups on&nbsp;real situations from their own schools. More than half of&nbsp;every program is practice.</p>' +
+        '<p>The Foundation doesn’t invent pedagogy. The programs are built on&nbsp;approaches with a well-studied track record: inquiry-based learning, structured discussion, the craft of&nbsp;teaching.</p>' +
+        '<p>What matters is not what looks good in&nbsp;a workshop, but what still works afterwards — in&nbsp;a regular class of&nbsp;35 on&nbsp;a Tuesday morning.</p>',
       q_teachers: "For teachers",
       a_teachers:
         '<p>We start with the later years of&nbsp;primary school and the beginning of&nbsp;middle school — when many children’s interest in&nbsp;learning starts to&nbsp;fade.</p>' +
@@ -32,6 +30,11 @@
       a_paid:
         '<p>Yes. Teachers have more than enough work without us, so we pay participants both for the training and for the practice with children.</p>' +
         '<p>If we believe a teacher’s time matters, it makes sense to&nbsp;act like it.</p>',
+      q_believe: "What we believe",
+      a_believe:
+        '<p>One good teacher shapes hundreds of&nbsp;children over a career. Some shape not just their own class, but the work of&nbsp;a whole team. So we’re not trying to&nbsp;invent a new pedagogy — we help teachers and coordinators get better at&nbsp;the work they already do.</p>' +
+        '<p class="label">What about AI?</p>' +
+        '<p>We teach teachers to&nbsp;use AI — and to&nbsp;teach children how to&nbsp;use it — instead of&nbsp;training AI to&nbsp;replace teachers.</p>',
       q_who: "Who we are",
       a_who:
         '<div class="cards">' +
@@ -60,11 +63,9 @@
       cta: "Хотите что-то сделать вместе?",
       q_what: "Что мы делаем",
       a_what:
-        '<p>Один хороший учитель за&nbsp;свою карьеру влияет на&nbsp;сотни детей. Некоторые влияют не&nbsp;только на&nbsp;свой класс, но&nbsp;и&nbsp;на&nbsp;работу целой команды. Поэтому мы не&nbsp;пытаемся придумать новую педагогическую систему, а&nbsp;помогаем учителям и&nbsp;координаторам становиться сильнее в&nbsp;своей работе.</p>' +
-        '<p>Берём подходы, которые уже хорошо работают, учимся ими пользоваться и&nbsp;проверяем их на&nbsp;практике. Больше половины программы — практика с&nbsp;настоящими детьми и&nbsp;разбор занятий с&nbsp;ментором.</p>' +
-        '<p>Нас интересует не&nbsp;то, что хорошо выглядит на&nbsp;воркшопе, а&nbsp;то, что работает потом — в&nbsp;обычном классе из&nbsp;35&nbsp;человек во&nbsp;вторник утром.</p>' +
-        '<p class="label">А&nbsp;что с&nbsp;ИИ?</p>' +
-        '<p>Мы учим учителей пользоваться ИИ и&nbsp;учить этому детей — а&nbsp;не&nbsp;обучаем ИИ заменять учителей.</p>',
+        '<p>Фонд организует обучающие программы для учителей и&nbsp;координаторов. В&nbsp;каждой есть интенсив, практика и&nbsp;работа с&nbsp;ментором: учителя ведут занятия с&nbsp;настоящими детьми, а&nbsp;координаторы в&nbsp;группах разбирают и&nbsp;проигрывают реальные ситуации из&nbsp;своей работы. Больше половины каждой программы — практика.</p>' +
+        '<p>Фонд не&nbsp;изобретает педагогику. В&nbsp;основе программ — подходы с&nbsp;хорошо изученным эффектом: обучение через исследование, структурированные дискуссии, ремесло преподавания.</p>' +
+        '<p>Важно не&nbsp;то, что хорошо выглядит на&nbsp;воркшопе, а&nbsp;то, что работает потом — в&nbsp;обычном классе из&nbsp;35&nbsp;человек во&nbsp;вторник утром.</p>',
       q_teachers: "Для учителей",
       a_teachers:
         '<p>Начинаем с&nbsp;конца начальной школы и&nbsp;начала средней — времени, когда интерес к&nbsp;учёбе у&nbsp;многих детей начинает снижаться.</p>' +
@@ -84,6 +85,11 @@
       a_paid:
         '<p>Да. У&nbsp;учителей и&nbsp;без нас достаточно работы, поэтому мы платим участникам и&nbsp;за&nbsp;обучение, и&nbsp;за&nbsp;практику с&nbsp;детьми.</p>' +
         '<p>Если мы считаем время учителя важным, логично вести себя соответственно.</p>',
+      q_believe: "Во что мы верим",
+      a_believe:
+        '<p>Один хороший учитель за&nbsp;свою карьеру влияет на&nbsp;сотни детей. Некоторые влияют не&nbsp;только на&nbsp;свой класс, но&nbsp;и&nbsp;на&nbsp;работу целой команды. Поэтому мы не&nbsp;пытаемся придумать новую педагогическую систему, а&nbsp;помогаем учителям и&nbsp;координаторам становиться сильнее в&nbsp;своей работе.</p>' +
+        '<p class="label">А&nbsp;что с&nbsp;ИИ?</p>' +
+        '<p>Мы учим учителей пользоваться ИИ и&nbsp;учить этому детей — а&nbsp;не&nbsp;обучаем ИИ заменять учителей.</p>',
       q_who: "Кто мы",
       a_who:
         '<div class="cards">' +
@@ -112,11 +118,9 @@
       cta: "רוצים לעשות משהו יחד?",
       q_what: "מה אנחנו עושים",
       a_what:
-        '<p>מורה טוב אחד משפיע במהלך הקריירה על מאות ילדים. יש מורים שמשפיעים לא רק על הכיתה שלהם, אלא גם על העבודה של צוות שלם. לכן אנחנו לא מנסים להמציא פדגוגיה חדשה — אנחנו עוזרים למורים ולרכזים להיות טובים יותר במה שהם כבר עושים.</p>' +
-        '<p>אנחנו לוקחים גישות שכבר עובדות, לומדים להשתמש בהן ובודקים אותן בפועל. יותר ממחצית מכל תוכנית היא תרגול: המשתתפים מלמדים ילדים ומנתחים את השיעורים עם מנטור.</p>' +
-        '<p>לא מעניין אותנו מה נראה טוב בסדנה, אלא מה עובד אחר כך — בכיתה רגילה של 35 ילדים ביום שלישי בבוקר.</p>' +
-        '<p class="label">ומה עם AI?</p>' +
-        '<p>אנחנו מלמדים מורים להשתמש ב-AI — וללמד ילדים איך להשתמש בו — במקום לאמן AI להחליף מורים.</p>',
+        '<p>הקרן מפעילה תוכניות הכשרה למורים ולרכזים. בכל תוכנית יש אינטנסיב, תרגול מעשי ועבודה עם מנטור: המורים מלמדים ילדים, והרכזים עובדים בקבוצות על מצבים אמיתיים מהעבודה שלהם. יותר ממחצית מכל תוכנית היא תרגול.</p>' +
+        '<p>הקרן לא ממציאה פדגוגיה. התוכניות בנויות על גישות שנחקרו היטב: למידת חקר, דיונים מובנים, אומנות ההוראה.</p>' +
+        '<p>מה שחשוב הוא לא מה שנראה טוב בסדנה, אלא מה שעובד אחר כך — בכיתה רגילה של 35 ילדים ביום שלישי בבוקר.</p>',
       q_teachers: "למורים",
       a_teachers:
         '<p>אנחנו מתחילים בכיתות הגבוהות של בית הספר היסודי ובתחילת חטיבת הביניים — בשנים שבהן העניין בלמידה אצל ילדים רבים מתחיל לדעוך.</p>' +
@@ -136,6 +140,11 @@
       a_paid:
         '<p>כן. למורים יש מספיק עבודה גם בלעדינו, ולכן אנחנו משלמים למשתתפים גם על ההכשרה וגם על התרגול עם ילדים.</p>' +
         '<p>אם אנחנו מאמינים שזמנו של מורה חשוב, הגיוני להתנהג בהתאם.</p>',
+      q_believe: "במה אנחנו מאמינים",
+      a_believe:
+        '<p>מורה טוב אחד משפיע במהלך הקריירה על מאות ילדים. יש מורים שמשפיעים לא רק על הכיתה שלהם, אלא גם על העבודה של צוות שלם. לכן אנחנו לא מנסים להמציא פדגוגיה חדשה — אנחנו עוזרים למורים ולרכזים להיות טובים יותר במה שהם כבר עושים.</p>' +
+        '<p class="label">ומה עם AI?</p>' +
+        '<p>אנחנו מלמדים מורים להשתמש ב-AI — וללמד ילדים איך להשתמש בו — במקום לאמן AI להחליף מורים.</p>',
       q_who: "מי אנחנו",
       a_who:
         '<div class="cards">' +
