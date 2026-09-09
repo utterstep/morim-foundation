@@ -352,7 +352,12 @@
    Leaders rows carry no where/when yet, so it is title + button only. */
 .leaders .program-row {
   position: relative;
-  grid-template-columns: minmax(0, 1fr) auto;
+}
+/* A closed cohort: the row stays listed, its button is inert and muted. */
+.leaders .apply-button:disabled {
+  background: #4a111614;
+  color: var(--leaders-muted);
+  cursor: not-allowed;
 }
 .leaders .program-list {
   padding-top: 0.75rem;

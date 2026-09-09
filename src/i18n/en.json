@@ -137,7 +137,7 @@
     "title_html": "dear <span class=\"word\">te<span class=\"glyph teacher-a\"><span class=\"sr-only\">a</span><img src=\"{root}assets/imgA1.svg\" alt=\"\" width=\"73\" height=\"66\"></span>cher-</span><br>leaders,",
     "intro": [
       "Strong teachers need schools where they can do good work and want to stay. That’s why we work not only with teachers, but also with people who shape the teams around them.",
-      "Our first program for coordinators is being developed together with rakazim themselves. The pilot is planned for fall 2026."
+      "Our first program for coordinators is being developed together with rakazim themselves. The first pilot is under way with a closed cohort."
     ],
     "benefits": [
       {
@@ -164,7 +164,7 @@
       },
       {
         "value": "tel-aviv",
-        "label": "Tel&nbsp;Aviv, Israel"
+        "label": "Tel&nbsp;Aviv"
       },
       {
         "value": "tbilisi",
@@ -181,15 +181,26 @@
         "id": "tel-aviv",
         "location": "tel-aviv",
         "title_html": "Teaching in the<br>Attention Economy",
-        "where": "Zoom + monthly meetings in Tel&nbsp;Aviv, Israel",
+        "where": "Zoom + monthly meetings in Tel&nbsp;Aviv",
         "when": "Starts in November 2026"
       }
     ],
     "leaders": [
       {
+        "id": "school-coordination-pilot",
+        "closed": true,
+        "badge": "Pilot in progress · closed cohort",
+        "title_html": "Coordinating a School: Team, Systems, Projects",
+        "where": "Zoom + monthly meetings in Tel&nbsp;Aviv",
+        "when": "In progress"
+      },
+      {
         "id": "school-coordination",
-        "badge": "First pilot planned for fall 2026",
-        "title_html": "Coordinating a School: Team, Systems, Projects"
+        "closed": false,
+        "badge": "",
+        "title_html": "Coordinating a School: Team, Systems, Projects",
+        "where": "Zoom + monthly meetings in Tel&nbsp;Aviv",
+        "when": "Starts in late January 2027"
       }
     ],
     "tbilisi": {
@@ -210,12 +221,12 @@
       ],
       "results_title": "The first pilot"
     },
-    "register_interest": "Register interest",
     "note": {
       "title": "Interested in bringing a program to your school or municipality?",
       "body": "Tell us a little about your school and what you need. We’re looking for participants and places to practice, not just funding.",
       "link": "Let’s talk"
-    }
+    },
+    "join": "Join"
   },
   "team": {
     "eyebrow": "People behind Morim",

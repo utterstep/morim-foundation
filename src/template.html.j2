@@ -69,10 +69,15 @@
   <div class="program-list" aria-live="polite">
     {% if audience == 'leaders' %}
     {% for row in t.programs.leaders %}
-    <article class="program-row" data-program="{{ row.id }}">
+    <article class="program-row" data-program="{{ row.id }}"{% if row.closed %} data-closed{% endif %}>
       {% if row.badge %}<span class="program-badge"><span>{{ row.badge }}</span></span>{% endif %}
       <h4>{{ row.title_html }}</h4>
-      {{ apply_button('button apply-button', t.programs.register_interest) }}
+      {{ program_meta(row.where, row.when) }}
+      {% if row.closed %}
+      <button type="button" class="button apply-button" disabled>{{ t.programs.join }}</button>
+      {% else %}
+      {{ apply_button('button apply-button', t.programs.join) }}
+      {% endif %}
     </article>
     {% endfor %}
     {% else %}
@@ -234,7 +239,7 @@
 
     <section class="leaders panel" id="leaders" aria-labelledby="leaders-title">
       <div class="floating-apply-rail" inert>
-        {{ apply_button('button apply-button floating-apply-button', t.programs.register_interest) }}
+        {{ apply_button('button apply-button floating-apply-button', t.programs.join) }}
       </div>
       <p class="eyebrow muted">{{ t.leaders.eyebrow }}</p>
       <h2 class="display" id="leaders-title">{{ t.leaders.title_html }}</h2>
