@@ -1,5 +1,17 @@
 # morim.foundation — landing page
 
+## Redesign preview — do not merge or deploy yet
+
+The work-in-progress React/Vinext redesign lives in [`website/`](website/README.md).
+It is for local review only. The existing `index.html`, `static/`, domain settings,
+and GitHub Pages setup are unchanged. No deployment workflow is included.
+
+Use Node 22.13+ and run `cd website && npm ci && npm run dev` to preview it locally.
+Contact/application links, final copy, external video behavior, and font licenses
+still need review before launch.
+
+## Existing static landing page
+
 Static single-page landing for **Untitled Foundation**, designed to be served from
 GitHub Pages at the custom domain `morim.foundation`.
 

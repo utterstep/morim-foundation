@@ -1,0 +1,92 @@
+/* Keep the original header's space so collapsing never shifts the page. */
+.header-shell {
+  --header-rest-height: 9rem;
+  height: 9rem;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  pointer-events: none;
+}
+main[data-hero-variant='context'] .header-shell {
+  --header-rest-height: 7rem;
+  height: 7rem;
+}
+.header-shell .site-header {
+  position: relative;
+  isolation: isolate;
+  width: calc(100% - 12.5%);
+  max-width: none;
+  margin-inline: auto;
+  height: var(--header-rest-height);
+  min-height: 0;
+  padding: 0.5rem 1.125rem;
+  justify-content: space-between;
+  pointer-events: auto;
+  border-radius: 999rem;
+  translate: 0 0;
+  transition:
+    height 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    translate 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.header-shell .site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: rgb(255 255 255 / 94%);
+  box-shadow:
+    0 0.375rem 1.5rem #18202212,
+    inset 0 0 0 1px #1820220a;
+  opacity: 0;
+  transition: opacity 420ms ease;
+}
+.header-shell[data-compact='true'] .site-header {
+  height: 4.5rem;
+  translate: 0 0.75rem;
+}
+.header-shell[data-compact='true'] .site-header::before {
+  opacity: 1;
+}
+.header-shell .site-header > .button,
+.header-shell .mobile-menu-trigger {
+  border-radius: 999rem;
+  flex-shrink: 0;
+}
+@supports (backdrop-filter: blur(1rem)) {
+  .header-shell .site-header::before {
+    background: rgb(255 255 255 / 88%);
+    backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem);
+  }
+}
+html:has(.header-shell) {
+  scroll-padding-top: 6.5rem;
+}
+@media (max-width: 700px) {
+  .header-shell,
+  main[data-hero-variant='context'] .header-shell {
+    --header-rest-height: 4.75rem;
+    height: calc(4.75rem + env(safe-area-inset-top, 0px));
+    top: env(safe-area-inset-top, 0px);
+  }
+  .header-shell .site-header {
+    width: calc(100% - 2.5rem);
+    padding: 0.5rem 0.75rem 0.5rem 1.125rem;
+    gap: 1.25rem;
+  }
+  .header-shell[data-compact='true'] .site-header {
+    height: 4.25rem;
+    translate: 0 0.5rem;
+  }
+  html:has(.header-shell) {
+    scroll-padding-top: calc(5.75rem + env(safe-area-inset-top, 0px));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .header-shell .site-header,
+  .header-shell .site-header::before {
+    transition: none;
+  }
+}

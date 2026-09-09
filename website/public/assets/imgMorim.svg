@@ -1,0 +1,17 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="15.0509" height="15.8871" viewBox="0 0 15.0509 15.8871" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="MORIM" filter="url(#filter0_i_0_13)">
+<path d="M14.0224 1.03108L15.0509 2.6724L14.925 4.6504L13.7915 6.60735L10.7057 9.32184L10.4538 10.2688L13.9384 13.5935L14.0643 15.2138L12.7629 15.8871L10.9996 15.6767L5.28987 12.5413L2.87584 15.2558L0.629747 15.2138L0 14.0564L0.167933 11.9942L2.26709 5.47106L4.38724 1.55715L6.00359 0.483978L8.69051 0L12.1751 0.126255L14.0224 1.03108Z" fill="#212121"/>
+</g>
+<defs>
+<filter id="filter0_i_0_13" x="0" y="-1" width="15.0509" height="16.8871" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="-1"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.15 0"/>
+<feBlend mode="normal" in2="shape" result="effect1_innerShadow_0_13"/>
+</filter>
+</defs>
+</svg>

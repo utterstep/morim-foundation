@@ -1,0 +1,316 @@
+/* Keep every random arrival in a compact field centered on “but...”. */
+.hero-editorial > .hero-accents {
+  inset: var(--but-center-y) auto auto 50%;
+  width: min(52rem, calc(100% - 4rem));
+  height: 16rem;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  font-size: 1rem;
+}
+.hero-editorial[data-poofed='true'] > .hero-accents {
+  /* Animated child visibility must not override the scroll dismissal. */
+  opacity: 0;
+}
+.hero-editorial .hero-app-item[data-slot] {
+  --float-width: 4.5rem;
+  --float-height: 4.5rem;
+  display: block;
+  width: var(--float-width);
+  height: var(--float-height);
+  left: calc((100% - var(--float-width)) * var(--float-x));
+  top: calc((100% - var(--float-height)) * var(--float-y));
+  right: auto;
+  bottom: auto;
+  z-index: var(--composition-layer, 2);
+}
+.hero-app-item[data-kind='icon'] {
+  border-radius: 26%;
+}
+.hero-app-icon-mask {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 26%;
+  overflow: hidden;
+  background: white;
+}
+.hero-app-icon-mask img {
+  display: block;
+  border-radius: 0;
+}
+.hero-editorial
+  .hero-app-item[data-slot]:is([data-dragging='true'], :focus-within) {
+  z-index: 10;
+}
+.hero-editorial .hero-app-item[data-kind='media'] {
+  --float-width: 7.5rem;
+  --float-height: calc((var(--float-width) - 4px) * 578 / 325 + 4px);
+  width: var(--float-width);
+  height: var(--float-height);
+  top: calc((100% - var(--float-height)) * var(--float-y));
+  border-radius: 0.4rem;
+}
+.hero-editorial
+  .hero-app-item[data-provider='youtube'][data-format='landscape'] {
+  --float-width: 19.25rem;
+  --float-height: calc((var(--float-width) - 4px) * 270 / 480 + 4px);
+}
+.hero-editorial .hero-app-item[data-provider='twitch'] {
+  z-index: 8;
+  --float-width: max(404px, 20.25rem);
+  --float-height: calc((var(--float-width) - 4px) * 0.75 + 4px);
+}
+.hero-live-media {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border: 2px solid white;
+  border-radius: inherit;
+  background: #151515;
+  color: white;
+  text-align: left;
+}
+.hero-video-poof-target {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+.hero-video-poof-target:focus-visible {
+  outline: 3px solid #2357ec;
+  outline-offset: -4px;
+}
+.hero-twitch-dismiss {
+  position: absolute;
+  right: -0.75rem;
+  top: -2rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #182022;
+  color: white;
+  font:
+    1.25rem/1 system-ui,
+    sans-serif;
+  cursor: pointer;
+}
+.hero-video-dismiss:focus-visible {
+  /* Keep keyboard dismissal without adding visible player chrome. */
+  clip: auto;
+  inset: 0.25rem 0.25rem auto auto;
+  width: 2rem;
+  height: 2rem;
+  z-index: 1;
+  color: white;
+  background: #151515;
+  border: 0;
+  border-radius: 50%;
+  font:
+    1.2rem/1 system-ui,
+    sans-serif;
+  cursor: pointer;
+}
+.hero-video-player {
+  display: block;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #151515;
+}
+.hero-video-player iframe {
+  display: block;
+  border: 0;
+  max-width: none;
+  transform-origin: top left;
+}
+.hero-video-status {
+  display: grid;
+  position: absolute;
+  inset: 0;
+  place-items: center;
+  padding: 0.5rem;
+  font:
+    0.7rem/1.3 system-ui,
+    sans-serif;
+  text-align: center;
+}
+.hero-editorial .hero-app-bob {
+  animation: none;
+  opacity: var(--story-opacity, 1);
+  transform: none;
+  filter: blur(var(--story-blur, 0px));
+}
+.hero-editorial .hero-app-item[data-provider='twitch'] .hero-app-bob {
+  filter: none;
+}
+.hero-editorial .hero-app-item[data-provider='twitch'] .hero-app-face {
+  transform: none;
+}
+.hero-editorial .hero-app-item[data-provider='twitch'] .hero-live-media {
+  border-radius: 0;
+}
+.hero-editorial .hero-app-item[data-dismissing='true'] .hero-app-face {
+  /* Vanish instantly under the smoke, then replace after the five frames. */
+  animation: none;
+  opacity: 0;
+  pointer-events: none;
+}
+.hero-editorial .hero-app-item:focus-visible .hero-app-bob {
+  animation: none;
+  opacity: 1;
+  visibility: visible;
+  filter: none;
+}
+@media (max-width: 700px) {
+  .hero-editorial > .hero-accents {
+    width: calc(100% - 3.5rem);
+    height: 13rem;
+  }
+  .hero-editorial .hero-app-item[data-slot] {
+    --float-width: 3rem;
+    --float-height: 3rem;
+    touch-action: pan-y;
+    left: calc(
+      (100% - var(--float-width)) * var(--float-mobile-x, var(--float-x))
+    );
+    top: calc(
+      (100% - var(--float-height)) * var(--float-mobile-y, var(--float-y))
+    );
+  }
+  .hero-editorial .hero-app-item[data-kind='media'] {
+    --float-width: 6rem;
+  }
+  .hero-editorial
+    .hero-app-item[data-provider='youtube'][data-format='landscape'] {
+    --float-width: min(12.5rem, calc(65vw - 2rem));
+  }
+  .hero-editorial .hero-app-item[data-provider='twitch'] {
+    --float-width: min(15rem, calc(80vw - 2.8rem));
+  }
+  /* Preserve the existing space under the mobile title as part of the field. */
+  .hero-editorial .hero-mobile-deck {
+    min-height: 7rem;
+  }
+  .hero-editorial .hero-notification {
+    font-size: 0.75rem;
+  }
+}
+.hero-editorial[data-media-layout='stay'],
+.hero-editorial[data-media-layout='static'] {
+  padding-bottom: 3rem;
+}
+main[data-hero-variant='original'] .introduction {
+  margin-top: 0;
+}
+.hero-editorial[data-media-layout='stay'] > .hero-accents,
+.hero-editorial[data-media-layout='static'] > .hero-accents {
+  /* Reserve space between the headline and copy; the collage scrolls normally. */
+  display: block;
+  position: relative;
+  inset: auto;
+  width: min(56rem, calc(100vw - 3.5rem));
+  height: 28rem;
+  margin: -6rem auto 0;
+  transform: none;
+}
+.hero-editorial[data-media-layout='scroll'] > .hero-accents {
+  position: absolute;
+  inset: var(--but-center-y) auto auto 50%;
+  width: min(56rem, calc(100vw - 3.5rem));
+  height: 28rem;
+  transform: translate(-50%, -50%);
+}
+@media (min-width: 701px) {
+  .hero-editorial[data-media-layout='static'] .hero-app-item[data-slot] {
+    --float-width: 5.25rem;
+    --float-height: 5.25rem;
+  }
+  .hero-editorial[data-media-layout='static']
+    .hero-app-item[data-kind='media'] {
+    --float-width: 8.75rem;
+    --float-height: calc((var(--float-width) - 4px) * 578 / 325 + 4px);
+  }
+  .hero-editorial[data-media-layout='static']
+    .hero-app-item[data-provider='youtube'][data-format='landscape'] {
+    --float-width: 22.5rem;
+    --float-height: calc((var(--float-width) - 4px) * 270 / 480 + 4px);
+  }
+  .hero-editorial[data-media-layout='static']
+    .hero-app-item[data-provider='twitch'] {
+    --float-width: max(404px, 23.5rem);
+    --float-height: calc((var(--float-width) - 4px) * 0.75 + 4px);
+  }
+}
+@media (max-width: 700px) {
+  .hero-editorial[data-media-layout='stay'] > .hero-accents,
+  .hero-editorial[data-media-layout='static'] > .hero-accents {
+    height: 25rem;
+    margin-top: -2.5rem;
+  }
+  .hero-editorial[data-media-layout='scroll'] > .hero-accents {
+    height: 24rem;
+  }
+}
+.hero-variation-switch {
+  position: fixed;
+  z-index: 60;
+  left: max(12px, env(safe-area-inset-left));
+  bottom: max(12px, env(safe-area-inset-bottom));
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px;
+  border: 1px solid #18202226;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 3px 16px #18202214;
+  color: #182022;
+  font:
+    14px/1.2 system-ui,
+    sans-serif;
+}
+.hero-variation-switch > span {
+  padding: 0 6px;
+  color: #656965;
+}
+.hero-variation-switch button {
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+}
+.hero-variation-switch button[aria-pressed='true'] {
+  background: #182022;
+  color: #fff;
+}
+.hero-variation-switch button:focus-visible {
+  outline: 2px solid #2357ec;
+  outline-offset: 2px;
+}
+@media (max-width: 440px) {
+  .hero-variation-switch > span {
+    display: none;
+  }
+}
+.hero-editorial .hero-app-item[data-story-visible='false'] {
+  visibility: hidden;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-editorial .hero-app-bob,
+  .hero-editorial .hero-app-item[data-dismissing='true'] .hero-app-face {
+    animation: none;
+  }
+}
