@@ -164,7 +164,7 @@
       },
       {
         "value": "tel-aviv",
-        "label": "Tel Aviv, Israel"
+        "label": "Tel&nbsp;Aviv, Israel"
       },
       {
         "value": "tbilisi",
@@ -181,7 +181,7 @@
         "id": "tel-aviv",
         "location": "tel-aviv",
         "title_html": "Teaching in the<br>Attention Economy",
-        "where": "Zoom + monthly meetings in Tel Aviv, Israel",
+        "where": "Zoom + monthly meetings in Tel&nbsp;Aviv, Israel",
         "when": "Starts in November 2026"
       }
     ],
