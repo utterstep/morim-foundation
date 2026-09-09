@@ -56,8 +56,8 @@ export const heroCompositionSlots = [
   {
     x: 0.56,
     y: 0.76,
-    mobileX: 0.62,
-    mobileY: 0.82,
+    mobileX: 0.55,
+    mobileY: 0.84,
     tilt: -3,
     layer: 3,
     previews: heroVideoPools.twitch,

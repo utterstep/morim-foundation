@@ -12,6 +12,7 @@
   },
   "switcher": {
     "label": "שפה",
+    "trigger": "שפות אחרות",
     "names": { "en": "EN", "ru": "RU", "he": "עב" }
   },
   "nav": [
@@ -127,6 +128,7 @@
     "where": "איפה",
     "when": "מתי",
     "apply": "להרשמה",
+    "updates": "לקבל עדכונים",
     "see_results": "לתוצאות",
     "collapse": "לסגור",
     "tba": "יפורסם בהמשך",
@@ -142,6 +144,7 @@
     "leaders": [
       {
         "id": "school-coordination",
+        "badge": "פיילוט בתהליך · הישארו בקשר",
         "title_html": "לרכז בית ספר: צוות, מערכות, פרויקטים"
       }
     ],

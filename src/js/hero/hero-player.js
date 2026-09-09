@@ -27,7 +27,7 @@ export function createPlayer(shell, video, { interactive, unavailableText }) {
   };
 
   const applyScale = () => {
-    if (state.iframe && video.provider !== 'twitch') state.iframe.style.transform = `scale(${state.scale})`;
+    if (state.iframe) state.iframe.style.transform = `scale(${state.scale})`;
   };
   const resize = new ResizeObserver(() => {
     state.scale = shell.clientWidth / video.width;
@@ -60,9 +60,6 @@ export function createPlayer(shell, video, { interactive, unavailableText }) {
     iframe.dataset.autoplay = String(autoplay);
     iframe.width = String(video.width);
     iframe.height = String(video.height);
-    if (video.provider === 'twitch') {
-      Object.assign(iframe.style, { width: '100%', height: '100%', position: 'absolute', inset: '0' });
-    }
     iframe.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
     iframe.allowFullscreen = true;
     iframe.referrerPolicy = 'strict-origin-when-cross-origin';

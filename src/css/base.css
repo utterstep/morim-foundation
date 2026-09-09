@@ -27,8 +27,9 @@
   --background: #fff;
   --foreground: #212121;
   --green: #133d30;
-  --leaders-purple: #3c3b52;
-  --leaders-muted: #b2b1bb;
+  --leaders-bg: #f4f3f0;
+  --leaders-ink: #4a1116;
+  --leaders-muted: #9a6462;
   --paper: #f4f3f0;
   --ink: #182022;
   --body-size: 1.625rem;
@@ -494,9 +495,14 @@ figcaption {
     padding-top: 4rem;
     padding-bottom: 5.5rem;
   }
+  /* Lines are hard breaks in the copy, so the widest line sets the size:
+     "shape hundreds" fits ~15.5vw; Cyrillic runs wider, so Russian steps down. */
   .hero h1 {
-    font-size: clamp(3rem, 10.8vw, 4.8rem);
+    font-size: clamp(3.5rem, 15.5vw, 6.5rem);
     line-height: 0.93;
+  }
+  html[lang='ru'] .hero h1 {
+    font-size: clamp(3rem, 13.5vw, 5.5rem);
   }
   .introduction {
     margin-top: 4.375rem;

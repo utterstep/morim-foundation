@@ -62,7 +62,7 @@ test('reduced-motion players do not request autoplay', () => {
   }
 });
 
-test('Twitch starts in view at native size with unobstructed manual controls', () => {
+test('Twitch starts in view, scaled from native size, with unobstructed manual controls', () => {
   const player = readFileSync(
     new URL('../src/js/hero/hero-player.js', import.meta.url),
     'utf8',
@@ -78,6 +78,10 @@ test('Twitch starts in view at native size with unobstructed manual controls', (
   // Only the Twitch iframe is interactive; it gets its own dismiss control.
   assert(hero.includes("interactive: video.provider === 'twitch'"));
   assert(hero.includes("'hero-twitch-dismiss'"));
-  assert(css.includes('--float-width: max(404px, 20.25rem)'));
-  assert(css.includes('--float-width: max(404px, 23.5rem)'));
+  // The iframe keeps its 400x300 native box and is scaled by transform like
+  // every other provider; the px floor keeps the clip readable at small rem.
+  assert(/if \(state\.iframe\) state\.iframe\.style\.transform = `scale/.test(player));
+  assert(!player.includes("video.provider === 'twitch') {\n      Object.assign(iframe.style"));
+  assert(css.includes('--float-width: max(250px, 14.5rem)'));
+  assert(css.includes('--float-width: max(250px, 16.5rem)'));
 });

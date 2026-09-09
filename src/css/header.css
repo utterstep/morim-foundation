@@ -51,6 +51,25 @@
   border-radius: 999rem;
   flex-shrink: 0;
 }
+/* Desktop: logo | nav | contact on a three-column grid, so the nav (with the
+   language menu) sits in the true centre whatever the outer widths are. */
+@media (min-width: 701px) {
+  .header-shell .site-header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+  }
+  .header-shell .site-header > .logo {
+    justify-self: start;
+  }
+  .header-shell .site-header > nav {
+    justify-self: center;
+    align-items: center;
+  }
+  .header-shell .site-header > .button {
+    justify-self: end;
+  }
+}
 @supports (backdrop-filter: blur(1rem)) {
   .header-shell .site-header::before {
     background: rgb(255 255 255 / 88%);
@@ -104,8 +123,8 @@ html:has(.header-shell) {
   margin-top: 1rem;
 }
 .lang-switcher-menu {
-  margin-top: 1.5rem;
-  font-size: 1.25rem;
+  margin-top: 1.25rem;
+  font-size: 1.125rem;
 }
 /* Header language drop-down: a text button with a chevron, opening a
    small card of links styled like the programs filter popup. */

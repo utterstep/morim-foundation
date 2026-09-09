@@ -60,6 +60,20 @@ test('every module import under site/js resolves', () => {
   }
 });
 
+test('the language dropdown closes the header nav, right after FAQ', () => {
+  for (const page of Object.values(pages)) {
+    const html = read(page);
+    const nav = /<nav aria-label="[^"]+">([\s\S]*?)<\/nav>/.exec(html)?.[1] ?? '';
+    assert.match(nav, /href="#faq">[^<]+<\/a>\s*<div class="lang-menu">/, `${page} lacks the dropdown after FAQ`);
+    assert.match(nav, /aria-controls="lang-menu-list"/);
+    assert.match(nav, /id="lang-menu-list" class="lang-menu-list" hidden>/, `${page} dropdown list is not hidden at rest`);
+    const list = /id="lang-menu-list"[\s\S]*?<\/ul>/.exec(html)?.[0] ?? '';
+    assert.equal((list.match(/<a /g) ?? []).length, 2, `${page} dropdown should list only the other two languages`);
+    assert.doesNotMatch(list, /aria-current/);
+    assert.doesNotMatch(html, /lang-switcher-header/);
+  }
+});
+
 test('native widgets are in the markup', () => {
   const html = read(pages.en);
   assert.equal((html.match(/<details class="faq-item"/g) ?? []).length, 3);

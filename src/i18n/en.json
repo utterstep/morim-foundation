@@ -11,6 +11,7 @@
   },
   "switcher": {
     "label": "Language",
+    "trigger": "Other languages",
     "names": {
       "en": "EN",
       "ru": "RU",
@@ -96,8 +97,8 @@
     ]
   },
   "fellowship": {
-    "eyebrow": "Morim fellows",
-    "title_html": "dear te<span class=\"glyph teacher-a\"><span class=\"sr-only\">a</span><img src=\"{root}assets/imgA1.svg\" alt=\"\" width=\"73\" height=\"66\"></span>chers,",
+    "eyebrow": "Morim Fellows",
+    "title_html": "dear <span class=\"word\">te<span class=\"glyph teacher-a\"><span class=\"sr-only\">a</span><img src=\"{root}assets/imgA1.svg\" alt=\"\" width=\"73\" height=\"66\"></span>chers,</span>",
     "intro": [
       "You see the results of years of classroom disruption better than anyone, and you’ve been left to face it alone. We want to give you tools, time and backing — and the respect your work deserves.",
       "We work where the leverage is highest: the late primary and early middle school years, before motivation fades. Joining our fellowship would give you:"
@@ -127,8 +128,8 @@
     ]
   },
   "leaders": {
-    "eyebrow": "Morim leaders",
-    "title_html": "dear sch<span class=\"glyph school-oo\"><span class=\"sr-only\">oo</span><img src=\"{root}assets/imgVector1.svg\" alt=\"\" width=\"106\" height=\"60\"></span>l<br>leaders,",
+    "eyebrow": "Morim Leaders",
+    "title_html": "dear <span class=\"word\">sch<span class=\"glyph school-oo\"><span class=\"sr-only\">oo</span><img src=\"{root}assets/imgVector1.svg\" alt=\"\" width=\"106\" height=\"60\"></span>l</span><br>leaders,",
     "intro": [
       "Strong teachers need schools where they can do good work and want to stay. That’s why we want to work not only with teachers, but also for people who shape the teams around them.",
       "In fall 2026, we’re launching a pilot program, where we’ll focus on:"
@@ -169,6 +170,7 @@
     "where": "Where",
     "when": "When",
     "apply": "Apply",
+    "updates": "Get updates",
     "see_results": "See results",
     "collapse": "Collapse",
     "tba": "To be announced",
@@ -184,13 +186,14 @@
     "leaders": [
       {
         "id": "school-coordination",
+        "badge": "Pilot in progress · stay in touch",
         "title_html": "Coordinating a School: Team, Systems, Projects"
       }
     ],
     "tbilisi": {
       "id": "tbilisi",
       "location": "tbilisi",
-      "title_html": "Summer C<span class=\"glyph small-a\"><span class=\"sr-only\">a</span><img src=\"{root}assets/imgA2.svg\" alt=\"\" width=\"28\" height=\"25\"></span>mp<br>in Tbilisi",
+      "title_html": "Summer <span class=\"word\">C<span class=\"glyph small-a\"><span class=\"sr-only\">a</span><img src=\"{root}assets/imgA2.svg\" alt=\"\" width=\"28\" height=\"25\"></span>mp</span><br>in Tbilisi",
       "where": "Tbilisi, Georgia",
       "when": "July 2026",
       "photos_aria": "Photos from the Tbilisi teacher intensive",

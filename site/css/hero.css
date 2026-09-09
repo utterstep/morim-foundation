@@ -31,7 +31,7 @@
   z-index: 10;
 }
 .hero-editorial .hero-app-item[data-kind='media'] {
-  --float-width: 7.5rem;
+  --float-width: 6.5rem;
   --float-height: calc((var(--float-width) - 4px) * 578 / 325 + 4px);
   width: var(--float-width);
   height: var(--float-height);
@@ -40,12 +40,14 @@
 }
 .hero-editorial
   .hero-app-item[data-provider='youtube'][data-format='landscape'] {
-  --float-width: 19.25rem;
+  --float-width: 16rem;
   --float-height: calc((var(--float-width) - 4px) * 270 / 480 + 4px);
 }
 .hero-editorial .hero-app-item[data-provider='twitch'] {
   z-index: 8;
-  --float-width: max(404px, 20.25rem);
+  /* Twitch renders at its 400px native size and is scaled down by transform;
+     the px floor keeps the clip readable when 1rem shrinks with the viewport. */
+  --float-width: max(250px, 14.5rem);
   --float-height: calc((var(--float-width) - 4px) * 0.75 + 4px);
 }
 .hero-live-media {
@@ -98,6 +100,10 @@
   width: 100%;
   overflow: hidden;
   background: #151515;
+  /* The iframe is a block wider than this box, scaled from its top-left
+     corner. In RTL it would start at the right edge and scale away from it,
+     so the box itself stays LTR (the embed is its own document anyway). */
+  direction: ltr;
 }
 .hero-video-player iframe {
   display: block;
@@ -157,18 +163,29 @@
       (100% - var(--float-height)) * var(--float-mobile-y, var(--float-y))
     );
   }
+  /* The icon rule above also resets --float-height, so each screen restates
+     its aspect ratio here or it collapses to the 3rem icon height. */
   .hero-editorial .hero-app-item[data-kind='media'] {
-    --float-width: 6rem;
+    --float-width: 5.25rem;
+    --float-height: calc((var(--float-width) - 4px) * 578 / 325 + 4px);
   }
   .hero-editorial
     .hero-app-item[data-provider='youtube'][data-format='landscape'] {
-    --float-width: min(12.5rem, calc(65vw - 2rem));
+    --float-width: min(11rem, calc(58vw - 2rem));
+    --float-height: calc((var(--float-width) - 4px) * 270 / 480 + 4px);
   }
   .hero-editorial .hero-app-item[data-provider='twitch'] {
-    --float-width: min(15rem, calc(80vw - 2.8rem));
+    --float-width: min(13rem, calc(68vw - 2.8rem));
+    --float-height: calc((var(--float-width) - 4px) * 0.75 + 4px);
   }
   .hero-editorial .hero-notification {
     font-size: 0.75rem;
+  }
+  /* Fewer pieces on a phone: the three screens, the two bottom-corner icons
+     and the top-left one. The centre-top and right-middle icons sit out. */
+  .hero-editorial .hero-app-item[data-slot='5'],
+  .hero-editorial .hero-app-item[data-slot='6'] {
+    display: none;
   }
 }
 .hero-editorial[data-media-layout='static'] {
@@ -194,23 +211,25 @@ main[data-hero-variant='original'] .introduction {
   }
   .hero-editorial[data-media-layout='static']
     .hero-app-item[data-kind='media'] {
-    --float-width: 8.75rem;
+    --float-width: 7.5rem;
     --float-height: calc((var(--float-width) - 4px) * 578 / 325 + 4px);
   }
   .hero-editorial[data-media-layout='static']
     .hero-app-item[data-provider='youtube'][data-format='landscape'] {
-    --float-width: 22.5rem;
+    --float-width: 18.5rem;
     --float-height: calc((var(--float-width) - 4px) * 270 / 480 + 4px);
   }
   .hero-editorial[data-media-layout='static']
     .hero-app-item[data-provider='twitch'] {
-    --float-width: max(404px, 23.5rem);
+    --float-width: max(250px, 16.5rem);
     --float-height: calc((var(--float-width) - 4px) * 0.75 + 4px);
   }
 }
 @media (max-width: 700px) {
   .hero-editorial[data-media-layout='static'] > .hero-accents {
     height: 25rem;
-    margin-top: -2.5rem;
+    /* The bigger mobile headline needs the collage to start lower, or the
+       top cards cover "but...". */
+    margin-top: -0.75rem;
   }
 }
