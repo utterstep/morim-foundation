@@ -26,7 +26,9 @@
 :root {
   --background: #fff;
   --foreground: #212121;
-  --green: #133d30;
+  --fellowship-bg: #3a2238;
+  --fellowship-rule: #756474;
+  --fellowship-muted: #bab2b9;
   --leaders-bg: #f4f3f0;
   --leaders-ink: #4a1116;
   --leaders-muted: #9a6462;

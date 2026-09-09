@@ -6,7 +6,7 @@
   text-align: center;
 }
 .fellowship {
-  background: var(--green);
+  background: var(--fellowship-bg);
   color: var(--paper);
   padding: 6rem 8.3% 5rem;
 }
@@ -115,7 +115,7 @@
 }
 .programs {
   margin-top: 8.875rem;
-  border-top: 1px solid #557768;
+  border-top: 1px solid var(--fellowship-rule);
   padding-top: 4.375rem;
   text-align: start;
 }
@@ -293,7 +293,7 @@
 }
 .apply-button:hover {
   background: #f4f3f0;
-  color: #133d30;
+  color: var(--fellowship-bg);
 }
 .results-button {
   background: #27291d33;
@@ -312,7 +312,7 @@
   font-size: 1.25rem;
   line-height: 1.5rem;
   text-align: center;
-  color: #adc0b5;
+  color: var(--fellowship-muted);
   letter-spacing: -0.03em;
   margin-top: 4.5rem;
 }
@@ -793,6 +793,11 @@
   }
   html[lang='ru'] .display {
     font-size: clamp(3rem, 13.5vw, 5rem);
+  }
+  /* "coordinators," / "координаторы," is one unbreakable word with the "oo"
+     glyph inside it; a step smaller keeps it inside the panel on phones. */
+  .leaders h2.display {
+    font-size: clamp(3rem, 12vw, 5rem);
   }
   .fellowship-intro {
     margin-top: 2.25rem;
