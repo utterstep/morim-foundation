@@ -88,21 +88,21 @@ dialog::backdrop {
   background: #f4f3f0;
 }
 
-/* Mobile menu: side sheet from the inline-end edge, 2.5rem slide + fade. */
+/* Mobile menu: a floating card where the header pill sits, dropping in
+   with a 0.75rem slide + fade. Surface and colours live in mobile.css. */
 .mobile-menu-panel {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  inset-inline-end: 0;
-  inset-inline-start: auto;
-  margin: 0;
-  height: 100%;
-  max-height: 100%;
+  top: calc(0.75rem + env(safe-area-inset-top, 0px));
+  bottom: auto;
+  inset-inline: 1.25rem;
+  margin: 0 auto;
+  height: auto;
+  max-height: calc(100dvh - 1.5rem - env(safe-area-inset-top, 0px));
   flex-direction: column;
-  border-inline-start: 1px solid #ddd;
+  border: 0;
   box-shadow:
-    0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
+    0 0.375rem 1.5rem #18202212,
+    inset 0 0 0 1px #1820220a;
 }
 .mobile-menu-panel[open] {
   display: flex;
@@ -119,10 +119,7 @@ dialog::backdrop {
 @starting-style {
   .mobile-menu-panel[open] {
     opacity: 0;
-    translate: 2.5rem 0;
-  }
-  [dir='rtl'] .mobile-menu-panel[open] {
-    translate: -2.5rem 0;
+    translate: 0 -0.75rem;
   }
   .mobile-menu-panel[open]::backdrop {
     opacity: 0;
@@ -130,10 +127,7 @@ dialog::backdrop {
 }
 .mobile-menu-panel[data-closing] {
   opacity: 0;
-  translate: 2.5rem 0;
-}
-[dir='rtl'] .mobile-menu-panel[data-closing] {
-  translate: -2.5rem 0;
+  translate: 0 -0.75rem;
 }
 .mobile-menu-panel[data-closing]::backdrop {
   opacity: 0;

@@ -11,6 +11,7 @@
   },
   "switcher": {
     "label": "Language",
+    "trigger": "Other languages",
     "names": {
       "en": "EN",
       "ru": "RU",
@@ -101,7 +102,7 @@
   },
   "fellowship": {
     "eyebrow": "Morim Fellowship",
-    "title_html": "dear te<span class=\"glyph teacher-a\"><span class=\"sr-only\">a</span><img src=\"{root}assets/imgA1.svg\" alt=\"\" width=\"73\" height=\"66\"></span>chers,",
+    "title_html": "dear <span class=\"word\">te<span class=\"glyph teacher-a\"><span class=\"sr-only\">a</span><img src=\"{root}assets/imgA1.svg\" alt=\"\" width=\"73\" height=\"66\"></span>chers,</span>",
     "intro": [
       "You see the effects of years of classroom disruption better than anyone. We want to give you time to learn, try things out, and work through what happens in the classroom with a mentor.",
       "We start with the later years of primary school and the beginning of middle school — when many children begin to lose interest in learning."
@@ -133,7 +134,7 @@
   },
   "leaders": {
     "eyebrow": "For teacher-leaders",
-    "title_html": "dear te<span class=\"glyph teacher-a\"><span class=\"sr-only\">a</span><img src=\"{root}assets/imgA1.svg\" alt=\"\" width=\"73\" height=\"66\"></span>cher-<br>leaders,",
+    "title_html": "dear <span class=\"word\">te<span class=\"glyph teacher-a\"><span class=\"sr-only\">a</span><img src=\"{root}assets/imgA1.svg\" alt=\"\" width=\"73\" height=\"66\"></span>cher-</span><br>leaders,",
     "intro": [
       "Strong teachers need schools where they can do good work and want to stay. That’s why we work not only with teachers, but also with people who shape the teams around them.",
       "Our first program for coordinators is being developed together with rakazim themselves. The pilot is planned for fall 2026."
@@ -187,15 +188,14 @@
     "leaders": [
       {
         "id": "school-coordination",
-        "title_html": "Coordinating a School: Team, Systems, Projects",
-        "where": "To be announced",
-        "when": "First pilot planned for fall 2026"
+        "badge": "First pilot planned for fall 2026",
+        "title_html": "Coordinating a School: Team, Systems, Projects"
       }
     ],
     "tbilisi": {
       "id": "tbilisi",
       "location": "tbilisi",
-      "title_html": "Summer C<span class=\"glyph small-a\"><span class=\"sr-only\">a</span><img src=\"{root}assets/imgA2.svg\" alt=\"\" width=\"28\" height=\"25\"></span>mp<br>in Tbilisi",
+      "title_html": "Summer <span class=\"word\">C<span class=\"glyph small-a\"><span class=\"sr-only\">a</span><img src=\"{root}assets/imgA2.svg\" alt=\"\" width=\"28\" height=\"25\"></span>mp</span><br>in Tbilisi",
       "where": "Tbilisi, Georgia",
       "when": "July–August 2026",
       "photos_aria": "Photos from the Tbilisi teacher intensive",

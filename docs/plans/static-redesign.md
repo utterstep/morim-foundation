@@ -32,7 +32,7 @@ reference. Exploratory material in the PR is dropped.
 | Tests | Port the 16 `node:test` files to zero-dependency tests; postcss-based layout test rewritten without postcss. |
 | Repo layout | New site source in `src/`, generated output in `site/` (`site/index.html`, `site/ru/`, `site/he/`). Root `index.html` + `static/` (live site) untouched. |
 | Links | Apply / "tell us about yourself" → `https://survey.morim.foundation/s/join-v1?src=landing&lang=<xx>`; "Get in touch" → `mailto:contact@morim.foundation`; team names → LinkedIn as on the live site; footer socials keep the placeholder dialog. |
-| Switcher | In the floating header (after nav, before "Get in touch"), inside the mobile menu, and in the footer "Foundation" column. |
+| Switcher | A dropdown at the end of the header nav (right after FAQ; the nav sits in the centre column of the header), inline inside the mobile menu, and in the footer "Foundation" column. |
 | Fonts | Copy GT Alpina Regular/Light/Medium + ABC Stefan Trial OTFs as-is; drop unused MeanHand; preload the above-the-fold faces. |
 | Copy | PR copy, with the three school-leader cards taking the coordinator copy from the live site, Tel-Aviv date normalised, team placeholders kept. |
 | Verification | Run the PR locally with `pkgx node@22.13` / `pkgx npm` in the scratchpad (never in the repo or user env) and compare side by side in a headless browser at 1440px and 390px. |

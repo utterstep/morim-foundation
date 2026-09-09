@@ -24,6 +24,11 @@
   margin: 3rem auto 0;
   white-space: nowrap;
 }
+/* A word that carries a glyph: the inline-flex artwork is a break
+   opportunity, so the word is pinned together for the wrapping breakpoints. */
+.word {
+  white-space: nowrap;
+}
 .glyph {
   display: inline-flex;
   align-items: center;
@@ -130,7 +135,7 @@
 .location-select {
   height: 3.375rem;
   padding: 1rem 1.5rem;
-  border: 1px solid #ffffff14;
+  border: 0;
   border-radius: 1.25rem;
   background: #ffffff1a;
   color: var(--paper);
@@ -166,7 +171,7 @@
   gap: 1.5rem;
   padding-block: 1.375rem;
   padding-inline: 1.875rem 1.5rem;
-  border: 1px solid #ffffff14;
+  border: 0;
   border-radius: 1.25rem;
   background: #ffffff12;
 }
@@ -184,7 +189,7 @@
   white-space: normal;
 }
 .program-results-card {
-  border: 1px solid #ffffff14;
+  border: 0;
   border-radius: 1.25rem;
   background: #ffffff12;
 }
@@ -326,25 +331,67 @@
   text-underline-offset: 3px;
 }
 .leaders {
-  background: var(--leaders-purple);
-  color: var(--paper);
+  background: var(--leaders-bg);
+  color: var(--leaders-ink);
   margin-top: 4.375rem;
   padding: 6.5rem 3.125rem 7.1875rem;
 }
 .leaders .programs {
-  border-color: #f4f3f033;
+  border-color: #4a111633;
 }
 .leaders .program-list {
   min-height: 0;
 }
 .leaders .program-row,
 .leaders .location-select {
-  background: #f4f3f00d;
-  border-color: #f4f3f026;
-  color: var(--paper);
+  background: #4a11160a;
+  border: 0;
+  color: var(--leaders-ink);
+}
+/* Sticker on a row's top edge ("pilot in progress"); the row is the anchor.
+   Leaders rows carry no where/when yet, so it is title + button only. */
+.leaders .program-row {
+  position: relative;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+.leaders .program-list {
+  padding-top: 0.75rem;
+}
+/* A short piece of caution tape on the row's top-left corner: striped ends
+   around a solid segment carrying the words, a slight tilt, a lift shadow. */
+.program-badge {
+  position: absolute;
+  top: -0.75rem;
+  inset-inline-start: 1.875rem;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  height: 1.75rem;
+  padding-inline: 1rem;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--leaders-ink) 0 0.625rem,
+    var(--leaders-bg) 0.625rem 1.25rem
+  );
+  box-shadow: 0 0.125rem 0.625rem #4a111633;
+  transform: rotate(-1.5deg);
+  transform-origin: center;
+  pointer-events: none;
+}
+.program-badge > span {
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 1.25rem;
+  background: var(--leaders-ink);
+  color: var(--leaders-bg);
+  font-size: 0.9375rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 .leaders .location-select svg {
-  color: var(--paper) !important;
+  color: var(--leaders-ink) !important;
 }
 .leaders .program-row h4 {
   white-space: normal;
@@ -356,18 +403,30 @@
   color: var(--leaders-muted);
 }
 .leaders .inline-button:hover {
-  color: #fff;
+  color: var(--leaders-ink);
 }
 .leaders .apply-button {
-  background: var(--paper);
-  color: var(--leaders-purple);
+  background: var(--leaders-ink);
+  color: var(--leaders-bg);
 }
 .leaders .apply-button:hover {
-  background: #fff;
+  background: #62171d;
+  color: var(--leaders-bg);
+}
+/* The "oo" artwork is a purple stroke; paint it in the panel's ink by using
+   the SVG as a mask over currentColor instead of a filter approximation. */
+.leaders .school-oo {
+  background: currentColor;
+  -webkit-mask: url('../assets/imgVector1.svg') center / 0.883em 0.5em no-repeat;
+  mask: url('../assets/imgVector1.svg') center / 0.883em 0.5em no-repeat;
+}
+.leaders .teacher-a {
+  background: currentColor;
+  -webkit-mask: url('../assets/imgA1.svg') center / 0.608em 0.55em no-repeat;
+  mask: url('../assets/imgA1.svg') center / 0.608em 0.55em no-repeat;
 }
 .leaders .glyph img {
-  filter: brightness(0) invert(1);
-  opacity: 0.95;
+  opacity: 0;
 }
 .muted {
   color: #777970;
@@ -715,9 +774,17 @@
     font-size: 1.25rem;
     line-height: 1.625rem;
   }
+  /* Big enough that "dear teachers," wraps to two lines; the desktop
+     nowrap is lifted here so nothing runs past the panel. */
   .display {
-    font-size: clamp(2.8rem, 9.8vw, 4.2rem);
+    font-size: clamp(3.5rem, 17vw, 6rem);
+    line-height: 0.88;
     margin-top: 1.875rem;
+    white-space: normal;
+    text-wrap: balance;
+  }
+  html[lang='ru'] .display {
+    font-size: clamp(3rem, 13.5vw, 5rem);
   }
   .fellowship-intro {
     margin-top: 2.25rem;
@@ -726,8 +793,8 @@
     margin-top: 5.3125rem;
   }
   .benefit h3 {
-    font-size: 2.35rem;
-    line-height: 0.98;
+    font-size: 2.8rem;
+    line-height: 0.96;
   }
   .benefit > p {
     font-size: 1.25rem;
@@ -771,8 +838,8 @@
     margin-bottom: 1.75rem;
   }
   .program-heading h3 {
-    font-size: 2.5rem;
-    line-height: 1;
+    font-size: 3rem;
+    line-height: 0.95;
   }
   .location-select {
     font-size: 1rem;
@@ -812,6 +879,15 @@
     padding: 4.0625rem 1.375rem 4.6875rem;
     margin-top: 2rem;
   }
+  .program-badge {
+    inset-inline-start: 1.125rem;
+    height: 1.5rem;
+    padding-inline: 0.75rem;
+  }
+  .program-badge > span {
+    padding-inline: 0.875rem;
+    font-size: 0.6875rem;
+  }
   .leaders-intro {
     width: 100%;
     margin-top: 2.375rem;
@@ -826,8 +902,8 @@
     padding-top: 5.5rem;
   }
   .team-title {
-    font-size: clamp(3.2rem, 10vw, 4.5rem);
-    line-height: 0.96;
+    font-size: clamp(3.5rem, 16vw, 6rem);
+    line-height: 0.92;
     width: 90%;
     margin: 1.625rem auto 3.125rem;
   }
@@ -856,8 +932,8 @@
     margin-top: 5rem;
   }
   .faq h2 {
-    font-size: 4.5rem;
-    line-height: 1;
+    font-size: clamp(4.5rem, 22vw, 7rem);
+    line-height: 0.95;
     margin-bottom: 2.25rem;
   }
   .faq-item {
@@ -883,7 +959,8 @@
     padding-bottom: 2.375rem;
   }
   .footer-message h2 {
-    font-size: 2.8rem;
+    font-size: clamp(3rem, 14vw, 4rem);
+    line-height: 0.92;
     max-width: 27.5rem;
   }
   .rounded-button {

@@ -40,21 +40,22 @@
         <a href="#leaders">Leaders</a>
         <a href="#team">Team</a>
         <a href="#faq">FAQ</a>
-      </nav>
-      <div class="lang-menu">
+        <div class="lang-menu">
   <button type="button" class="lang-menu-button" aria-haspopup="true" aria-expanded="false"
-          aria-controls="lang-menu-list" aria-label="Language">
-    <span>EN</span>
+          aria-controls="lang-menu-list">
+    <span>Other languages</span>
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
   </button>
   <ul id="lang-menu-list" class="lang-menu-list" hidden>
-    <li><a href="" hreflang="en" lang="en" aria-current="page">English<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></a></li>
-    <li><a href="ru/" hreflang="ru" lang="ru">Русский<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></a></li>
-    <li><a href="he/" hreflang="he" lang="he">עברית<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></a></li>
+    <li><a href="ru/" hreflang="ru" lang="ru">Русский</a></li>
+    <li><a href="he/" hreflang="he" lang="he">עברית</a></li>
   </ul>
 </div>
+      </nav>
       <a class="button" href="mailto:contact@morim.foundation">Get in touch</a>
-      <button type="button" class="mobile-menu-trigger" data-dialog="mobile-menu" aria-haspopup="dialog">Menu</button>
+      <button type="button" class="mobile-menu-trigger" data-dialog="mobile-menu" aria-haspopup="dialog" aria-label="Menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
     </header>
   </div>
 
@@ -100,7 +101,7 @@
         <a class="button apply-button floating-apply-button" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=en">Apply</a>
       </div>
       <p class="eyebrow">Morim Fellowship</p>
-      <h2 class="display" id="fellowship-title">dear te<span class="glyph teacher-a"><span class="sr-only">a</span><img src="assets/imgA1.svg" alt="" width="73" height="66"></span>chers,</h2>
+      <h2 class="display" id="fellowship-title">dear <span class="word">te<span class="glyph teacher-a"><span class="sr-only">a</span><img src="assets/imgA1.svg" alt="" width="73" height="66"></span>chers,</span></h2>
       <div class="prose fellowship-intro">
         <p>You see the effects of years of classroom disruption better than anyone. We want to give you time to learn, try things out, and work through what happens in the classroom with a mentor.</p>
         <p>We start with the later years of primary school and the beginning of middle school — when many children begin to lose interest in learning.</p>
@@ -162,7 +163,7 @@
     </article>
     <article class="program-results-card" data-program="tbilisi" data-location="tbilisi" data-state="closed">
       <div class="program-row program-results-summary">
-        <h4 id="tbilisi-program-title">Summer C<span class="glyph small-a"><span class="sr-only">a</span><img src="assets/imgA2.svg" alt="" width="28" height="25"></span>mp<br>in Tbilisi</h4>
+        <h4 id="tbilisi-program-title">Summer <span class="word">C<span class="glyph small-a"><span class="sr-only">a</span><img src="assets/imgA2.svg" alt="" width="28" height="25"></span>mp</span><br>in Tbilisi</h4>
         <p><span>Where</span>Tbilisi, Georgia</p>
 <p><span>When</span>July–August 2026</p>
         <button type="button" class="button results-button"
@@ -196,7 +197,7 @@
         <a class="button apply-button floating-apply-button" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=en">Register interest</a>
       </div>
       <p class="eyebrow muted">For teacher-leaders</p>
-      <h2 class="display" id="leaders-title">dear te<span class="glyph teacher-a"><span class="sr-only">a</span><img src="assets/imgA1.svg" alt="" width="73" height="66"></span>cher-<br>leaders,</h2>
+      <h2 class="display" id="leaders-title">dear <span class="word">te<span class="glyph teacher-a"><span class="sr-only">a</span><img src="assets/imgA1.svg" alt="" width="73" height="66"></span>cher-</span><br>leaders,</h2>
       <div class="prose leaders-intro">
         <p>Strong teachers need schools where they can do good work and want to stay. That’s why we work not only with teachers, but also with people who shape the teams around them.</p>
         <p>Our first program for coordinators is being developed together with rakazim themselves. The pilot is planned for fall 2026.</p>
@@ -237,9 +238,7 @@
   </div>
   <div class="program-list" aria-live="polite">
     <article class="program-row" data-program="school-coordination">
-      <h4>Coordinating a School: Team, Systems, Projects</h4>
-      <p><span>Where</span>To be announced</p>
-<p><span>When</span>First pilot planned for fall 2026</p>
+<span class="program-badge"><span>First pilot planned for fall 2026</span></span>      <h4>Coordinating a School: Team, Systems, Projects</h4>
       <a class="button apply-button" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=en">Register interest</a>
     </article>
   </div>
@@ -379,7 +378,9 @@
 <dialog class="mobile-menu-panel" id="mobile-menu" aria-labelledby="mobile-menu-title" aria-describedby="mobile-menu-desc">
   <div class="mobile-menu-heading">
     <h2 id="mobile-menu-title">morim foundation</h2>
-    <button type="button" class="mobile-menu-close" data-dialog-close>Close</button>
+    <button type="button" class="mobile-menu-close" data-dialog-close aria-label="Close">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
   </div>
   <p id="mobile-menu-desc" class="sr-only">Explore the foundation and its programs.</p>
   <nav aria-label="Mobile navigation">

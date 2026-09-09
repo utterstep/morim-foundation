@@ -17,16 +17,17 @@
 </nav>
 {%- endmacro %}
 
+{# The button says "Other languages" and the list holds only the other two, by name. #}
 {% macro lang_menu() -%}
 <div class="lang-menu">
   <button type="button" class="lang-menu-button" aria-haspopup="true" aria-expanded="false"
-          aria-controls="lang-menu-list" aria-label="{{ t.switcher.label }}">
-    <span>{{ t.switcher.names[lang] }}</span>
+          aria-controls="lang-menu-list">
+    <span>{{ t.switcher.trigger }}</span>
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
   </button>
   <ul id="lang-menu-list" class="lang-menu-list" hidden>
-    {% for l in langs %}
-    <li><a href="{{ l.href }}" hreflang="{{ l.code }}" lang="{{ l.code }}"{% if l.current %} aria-current="page"{% endif %}>{{ l.name }}<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></a></li>
+    {% for l in langs if not l.current %}
+    <li><a href="{{ l.href }}" hreflang="{{ l.code }}" lang="{{ l.code }}">{{ l.name }}</a></li>
     {% endfor %}
   </ul>
 </div>
@@ -69,8 +70,8 @@
     {% if audience == 'leaders' %}
     {% for row in t.programs.leaders %}
     <article class="program-row" data-program="{{ row.id }}">
+      {% if row.badge %}<span class="program-badge"><span>{{ row.badge }}</span></span>{% endif %}
       <h4>{{ row.title_html }}</h4>
-      {{ program_meta(row.where, row.when) }}
       {{ apply_button('button apply-button', t.programs.register_interest) }}
     </article>
     {% endfor %}
@@ -156,10 +157,12 @@
         {% for item in t.nav %}
         <a href="#{{ item.id }}">{{ item.label }}</a>
         {% endfor %}
+        {{ lang_menu() }}
       </nav>
-      {{ lang_menu() }}
       <a class="button" href="{{ t.links.email }}">{{ t.header.contact }}</a>
-      <button type="button" class="mobile-menu-trigger" data-dialog="mobile-menu" aria-haspopup="dialog">{{ t.header.menu }}</button>
+      <button type="button" class="mobile-menu-trigger" data-dialog="mobile-menu" aria-haspopup="dialog" aria-label="{{ t.header.menu }}">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
     </header>
   </div>
 
@@ -339,7 +342,9 @@
 <dialog class="mobile-menu-panel" id="mobile-menu" aria-labelledby="mobile-menu-title" aria-describedby="mobile-menu-desc">
   <div class="mobile-menu-heading">
     <h2 id="mobile-menu-title">{{ t.header.logo }}</h2>
-    <button type="button" class="mobile-menu-close" data-dialog-close>{{ t.header.menu_close }}</button>
+    <button type="button" class="mobile-menu-close" data-dialog-close aria-label="{{ t.header.menu_close }}">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
   </div>
   <p id="mobile-menu-desc" class="sr-only">{{ t.header.menu_description }}</p>
   <nav aria-label="{{ t.header.menu_nav_aria }}">

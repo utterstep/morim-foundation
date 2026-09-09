@@ -40,21 +40,22 @@
         <a href="#leaders">לרכזים</a>
         <a href="#team">הצוות</a>
         <a href="#faq">שאלות</a>
-      </nav>
-      <div class="lang-menu">
+        <div class="lang-menu">
   <button type="button" class="lang-menu-button" aria-haspopup="true" aria-expanded="false"
-          aria-controls="lang-menu-list" aria-label="שפה">
-    <span>עב</span>
+          aria-controls="lang-menu-list">
+    <span>שפות אחרות</span>
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
   </button>
   <ul id="lang-menu-list" class="lang-menu-list" hidden>
-    <li><a href="../" hreflang="en" lang="en">English<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></a></li>
-    <li><a href="../ru/" hreflang="ru" lang="ru">Русский<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></a></li>
-    <li><a href="../he/" hreflang="he" lang="he" aria-current="page">עברית<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></a></li>
+    <li><a href="../" hreflang="en" lang="en">English</a></li>
+    <li><a href="../ru/" hreflang="ru" lang="ru">Русский</a></li>
   </ul>
 </div>
+      </nav>
       <a class="button" href="mailto:contact@morim.foundation">צרו קשר</a>
-      <button type="button" class="mobile-menu-trigger" data-dialog="mobile-menu" aria-haspopup="dialog">תפריט</button>
+      <button type="button" class="mobile-menu-trigger" data-dialog="mobile-menu" aria-haspopup="dialog" aria-label="תפריט">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
     </header>
   </div>
 
@@ -237,9 +238,7 @@
   </div>
   <div class="program-list" aria-live="polite">
     <article class="program-row" data-program="school-coordination">
-      <h4>לרכז בית ספר: צוות, מערכות, פרויקטים</h4>
-      <p><span>איפה</span>יפורסם בהמשך</p>
-<p><span>מתי</span>פיילוט ראשון מתוכנן לסתיו 2026</p>
+<span class="program-badge"><span>פיילוט ראשון — סתיו 2026</span></span>      <h4>לרכז בית ספר: צוות, מערכות, פרויקטים</h4>
       <a class="button apply-button" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=he">אני רוצה להשתתף</a>
     </article>
   </div>
@@ -379,7 +378,9 @@
 <dialog class="mobile-menu-panel" id="mobile-menu" aria-labelledby="mobile-menu-title" aria-describedby="mobile-menu-desc">
   <div class="mobile-menu-heading">
     <h2 id="mobile-menu-title">morim foundation</h2>
-    <button type="button" class="mobile-menu-close" data-dialog-close>סגירה</button>
+    <button type="button" class="mobile-menu-close" data-dialog-close aria-label="סגירה">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
   </div>
   <p id="mobile-menu-desc" class="sr-only">חלקי האתר של הקרן והתוכניות שלה.</p>
   <nav aria-label="ניווט למובייל">
