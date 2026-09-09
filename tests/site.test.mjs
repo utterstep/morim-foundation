@@ -62,7 +62,7 @@ test('every module import under site/js resolves', () => {
 
 test('native widgets are in the markup', () => {
   const html = read(pages.en);
-  assert.equal((html.match(/<details class="faq-item"/g) ?? []).length, 3);
+  assert.equal((html.match(/<details class="faq-item"/g) ?? []).length, 5);
   assert.match(html, /<dialog class="morim-dialog" id="dialog-social"/);
   assert.match(html, /<dialog class="mobile-menu-panel" id="mobile-menu"/);
   assert.match(html, /role="listbox"/);

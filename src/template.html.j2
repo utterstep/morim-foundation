@@ -32,8 +32,8 @@
 </div>
 {%- endmacro %}
 
-{% macro apply_button(class) -%}
-<a class="{{ class }}" href="{{ t.links.survey }}">{{ t.programs.apply }}</a>
+{% macro apply_button(class, label=none) -%}
+<a class="{{ class }}" href="{{ t.links.survey }}">{{ label or t.programs.apply }}</a>
 {%- endmacro %}
 
 {% macro program_meta(where, when) -%}
@@ -70,8 +70,8 @@
     {% for row in t.programs.leaders %}
     <article class="program-row" data-program="{{ row.id }}">
       <h4>{{ row.title_html }}</h4>
-      {{ program_meta(t.programs.tba, t.programs.tba) }}
-      {{ apply_button('button apply-button') }}
+      {{ program_meta(row.where, row.when) }}
+      {{ apply_button('button apply-button', t.programs.register_interest) }}
     </article>
     {% endfor %}
     {% else %}
@@ -99,6 +99,7 @@
             <img class="results-portrait" src="{{ root }}assets/img2607180000709000022.png" alt="{{ tb.portrait_alt }}" width="317" height="412">
           </figure>
           <div class="program-results-copy">
+            <h5 class="program-results-title">{{ tb.results_title }}</h5>
             {% for p in tb.results %}
             <p>{{ p }}</p>
             {% endfor %}
@@ -108,11 +109,14 @@
     </article>
     {% endif %}
   </div>
+  {% if audience == 'leaders' %}
   <p class="program-note">
-    {{ t.programs.note_before }}
+    {{ t.programs.note.title }}
     <br>
-    <a class="inline-button" href="{{ t.links.survey }}">{{ t.programs.note_link }}</a>{{ t.programs.note_after }}
+    {{ t.programs.note.body }}
+    <a class="inline-button" href="{{ t.links.survey }}">{{ t.programs.note.link }}</a>
   </p>
+  {% endif %}
 </div>
 {%- endmacro %}
 <!DOCTYPE html>
@@ -130,7 +134,7 @@
   <link rel="alternate" hreflang="{{ l.code }}" href="{{ l.href }}">
   {% endfor %}
   <link rel="alternate" hreflang="x-default" href="{{ root }}">
-  <link rel="icon" href="{{ root }}assets/imgRectangle113.png">
+  <link rel="icon" href="{{ root }}assets/favicon.png">
   <link rel="preload" href="{{ root }}assets/fonts/GTAlpina-Regular.otf" as="font" type="font/otf" crossorigin>
   <link rel="preload" href="{{ root }}assets/fonts/GTAlpina-Light.otf" as="font" type="font/otf" crossorigin>
   {# Same order as the PR's layout.tsx imports: the cascade depends on it. #}
@@ -227,7 +231,7 @@
 
     <section class="leaders panel" id="leaders" aria-labelledby="leaders-title">
       <div class="floating-apply-rail" inert>
-        {{ apply_button('button apply-button floating-apply-button') }}
+        {{ apply_button('button apply-button floating-apply-button', t.programs.register_interest) }}
       </div>
       <p class="eyebrow muted">{{ t.leaders.eyebrow }}</p>
       <h2 class="display" id="leaders-title">{{ t.leaders.title_html }}</h2>
@@ -264,6 +268,10 @@
         <p>{{ p.bio_html }}</p>
       </article>
       {% endfor %}
+      <article class="person person-note">
+        <h3>{{ t.team.note.title }}</h3>
+        <p>{{ t.team.note.body }}</p>
+      </article>
     </div>
   </section>
 
@@ -286,8 +294,10 @@
 
   <footer id="contact" class="site-footer">
     <div class="footer-message">
-      <h2>{{ t.footer.message }}</h2>
-      <a class="button rounded-button" href="{{ t.links.email }}">{{ t.header.contact }}</a>
+      <h2>{{ t.footer.title }}</h2>
+      <p class="footer-lead">{{ t.footer.lead_before }}<a href="{{ t.links.survey }}">{{ t.footer.lead_link }}</a>{{ t.footer.lead_after }}</p>
+      <a class="button rounded-button" href="{{ t.links.survey }}">{{ t.footer.cta }}</a>
+      <a class="footer-email" href="{{ t.links.email }}">{{ t.footer.email }}</a>
     </div>
     <div class="footer-links">
       <div>
