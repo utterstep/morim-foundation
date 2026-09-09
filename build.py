@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import filecmp
+import hashlib
 import http.server
 import json
 import shutil
@@ -61,6 +62,17 @@ def _resolve_root(value, root: str):
     return value
 
 
+def asset_version() -> str:
+    """Short hash of every stylesheet and script, appended to their URLs as
+    `?v=` so a redeploy never pairs new markup with a cached old stylesheet."""
+    digest = hashlib.sha256()
+    for name in ("css", "js"):
+        for file in sorted((SRC / name).rglob("*")):
+            if file.is_file():
+                digest.update(file.read_bytes())
+    return digest.hexdigest()[:8]
+
+
 def render(out: Path) -> None:
     env = Environment(
         loader=FileSystemLoader(SRC),
@@ -71,6 +83,7 @@ def render(out: Path) -> None:
         keep_trailing_newline=True,
     )
     template = env.get_template("template.html.j2")
+    version = asset_version()
     for lang, meta in LANGS.items():
         # Pages sit at /, /ru/ and /he/; shared files are addressed relative to
         # the page so the output works at the domain root, under /site/, or
@@ -81,6 +94,7 @@ def render(out: Path) -> None:
             lang=lang,
             dir=meta["dir"],
             root=root,
+            v=version,
             langs=[
                 {"code": code, "name": m["name"], "href": root + m["path"], "current": code == lang}
                 for code, m in LANGS.items()

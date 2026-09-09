@@ -72,10 +72,10 @@
     <article class="program-row" data-program="{{ row.id }}"{% if row.closed %} data-closed{% endif %}>
       {% if row.badge %}<span class="program-badge"><span>{{ row.badge }}</span></span>{% endif %}
       <h4>{{ row.title_html }}</h4>
-      {{ program_meta(row.where, row.when) }}
       {% if row.closed %}
       <button type="button" class="button apply-button" disabled>{{ t.programs.join }}</button>
       {% else %}
+      {{ program_meta(row.where, row.when) }}
       {{ apply_button('button apply-button', t.programs.join) }}
       {% endif %}
     </article>
@@ -144,13 +144,13 @@
   <link rel="preload" href="{{ root }}assets/fonts/GTAlpina-Regular.otf" as="font" type="font/otf" crossorigin>
   <link rel="preload" href="{{ root }}assets/fonts/GTAlpina-Light.otf" as="font" type="font/otf" crossorigin>
   {# Same order as the PR's layout.tsx imports: the cascade depends on it. #}
-  <link rel="stylesheet" href="{{ root }}css/base.css">
-  <link rel="stylesheet" href="{{ root }}css/sections.css">
-  <link rel="stylesheet" href="{{ root }}css/motion.css">
-  <link rel="stylesheet" href="{{ root }}css/mobile.css">
-  <link rel="stylesheet" href="{{ root }}css/header.css">
-  <link rel="stylesheet" href="{{ root }}css/hero.css">
-  <link rel="stylesheet" href="{{ root }}css/widgets.css">
+  <link rel="stylesheet" href="{{ root }}css/base.css?v={{ v }}">
+  <link rel="stylesheet" href="{{ root }}css/sections.css?v={{ v }}">
+  <link rel="stylesheet" href="{{ root }}css/motion.css?v={{ v }}">
+  <link rel="stylesheet" href="{{ root }}css/mobile.css?v={{ v }}">
+  <link rel="stylesheet" href="{{ root }}css/header.css?v={{ v }}">
+  <link rel="stylesheet" href="{{ root }}css/hero.css?v={{ v }}">
+  <link rel="stylesheet" href="{{ root }}css/widgets.css?v={{ v }}">
 </head>
 <body>
 <main id="top" data-hero-variant="original" data-lang="{{ lang }}">
@@ -360,6 +360,6 @@
   {{ switcher('lang-switcher-menu') }}
 </dialog>
 
-<script type="module" src="{{ root }}js/main.js"></script>
+<script type="module" src="{{ root }}js/main.js?v={{ v }}"></script>
 </body>
 </html>

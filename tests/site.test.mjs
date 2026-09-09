@@ -38,7 +38,7 @@ test('every local href/src in the pages resolves to a file', () => {
     const dir = dirname(join(site, page));
     for (const [, url] of html.matchAll(/(?:href|src)="([^"#][^"]*)"/g)) {
       if (/^(https?:|mailto:|data:)/.test(url)) continue;
-      const target = resolve(dir, url);
+      const target = resolve(dir, url.split('?')[0]);
       const path = url.endsWith('/') ? join(target, 'index.html') : target;
       assert.ok(existsSync(path), `${page}: ${url} does not resolve`);
     }
@@ -81,5 +81,5 @@ test('native widgets are in the markup', () => {
   assert.match(html, /<dialog class="mobile-menu-panel" id="mobile-menu"/);
   assert.match(html, /role="listbox"/);
   assert.match(html, /class="button results-button"\s+aria-expanded="false"/);
-  assert.match(html, /<script type="module" src="js\/main.js">/);
+  assert.match(html, /<script type="module" src="js\/main.js\?v=[0-9a-f]{8}">/);
 });

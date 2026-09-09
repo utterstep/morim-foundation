@@ -353,6 +353,9 @@
 .leaders .program-row {
   position: relative;
 }
+.leaders .program-row[data-closed] {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
 /* A closed cohort: the row stays listed, its button is inert and muted. */
 .leaders .apply-button:disabled {
   background: #4a111614;
