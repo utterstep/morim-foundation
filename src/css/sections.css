@@ -253,6 +253,62 @@
   font-weight: 500;
   margin-bottom: 1.75rem;
 }
+/* Survey figures before the story: four stats across, then prose, a pull
+   quote with a hand-written attribution, and the caveat in the muted tone. */
+.results-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+  text-align: start;
+}
+.stat {
+  border-top: 1px solid var(--fellowship-rule);
+  padding-top: 0.75rem;
+}
+.stat-value {
+  display: block;
+  direction: ltr; /* before → after reads left to right in every language */
+  font-size: 3rem;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+.stat-value small {
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+.stat-value .arrow {
+  color: var(--fellowship-muted);
+  font-size: 1.4rem;
+  margin-inline: 0.1em;
+}
+.stat-label {
+  display: block;
+  margin-top: 0.45rem;
+  font-size: 0.9375rem;
+  line-height: 1.25;
+  color: var(--fellowship-muted);
+}
+.results-quote {
+  margin: 1.75rem 0 0;
+  font-style: italic;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+.results-note {
+  margin-top: 0.75rem;
+  font-family: Stefan, cursive;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fellowship-muted);
+}
+.results-caveat {
+  font-style: italic;
+  color: var(--fellowship-muted);
+}
 @media (max-width: 700px) {
   .program-results-body {
     margin-inline: 1.125rem;
@@ -261,6 +317,16 @@
   .program-results-copy {
     font-size: 1.125rem;
     line-height: 1.4;
+  }
+  .results-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem 0.75rem;
+  }
+  .stat-value {
+    font-size: 2.5rem;
+  }
+  .results-quote {
+    font-size: 1.3rem;
   }
   .program-results-photos img {
     border-width: 3px;

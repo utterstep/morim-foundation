@@ -106,9 +106,23 @@
           </figure>
           <div class="program-results-copy">
             <h5 class="program-results-title">{{ tb.results_title }}</h5>
+            <div class="results-stats">
+              {% for s in tb.stats %}
+              <div class="stat">
+                <span class="stat-value">{{ s.value_html }}</span>
+                <span class="stat-label">{{ s.label }}</span>
+              </div>
+              {% endfor %}
+            </div>
             {% for p in tb.results %}
             <p>{{ p }}</p>
             {% endfor %}
+            <blockquote class="results-quote">{{ tb.quote }}</blockquote>
+            <p class="results-note">{{ tb.quote_note }}</p>
+            {% for p in tb.results_after %}
+            <p>{{ p }}</p>
+            {% endfor %}
+            <p class="results-caveat">{{ tb.caveat }}</p>
           </div>
         </div>
       </div>
