@@ -1,0 +1,365 @@
+{#
+  Morim Foundation landing page.
+
+  Rendered once per language by build.py. `t` holds the strings from
+  src/i18n/<lang>.json, `root` is "" for the English page at / and "../" for
+  the pages at /ru/ and /he/, `langs` drives the language switcher.
+
+  Ported from PR #3 (website/app/home-content.tsx, sections.tsx, hero.tsx,
+  mobile-menu.tsx). Interactive widgets are native elements wired up by
+  js/main.js; the hero collage is built entirely by JavaScript.
+#}
+{% macro switcher(class) -%}
+<nav class="lang-switcher {{ class }}" aria-label="{{ t.switcher.label }}">
+  {% for l in langs %}
+  <a href="{{ l.href }}" hreflang="{{ l.code }}" lang="{{ l.code }}"{% if l.current %} aria-current="page"{% endif %}>{{ t.switcher.names[l.code] }}</a>
+  {% endfor %}
+</nav>
+{%- endmacro %}
+
+{# The button says "Other languages" and the list holds only the other two, by name. #}
+{% macro lang_menu() -%}
+<div class="lang-menu">
+  <button type="button" class="lang-menu-button" aria-haspopup="true" aria-expanded="false"
+          aria-controls="lang-menu-list">
+    <span>{{ t.switcher.trigger }}</span>
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+  </button>
+  <ul id="lang-menu-list" class="lang-menu-list" hidden>
+    {% for l in langs if not l.current %}
+    <li><a href="{{ l.href }}" hreflang="{{ l.code }}" lang="{{ l.code }}">{{ l.name }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+{%- endmacro %}
+
+{% macro apply_button(class, label=none) -%}
+<a class="{{ class }}" href="{{ t.links.survey }}">{{ label or t.programs.apply }}</a>
+{%- endmacro %}
+
+{% macro program_meta(where, when) -%}
+<p><span>{{ t.programs.where }}</span>{{ where }}</p>
+<p><span>{{ t.programs.when }}</span>{{ when }}</p>
+{%- endmacro %}
+
+{% macro programs(audience) -%}
+{% set locations = t.programs.locations if audience == 'teachers' else t.programs.locations[:1] %}
+<div class="programs" id="{{ 'programs' if audience == 'teachers' else 'leaders-programs' }}">
+  <div class="program-heading">
+    <h3>{{ t.programs.heading }}</h3>
+    <div class="location-select-wrap">
+      <button type="button" class="location-select" id="{{ audience }}-location"
+              aria-haspopup="listbox" aria-expanded="false"
+              aria-controls="{{ audience }}-location-list"
+              aria-label="{{ t.programs.filter_aria }}">
+        <span data-value-label>{{ locations[0].label }}</span>
+        <svg class="location-select-chevron" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <ul id="{{ audience }}-location-list" class="location-options" role="listbox"
+          aria-labelledby="{{ audience }}-location" tabindex="-1" hidden>
+        {% for loc in locations %}
+        <li role="option" data-value="{{ loc.value }}" aria-selected="{{ 'true' if loop.first else 'false' }}" tabindex="{{ '0' if loop.first else '-1' }}">
+          <span>{{ loc.label }}</span>
+          <svg class="location-option-check" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="program-list" aria-live="polite">
+    {% if audience == 'leaders' %}
+    {% for row in t.programs.leaders %}
+    <article class="program-row" data-program="{{ row.id }}"{% if row.closed %} data-closed{% endif %}>
+      {% if row.badge %}<span class="program-badge"><span>{{ row.badge }}</span></span>{% endif %}
+      <h4>{{ row.title_html }}</h4>
+      {% if row.closed %}
+      <button type="button" class="button apply-button" disabled>{{ t.programs.join }}</button>
+      {% else %}
+      {{ program_meta(row.where, row.when) }}
+      {{ apply_button('button apply-button', t.programs.join) }}
+      {% endif %}
+    </article>
+    {% endfor %}
+    {% else %}
+    {% for row in t.programs.teachers %}
+    <article class="program-row" data-program="{{ row.id }}" data-location="{{ row.location }}">
+      <h4>{{ row.title_html }}</h4>
+      {{ program_meta(row.where, row.when) }}
+      {{ apply_button('button apply-button') }}
+    </article>
+    {% endfor %}
+    {% set tb = t.programs.tbilisi %}
+    <article class="program-results-card" data-program="{{ tb.id }}" data-location="{{ tb.location }}" data-state="closed">
+      <div class="program-row program-results-summary">
+        <h4 id="tbilisi-program-title">{{ tb.title_html }}</h4>
+        {{ program_meta(tb.where, tb.when) }}
+        <button type="button" class="button results-button"
+                aria-expanded="false" aria-controls="tbilisi-results"
+                data-label-open="{{ t.programs.collapse }}"
+                data-label-closed="{{ t.programs.see_results }}">{{ t.programs.see_results }}</button>
+      </div>
+      <div id="tbilisi-results" class="program-results-content" role="region" aria-labelledby="tbilisi-program-title" hidden>
+        <div class="program-results-body">
+          <figure class="program-results-photos" aria-label="{{ tb.photos_aria }}">
+            <img class="results-landscape" src="{{ root }}assets/img2607180000709000081.png" alt="{{ tb.landscape_alt }}" width="511" height="339">
+            <img class="results-portrait" src="{{ root }}assets/img2607180000709000022.png" alt="{{ tb.portrait_alt }}" width="317" height="412">
+          </figure>
+          <div class="program-results-copy">
+            <h5 class="program-results-title">{{ tb.results_title }}</h5>
+            {% for p in tb.results %}
+            <p>{{ p }}</p>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </article>
+    {% endif %}
+  </div>
+  {% if audience == 'leaders' %}
+  <p class="program-note">
+    {{ t.programs.note.title }}
+    <br>
+    {{ t.programs.note.body }}
+    <a class="inline-button" href="{{ t.links.survey }}">{{ t.programs.note.link }}</a>
+  </p>
+  {% endif %}
+</div>
+{%- endmacro %}
+<!DOCTYPE html>
+<html lang="{{ lang }}" dir="{{ dir }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ t.meta.title }}</title>
+  <meta name="description" content="{{ t.meta.description }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ t.meta.og_title }}">
+  <meta property="og:description" content="{{ t.meta.description }}">
+  <meta name="twitter:card" content="summary">
+  {% for l in langs %}
+  <link rel="alternate" hreflang="{{ l.code }}" href="{{ l.href }}">
+  {% endfor %}
+  <link rel="alternate" hreflang="x-default" href="{{ root }}">
+  <link rel="icon" href="{{ root }}assets/favicon.png">
+  <link rel="preload" href="{{ root }}assets/fonts/GTAlpina-Regular.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="{{ root }}assets/fonts/GTAlpina-Light.otf" as="font" type="font/otf" crossorigin>
+  {# Same order as the PR's layout.tsx imports: the cascade depends on it. #}
+  <link rel="stylesheet" href="{{ root }}css/base.css?v={{ v }}">
+  <link rel="stylesheet" href="{{ root }}css/sections.css?v={{ v }}">
+  <link rel="stylesheet" href="{{ root }}css/motion.css?v={{ v }}">
+  <link rel="stylesheet" href="{{ root }}css/mobile.css?v={{ v }}">
+  <link rel="stylesheet" href="{{ root }}css/header.css?v={{ v }}">
+  <link rel="stylesheet" href="{{ root }}css/hero.css?v={{ v }}">
+  <link rel="stylesheet" href="{{ root }}css/widgets.css?v={{ v }}">
+</head>
+<body>
+<main id="top" data-hero-variant="original" data-lang="{{ lang }}">
+
+  <div class="header-shell" data-compact="false">
+    <header class="site-header">
+      <a class="logo" href="#top" aria-label="{{ t.header.logo_aria }}">{{ t.header.logo }}</a>
+      <nav aria-label="{{ t.header.nav_aria }}">
+        {% for item in t.nav %}
+        <a href="#{{ item.id }}">{{ item.label }}</a>
+        {% endfor %}
+        {{ lang_menu() }}
+      </nav>
+      <a class="button" href="{{ t.links.email }}">{{ t.header.contact }}</a>
+      <button type="button" class="mobile-menu-trigger" data-dialog="mobile-menu" aria-haspopup="dialog" aria-label="{{ t.header.menu }}">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </header>
+  </div>
+
+  <section class="hero hero-editorial" aria-labelledby="hero-title"
+           data-playing="false" data-looping="false" data-media-layout="static"
+           data-label-icon="{{ t.hero.label_icon }}"
+           data-label-media-dismiss="{{ t.hero.label_media_dismiss }}"
+           data-video-unavailable="{{ t.hero.video_unavailable }}"
+           data-help-desktop="{{ t.hero.help_desktop }}"
+           data-help-compact="{{ t.hero.help_compact }}">
+    <div class="hero-mobile-content">
+      <h1 id="hero-title" aria-label="{{ t.hero.title_aria }}">{{ t.hero.title_html }}</h1>
+    </div>
+    <span class="hero-accents" role="group" aria-label="{{ t.hero.group_aria }}"></span>
+    <span id="hero-app-help" class="sr-only">{{ t.hero.help_desktop }}</span>
+  </section>
+
+  <section class="approach" id="approach" aria-label="{{ t.approach.aria }}">
+    <div class="prose introduction">
+      <p data-hero-story-end>{{ t.approach.attention }}</p>
+      <p>{{ t.approach.schools_html }}</p>
+    </div>
+    <figure class="pilot" id="pilot">
+      <div class="photo-stack">
+        <img class="pilot-landscape" src="{{ root }}assets/img2607180000709000081.png" alt="{{ t.approach.pilot_landscape_alt }}" width="511" height="339">
+        <img class="pilot-portrait" src="{{ root }}assets/img2607180000709000022.png" alt="{{ t.approach.pilot_portrait_alt }}" width="317" height="412">
+      </div>
+      <figcaption>{{ t.approach.pilot_caption }}</figcaption>
+    </figure>
+    <div class="mission">
+      <div class="prose">
+        <p class="mission-intro">{{ t.approach.mission_intro_html }}</p>
+        {% for p in t.approach.mission %}
+        <p>{{ p }}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <div class="story-stack">
+    <section class="fellowship panel" id="fellowship" aria-labelledby="fellowship-title">
+      <div class="floating-apply-rail" inert>
+        {{ apply_button('button apply-button floating-apply-button') }}
+      </div>
+      <p class="eyebrow">{{ t.fellowship.eyebrow }}</p>
+      <h2 class="display" id="fellowship-title">{{ t.fellowship.title_html }}</h2>
+      <div class="prose fellowship-intro">
+        {% for p in t.fellowship.intro %}
+        <p>{{ p }}</p>
+        {% endfor %}
+      </div>
+      <div class="benefits">
+        {% for b in t.fellowship.benefits %}
+        <article class="benefit{% if b.class %} {{ b.class }}{% endif %}">
+          <h3>{{ b.title }}</h3>
+          <p>{{ b.body }}</p>
+          {% if b.questions is defined %}
+          <div class="questions" aria-label="{{ b.questions_aria }}">
+            {% for q in b.questions %}
+            <span>{{ q }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </article>
+        {% endfor %}
+      </div>
+      {{ programs('teachers') }}
+    </section>
+
+    <section class="leaders panel" id="leaders" aria-labelledby="leaders-title">
+      <div class="floating-apply-rail" inert>
+        {{ apply_button('button apply-button floating-apply-button', t.programs.join) }}
+      </div>
+      <p class="eyebrow muted">{{ t.leaders.eyebrow }}</p>
+      <h2 class="display" id="leaders-title">{{ t.leaders.title_html }}</h2>
+      <div class="prose leaders-intro">
+        {% for p in t.leaders.intro %}
+        <p>{{ p }}</p>
+        {% endfor %}
+      </div>
+      <div class="leader-benefits">
+        {% for b in t.leaders.benefits %}
+        <article class="benefit">
+          <h3>{{ b.title }}</h3>
+          <p>{{ b.body }}</p>
+        </article>
+        {% endfor %}
+      </div>
+      {{ programs('leaders') }}
+    </section>
+  </div>
+
+  <section class="team" id="team" aria-labelledby="team-title">
+    <p class="eyebrow">{{ t.team.eyebrow }}</p>
+    <h2 class="team-title" id="team-title">{{ t.team.title_html }}</h2>
+    <div class="team-track" tabindex="0" role="region" aria-label="{{ t.team.track_aria }}">
+      {% for p in t.team.people %}
+      <article class="person">
+        {% if p.photo %}
+        <img class="portrait" src="{{ root }}assets/{{ p.photo }}" alt="{{ p.name }}" width="420" height="510" loading="lazy">
+        {% else %}
+        <div class="portrait-placeholder" role="img" aria-label="{{ t.team.portrait_pending.replace('{name}', p.name) }}"></div>
+        {% endif %}
+        <p class="person-role">{{ p.role }}</p>
+        <h3>{% if p.href %}<a href="{{ p.href }}" target="_blank" rel="noreferrer">{{ p.name }}</a>{% else %}{{ p.name }}{% endif %}</h3>
+        <p>{{ p.bio_html }}</p>
+      </article>
+      {% endfor %}
+      <article class="person person-note">
+        <h3>{{ t.team.note.title }}</h3>
+        <p>{{ t.team.note.body }}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="faq" id="faq" aria-labelledby="faq-title">
+    <h2 id="faq-title">{{ t.faq.title }}</h2>
+    <div class="faq-list">
+      {% for item in t.faq.questions %}
+      <details class="faq-item" data-state="closed">
+        <summary class="faq-trigger">
+          {{ item.q }}
+          <span class="faq-chevron" aria-hidden="true">›</span>
+        </summary>
+        <div class="faq-answer">
+          <div class="faq-answer-body">{{ item.a }}</div>
+        </div>
+      </details>
+      {% endfor %}
+    </div>
+  </section>
+
+  <footer id="contact" class="site-footer">
+    <div class="footer-message">
+      <h2>{{ t.footer.title }}</h2>
+      <p class="footer-lead">{{ t.footer.lead_before }}<a href="{{ t.links.survey }}">{{ t.footer.lead_link }}</a>{{ t.footer.lead_after }}</p>
+      <a class="button rounded-button" href="{{ t.links.survey }}">{{ t.footer.cta }}</a>
+      <a class="footer-email" href="{{ t.links.email }}">{{ t.footer.email }}</a>
+    </div>
+    <div class="footer-links">
+      <div>
+        <p class="footer-label">{{ t.footer.foundation_label }}</p>
+        <nav aria-label="{{ t.footer.nav_aria }}">
+          {% for item in t.nav %}
+          <a href="#{{ item.id }}">{{ item.label }}</a>
+          {% endfor %}
+        </nav>
+        {{ switcher('lang-switcher-footer') }}
+      </div>
+      <div>
+        <p class="footer-label">{{ t.footer.socials_label }}</p>
+        <nav aria-label="{{ t.footer.socials_aria }}">
+          {% for name in t.footer.socials %}
+          <button type="button" class="text-button" data-dialog="dialog-social" data-dialog-title="{{ name }}">{{ name }}</button>
+          {% endfor %}
+        </nav>
+      </div>
+      <div class="footer-legal">
+        <a class="logo" href="#top" aria-label="{{ t.header.logo_aria }}">{{ t.header.logo }}</a>
+        <p>{{ t.footer.legal_html }}</p>
+      </div>
+    </div>
+  </footer>
+</main>
+
+{# Modal content lives outside <main> so the page can be inert while it is open. #}
+<dialog class="morim-dialog" id="dialog-social" aria-labelledby="dialog-social-title" aria-describedby="dialog-social-desc">
+  <div class="morim-dialog-body">
+    <h2 id="dialog-social-title" data-dialog-title></h2>
+    <p id="dialog-social-desc">{{ t.dialogs.social.body }}</p>
+    <button type="button" class="dialog-close" data-dialog-close aria-label="{{ t.dialogs.close }}">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+</dialog>
+
+<dialog class="mobile-menu-panel" id="mobile-menu" aria-labelledby="mobile-menu-title" aria-describedby="mobile-menu-desc">
+  <div class="mobile-menu-heading">
+    <h2 id="mobile-menu-title">{{ t.header.logo }}</h2>
+    <button type="button" class="mobile-menu-close" data-dialog-close aria-label="{{ t.header.menu_close }}">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <p id="mobile-menu-desc" class="sr-only">{{ t.header.menu_description }}</p>
+  <nav aria-label="{{ t.header.menu_nav_aria }}">
+    {% for item in t.mobile_nav %}
+    <a href="#{{ item.id }}">{{ item.label }}</a>
+    {% endfor %}
+  </nav>
+  {{ switcher('lang-switcher-menu') }}
+</dialog>
+
+<script type="module" src="{{ root }}js/main.js?v={{ v }}"></script>
+</body>
+</html>

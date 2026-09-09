@@ -1,0 +1,255 @@
+/* Ported from PR #3 website/app/mobile.css. Physical inline-axis properties were converted to logical ones for RTL. */
+.mobile-menu-trigger {
+  display: none;
+}
+/* Same surface as the floating header: frosted white, soft shadow, hairline. */
+.mobile-menu-panel {
+  width: auto;
+  max-width: 28rem;
+  padding: 0.75rem 1.125rem 1.375rem 1.5rem;
+  background: rgb(255 255 255 / 94%);
+  color: var(--ink);
+  border-radius: 1.75rem;
+  overflow-y: auto;
+}
+@supports (backdrop-filter: blur(1rem)) {
+  .mobile-menu-panel {
+    background: rgb(255 255 255 / 88%);
+    backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem);
+  }
+}
+.mobile-menu-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.mobile-menu-heading h2 {
+  font-family:
+    Alpina Wordmark,
+    Georgia,
+    serif;
+  font-size: 1.2rem;
+}
+.mobile-menu-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 999rem;
+  color: var(--ink);
+}
+.mobile-menu-close:hover {
+  background: #1820220d;
+}
+.mobile-menu-panel nav {
+  display: grid;
+  margin-top: 1.5rem;
+}
+.mobile-menu-panel nav a {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #18202214;
+  font-size: 1.375rem;
+  line-height: 1.2;
+}
+.mobile-menu-panel nav a:last-child {
+  border-bottom: 0;
+}
+
+@media (max-width: 700px) {
+  html {
+    scroll-padding-top: 1.5rem;
+  }
+  main {
+    width: 100%;
+  }
+  .site-header {
+    height: auto;
+    min-height: 4.75rem;
+    margin: 0 1.25rem;
+    padding: max(0.75rem, env(safe-area-inset-top)) 0 0.75rem;
+    flex-wrap: nowrap;
+  }
+  .site-header > nav,
+  .site-header > .button {
+    display: none;
+  }
+  .mobile-menu-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    background: transparent;
+    color: var(--ink);
+    border: 0;
+    border-radius: 999rem;
+  }
+  .mobile-menu-trigger svg {
+    width: 1.375rem;
+    height: 1.375rem;
+  }
+  .hero {
+    padding: 4rem 0 0;
+    min-height: 0;
+  }
+  .hero.hero-editorial {
+    padding-top: 5rem;
+  }
+  .hero-mobile-content {
+    width: 100%;
+    margin: auto;
+  }
+  .introduction {
+    margin-top: 3rem;
+  }
+  .pilot {
+    margin-top: 3rem;
+  }
+  .photo-stack {
+    width: min(42rem, calc(100% - 2.5rem));
+    height: auto;
+    aspect-ratio: 850 / 456;
+  }
+  .pilot-landscape {
+    height: 74.3%;
+    top: 10%;
+    transform: rotate(-2deg);
+  }
+  .pilot-portrait {
+    height: 90.3%;
+    top: 2%;
+    transform: rotate(5deg);
+  }
+  .pilot figcaption {
+    margin: 0.875rem 1.5rem 0;
+  }
+  .mission {
+    margin: 3.5rem auto;
+  }
+  .stipend-note {
+    position: static;
+    display: block;
+    width: 100%;
+    margin: 1.25rem 0;
+  }
+  .panel {
+    width: calc(100% - 2rem);
+    border-radius: 0.75rem;
+  }
+  .fellowship,
+  .leaders {
+    padding: 3.5rem 1.25rem;
+  }
+  .benefits,
+  .leader-benefits {
+    margin-top: 3.5rem;
+  }
+  .benefit > p {
+    margin-top: 1rem;
+  }
+  .benefit + .benefit,
+  .leader-benefits .benefit + .benefit {
+    margin-top: 3rem;
+  }
+  .questions {
+    margin-top: 2rem;
+    gap: 2rem;
+  }
+  .programs {
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+  }
+  .program-heading {
+    align-items: flex-start;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .program-list {
+    min-height: 0;
+    --program-columns: repeat(2, minmax(0, 1fr));
+  }
+  .program-row {
+    padding: 1.25rem;
+    gap: 1.5rem 1rem;
+    border-radius: 0.75rem;
+  }
+  .program-row .button {
+    grid-column: 1 / -1;
+    min-height: 3rem;
+  }
+  .program-results-card {
+    border-radius: 0.75rem;
+  }
+  .floating-apply-rail {
+    top: calc(100svh - 4.5rem - env(safe-area-inset-bottom, 0px));
+  }
+  .floating-apply-button {
+    min-width: 8rem;
+    min-height: 3rem;
+    box-shadow: 0 0.25rem 1rem #00000018;
+  }
+  .team {
+    padding-top: 4rem;
+  }
+  .team-track {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1.5rem;
+    padding: 0 1.5rem 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1.5rem;
+  }
+  .person {
+    flex: 0 0 78vw;
+    max-width: 22.5rem;
+    min-width: 0;
+  }
+  .portrait,
+  .portrait-placeholder {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+  .faq {
+    margin-top: 4rem;
+  }
+  .faq h2 {
+    margin-bottom: 1.5rem;
+  }
+  .faq-item,
+  .faq-trigger {
+    border-radius: 0.75rem;
+  }
+  .faq-trigger {
+    min-height: 4.5rem;
+    padding: 1.5rem 1.25rem;
+  }
+  .faq-answer {
+    padding: 0 1.25rem 1.5rem !important;
+  }
+  .site-footer {
+    margin: 4rem 1.5rem 0;
+    gap: 2.5rem;
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  }
+  .footer-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem 1rem;
+  }
+  .footer-links nav a,
+  .footer-links nav button {
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+  }
+  .footer-legal {
+    grid-column: 1 / -1;
+  }
+}

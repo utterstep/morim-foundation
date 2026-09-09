@@ -1,0 +1,202 @@
+/* Ported from PR #3 website/app/floating-header.css. Physical inline-axis properties were converted to logical ones for RTL. */
+/* Keep the original header's space so collapsing never shifts the page. */
+.header-shell {
+  --header-rest-height: 9rem;
+  height: 9rem;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  pointer-events: none;
+}
+.header-shell .site-header {
+  position: relative;
+  isolation: isolate;
+  width: calc(100% - 12.5%);
+  max-width: none;
+  margin-inline: auto;
+  height: var(--header-rest-height);
+  min-height: 0;
+  padding: 0.5rem 1.125rem;
+  justify-content: space-between;
+  pointer-events: auto;
+  border-radius: 999rem;
+  translate: 0 0;
+  transition:
+    height 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    translate 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.header-shell .site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: rgb(255 255 255 / 94%);
+  box-shadow:
+    0 0.375rem 1.5rem #18202212,
+    inset 0 0 0 1px #1820220a;
+  opacity: 0;
+  transition: opacity 420ms ease;
+}
+.header-shell[data-compact='true'] .site-header {
+  height: 4.5rem;
+  translate: 0 0.75rem;
+}
+.header-shell[data-compact='true'] .site-header::before {
+  opacity: 1;
+}
+.header-shell .site-header > .button,
+.header-shell .mobile-menu-trigger {
+  border-radius: 999rem;
+  flex-shrink: 0;
+}
+/* Desktop: logo | nav | contact on a three-column grid, so the nav (with the
+   language menu) sits in the true centre whatever the outer widths are. */
+@media (min-width: 701px) {
+  .header-shell .site-header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+  }
+  .header-shell .site-header > .logo {
+    justify-self: start;
+  }
+  .header-shell .site-header > nav {
+    justify-self: center;
+    align-items: center;
+  }
+  .header-shell .site-header > .button {
+    justify-self: end;
+  }
+}
+@supports (backdrop-filter: blur(1rem)) {
+  .header-shell .site-header::before {
+    background: rgb(255 255 255 / 88%);
+    backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem);
+  }
+}
+html:has(.header-shell) {
+  scroll-padding-top: 6.5rem;
+}
+@media (max-width: 700px) {
+  .header-shell {
+    --header-rest-height: 4.75rem;
+    height: calc(4.75rem + env(safe-area-inset-top, 0px));
+    top: env(safe-area-inset-top, 0px);
+  }
+  .header-shell .site-header {
+    width: calc(100% - 2.5rem);
+    padding-block: 0.5rem 0.5rem;
+    padding-inline: 1.125rem 0.75rem;
+    gap: 1.25rem;
+  }
+  .header-shell[data-compact='true'] .site-header {
+    height: 4.25rem;
+    translate: 0 0.5rem;
+  }
+  html:has(.header-shell) {
+    scroll-padding-top: calc(5.75rem + env(safe-area-inset-top, 0px));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .header-shell .site-header,
+  .header-shell .site-header::before {
+    transition: none;
+  }
+}
+/* Language switcher (new in the static port; not part of PR #3). */
+.lang-switcher {
+  display: flex;
+  flex-shrink: 0;
+  white-space: nowrap;
+  gap: 0.75rem;
+  font-size: 1.125rem;
+  letter-spacing: -0.03em;
+}
+.lang-switcher a[aria-current='page'] {
+  text-decoration: underline;
+  text-underline-offset: 0.3125rem;
+}
+.lang-switcher-footer {
+  margin-top: 1rem;
+}
+.lang-switcher-menu {
+  margin-top: 1.25rem;
+  font-size: 1.125rem;
+}
+/* Header language drop-down: a text button with a chevron, opening a
+   small card of links styled like the programs filter popup. */
+.lang-menu {
+  position: relative;
+  flex-shrink: 0;
+}
+.lang-menu-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0;
+  border: 0;
+  background: none;
+  font-size: 1.125rem;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.lang-menu-button svg {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.lang-menu-button[aria-expanded='true'] svg {
+  transform: rotate(180deg);
+}
+.lang-menu-list {
+  position: absolute;
+  z-index: 50;
+  top: calc(100% + 0.375rem);
+  inset-inline-end: 0;
+  min-width: 10rem;
+  margin: 0;
+  padding: 0.5rem;
+  list-style: none;
+  border-radius: 0.75rem;
+  background: var(--background);
+  color: var(--foreground);
+  box-shadow:
+    0 0 0 1px rgb(33 33 33 / 0.1),
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+.lang-menu-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.lang-menu-list a:hover,
+.lang-menu-list a:focus-visible {
+  background: #f4f3f0;
+  text-decoration: none;
+  outline: none;
+}
+.lang-menu-list a svg {
+  width: 1rem;
+  height: 1rem;
+  visibility: hidden;
+}
+.lang-menu-list a[aria-current='page'] svg {
+  visibility: visible;
+}
+@media (max-width: 700px) {
+  .lang-menu {
+    display: none;
+  }
+}

@@ -1,0 +1,304 @@
+{
+  "_comment": "Source of truth for English copy. Values may contain inline HTML. Keys starting with an underscore are notes for editors and are ignored by the build and the parity test.",
+  "meta": {
+    "title": "Morim — Foundation for Teachers Growth",
+    "description": "We help teachers shape the next generation of children through practice, mentorship, and fellowship programs.",
+    "og_title": "Morim Foundation"
+  },
+  "links": {
+    "survey": "https://survey.morim.foundation/s/join-v1?src=landing&lang=en",
+    "email": "mailto:contact@morim.foundation"
+  },
+  "switcher": {
+    "label": "Language",
+    "trigger": "Other languages",
+    "names": {
+      "en": "EN",
+      "ru": "RU",
+      "he": "עב"
+    }
+  },
+  "nav": [
+    {
+      "id": "approach",
+      "label": "Approach"
+    },
+    {
+      "id": "fellowship",
+      "label": "Fellowship"
+    },
+    {
+      "id": "leaders",
+      "label": "Leaders"
+    },
+    {
+      "id": "team",
+      "label": "Team"
+    },
+    {
+      "id": "faq",
+      "label": "FAQ"
+    }
+  ],
+  "mobile_nav": [
+    {
+      "id": "approach",
+      "label": "Approach"
+    },
+    {
+      "id": "fellowship",
+      "label": "Fellowship"
+    },
+    {
+      "id": "leaders",
+      "label": "Leaders"
+    },
+    {
+      "id": "team",
+      "label": "Team"
+    },
+    {
+      "id": "faq",
+      "label": "FAQ"
+    },
+    {
+      "id": "contact",
+      "label": "Get in touch"
+    }
+  ],
+  "header": {
+    "logo": "morim foundation",
+    "logo_aria": "Morim Foundation home",
+    "nav_aria": "Main navigation",
+    "contact": "Get in touch",
+    "menu": "Menu",
+    "menu_close": "Close",
+    "menu_nav_aria": "Mobile navigation",
+    "menu_description": "Explore the foundation and its programs."
+  },
+  "hero": {
+    "title_html": "one good<br>teacher can<br>shape hundreds<br>of children,<br><span class=\"hero-line\">but...</span>",
+    "title_aria": "one good teacher can shape hundreds of children, but...",
+    "group_aria": "App distractions",
+    "help_desktop": "Drag an app to move it. Click or press Enter to dismiss it and show the next app.",
+    "help_compact": "Tap or press Enter to dismiss an item and show the next one. Swipe vertically to keep reading.",
+    "label_icon": "Dismiss {app} and show the next app",
+    "label_media_dismiss": "Dismiss {label} and show the next element",
+    "video_unavailable": "Video unavailable"
+  },
+  "approach": {
+    "aria": "Our approach",
+    "attention": "kids today are growing up inside an economy engineered to consume their attention. Wars. COVID. Zoom classes.",
+    "schools_html": "Schools were never designed to handle that.<br>Our foundation is here to help.",
+    "pilot_landscape_alt": "Teachers in discussion at the foundation’s Tbilisi pilot",
+    "pilot_portrait_alt": "Participants working on an activity during the Tbilisi pilot",
+    "pilot_caption": "Our first pilot in Tbilisi, Georgia. July 2026",
+    "mission_intro_html": "The Foundation runs programs for teachers and coordinators, and equip them with <span class=\"mentor-highlight\">mentors<img src=\"{root}assets/imgRectangle70.svg\" alt=\"\" aria-hidden=\"true\"></span> and <span class=\"funding\">funding<span class=\"funding-underline\" aria-hidden=\"true\"></span></span>.<span class=\"stipend-note\">Yes, monthly stipend</span>",
+    "mission": [
+      "More than half of every program is practice. Each starts with an intensive and moves quickly into practical work: teachers lead lessons with children, while coordinators bring real situations from their schools and work through them together. A mentor stays with the group throughout.",
+      "We use approaches we trust and that have been well studied, such as inquiry-based learning, activity-based learning, and project work. We don’t have a new pedagogy to sell.",
+      "<strong>The test is simple: does it still work in a regular class of 35 on a Tuesday morning?</strong>"
+    ]
+  },
+  "fellowship": {
+    "eyebrow": "Morim Fellowship",
+    "title_html": "dear <span class=\"word\">te<span class=\"glyph teacher-a\"><span class=\"sr-only\">a</span><img src=\"{root}assets/imgA1.svg\" alt=\"\" width=\"73\" height=\"66\"></span>chers,</span>",
+    "intro": [
+      "You see the effects of years of classroom disruption better than anyone. We want to give you time to learn, try things out, and work through what happens in the classroom with a mentor.",
+      "We start with the later years of primary school and the beginning of middle school — when many children begin to lose interest in learning."
+    ],
+    "benefits": [
+      {
+        "class": "craft",
+        "title": "Specific teaching practices",
+        "body": "Intensives where we explore and try specific teaching practices.",
+        "questions_aria": "Ordinary questions, hard ones",
+        "questions": [
+          "“how do you get a class’s attention without raising your voice?”",
+          "“how do you build motivation that doesn’t depend on grades?”",
+          "“how do you start a lesson with a real question?”",
+          "“how do you get children to look for answers themselves instead of trying to guess what the teacher wants to hear?”"
+        ]
+      },
+      {
+        "class": "",
+        "title": "Practice with children",
+        "body": "After the intensive, participants spend several weeks teaching children and go over their lessons with a mentor every week. The point is to bring what they learn back to their own classrooms."
+      },
+      {
+        "class": "",
+        "title": "A stipend for your time",
+        "body": "You have more than enough work without us, so we pay participants a stipend for both the training and the practice with children.<br>If we believe a teacher’s time matters, it makes sense to act like it."
+      }
+    ]
+  },
+  "leaders": {
+    "eyebrow": "For teacher-leaders",
+    "title_html": "dear <span class=\"word\">te<span class=\"glyph teacher-a\"><span class=\"sr-only\">a</span><img src=\"{root}assets/imgA1.svg\" alt=\"\" width=\"73\" height=\"66\"></span>cher-</span><br>leaders,",
+    "intro": [
+      "Strong teachers need schools where they can do good work and want to stay. That’s why we work not only with teachers, but also with people who shape the teams around them.",
+      "Our first program for coordinators is being developed together with rakazim themselves. The first pilot is under way with a closed cohort."
+    ],
+    "benefits": [
+      {
+        "title": "Leading without formal authority",
+        "body": "Rakazim are teachers too. They teach their own classes and help a whole team work better, often without formal authority over the people they lead.<br>How do you move a team forward when the people in it don’t report to you?"
+      },
+      {
+        "title": "Feedback that actually helps",
+        "body": "How do you give feedback that people can use, support colleagues, and help them grow?<br>Participants bring real situations from their schools and work through them together with a mentor."
+      },
+      {
+        "title": "Making room for the work that matters",
+        "body": "How do you distribute the workload across the team and make time for everyone to grow?<br>The program also covers the practical systems and projects that keep a department running without letting coordination take over the time meant for teaching."
+      }
+    ]
+  },
+  "programs": {
+    "heading": "Our programs",
+    "filter_aria": "Filter programs by location",
+    "locations": [
+      {
+        "value": "all",
+        "label": "All locations"
+      },
+      {
+        "value": "tel-aviv",
+        "label": "Tel&nbsp;Aviv"
+      },
+      {
+        "value": "tbilisi",
+        "label": "Tbilisi, Georgia"
+      }
+    ],
+    "where": "Where",
+    "when": "When",
+    "apply": "Apply",
+    "see_results": "See results",
+    "collapse": "Collapse",
+    "teachers": [
+      {
+        "id": "tel-aviv",
+        "location": "tel-aviv",
+        "title_html": "Teaching in the<br>Attention Economy",
+        "where": "Zoom + monthly meetings in Tel&nbsp;Aviv",
+        "when": "Starts in November 2026"
+      }
+    ],
+    "leaders": [
+      {
+        "id": "school-coordination-pilot",
+        "closed": true,
+        "badge": "Pilot in progress · closed cohort",
+        "title_html": "Coordinating a School: Team, Systems, Projects"
+      },
+      {
+        "id": "school-coordination",
+        "closed": false,
+        "badge": "",
+        "title_html": "Coordinating a School: Team, Systems, Projects",
+        "where": "Zoom + monthly meetings in Tel&nbsp;Aviv",
+        "when": "Starts in late January 2027"
+      }
+    ],
+    "tbilisi": {
+      "id": "tbilisi",
+      "location": "tbilisi",
+      "title_html": "Summer <span class=\"word\">C<span class=\"glyph small-a\"><span class=\"sr-only\">a</span><img src=\"{root}assets/imgA2.svg\" alt=\"\" width=\"28\" height=\"25\"></span>mp</span><br>in Tbilisi",
+      "where": "Tbilisi, Georgia",
+      "when": "July–August 2026",
+      "photos_aria": "Photos from the Tbilisi teacher intensive",
+      "landscape_alt": "Teachers in discussion during the Tbilisi intensive",
+      "portrait_alt": "Participants working together on a teaching activity",
+      "results": [
+        "In July–August 2026, 17 teachers completed our first intensive in Tbilisi, focused on inquiry-based education. The follow-up survey shows why practice matters.",
+        "After the intensive, teachers rated their willingness to recommend the program to a colleague at an average of 8.8 out of 10. After several weeks of teaching children with weekly mentoring, that rose to 9.5. Across eight key skills, the share of responses saying “I understand the inquiry method and can use it” nearly doubled, from 24% to 47%. Every follow-up respondent gave the maximum score to their willingness to teach our lessons again.",
+        "One teacher described becoming “much less likely to lead children toward the right answer, and more attentive to how they reason.” That’s the change we’re looking for.",
+        "Group dynamics and helping children through uncertainty remain difficult, so we’re adding more practice and mentoring around them. Two-thirds of the children surveyed said they would like lessons like these at school.",
+        "Encouraging results, but still from a small, unusually friendly setting. We’ll see how they hold up in regular classrooms."
+      ],
+      "results_title": "The first pilot"
+    },
+    "note": {
+      "title": "Interested in bringing a program to your school or municipality?",
+      "body": "Tell us a little about your school and what you need. We’re looking for participants and places to practice, not just funding.",
+      "link": "Let’s talk"
+    },
+    "join": "Join"
+  },
+  "team": {
+    "eyebrow": "People behind Morim",
+    "title_html": "We’ve spent years<br class=\"desktop-break\"> working in education.<br class=\"desktop-break\"> Now we’re building<br class=\"desktop-break\"> Morim together.",
+    "track_aria": "Foundation team",
+    "portrait_pending": "{name} portrait pending",
+    "people": [
+      {
+        "photo": "team-elena.jpg",
+        "role": "Founder, Patron",
+        "name": "Elena Bunina",
+        "href": "https://www.linkedin.com/in/elena-bunina-738522eb/",
+        "bio_html": "Professor of Mathematics at Bar-Ilan University and head of <a href=\"https://academy.nebius.com/\" target=\"_blank\" rel=\"noreferrer\">Nebius Academy</a>. Former CEO of Yandex."
+      },
+      {
+        "photo": "team-vlad.jpg",
+        "role": "Co-founder, CEO",
+        "name": "Vlad Stepanov",
+        "href": "https://www.linkedin.com/in/utterstep/",
+        "bio_html": "Former CEO of <a href=\"https://gradarius.com/\" target=\"_blank\" rel=\"noreferrer\">Gradarius</a>; previously CTO and Head of Informatika at Yandex Education. 13+ years in EdTech in the US and the CIS."
+      }
+    ],
+    "note": {
+      "title": "The team",
+      "body": "We bring together teacher-development specialists and practicing teachers. We’re also building a circle of experienced Israeli educators and researchers who can challenge our assumptions and help us understand the school system from the inside."
+    }
+  },
+  "faq": {
+    "title": "FAQ",
+    "questions": [
+      {
+        "q": "Who is the Fellowship for?",
+        "a": "We currently focus on practicing teachers in the later years of primary school and the beginning of middle school. If you work with another age group, you can still get in touch and tell us about your experience."
+      },
+      {
+        "q": "What about AI?",
+        "a": "We teach teachers to use AI — and to teach children how to use it — instead of training AI to replace teachers."
+      },
+      {
+        "q": "How is the program structured?",
+        "a": "We interleave theory and workshops with practice on real cases: organized practice with kids for teachers, real school cases for coordinators. And live sessions with mentors in small groups every week."
+      },
+      {
+        "q": "Do participants receive a stipend?",
+        "a": "Yes. We pay participants for the training and the subsequent practice with children. The amount and payment arrangements will be provided with the details of each program."
+      },
+      {
+        "q": "Can a school or municipality work with Morim?",
+        "a": "Yes. We’re interested in working with schools, networks, and municipalities that want to bring our programs to their teachers or coordinators. We’re also looking for experienced educators who can help us build the programs."
+      }
+    ]
+  },
+  "dialogs": {
+    "close": "Close",
+    "social": {
+      "body": "This profile link will be added soon."
+    }
+  },
+  "footer": {
+    "title": "Let’s talk",
+    "lead_before": "If you’re a teacher, work with a school or municipality, or just think we should talk — ",
+    "lead_link": "leave your contact in the form",
+    "lead_after": " or write to us.",
+    "cta": "Want to do something together?",
+    "email": "contact@morim.foundation",
+    "foundation_label": "Foundation",
+    "nav_aria": "Footer navigation",
+    "socials_label": "Socials",
+    "socials_aria": "Social links",
+    "socials": [
+      "LinkedIn",
+      "Instagram",
+      "X"
+    ],
+    "legal_html": "© 2026, The Foundation for Teachers Growth LTD<br>Company Number: 517356374"
+  }
+}

@@ -1,0 +1,235 @@
+/* Ported from PR #3 website/app/hero-floating.css. Physical inline-axis properties were converted to logical ones for RTL. */
+.hero-editorial .hero-app-item[data-slot] {
+  --float-width: 4.5rem;
+  --float-height: 4.5rem;
+  display: block;
+  width: var(--float-width);
+  height: var(--float-height);
+  inset-inline-start: calc((100% - var(--float-width)) * var(--float-x));
+  top: calc((100% - var(--float-height)) * var(--float-y));
+  inset-inline-end: auto;
+  bottom: auto;
+  z-index: var(--composition-layer, 2);
+}
+.hero-app-item[data-kind='icon'] {
+  border-radius: 26%;
+}
+.hero-app-icon-mask {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 26%;
+  overflow: hidden;
+  background: white;
+}
+.hero-app-icon-mask img {
+  display: block;
+  border-radius: 0;
+}
+.hero-editorial
+  .hero-app-item[data-slot]:is([data-dragging='true'], :focus-within) {
+  z-index: 10;
+}
+.hero-editorial .hero-app-item[data-kind='media'] {
+  --float-width: 6.5rem;
+  --float-height: calc((var(--float-width) - 4px) * 578 / 325 + 4px);
+  width: var(--float-width);
+  height: var(--float-height);
+  top: calc((100% - var(--float-height)) * var(--float-y));
+  border-radius: 0.4rem;
+}
+.hero-editorial
+  .hero-app-item[data-provider='youtube'][data-format='landscape'] {
+  --float-width: 16rem;
+  --float-height: calc((var(--float-width) - 4px) * 270 / 480 + 4px);
+}
+.hero-editorial .hero-app-item[data-provider='twitch'] {
+  z-index: 8;
+  /* Twitch renders at its 400px native size and is scaled down by transform;
+     the px floor keeps the clip readable when 1rem shrinks with the viewport. */
+  --float-width: max(250px, 14.5rem);
+  --float-height: calc((var(--float-width) - 4px) * 0.75 + 4px);
+}
+.hero-live-media {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border: 2px solid white;
+  border-radius: inherit;
+  background: #151515;
+  color: white;
+  text-align: start;
+}
+.hero-video-poof-target {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+.hero-video-poof-target:focus-visible {
+  outline: 3px solid #2357ec;
+  outline-offset: -4px;
+}
+.hero-twitch-dismiss {
+  position: absolute;
+  inset-inline-end: -0.75rem;
+  top: -2rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #182022;
+  color: white;
+  font:
+    1.25rem/1 system-ui,
+    sans-serif;
+  cursor: pointer;
+}
+.hero-video-player {
+  display: block;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #151515;
+  /* The iframe is a block wider than this box, scaled from its top-left
+     corner. In RTL it would start at the right edge and scale away from it,
+     so the box itself stays LTR (the embed is its own document anyway). */
+  direction: ltr;
+}
+.hero-video-player iframe {
+  display: block;
+  border: 0;
+  max-width: none;
+  transform-origin: top left;
+}
+.hero-video-status {
+  display: grid;
+  position: absolute;
+  inset: 0;
+  place-items: center;
+  padding: 0.5rem;
+  font:
+    0.7rem/1.3 system-ui,
+    sans-serif;
+  text-align: center;
+}
+.hero-editorial .hero-app-bob {
+  animation: none;
+  transform: none;
+}
+.hero-editorial .hero-app-item[data-provider='twitch'] .hero-app-bob {
+  filter: none;
+}
+.hero-editorial .hero-app-item[data-provider='twitch'] .hero-app-face {
+  transform: none;
+}
+.hero-editorial .hero-app-item[data-provider='twitch'] .hero-live-media {
+  border-radius: 0;
+}
+.hero-editorial .hero-app-item[data-dismissing='true'] .hero-app-face {
+  /* Vanish instantly under the smoke, then replace after the five frames. */
+  animation: none;
+  opacity: 0;
+  pointer-events: none;
+}
+.hero-editorial .hero-app-item:focus-visible .hero-app-bob {
+  animation: none;
+  opacity: 1;
+  visibility: visible;
+  filter: none;
+}
+@media (max-width: 700px) {
+  .hero-editorial > .hero-accents {
+    width: calc(100% - 3.5rem);
+    height: 13rem;
+  }
+  .hero-editorial .hero-app-item[data-slot] {
+    --float-width: 3rem;
+    --float-height: 3rem;
+    touch-action: pan-y;
+    inset-inline-start: calc(
+      (100% - var(--float-width)) * var(--float-mobile-x, var(--float-x))
+    );
+    top: calc(
+      (100% - var(--float-height)) * var(--float-mobile-y, var(--float-y))
+    );
+  }
+  /* The icon rule above also resets --float-height, so each screen restates
+     its aspect ratio here or it collapses to the 3rem icon height. */
+  .hero-editorial .hero-app-item[data-kind='media'] {
+    --float-width: 5.25rem;
+    --float-height: calc((var(--float-width) - 4px) * 578 / 325 + 4px);
+  }
+  .hero-editorial
+    .hero-app-item[data-provider='youtube'][data-format='landscape'] {
+    --float-width: min(11rem, calc(58vw - 2rem));
+    --float-height: calc((var(--float-width) - 4px) * 270 / 480 + 4px);
+  }
+  .hero-editorial .hero-app-item[data-provider='twitch'] {
+    --float-width: min(13rem, calc(68vw - 2.8rem));
+    --float-height: calc((var(--float-width) - 4px) * 0.75 + 4px);
+  }
+  .hero-editorial .hero-notification {
+    font-size: 0.75rem;
+  }
+  /* Fewer pieces on a phone: the three screens, the two bottom-corner icons
+     and the top-left one. The centre-top and right-middle icons sit out. */
+  .hero-editorial .hero-app-item[data-slot='5'],
+  .hero-editorial .hero-app-item[data-slot='6'] {
+    display: none;
+  }
+}
+.hero-editorial[data-media-layout='static'] {
+  padding-bottom: 3rem;
+}
+main[data-hero-variant='original'] .introduction {
+  margin-top: 0;
+}
+.hero-editorial[data-media-layout='static'] > .hero-accents {
+  /* Reserve space between the headline and copy; the collage scrolls normally. */
+  display: block;
+  position: relative;
+  inset: auto;
+  width: min(56rem, calc(100vw - 3.5rem));
+  height: 28rem;
+  margin: -6rem auto 0;
+  transform: none;
+}
+@media (min-width: 701px) {
+  .hero-editorial[data-media-layout='static'] .hero-app-item[data-slot] {
+    --float-width: 5.25rem;
+    --float-height: 5.25rem;
+  }
+  .hero-editorial[data-media-layout='static']
+    .hero-app-item[data-kind='media'] {
+    --float-width: 7.5rem;
+    --float-height: calc((var(--float-width) - 4px) * 578 / 325 + 4px);
+  }
+  .hero-editorial[data-media-layout='static']
+    .hero-app-item[data-provider='youtube'][data-format='landscape'] {
+    --float-width: 18.5rem;
+    --float-height: calc((var(--float-width) - 4px) * 270 / 480 + 4px);
+  }
+  .hero-editorial[data-media-layout='static']
+    .hero-app-item[data-provider='twitch'] {
+    --float-width: max(250px, 16.5rem);
+    --float-height: calc((var(--float-width) - 4px) * 0.75 + 4px);
+  }
+}
+@media (max-width: 700px) {
+  .hero-editorial[data-media-layout='static'] > .hero-accents {
+    height: 25rem;
+    /* The bigger mobile headline needs the collage to start lower, or the
+       top cards cover "but...". */
+    margin-top: -0.75rem;
+  }
+}

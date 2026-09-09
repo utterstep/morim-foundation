@@ -1,0 +1,253 @@
+/* Native replacements for the shadcn/Base UI widgets used in PR #3
+   (dialog.tsx, sheet.tsx, select.tsx, accordion.tsx, collapsible.tsx).
+   Structural styles and motion only; the site's own colours, sizes and
+   typography for these elements live in sections.css and mobile.css.
+   Timings are the PR's: dialog 100ms, sheet 200ms (backdrop 150ms). */
+
+/* ---- Modal dialogs -------------------------------------------------- */
+
+/* Scroll lock while a modal is open; the gutter stays reserved so the page
+   does not shift when the scrollbar disappears. */
+html:has(dialog:modal) {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+dialog {
+  border: 0;
+  padding: 0;
+  color: var(--foreground);
+  background: var(--background);
+}
+dialog::backdrop {
+  background: rgb(0 0 0 / 0.1);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Content dialog: centred card, fade + scale from 95% (shadcn zoom-in-95). */
+.morim-dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: calc(100% - 2rem);
+  box-shadow: 0 0 0 1px rgb(24 32 34 / 0.1);
+  overflow: visible;
+}
+.morim-dialog-body {
+  position: relative;
+  display: grid;
+}
+.morim-dialog[open] {
+  opacity: 1;
+  scale: 1;
+  transition:
+    opacity 100ms ease-out,
+    scale 100ms ease-out;
+}
+.morim-dialog[open]::backdrop {
+  opacity: 1;
+  transition: opacity 100ms ease-out;
+}
+@starting-style {
+  .morim-dialog[open] {
+    opacity: 0;
+    scale: 0.95;
+  }
+  .morim-dialog[open]::backdrop {
+    opacity: 0;
+  }
+}
+.morim-dialog[data-closing] {
+  opacity: 0;
+  scale: 0.95;
+  transition:
+    opacity 100ms ease-in,
+    scale 100ms ease-in;
+}
+.morim-dialog[data-closing]::backdrop {
+  opacity: 0;
+  transition: opacity 100ms ease-in;
+}
+.dialog-close {
+  position: absolute;
+  top: 0.5rem;
+  inset-inline-end: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0.375rem;
+  background: transparent;
+  color: inherit;
+  transition: background-color 150ms;
+}
+.dialog-close:hover {
+  background: #f4f3f0;
+}
+
+/* Mobile menu: a floating card where the header pill sits, dropping in
+   with a 0.75rem slide + fade. Surface and colours live in mobile.css. */
+.mobile-menu-panel {
+  position: fixed;
+  top: calc(0.75rem + env(safe-area-inset-top, 0px));
+  bottom: auto;
+  inset-inline: 1.25rem;
+  margin: 0 auto;
+  height: auto;
+  max-height: calc(100dvh - 1.5rem - env(safe-area-inset-top, 0px));
+  flex-direction: column;
+  border: 0;
+  box-shadow:
+    0 0.375rem 1.5rem #18202212,
+    inset 0 0 0 1px #1820220a;
+}
+.mobile-menu-panel[open] {
+  display: flex;
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity 200ms ease-in-out,
+    translate 200ms ease-in-out;
+}
+.mobile-menu-panel[open]::backdrop {
+  opacity: 1;
+  transition: opacity 150ms;
+}
+@starting-style {
+  .mobile-menu-panel[open] {
+    opacity: 0;
+    translate: 0 -0.75rem;
+  }
+  .mobile-menu-panel[open]::backdrop {
+    opacity: 0;
+  }
+}
+.mobile-menu-panel[data-closing] {
+  opacity: 0;
+  translate: 0 -0.75rem;
+}
+.mobile-menu-panel[data-closing]::backdrop {
+  opacity: 0;
+  transition: opacity 150ms;
+}
+.mobile-menu-heading h2 {
+  margin: 0;
+  font-weight: 500;
+}
+
+/* ---- Location filter listbox (replaces Base UI Select) --------------- */
+
+.location-select-wrap {
+  position: relative;
+}
+.location-select {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: space-between;
+  white-space: nowrap;
+  cursor: default;
+  user-select: none;
+  transition: color 150ms, background-color 150ms, border-color 150ms;
+}
+.location-select svg {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+/* Popup overlays the trigger with the selected option aligned to it
+   (Base UI's alignItemWithTrigger), so there is no open animation. */
+.location-options {
+  position: absolute;
+  z-index: 50;
+  top: calc(-1 * var(--selected-offset, 0px));
+  inset-inline: 0;
+  min-width: 9rem;
+  margin: 0;
+  list-style: none;
+  border-radius: 0.5rem;
+  background: var(--background);
+  color: var(--foreground);
+  box-shadow:
+    0 0 0 1px rgb(33 33 33 / 0.1),
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: none;
+}
+.location-options[hidden] {
+  display: none;
+}
+.location-options [role='option'] {
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.375rem;
+  padding-inline: 0.375rem 2rem; /* padding-block comes from sections.css */
+  border-radius: 0.375rem;
+  cursor: default;
+  user-select: none;
+  outline: none;
+  white-space: nowrap;
+}
+.location-options [role='option'] > span {
+  flex: 1 0 auto;
+}
+.location-options [role='option']:focus,
+.location-options [role='option']:hover {
+  background: #f4f3f0;
+  color: #212121;
+}
+.location-option-check {
+  position: absolute;
+  inset-inline-end: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+  visibility: hidden;
+}
+.location-options [aria-selected='true'] .location-option-check {
+  visibility: visible;
+}
+
+/* ---- Disclosures (FAQ <details>, Tbilisi results) -------------------- */
+
+.faq-trigger {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  cursor: pointer;
+  list-style: none;
+}
+.faq-trigger::-webkit-details-marker {
+  display: none;
+}
+.faq-trigger::marker {
+  content: '';
+}
+.faq-answer,
+.program-results-content {
+  overflow: hidden;
+}
+.program-results-content[hidden] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .morim-dialog[open],
+  .morim-dialog[data-closing],
+  .morim-dialog[open]::backdrop,
+  .morim-dialog[data-closing]::backdrop,
+  .mobile-menu-panel[open],
+  .mobile-menu-panel[data-closing],
+  .mobile-menu-panel[open]::backdrop,
+  .mobile-menu-panel[data-closing]::backdrop {
+    transition: none;
+  }
+}

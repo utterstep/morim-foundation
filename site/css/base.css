@@ -1,0 +1,551 @@
+/* Ported from PR #3 website/app/globals.css. Physical inline-axis properties were converted to logical ones for RTL. */
+@font-face {
+  font-family: Alpina;
+  src: url('../assets/fonts/GTAlpina-Regular.otf') format('opentype');
+  font-weight: 400 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: Alpina;
+  src: url('../assets/fonts/GTAlpina-Light.otf') format('opentype');
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: Alpina Wordmark;
+  src: url('../assets/fonts/GTAlpina-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: Stefan;
+  src: url('../assets/fonts/ABCStefanTrial-Simple.otf') format('opentype');
+  font-weight: 400;
+  font-display: swap;
+}
+:root {
+  --background: #fff;
+  --foreground: #212121;
+  --green: #133d30;
+  --leaders-bg: #f4f3f0;
+  --leaders-ink: #4a1116;
+  --leaders-muted: #9a6462;
+  --paper: #f4f3f0;
+  --ink: #182022;
+  --body-size: 1.625rem;
+  --page-width: 90rem;
+}
+/* The PR's styles were written on top of Tailwind's preflight reset (v4)
+   and shadcn's base layer. This is the subset they depend on, kept so the
+   site's own rules below behave exactly as they did. */
+*,
+::before,
+::after,
+::backdrop {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0 solid #ddd;
+}
+html {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+  -webkit-tap-highlight-color: transparent;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+b,
+strong {
+  font-weight: bolder;
+}
+ol,
+ul,
+menu {
+  list-style: none;
+}
+summary {
+  display: list-item;
+}
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+  vertical-align: middle;
+}
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+button,
+input,
+select,
+optgroup,
+textarea {
+  font: inherit;
+  font-feature-settings: inherit;
+  font-variation-settings: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  border-radius: 0;
+  background-color: transparent;
+  opacity: 1;
+}
+button,
+input:where([type='button'], [type='reset'], [type='submit']) {
+  appearance: button;
+}
+[hidden]:where(:not([hidden='until-found'])) {
+  display: none !important;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2.25rem;
+}
+/* 90rem is the 1440px reference canvas at the default 16px text size.
+   Shared rem dimensions scale the desktop layout without transforming it. */
+@media (min-width: 701px) {
+  html {
+    font-size: calc(100vw / 90);
+  }
+}
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Alpina, Georgia, serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+button,
+a,
+summary {
+  -webkit-tap-highlight-color: transparent;
+}
+button,
+a {
+  touch-action: manipulation;
+}
+button {
+  cursor: pointer;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3125rem;
+}
+button:focus-visible,
+a:focus-visible,
+summary:focus-visible {
+  outline: 2px solid #1c51e0;
+  outline-offset: 0.3125rem;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+p,
+h1,
+h2,
+h3,
+figure {
+  margin: 0;
+}
+main {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  overflow: clip;
+}
+.site-header {
+  height: 9rem;
+  margin: 0 6.25%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.logo {
+  display: inline-flex;
+  align-items: baseline;
+  font-family:
+    Alpina Wordmark,
+    Alpina,
+    Georgia,
+    serif;
+  font-size: 1.5rem;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.logo:hover {
+  text-decoration: none;
+}
+.site-header nav {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 1.125rem;
+  letter-spacing: -0.03em;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.5rem;
+  padding: 1.125rem 1.375rem;
+  background: var(--ink);
+  color: white;
+  border: 0;
+  border-radius: 1.0625rem;
+  font-size: 1.125rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+.button:hover {
+  background: #29443b;
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+.hero {
+  position: relative;
+  z-index: 1;
+  overflow-x: clip;
+  padding-top: 3rem;
+  padding-bottom: 6.25rem;
+  text-align: center;
+}
+.hero h1 {
+  font-size: 10rem;
+  line-height: 0.8125;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+.hero-line {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+@media (min-width: 701px) {
+  .hero-editorial {
+    padding-top: 6rem;
+    padding-bottom: 5rem;
+  }
+}
+.hero-accents {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.hero-app-item {
+  position: absolute;
+  z-index: 2;
+  width: max(2.75rem, 0.456em);
+  height: max(2.75rem, 0.456em);
+  padding: 0;
+  border: 0;
+  border-radius: 27%;
+  background: transparent;
+  font: inherit;
+  line-height: 1;
+  pointer-events: auto;
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+  translate: var(--drag-x, 0px) var(--drag-y, 0px);
+}
+.hero-app-item[data-dragging='true'] {
+  z-index: 10;
+  cursor: grabbing;
+}
+.hero-app-item:focus-visible {
+  z-index: 10;
+  outline: 2px solid #1c51e0;
+  outline-offset: 0.375rem;
+  translate: var(--drag-x, 0px) var(--drag-y, 0px);
+  rotate: 0deg;
+}
+.hero-app-face {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  transform: rotate(var(--app-tilt));
+  box-shadow:
+    0 0.875rem 1.5rem -0.625rem #18202245,
+    0 3px 0.4375rem #18202220;
+}
+.hero-app-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+.hero-notification {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inset-inline-end: -0.6em;
+  top: -0.6em;
+  width: max-content;
+  min-width: 1.75em;
+  height: 1.75em;
+  padding: 0 0.42em;
+  white-space: nowrap;
+  border-radius: 2em;
+  color: white;
+  background: #ff3131;
+  font:
+    500 max(0.75rem, 0.075em) / 1 system-ui,
+    sans-serif;
+  letter-spacing: -0.03em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.prose {
+  width: min(41.875rem, 90%);
+  margin: auto;
+  text-align: center;
+  font-size: var(--body-size);
+  line-height: 1.23;
+  letter-spacing: -0.03em;
+}
+.prose p + p {
+  margin-top: 2rem;
+}
+.introduction {
+  margin-top: 7.125rem;
+}
+.pilot {
+  margin-top: 3.5625rem;
+  text-align: center;
+}
+.photo-stack {
+  position: relative;
+  width: min(53.125rem, 88%);
+  height: 28.5rem;
+  margin: 0 auto;
+}
+.photo-stack img {
+  position: absolute;
+  border: 0.3125rem solid white;
+  box-shadow: 0 1px 0.75rem #0000001a;
+  object-fit: cover;
+}
+.pilot-landscape {
+  width: 60.13%;
+  height: 21.1875rem;
+  inset-inline-start: 2%;
+  top: 2.75rem;
+  transform: rotate(-3.11deg);
+}
+.pilot-portrait {
+  width: 37.27%;
+  height: 25.75rem;
+  inset-inline-end: 4%;
+  top: 0.625rem;
+  transform: rotate(8.78deg);
+}
+figcaption {
+  margin-top: 0.375rem;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  color: #77776f;
+  letter-spacing: -0.03em;
+}
+.mission {
+  position: relative;
+  margin: 7.625rem auto 7rem;
+}
+.mission-intro {
+  position: relative;
+}
+.funding,
+.mentor-highlight {
+  display: inline-block;
+  position: relative;
+}
+.mentor-highlight {
+  isolation: isolate;
+}
+.mentor-highlight img {
+  z-index: -1;
+  position: absolute;
+  inset: -2px -0.375rem;
+  width: calc(100% + 0.75rem);
+  height: calc(100% + 0.25rem);
+  max-width: none;
+  pointer-events: none;
+}
+.funding-underline {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
+  bottom: -0.1em;
+  height: 2px;
+  background: #1c51e0;
+  pointer-events: none;
+}
+.stipend-note {
+  position: absolute;
+  inset-inline-start: calc(100% + 1.5rem);
+  top: 3.4375rem;
+  width: 15rem;
+  color: #1c51e0;
+  font-family: Stefan, cursive;
+  font-size: 1.625rem;
+  line-height: 1.1;
+  text-align: center;
+  transform: rotate(2deg);
+  text-transform: uppercase;
+  letter-spacing: normal;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+@media (min-width: 1441px) {
+  .hero h1 {
+    font-size: 10rem;
+  }
+}
+@media (max-width: 700px) {
+  .stipend-note {
+    position: static;
+    display: block;
+    width: min(15rem, 100%);
+    margin: 1.875rem auto 0;
+  }
+  .site-header {
+    margin: 0 5%;
+  }
+  .prose {
+    font-size: 1.5rem;
+  }
+  .mission {
+    margin-top: 5.625rem;
+  }
+  .photo-stack {
+    height: 25rem;
+  }
+  .pilot-landscape {
+    height: 18.75rem;
+  }
+  .pilot-portrait {
+    height: 22.8125rem;
+  }
+}
+@media (max-width: 700px) {
+  .site-header .logo {
+    font-size: 1.125rem;
+  }
+  .site-header {
+    height: 6.75rem;
+    gap: 0.875rem;
+    flex-wrap: wrap;
+    padding-top: 1.375rem;
+  }
+  .site-header nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 1.375rem;
+    font-size: 1rem;
+  }
+  .site-header .button {
+    min-height: 2.75rem;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+  }
+  .hero {
+    padding-top: 4rem;
+    padding-bottom: 5.5rem;
+  }
+  /* Lines are hard breaks in the copy, so the widest line sets the size:
+     "shape hundreds" fits ~15.5vw; Cyrillic runs wider, so Russian steps down. */
+  .hero h1 {
+    font-size: clamp(3.5rem, 15.5vw, 6.5rem);
+    line-height: 0.93;
+  }
+  html[lang='ru'] .hero h1 {
+    font-size: clamp(3rem, 13.5vw, 5.5rem);
+  }
+  .introduction {
+    margin-top: 4.375rem;
+  }
+  .prose {
+    font-size: 1.35rem;
+    width: 86%;
+  }
+  .prose p + p {
+    margin-top: 1.625rem;
+  }
+  .photo-stack {
+    height: 16.875rem;
+    width: 94%;
+  }
+  .pilot-landscape {
+    height: 12.1875rem;
+    top: 1.875rem;
+  }
+  .pilot-portrait {
+    height: 14.875rem;
+  }
+  .pilot {
+    margin-top: 2.75rem;
+  }
+  figcaption {
+    font-size: 0.875rem;
+  }
+  .mission {
+    margin: 4.375rem auto;
+  }
+  .desktop-break {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *:before,
+  *:after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
