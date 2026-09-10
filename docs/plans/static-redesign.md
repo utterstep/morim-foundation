@@ -56,10 +56,11 @@ tests/*.test.mjs            # node --test, imports src/js/*.js
 docs/plans/static-redesign.md
 ```
 
-`site/` is served at `morim.foundation/site/` once merged; promotion to root later is a
-move of `site/*` to `/` (plus CNAME). All asset URLs in the template are relative to the
-page (`{{ root }}css/…` where `root` is `""` for EN and `"../"` for RU/HE), so the same
-output works at `/site/`, at `/`, and from a local static server.
+`site/` was served at `morim.foundation/site/` for review. At release (September 2026)
+the old site was deleted, the build was pointed at the repository root, and `site/` kept
+only redirects to `/`. All asset URLs in the template are relative to the page
+(`{{ root }}css/…` where `root` is `""` for EN and `"../"` for RU/HE), so the same output
+works at `/`, under any prefix, and from a local static server.
 
 ## build.py
 

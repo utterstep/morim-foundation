@@ -4,8 +4,8 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
 
-// Checks on the generated site/ (run `uv run build.py` first).
-const site = fileURLToPath(new URL('../site/', import.meta.url));
+// Checks on the generated pages at the repository root (run `uv run build.py` first).
+const site = fileURLToPath(new URL('../', import.meta.url));
 const pages = { en: 'index.html', ru: 'ru/index.html', he: 'he/index.html' };
 const read = (page) => readFileSync(join(site, page), 'utf8');
 
@@ -45,7 +45,7 @@ test('every local href/src in the pages resolves to a file', () => {
   }
 });
 
-test('every module import under site/js resolves', () => {
+test('every module import under js/ resolves', () => {
   const walk = (dir) =>
     readdirSync(dir).flatMap((name) => {
       const path = join(dir, name);

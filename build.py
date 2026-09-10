@@ -2,11 +2,14 @@
 # requires-python = ">=3.12"
 # dependencies = ["jinja2"]
 # ///
-"""Render the Morim Foundation site from src/ into site/.
+"""Render the Morim Foundation site from src/ into the repository root.
 
     uv run build.py            # render all languages and copy static files
-    uv run build.py --serve    # render, then serve site/ on http://localhost:8000
-    uv run build.py --check    # exit 1 if site/ is not what a fresh render produces
+    uv run build.py --serve    # render, then serve the root on http://localhost:8000
+    uv run build.py --check    # exit 1 if the output is not what a fresh render produces
+
+GitHub Pages serves the root of `main`, so the generated files (index.html,
+ru/, he/, css/, js/, assets/) live next to the sources and are committed.
 
 There is no other tooling: the template is plain HTML with Jinja2 tags, strings
 live in src/i18n/<lang>.json, and everything under src/css, src/js and
@@ -30,7 +33,7 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 ROOT = Path(__file__).resolve().parent
 SRC = ROOT / "src"
-SITE = ROOT / "site"
+OUT = ROOT
 STATIC_DIRS = ("css", "js", "assets")
 
 # Order matters: it is the order of the language switcher.
@@ -107,25 +110,39 @@ def render(out: Path) -> None:
         shutil.copytree(SRC / name, out / name, dirs_exist_ok=True)
 
 
+def generated() -> list[str]:
+    """Everything the build owns at the root; nothing else is ever touched."""
+    pages = [meta["path"].rstrip("/") or "index.html" for meta in LANGS.values()]
+    return pages + list(STATIC_DIRS)
+
+
 def build() -> None:
-    if SITE.exists():
-        shutil.rmtree(SITE)
-    render(SITE)
-    print(f"rendered {', '.join(LANGS)} into {SITE.relative_to(ROOT)}/")
+    for name in generated():
+        path = OUT / name
+        if path.is_dir():
+            shutil.rmtree(path)
+        elif path.exists():
+            path.unlink()
+    render(OUT)
+    print(f"rendered {', '.join(LANGS)} into {', '.join(generated())}")
 
 
 def check() -> int:
+    stale = []
     with tempfile.TemporaryDirectory() as tmp:
-        fresh = Path(tmp) / "site"
+        fresh = Path(tmp)
         render(fresh)
-        diff = filecmp.dircmp(fresh, SITE)
-        stale = _differences(diff)
+        for name in generated():
+            if (fresh / name).is_dir():
+                stale += _differences(filecmp.dircmp(fresh / name, OUT / name), f"{name}/")
+            elif not (OUT / name).exists() or not filecmp.cmp(fresh / name, OUT / name, shallow=False):
+                stale.append(name)
     if stale:
-        print("site/ is out of date; run `uv run build.py`:", file=sys.stderr)
+        print("generated files are out of date; run `uv run build.py`:", file=sys.stderr)
         for path in stale:
             print(f"  {path}", file=sys.stderr)
         return 1
-    print("site/ is up to date")
+    print("generated files are up to date")
     return 0
 
 
@@ -137,9 +154,9 @@ def _differences(diff: filecmp.dircmp, prefix: str = "") -> list[str]:
 
 
 def serve(port: int) -> None:
-    handler = partial(http.server.SimpleHTTPRequestHandler, directory=str(SITE))
+    handler = partial(http.server.SimpleHTTPRequestHandler, directory=str(OUT))
     with http.server.ThreadingHTTPServer(("127.0.0.1", port), handler) as server:
-        print(f"serving {SITE.relative_to(ROOT)}/ at http://127.0.0.1:{port}/")
+        print(f"serving the repository root at http://127.0.0.1:{port}/")
         try:
             server.serve_forever()
         except KeyboardInterrupt:

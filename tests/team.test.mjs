@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 
 const page = readFileSync(
-  new URL('../site/index.html', import.meta.url),
+  new URL('../index.html', import.meta.url),
   'utf8',
 );
 const team = page

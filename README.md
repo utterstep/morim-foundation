@@ -1,24 +1,15 @@
 # morim.foundation
 
 Landing page of the Morim Foundation, served from GitHub Pages at `morim.foundation`.
+The previous site lives in git history before the release commit.
 
-Two sites live in this repository at the moment:
-
-| Path | What it is |
-|---|---|
-| `index.html`, `static/` | The current live site. Untouched; kept as a reference until the redesign is promoted. |
-| `src/` → `site/` | The redesign, ported from [PR #3](https://github.com/utterstep/morim-foundation/pull/3) to static HTML, CSS and plain ES modules. Reachable at `/site/` once merged. |
-
-Promoting the redesign later means moving the contents of `site/` to the repository root
-(and keeping `CNAME` and `.nojekyll`).
-
-## The redesign (`src/` → `site/`)
+## How it is built
 
 No bundler, no framework, no npm packages. Three languages at separate URLs:
 `/` (English), `/ru/`, `/he/` (right-to-left).
 
 ```
-build.py               renders src/ into site/  (Python, one dependency: Jinja2, via uv)
+build.py               renders src/ into the repository root (Python, one dependency: Jinja2, via uv)
 src/template.html.j2   the page: plain HTML with Jinja loops over repeated blocks
 src/i18n/{en,ru,he}.json   every string on the page; values may contain inline HTML
 src/css/               stylesheets (logical properties, direction-agnostic)
@@ -26,7 +17,9 @@ src/js/                ES modules loaded straight by the browser
 src/js/lib/            behaviour ported verbatim from PR #3 (hero maths, page motion, video autoplay, poof)
 src/js/hero/           the hero collage, rewritten from the React component
 src/assets/            images and fonts
-site/                  generated output, committed
+index.html, ru/, he/   generated pages, committed
+css/ js/ assets/       copied from src/ by the build, committed
+site/                  redirects from the old /site/ preview URLs to the root
 tests/                 node --test, zero dependencies
 docs/plans/static-redesign.md   the decisions behind this port
 ```
@@ -34,9 +27,9 @@ docs/plans/static-redesign.md   the decisions behind this port
 ### Build and preview
 
 ```sh
-uv run build.py            # render all three languages into site/
-uv run build.py --serve    # render, then serve site/ on http://127.0.0.1:8000
-uv run build.py --check    # exit 1 if site/ is stale (useful before committing)
+uv run build.py            # render all three languages into the root
+uv run build.py --serve    # render, then serve the root on http://127.0.0.1:8000
+uv run build.py --check    # exit 1 if the generated files are stale (useful before committing)
 ```
 
 ES modules do not load from `file://`, so use `--serve` or any static server.
@@ -51,7 +44,8 @@ ES modules do not load from `file://`, so use `--serve` or any static server.
   (the "a" in *teachers*, the "oo" in *school*) can sit on a different letter, or be
   left out, in each language.
 - Structure and markup live in `src/template.html.j2`. Change it once for all languages.
-- After editing, run `uv run build.py` and commit `site/` along with `src/`.
+- After editing, run `uv run build.py` and commit the generated files along with `src/`.
+  The build only ever touches `index.html`, `ru/`, `he/`, `css/`, `js/` and `assets/`.
 
 ### Tests
 
