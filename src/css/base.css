@@ -229,7 +229,7 @@ main {
     transform 0.2s;
 }
 .button:hover {
-  background: #29443b;
+  background: var(--foreground);
   text-decoration: none;
   transform: translateY(-2px);
 }
