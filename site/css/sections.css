@@ -157,7 +157,7 @@
 }
 .program-list {
   /* Every row shares content-independent tracks, including expanded results. */
-  --program-columns: minmax(0, 1fr) 9rem 11rem 8.5rem;
+  --program-columns: minmax(0, 1fr) 9rem 11rem minmax(8.5rem, auto);
   display: grid;
   gap: 0.875rem;
   min-height: 17.75rem;
