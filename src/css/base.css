@@ -23,7 +23,64 @@
   font-weight: 400;
   font-display: swap;
 }
+@font-face {
+  font-family: Caveat;
+  src: url('../assets/fonts/Caveat-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: Gveret Levin;
+  src: url('../assets/fonts/GveretLevin-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: Spectral;
+  src: url('../assets/fonts/Spectral-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Spectral;
+  src: url('../assets/fonts/Spectral-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Spectral;
+  src: url('../assets/fonts/Spectral-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Spectral;
+  src: url('../assets/fonts/Spectral-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Spectral;
+  src: url('../assets/fonts/Spectral-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: Frank Ruhl Libre;
+  src: url('../assets/fonts/FrankRuhlLibre-Variable.ttf') format('truetype');
+  font-weight: 300 900;
+  font-display: swap;
+}
 :root {
+  --font-text: Alpina, Georgia, serif;
+  --font-handwritten: Stefan, cursive;
+  --handwritten-case: uppercase;
+  --handwritten-spacing: 0.06em;
   --background: #fff;
   --foreground: #212121;
   --fellowship-bg: #5a3757;
@@ -36,6 +93,18 @@
   --ink: #182022;
   --body-size: 1.625rem;
   --page-width: 90rem;
+}
+html[lang='ru'] {
+  --font-text: Spectral, Georgia, serif;
+  --font-handwritten: Caveat, cursive;
+  --handwritten-case: none;
+  --handwritten-spacing: normal;
+}
+html[lang='he'] {
+  --font-text: Frank Ruhl Libre, Georgia, serif;
+  --font-handwritten: Gveret Levin, cursive;
+  --handwritten-case: none;
+  --handwritten-spacing: normal;
 }
 /* The PR's styles were written on top of Tailwind's preflight reset (v4)
    and shadcn's base layer. This is the subset they depend on, kept so the
@@ -128,7 +197,7 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Alpina, Georgia, serif;
+  font-family: var(--font-text);
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
 }
@@ -424,12 +493,12 @@ figcaption {
   top: 3.4375rem;
   width: 15rem;
   color: #1c51e0;
-  font-family: Stefan, cursive;
+  font-family: var(--font-handwritten);
   font-size: 1.625rem;
   line-height: 1.1;
   text-align: center;
   transform: rotate(2deg);
-  text-transform: uppercase;
+  text-transform: var(--handwritten-case);
   letter-spacing: normal;
 }
 .sr-only {

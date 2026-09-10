@@ -158,8 +158,15 @@
   {% endfor %}
   <link rel="alternate" hreflang="x-default" href="{{ root }}">
   <link rel="icon" href="{{ root }}assets/favicon.png">
+  {% if lang == 'ru' %}
+  <link rel="preload" href="{{ root }}assets/fonts/Spectral-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="{{ root }}assets/fonts/Spectral-Light.ttf" as="font" type="font/ttf" crossorigin>
+  {% elif lang == 'he' %}
+  <link rel="preload" href="{{ root }}assets/fonts/FrankRuhlLibre-Variable.ttf" as="font" type="font/ttf" crossorigin>
+  {% else %}
   <link rel="preload" href="{{ root }}assets/fonts/GTAlpina-Regular.otf" as="font" type="font/otf" crossorigin>
   <link rel="preload" href="{{ root }}assets/fonts/GTAlpina-Light.otf" as="font" type="font/otf" crossorigin>
+  {% endif %}
   {# Same order as the PR's layout.tsx imports: the cascade depends on it. #}
   <link rel="stylesheet" href="{{ root }}css/base.css?v={{ v }}">
   <link rel="stylesheet" href="{{ root }}css/sections.css?v={{ v }}">

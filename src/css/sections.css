@@ -89,10 +89,10 @@
   gap: 3.5rem;
   margin: 3rem auto 0;
   padding: 0.75rem 0.5rem;
-  font-family: Stefan, cursive;
+  font-family: var(--font-handwritten);
   font-size: 0.9375rem;
   line-height: 1.35;
-  text-transform: uppercase;
+  text-transform: var(--handwritten-case);
   color: var(--fellowship-muted);
 }
 .questions span {
@@ -151,7 +151,7 @@
   padding: 0.5rem;
 }
 .location-options [role='option'] {
-  font-family: Alpina, Georgia, serif;
+  font-family: var(--font-text);
   font-size: 1.125rem;
   padding-block: 0.625rem;
 }
@@ -298,11 +298,11 @@
 }
 .results-note {
   margin-top: 0.75rem;
-  font-family: Stefan, cursive;
+  font-family: var(--font-handwritten);
   font-size: 0.8125rem;
   line-height: 1.35;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: var(--handwritten-spacing);
+  text-transform: var(--handwritten-case);
   color: var(--fellowship-muted);
 }
 .results-caveat {
@@ -623,7 +623,7 @@
   list-style: none;
   width: 100%;
   padding: 2.8125rem 3.25rem;
-  font-family: Alpina, Georgia, serif;
+  font-family: var(--font-text);
   font-size: 1.625rem;
   line-height: 2rem;
   font-weight: 300;
@@ -653,7 +653,7 @@
   transform: rotate(-90deg);
 }
 .faq-answer {
-  font-family: Alpina, Georgia, serif;
+  font-family: var(--font-text);
   font-size: 1.375rem;
   line-height: 1.3;
   color: #66685f;
@@ -754,13 +754,13 @@
   gap: 1.5rem;
 }
 .morim-dialog h2 {
-  font-family: Alpina, Georgia, serif;
+  font-family: var(--font-text);
   font-size: 2.5rem;
   line-height: 1;
   font-weight: 400;
 }
 .morim-dialog p {
-  font-family: Alpina, Georgia, serif;
+  font-family: var(--font-text);
   font-size: 1.375rem;
   line-height: 1.3;
 }
@@ -864,6 +864,9 @@
      glyph inside it; a step smaller keeps it inside the panel on phones. */
   .leaders h2.display {
     font-size: clamp(3rem, 12vw, 5rem);
+  }
+  html[lang='ru'] .leaders h2.display {
+    font-size: clamp(2.25rem, 11.5vw, 5rem);
   }
   .fellowship-intro {
     margin-top: 2.25rem;

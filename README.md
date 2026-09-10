@@ -47,6 +47,18 @@ ES modules do not load from `file://`, so use `--serve` or any static server.
 - After editing, run `uv run build.py` and commit the generated files along with `src/`.
   The build only ever touches `index.html`, `ru/`, `he/`, `css/`, `js/` and `assets/`.
 
+### Typography
+
+English uses Alpina with Stefan for handwritten accents. Russian uses Spectral
+with Caveat; Hebrew uses Frank Ruhl Libre with Gveret Levin. The Latin wordmark
+uses Alpina in every language. Font preloads follow the page language, and fonts
+are served locally from `src/assets/fonts/` (copied to `assets/fonts/`).
+
+Spectral and Frank Ruhl Libre come from the [Google Fonts repository](https://github.com/google/fonts/tree/main/ofl).
+Caveat comes from [googlefonts/caveat](https://github.com/googlefonts/caveat), and
+Gveret Levin from [AlefAlefAlef/gveret-levin](https://github.com/AlefAlefAlef/gveret-levin).
+Their SIL Open Font Licenses are included beside the font files.
+
 ### Tests
 
 ```sh
