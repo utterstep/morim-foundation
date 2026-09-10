@@ -4,7 +4,8 @@
   "meta": {
     "title": "Morim — קרן לצמיחת מורים",
     "description": "אנחנו עוזרים למורים לעצב את הדור הבא של הילדים באמצעות תרגול, מנטורינג ותוכניות מלגה.",
-    "og_title": "קרן Morim"
+    "og_title": "קרן Morim",
+    "locale": "he_IL"
   },
   "links": {
     "survey": "https://survey.morim.foundation/s/join-v1?src=landing&lang=he",

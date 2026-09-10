@@ -1,9 +1,10 @@
 {
   "_comment": "Source of truth for English copy. Values may contain inline HTML. Keys starting with an underscore are notes for editors and are ignored by the build and the parity test.",
   "meta": {
-    "title": "Morim — Foundation for Teachers Growth",
-    "description": "We help teachers shape the next generation of children through practice, mentorship, and fellowship programs.",
-    "og_title": "Morim Foundation"
+    "title": "Morim Foundation",
+    "description": "Programs for teachers and school coordinators: intensives, practice with children and real school cases, weekly mentoring, and a stipend for your time.",
+    "og_title": "Morim Foundation",
+    "locale": "en_US"
   },
   "links": {
     "survey": "https://survey.morim.foundation/s/join-v1?src=landing&lang=en",
@@ -93,7 +94,7 @@
     "pilot_landscape_alt": "Teachers in discussion at the foundation’s Tbilisi pilot",
     "pilot_portrait_alt": "Participants working on an activity during the Tbilisi pilot",
     "pilot_caption": "Our first pilot in Tbilisi, Georgia. July 2026",
-    "mission_intro_html": "The Foundation runs programs for teachers and coordinators, and equip them with <span class=\"mentor-highlight\">mentors<img src=\"{root}assets/imgRectangle70.svg\" alt=\"\" aria-hidden=\"true\"></span> and <span class=\"funding\">funding<span class=\"funding-underline\" aria-hidden=\"true\"></span></span>.<span class=\"stipend-note\">Yes, monthly stipend</span>",
+    "mission_intro_html": "The Foundation runs programs for teachers and coordinators, with <span class=\"mentor-highlight\">mentors<img src=\"{root}assets/imgRectangle70.svg\" alt=\"\" aria-hidden=\"true\"></span> and <span class=\"funding\">funding<span class=\"funding-underline\" aria-hidden=\"true\"></span></span> built in.<span class=\"stipend-note\">Yes, a monthly stipend</span>",
     "mission": [
       "More than half of every program is practice. Each starts with an intensive and moves quickly into practical work: teachers lead lessons with children, while coordinators bring real situations from their schools and work through them together. A mentor stays with the group throughout.",
       "We use approaches we trust and that have been well studied, such as inquiry-based learning, activity-based learning, and project work. We don’t have a new pedagogy to sell.",
@@ -111,7 +112,7 @@
       {
         "class": "craft",
         "title": "Specific teaching practices",
-        "body": "Intensives where we explore and try specific teaching practices.",
+        "body": "Intensives where we take practical teaching methods apart, try them, and see what happens.",
         "questions_aria": "Ordinary questions, hard ones",
         "questions": [
           "“how do you get a class’s attention without raising your voice?”",
@@ -136,7 +137,7 @@
     "eyebrow": "Morim Leaders",
     "title_html": "dear <span class=\"word\">c<span class=\"glyph school-oo\"><span class=\"sr-only\">oo</span><img src=\"{root}assets/imgVector1.svg\" alt=\"\" width=\"106\" height=\"60\"></span>rdinators,</span>",
     "intro": [
-      "Strong teachers need schools where they can do good work and want to stay. That’s why we work not only with teachers, but also with people who shape the teams around them.",
+      "Strong teachers need schools where they can do good work and want to stay. That’s why we work with teachers at more than one level: in their own classrooms and in the teams they help lead.",
       "Our first program for coordinators is being developed together with rakazim themselves. The first pilot is under way with a closed cohort."
     ],
     "benefits": [
@@ -150,7 +151,7 @@
       },
       {
         "title": "Making room for the work that matters",
-        "body": "How do you distribute the workload across the team and make time for everyone to grow?<br>The program also covers the practical systems and projects that keep a department running without letting coordination take over the time meant for teaching."
+        "body": "How do you distribute the workload across the team and still make time for professional growth — yours and your colleagues’?<br>The program also covers the practical systems and projects that keep a department running without letting coordination take over the time meant for teaching."
       }
     ]
   },
@@ -190,13 +191,13 @@
         "id": "school-coordination-pilot",
         "closed": true,
         "badge": "Pilot in progress · closed cohort",
-        "title_html": "Coordinating a School: Team, Systems, Projects"
+        "title_html": "Coordinating in a School: Team, Systems, Projects"
       },
       {
         "id": "school-coordination",
         "closed": false,
         "badge": "",
-        "title_html": "Coordinating a School: Team, Systems, Projects",
+        "title_html": "Coordinating in a School: Team, Systems, Projects",
         "where": "Zoom + monthly meetings in Tel&nbsp;Aviv",
         "when": "Starts in late January 2027"
       }
@@ -217,27 +218,28 @@
         },
         {
           "value_html": "8.8<span class=\"arrow\">→</span>9.5",
-          "label": "of 10 would recommend it, after the intensive and after practice"
+          "label": "average recommendation score, after the intensive → after practice"
         },
         {
           "value_html": "40<span class=\"arrow\">→</span>81<small>%</small>",
           "label": "of answers on the fundamentals at “I understand it and can use it”"
         },
         {
-          "value_html": "9<span class=\"arrow\">→</span>3",
-          "label": "teachers worried about adapting a lesson on the fly, of 15 and of 12"
+          "value_html": "60<span class=\"arrow\">→</span>25<small>%</small>",
+          "label": "worried about adapting when a lesson goes off plan"
         }
       ],
       "results": [
-        "Our first intensive in Tbilisi focused on inquiry-based education. We surveyed the teachers after the intensive and again after several weeks of teaching children with weekly mentoring.",
-        "The understanding scale starts at “I understand, with questions” and ends at “I can use it”. On the fundamentals, what an inquiry lesson is for, how it differs from a merely engaging one and what the teacher does, four in five answers are now at “I can use it”, up from two in five. On the craft, such as moderating without hinting and helping children through uncertainty, the share went from 15% to 27%, and every teacher now has at least one aspect there; after the intensive, half of them had none."
+        "Our first intensive in Tbilisi focused on inquiry-based education. We surveyed teachers after the intensive and again after several weeks of teaching children with weekly mentoring.",
+        "Practice made a visible difference. On the fundamentals — what an inquiry lesson is for, how it differs from a merely engaging one, and what the teacher does — the share of answers at “I understand and can use it” rose from 40% to 81%. Teachers also became much less worried about having to adapt when a lesson went off plan."
       ],
       "quote": "“I’ve become noticeably less inclined to steer children toward the right answer, and more attentive to how they reason.”",
       "quote_note": "One of the teachers · that’s the change we’re looking for",
       "results_after": [
-        "Ten of twelve will use these techniques in their own classrooms. Group dynamics is the one thing practice did not make easier, so we’re adding more practice and mentoring around it. Three-quarters of the children surveyed said they would like lessons like these at school."
+        "Not everything became easier. Group dynamics remained difficult, and we’re adding more practice and mentoring around it.",
+        "Ultimately, three-quarters of the children surveyed said they would like lessons like these at school."
       ],
-      "caveat": "Encouraging results, but from a small, unusually friendly setting, compared cohort to cohort. We’ll see how they hold up in regular classrooms.",
+      "caveat": "Encouraging results, but still from a small, unusually friendly setting, compared cohort to cohort. We’ll see how they hold up in regular classrooms.",
       "results_title": "The first pilot"
     },
     "note": {
@@ -270,7 +272,7 @@
     ],
     "note": {
       "title": "The team",
-      "body": "We bring together teacher-development specialists and practicing teachers. We’re also building a circle of experienced Israeli educators and researchers who can challenge our assumptions and help us understand the school system from the inside."
+      "body": "We bring together teacher-development specialists and practicing teachers. We’re also building a circle of experienced Israeli educators and researchers who can tell us when we’re wrong and help us understand the school system from the inside."
     }
   },
   "faq": {
@@ -286,7 +288,7 @@
       },
       {
         "q": "How is the program structured?",
-        "a": "We interleave theory and workshops with practice on real cases: organized practice with kids for teachers, real school cases for coordinators. And live sessions with mentors in small groups every week."
+        "a": "Theory and workshops are mixed with practice throughout. Teachers work with children; coordinators bring real situations from their schools. Both meet in small groups with a mentor every week."
       },
       {
         "q": "Do participants receive a stipend?",

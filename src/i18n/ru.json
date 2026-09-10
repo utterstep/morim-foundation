@@ -4,7 +4,8 @@
   "meta": {
     "title": "Morim — фонд развития учителей",
     "description": "Мы помогаем учителям формировать следующее поколение детей: практика, менторство и программы стипендий.",
-    "og_title": "Фонд Morim"
+    "og_title": "Фонд Morim",
+    "locale": "ru_RU"
   },
   "links": {
     "survey": "https://survey.morim.foundation/s/join-v1?src=landing&lang=ru",
