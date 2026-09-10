@@ -84,7 +84,7 @@
 }
 .questions {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--question-columns, 4), minmax(0, 1fr));
   align-items: start;
   gap: 3.5rem;
   margin: 3rem auto 0;
@@ -96,7 +96,7 @@
   color: var(--fellowship-muted);
 }
 .questions span {
-  width: min(100%, 14.375rem);
+  width: min(100%, var(--question-width, 14.375rem));
   justify-self: center;
   text-wrap: balance;
 }
@@ -299,7 +299,7 @@
 .results-note {
   margin-top: 0.75rem;
   font-family: var(--font-handwritten);
-  font-size: 0.8125rem;
+  font-size: var(--results-note-size, 0.8125rem);
   line-height: 1.35;
   letter-spacing: var(--handwritten-spacing);
   text-transform: var(--handwritten-case);

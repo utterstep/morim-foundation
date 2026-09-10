@@ -99,8 +99,11 @@
 html[lang='ru'] {
   --font-text: Spectral, Georgia, serif;
   --font-handwritten: Caveat, cursive;
-  --question-size: 1.375rem;
-  --question-size-mobile: 1.25rem;
+  --question-size: 2rem;
+  --question-size-mobile: 1.75rem;
+  --question-columns: 2;
+  --question-width: 25rem;
+  --results-note-size: 1.75rem;
   --handwritten-case: none;
   --handwritten-spacing: normal;
 }
