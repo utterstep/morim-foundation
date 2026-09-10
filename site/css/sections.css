@@ -74,7 +74,7 @@
   font-size: 1.625rem;
   line-height: 2rem;
   letter-spacing: -0.03em;
-  color: #a6bbb0;
+  color: var(--fellowship-muted);
 }
 .benefit + .benefit {
   margin-top: 5.9375rem;
@@ -93,7 +93,7 @@
   font-size: 0.9375rem;
   line-height: 1.35;
   text-transform: uppercase;
-  color: #98b5a6;
+  color: var(--fellowship-muted);
 }
 .questions span {
   width: min(100%, 14.375rem);
@@ -340,7 +340,7 @@
 }
 .program-row p > span {
   display: block;
-  color: #a6bbb0;
+  color: var(--fellowship-muted);
   margin-bottom: 0.3125rem;
 }
 .program-row .button,
