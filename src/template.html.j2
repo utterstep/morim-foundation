@@ -89,16 +89,16 @@
     </article>
     {% endfor %}
     {% set tb = t.programs.tbilisi %}
-    <article class="program-results-card" data-program="{{ tb.id }}" data-location="{{ tb.location }}" data-state="closed">
+    <article class="program-results-card" data-program="{{ tb.id }}" data-location="{{ tb.location }}" data-state="open">
       <div class="program-row program-results-summary">
         <h4 id="tbilisi-program-title">{{ tb.title_html }}</h4>
         {{ program_meta(tb.where, tb.when) }}
         <button type="button" class="button results-button"
-                aria-expanded="false" aria-controls="tbilisi-results"
+                aria-expanded="true" aria-controls="tbilisi-results"
                 data-label-open="{{ t.programs.collapse }}"
-                data-label-closed="{{ t.programs.see_results }}">{{ t.programs.see_results }}</button>
+                data-label-closed="{{ t.programs.see_results }}">{{ t.programs.collapse }}</button>
       </div>
-      <div id="tbilisi-results" class="program-results-content" role="region" aria-labelledby="tbilisi-program-title" hidden>
+      <div id="tbilisi-results" class="program-results-content" role="region" aria-labelledby="tbilisi-program-title">
         <div class="program-results-body">
           <figure class="program-results-photos" aria-label="{{ tb.photos_aria }}">
             <img class="results-landscape" src="{{ root }}assets/img2607180000709000081.png" alt="{{ tb.landscape_alt }}" width="511" height="339">

@@ -80,6 +80,6 @@ test('native widgets are in the markup', () => {
   assert.match(html, /<dialog class="morim-dialog" id="dialog-social"/);
   assert.match(html, /<dialog class="mobile-menu-panel" id="mobile-menu"/);
   assert.match(html, /role="listbox"/);
-  assert.match(html, /class="button results-button"\s+aria-expanded="false"/);
+  assert.match(html, /class="button results-button"\s+aria-expanded="true"/);
   assert.match(html, /<script type="module" src="js\/main.js\?v=[0-9a-f]{8}">/);
 });
