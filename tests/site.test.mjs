@@ -32,11 +32,30 @@ test('every page links to every language', () => {
   }
 });
 
-test('every local href/src in the pages resolves to a file', () => {
+// Search engines resolve these against the indexed origin, so a relative value
+// is silently dropped and the translations never get linked to each other.
+test('canonical and hreflang URLs are absolute', () => {
+  const paths = { en: '', ru: 'ru/', he: 'he/' };
+  for (const [lang, page] of Object.entries(pages)) {
+    const html = read(page);
+    assert.match(html, new RegExp(`<link rel="canonical" href="https://morim\\.foundation/${paths[lang]}">`), `${page} canonical`);
+    for (const [code, path] of Object.entries(paths)) {
+      const tag = `<link rel="alternate" hreflang="${code}" href="https://morim.foundation/${path}">`;
+      assert.ok(html.includes(tag), `${page} lacks ${tag}`);
+    }
+    assert.ok(html.includes('<link rel="alternate" hreflang="x-default" href="https://morim.foundation/">'), `${page} x-default`);
+  }
+});
+
+test('every local href/src/srcset in the pages resolves to a file', () => {
   for (const page of Object.values(pages)) {
     const html = read(page);
     const dir = dirname(join(site, page));
-    for (const [, url] of html.matchAll(/(?:href|src)="([^"#][^"]*)"/g)) {
+    const urls = [...html.matchAll(/(?:href|src)="([^"#][^"]*)"/g)].map(([, url]) => url);
+    for (const [, list] of html.matchAll(/srcset="([^"]*)"/g)) {
+      urls.push(...list.split(',').map((candidate) => candidate.trim().split(/\s+/)[0]));
+    }
+    for (const url of urls) {
       if (/^(https?:|mailto:|data:)/.test(url)) continue;
       const target = resolve(dir, url.split('?')[0]);
       const path = url.endsWith('/') ? join(target, 'index.html') : target;

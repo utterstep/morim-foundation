@@ -17,8 +17,12 @@ export function createBadge(target, flags) {
   let frame = 0;
   let previous = 0;
 
+  // The count is drawn from `data-count` by CSS rather than being a text node.
+  // The badge sits inside the dismiss button, whose accessible name names the
+  // app ("Dismiss Messages and show the next app"); a bare "99+" in the DOM
+  // reads as that button's visible label and contradicts it (WCAG 2.5.3).
   const show = (text) => {
-    el.textContent = text;
+    el.dataset.count = text;
     el.dataset.complete = String(text === '99+');
   };
   const stop = () => {

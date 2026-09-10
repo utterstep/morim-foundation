@@ -37,6 +37,15 @@
 <a class="{{ class }}" href="{{ t.links.survey }}">{{ label or t.programs.apply }}</a>
 {%- endmacro %}
 
+{# The workshop scans, in the two densities the assets ship in (see README,
+   "Photographs"). `width`/`height` are the layout box, not the file: the CSS
+   crops with object-fit, so they stay put whatever the file's own size is. #}
+{% macro photo(class, stem, alt, width, height) -%}
+<img class="{{ class }}" src="{{ root }}assets/{{ stem }}.webp"
+     srcset="{{ root }}assets/{{ stem }}.webp 1x, {{ root }}assets/{{ stem }}@2x.webp 2x"
+     alt="{{ alt }}" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async">
+{%- endmacro %}
+
 {% macro program_meta(where, when) -%}
 <p><span>{{ t.programs.where }}</span>{{ where }}</p>
 <p><span>{{ t.programs.when }}</span>{{ when }}</p>
@@ -48,10 +57,13 @@
   <div class="program-heading">
     <h3>{{ t.programs.heading }}</h3>
     <div class="location-select-wrap">
+      {# The purpose is spoken first, then the current value, rather than an
+         aria-label that replaces the value: a name that drops the visible text
+         leaves voice-control users with nothing to say (WCAG 2.5.3). #}
       <button type="button" class="location-select" id="{{ audience }}-location"
               aria-haspopup="listbox" aria-expanded="false"
-              aria-controls="{{ audience }}-location-list"
-              aria-label="{{ t.programs.filter_aria }}">
+              aria-controls="{{ audience }}-location-list">
+        <span class="sr-only">{{ t.programs.filter_aria }}</span>
         <span data-value-label>{{ locations[0].label }}</span>
         <svg class="location-select-chevron" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
       </button>
@@ -101,8 +113,8 @@
       <div id="tbilisi-results" class="program-results-content" role="region" aria-labelledby="tbilisi-program-title">
         <div class="program-results-body">
           <figure class="program-results-photos" aria-label="{{ tb.photos_aria }}">
-            <img class="results-landscape" src="{{ root }}assets/img2607180000709000081.png" alt="{{ tb.landscape_alt }}" width="511" height="339">
-            <img class="results-portrait" src="{{ root }}assets/img2607180000709000022.png" alt="{{ tb.portrait_alt }}" width="317" height="412">
+            {{ photo('results-landscape', 'photo-landscape', tb.landscape_alt, 511, 339) }}
+            {{ photo('results-portrait', 'photo-portrait', tb.portrait_alt, 317, 412) }}
           </figure>
           <div class="program-results-copy">
             <h5 class="program-results-title">{{ tb.results_title }}</h5>
@@ -153,10 +165,12 @@
   <meta property="og:locale" content="{{ t.meta.locale }}">
   <meta name="twitter:card" content="summary">
   <meta name="theme-color" content="#f4f3f0">
+  <link rel="canonical" href="{{ canonical }}">
+  {# Absolute by necessity: a relative hreflang is ignored outright. #}
   {% for l in langs %}
-  <link rel="alternate" hreflang="{{ l.code }}" href="{{ l.href }}">
+  <link rel="alternate" hreflang="{{ l.code }}" href="{{ l.url }}">
   {% endfor %}
-  <link rel="alternate" hreflang="x-default" href="{{ root }}">
+  <link rel="alternate" hreflang="x-default" href="{{ site }}">
   <link rel="icon" href="{{ root }}assets/favicon.png">
   {% if lang == 'ru' %}
   <link rel="preload" href="{{ root }}assets/fonts/Spectral-Regular.ttf" as="font" type="font/ttf" crossorigin>
@@ -216,8 +230,8 @@
     </div>
     <figure class="pilot" id="pilot">
       <div class="photo-stack">
-        <img class="pilot-landscape" src="{{ root }}assets/img2607180000709000081.png" alt="{{ t.approach.pilot_landscape_alt }}" width="511" height="339">
-        <img class="pilot-portrait" src="{{ root }}assets/img2607180000709000022.png" alt="{{ t.approach.pilot_portrait_alt }}" width="317" height="412">
+        {{ photo('pilot-landscape', 'photo-landscape', t.approach.pilot_landscape_alt, 511, 339) }}
+        {{ photo('pilot-portrait', 'photo-portrait', t.approach.pilot_portrait_alt, 317, 412) }}
       </div>
       <figcaption>{{ t.approach.pilot_caption }}</figcaption>
     </figure>

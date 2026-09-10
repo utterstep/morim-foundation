@@ -11,37 +11,37 @@
 export const heroApps = [
   {
     name: 'ChatGPT',
-    src: new URL('../../assets/hero-app-chatgpt.png', import.meta.url).href,
+    src: new URL('../../assets/hero-app-chatgpt.webp', import.meta.url).href,
     notifications: 2,
   },
   {
     name: 'Messages',
-    src: new URL('../../assets/hero-app-messages.png', import.meta.url).href,
+    src: new URL('../../assets/hero-app-messages.webp', import.meta.url).href,
     notifications: '99+',
   },
   {
     name: 'Instagram',
-    src: new URL('../../assets/hero-app-instagram.png', import.meta.url).href,
+    src: new URL('../../assets/hero-app-instagram.webp', import.meta.url).href,
     notifications: 12,
   },
   {
     name: 'TikTok',
-    src: new URL('../../assets/hero-app-tiktok.png', import.meta.url).href,
+    src: new URL('../../assets/hero-app-tiktok.webp', import.meta.url).href,
     notifications: 8,
   },
   {
     name: 'Twitch',
-    src: new URL('../../assets/hero-app-twitch.png', import.meta.url).href,
+    src: new URL('../../assets/hero-app-twitch.webp', import.meta.url).href,
     notifications: 3,
   },
   {
     name: 'Fortnite',
-    src: new URL('../../assets/hero-app-fortnite.png', import.meta.url).href,
+    src: new URL('../../assets/hero-app-fortnite.webp', import.meta.url).href,
     notifications: 1,
   },
   {
     name: 'YouTube',
-    src: new URL('../../assets/hero-app-youtube.png', import.meta.url).href,
+    src: new URL('../../assets/hero-app-youtube.webp', import.meta.url).href,
     notifications: 5,
   },
 ];

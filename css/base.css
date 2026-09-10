@@ -412,6 +412,10 @@ main {
   text-align: center;
   font-variant-numeric: tabular-nums;
 }
+/* Generated content, so the digits never read as the dismiss button's label. */
+.hero-notification::after {
+  content: attr(data-count);
+}
 .prose {
   width: min(41.875rem, 90%);
   margin: auto;

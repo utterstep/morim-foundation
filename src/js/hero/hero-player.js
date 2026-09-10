@@ -6,6 +6,34 @@
 import { heroVideoEmbed } from '../lib/hero-videos.js';
 import { startHeroVideoAutoplay } from '../lib/hero-video-autoplay.js';
 
+// The embeds are the heaviest thing on the page by a wide margin: a couple of
+// megabytes of provider script plus their own webfonts, none of which the hero
+// needs in order to paint. Hold every iframe until the page has loaded and the
+// main thread goes idle, so the collage renders from its own assets first and
+// the players arrive behind it. The shells keep their aspect ratio either way,
+// so nothing moves when they do.
+//
+// EMBED_DEADLINE_MS bounds the wait: on a slow connection `load` can be many
+// seconds out, and a hero of empty video cards is worse than a late webfont.
+const EMBED_DEADLINE_MS = 2500;
+const waiting = new Set();
+let embedsReady = false;
+
+function releaseEmbeds() {
+  if (embedsReady) return;
+  embedsReady = true;
+  for (const render of waiting) render();
+  waiting.clear();
+}
+
+if (typeof window !== 'undefined') {
+  const idle = window.requestIdleCallback?.bind(window) ?? ((fn) => setTimeout(fn, 200));
+  const afterLoad = () => idle(releaseEmbeds, { timeout: 1000 });
+  if (document.readyState === 'complete') afterLoad();
+  else window.addEventListener('load', afterLoad, { once: true });
+  setTimeout(releaseEmbeds, EMBED_DEADLINE_MS);
+}
+
 /**
  * @param {HTMLElement} shell  the `.hero-video-player` span, already in the DOM
  * @param {import('../lib/hero-videos.js').HeroVideo} video
@@ -87,7 +115,7 @@ export function createPlayer(shell, video, { interactive, unavailableText }) {
     const desired = state.desired;
     if (!desired) return;
     // Unmount remote players as soon as the page is hidden or scrolled away.
-    const mounted = desired.active && (video.provider !== 'twitch' || state.twitchVisible);
+    const mounted = desired.active && embedsReady && (video.provider !== 'twitch' || state.twitchVisible);
     const key = `${mounted}:${desired.autoplay}`;
     if (key !== state.key) {
       state.key = key;
@@ -103,9 +131,11 @@ export function createPlayer(shell, video, { interactive, unavailableText }) {
   return {
     sync(desired) {
       state.desired = desired;
+      if (!embedsReady) waiting.add(render);
       render();
     },
     destroy() {
+      waiting.delete(render);
       resize.disconnect();
       visibility?.disconnect();
       unmount();

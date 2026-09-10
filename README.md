@@ -54,6 +54,19 @@ with Caveat; Hebrew uses Frank Ruhl Libre with Gveret Levin. The Latin wordmark
 uses Alpina in every language. Font preloads follow the page language, and fonts
 are served locally from `src/assets/fonts/` (copied to `assets/fonts/`).
 
+### Photographs
+
+`assets/photo-landscape.webp` and `assets/photo-portrait.webp` are the two workshop
+scans, used in both the Tbilisi results and the pilot photo stack. They ship at the
+size they render (720px and 500px wide) with an `@2x` companion for dense screens;
+the `photo()` macro in the template emits the pair as a `srcset`. The app icons in
+the hero are 256px WebP for the same reason.
+
+The full-resolution scans they came from are in git history, before the commit that
+converted them — `src/assets/` is copied verbatim into the published site, so nothing
+larger than what a browser actually paints belongs there. Re-crop from history and
+re-export at the same widths if the layout changes.
+
 Spectral and Frank Ruhl Libre come from the [Google Fonts repository](https://github.com/google/fonts/tree/main/ofl).
 Caveat comes from [googlefonts/caveat](https://github.com/googlefonts/caveat), and
 Gveret Levin from [AlefAlefAlef/gveret-levin](https://github.com/AlefAlefAlef/gveret-levin).

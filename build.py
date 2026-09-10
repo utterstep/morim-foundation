@@ -36,6 +36,11 @@ SRC = ROOT / "src"
 OUT = ROOT
 STATIC_DIRS = ("css", "js", "assets")
 
+# `rel=canonical` and `rel=alternate hreflang` are the two places a URL cannot be
+# relative: search engines resolve them against the indexed origin, not the page.
+# Everything else on the page stays relative so a preview still works anywhere.
+SITE = "https://morim.foundation/"
+
 # Order matters: it is the order of the language switcher.
 LANGS = {
     "en": {"dir": "ltr", "path": "", "name": "English"},
@@ -98,8 +103,16 @@ def render(out: Path) -> None:
             dir=meta["dir"],
             root=root,
             v=version,
+            site=SITE,
+            canonical=SITE + meta["path"],
             langs=[
-                {"code": code, "name": m["name"], "href": root + m["path"], "current": code == lang}
+                {
+                    "code": code,
+                    "name": m["name"],
+                    "href": root + m["path"],
+                    "url": SITE + m["path"],
+                    "current": code == lang,
+                }
                 for code, m in LANGS.items()
             ],
         )
