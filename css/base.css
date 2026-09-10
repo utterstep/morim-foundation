@@ -79,6 +79,8 @@
 :root {
   --font-text: Alpina, Georgia, serif;
   --font-handwritten: Stefan, cursive;
+  --question-size: 1.03125rem;
+  --question-size-mobile: 0.9625rem;
   --handwritten-case: uppercase;
   --handwritten-spacing: 0.06em;
   --background: #fff;
@@ -97,12 +99,16 @@
 html[lang='ru'] {
   --font-text: Spectral, Georgia, serif;
   --font-handwritten: Caveat, cursive;
+  --question-size: 1.375rem;
+  --question-size-mobile: 1.25rem;
   --handwritten-case: none;
   --handwritten-spacing: normal;
 }
 html[lang='he'] {
   --font-text: Frank Ruhl Libre, Georgia, serif;
   --font-handwritten: Gveret Levin, cursive;
+  --question-size: 1.171875rem;
+  --question-size-mobile: 1.09375rem;
   --handwritten-case: none;
   --handwritten-spacing: normal;
 }

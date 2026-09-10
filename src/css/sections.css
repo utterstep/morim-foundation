@@ -90,7 +90,7 @@
   margin: 3rem auto 0;
   padding: 0.75rem 0.5rem;
   font-family: var(--font-handwritten);
-  font-size: 0.9375rem;
+  font-size: var(--question-size, 0.9375rem);
   line-height: 1.35;
   text-transform: var(--handwritten-case);
   color: var(--fellowship-muted);
@@ -891,7 +891,7 @@
   }
   .questions span {
     width: min(80%, 15.625rem);
-    font-size: 0.875rem;
+    font-size: var(--question-size-mobile, 0.875rem);
   }
   .questions span:first-child {
     justify-self: start;
