@@ -1,6 +1,7 @@
 // DOM builders for the hero collage, ported from the JSX in PR #3
 // website/app/hero.tsx (`AppItem`, lines 588-770). No state lives here.
 
+import { heroAppSizes } from '../lib/hero-apps.js';
 import { describeFloater, floaterLabel, floaterStyle, formatTemplate } from './hero-state.js';
 
 /**
@@ -102,6 +103,8 @@ export function buildFace(item, strings) {
     const mask = document.createElement('span');
     mask.className = 'hero-app-icon-mask';
     const img = document.createElement('img');
+    img.srcset = app.srcset;
+    img.sizes = heroAppSizes;
     img.src = app.src;
     img.alt = '';
     img.width = 73;

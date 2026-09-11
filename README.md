@@ -56,16 +56,34 @@ are served locally from `src/assets/fonts/` (copied to `assets/fonts/`).
 
 ### Photographs
 
-`assets/photo-landscape.webp` and `assets/photo-portrait.webp` are the two workshop
-scans, used in both the Tbilisi results and the pilot photo stack. They ship at the
-size they render (720px and 500px wide) with an `@2x` companion for dense screens;
-the `photo()` macro in the template emits the pair as a `srcset`. The app icons in
-the hero are 256px WebP for the same reason.
+`assets/photo-landscape-*.webp` and `assets/photo-portrait-*.webp` are the two
+workshop scans, used in both the Tbilisi results and the pilot photo stack. Each
+ships as a ladder of widths; the `photo()` macro emits them as a `srcset` of width
+descriptors with a `sizes` value per placement, and the hero app icons do the same
+through `icon()` in `src/js/lib/hero-apps.js`.
 
-The full-resolution scans they came from are in git history, before the commit that
-converted them — `src/assets/` is copied verbatim into the published site, so nothing
-larger than what a browser actually paints belongs there. Re-crop from history and
-re-export at the same widths if the layout changes.
+Width descriptors rather than `1x`/`2x` because above 701px the desktop layout is
+pure `vw` — `base.css` sets `html { font-size: calc(100vw / 90) }`, so every rem
+dimension grows with the viewport and the boxes never settle at a fixed size. A
+photo that is 700 CSS px wide at 1920 is 1400 at 3840, which a density descriptor
+cannot express: it would send the 1x file to a 4K panel and the 2x file to a phone.
+Measured in Chromium across 360–3840px, the boxes settle at:
+
+| | phone (<=700px) | desktop |
+|---|---|---|
+| pilot landscape / portrait | 58vw / 38vw | 37vw / 26vw |
+| results landscape / portrait | 50vw / 36vw | 26vw / 19vw |
+| hero app icon | ~14vw | ~6.4vw |
+
+If those percentages change, re-measure and update the `sizes` strings — they are
+promises to the browser, and a wrong one is worse than none.
+
+The ladders stop at the resolution the artwork actually has, so nothing is upscaled.
+Two of the app icons are small at source (Messages 250px, Fortnite 258px) and will
+be soft on a 2x display above about 2200px wide; they need new artwork, not a new
+export. The full-resolution scans are in git history, before the commit that
+converted them — `src/assets/` is copied verbatim into the published site, so
+nothing larger than what a browser paints belongs there.
 
 Spectral and Frank Ruhl Libre come from the [Google Fonts repository](https://github.com/google/fonts/tree/main/ofl).
 Caveat comes from [googlefonts/caveat](https://github.com/googlefonts/caveat), and

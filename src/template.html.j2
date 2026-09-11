@@ -37,14 +37,27 @@
 <a class="{{ class }}" href="{{ t.links.survey }}">{{ label or t.programs.apply }}</a>
 {%- endmacro %}
 
-{# The workshop scans, in the two densities the assets ship in (see README,
-   "Photographs"). `width`/`height` are the layout box, not the file: the CSS
-   crops with object-fit, so they stay put whatever the file's own size is. #}
-{% macro photo(class, stem, alt, width, height) -%}
-<img class="{{ class }}" src="{{ root }}assets/{{ stem }}.webp"
-     srcset="{{ root }}assets/{{ stem }}.webp 1x, {{ root }}assets/{{ stem }}@2x.webp 2x"
+{# The workshop scans (see README, "Photographs").
+
+   `sizes` is not decoration here: above 701px the desktop layout is pure vw
+   (base.css sets html{font-size:calc(100vw/90)}), so these boxes keep growing
+   with the viewport and never settle at a fixed pixel size. Width descriptors
+   let the browser weigh the box against the screen's pixel ratio; `2x`-style
+   density descriptors cannot, and would go soft on a 4K panel.
+
+   `width`/`height` are the layout box, not the file: the CSS crops with
+   object-fit, so they stay put whatever candidate is chosen. #}
+{% macro photo(class, stem, widths, sizes, alt, width, height) -%}
+<img class="{{ class }}" src="{{ root }}assets/{{ stem }}-{{ widths[1] }}.webp"
+     srcset="{% for w in widths %}{{ root }}assets/{{ stem }}-{{ w }}.webp {{ w }}w{{ ", " if not loop.last }}{% endfor %}"
+     sizes="{{ sizes }}"
      alt="{{ alt }}" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async">
 {%- endmacro %}
+
+{# Measured in Chromium across 360-3840px: the mobile stop, then the vw the
+   box settles at on desktop, rounded up so a candidate is never too small. #}
+{% set landscape_widths = [480, 720, 1080, 1440, 2048] %}
+{% set portrait_widths = [360, 500, 760, 1024, 1536] %}
 
 {% macro program_meta(where, when) -%}
 <p><span>{{ t.programs.where }}</span>{{ where }}</p>
@@ -113,8 +126,8 @@
       <div id="tbilisi-results" class="program-results-content" role="region" aria-labelledby="tbilisi-program-title">
         <div class="program-results-body">
           <figure class="program-results-photos" aria-label="{{ tb.photos_aria }}">
-            {{ photo('results-landscape', 'photo-landscape', tb.landscape_alt, 511, 339) }}
-            {{ photo('results-portrait', 'photo-portrait', tb.portrait_alt, 317, 412) }}
+            {{ photo('results-landscape', 'photo-landscape', landscape_widths, '(max-width: 700px) 50vw, 26vw', tb.landscape_alt, 511, 339) }}
+            {{ photo('results-portrait', 'photo-portrait', portrait_widths, '(max-width: 700px) 36vw, 19vw', tb.portrait_alt, 317, 412) }}
           </figure>
           <div class="program-results-copy">
             <h5 class="program-results-title">{{ tb.results_title }}</h5>
@@ -230,8 +243,8 @@
     </div>
     <figure class="pilot" id="pilot">
       <div class="photo-stack">
-        {{ photo('pilot-landscape', 'photo-landscape', t.approach.pilot_landscape_alt, 511, 339) }}
-        {{ photo('pilot-portrait', 'photo-portrait', t.approach.pilot_portrait_alt, 317, 412) }}
+        {{ photo('pilot-landscape', 'photo-landscape', landscape_widths, '(max-width: 700px) 58vw, 37vw', t.approach.pilot_landscape_alt, 511, 339) }}
+        {{ photo('pilot-portrait', 'photo-portrait', portrait_widths, '(max-width: 700px) 38vw, 26vw', t.approach.pilot_portrait_alt, 317, 412) }}
       </div>
       <figcaption>{{ t.approach.pilot_caption }}</figcaption>
     </figure>
