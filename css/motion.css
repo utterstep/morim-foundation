@@ -33,7 +33,8 @@
   display: flow-root;
 }
 .approach,
-.what-we-do {
+.what-we-do,
+.partners {
   display: flow-root;
   background: var(--background);
 }

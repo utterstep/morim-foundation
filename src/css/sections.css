@@ -369,14 +369,6 @@
   width: 0.72em;
   height: 0.64em;
 }
-.program-note {
-  font-size: 1.25rem;
-  line-height: 1.5rem;
-  text-align: center;
-  color: var(--fellowship-muted);
-  letter-spacing: -0.03em;
-  margin-top: 4.5rem;
-}
 .inline-button {
   display: inline;
   padding: 0;
@@ -524,6 +516,73 @@
     margin-top: 3rem;
   }
 }
+/* "For schools and partners": plain on paper after the two panels. Heading,
+   lead, three partner shapes set like the What-we-do beats, the pilot as
+   proof, then the form button with the email beside it. */
+.partners {
+  padding: 7rem 5% 2rem;
+  text-align: center;
+  background: var(--background);
+}
+.partners .display {
+  font-size: 5.5rem;
+  margin-top: 0;
+}
+.partners-lead {
+  margin-top: 3.25rem;
+}
+.partners-types {
+  margin-top: 4.5rem;
+}
+.partners-proof {
+  width: min(41.875rem, 90%);
+  margin: 4rem auto 0;
+  font-size: 1.3125rem;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+.partners-proof a,
+.partners-email {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+.partners-action {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem 1.75rem;
+  margin-top: 2rem;
+}
+.partners-action .button {
+  min-height: 3.5rem;
+  padding: 1.125rem 1.75rem;
+  border-radius: 2rem;
+  font-size: 1.25rem;
+}
+.partners-email {
+  font-size: 1.125rem;
+  letter-spacing: -0.03em;
+}
+@media (max-width: 700px) {
+  .partners {
+    padding: 4.5rem 5% 1rem;
+  }
+  .partners .display {
+    font-size: clamp(2.5rem, 10.5vw, 4rem);
+  }
+  .partners-lead {
+    margin-top: 2.25rem;
+  }
+  .partners-types {
+    margin-top: 3rem;
+  }
+  .partners-proof {
+    margin-top: 3rem;
+    font-size: 1.25rem;
+  }
+}
 .leaders {
   background: var(--leaders-bg);
   color: var(--leaders-ink);
@@ -600,7 +659,6 @@
   text-wrap: balance;
 }
 .leaders .program-row p > span,
-.leaders .program-note,
 .leaders .muted {
   color: var(--leaders-muted);
 }
@@ -1079,11 +1137,6 @@
   }
   .button.apply-button {
     min-height: 3rem;
-  }
-  .program-note {
-    font-size: 1.1rem;
-    line-height: 1.5rem;
-    margin-top: 2.25rem;
   }
   .leaders {
     padding: 4.0625rem 1.375rem 4.6875rem;

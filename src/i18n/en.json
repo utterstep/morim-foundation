@@ -8,7 +8,8 @@
   },
   "links": {
     "survey": "https://survey.morim.foundation/s/join-v1?src=landing&lang=en",
-    "email": "mailto:contact@morim.foundation"
+    "email": "mailto:contact@morim.foundation",
+    "partners": "https://survey.morim.foundation/s/join-v1?src=partners&lang=en"
   },
   "switcher": {
     "label": "Language",
@@ -31,6 +32,10 @@
     {
       "id": "leaders",
       "label": "Leaders"
+    },
+    {
+      "id": "partners",
+      "label": "For partners"
     },
     {
       "id": "team",
@@ -60,6 +65,10 @@
       ]
     },
     {
+      "id": "partners",
+      "label": "For partners"
+    },
+    {
       "id": "team",
       "label": "Team"
     },
@@ -80,6 +89,10 @@
     {
       "id": "leaders",
       "label": "Leaders"
+    },
+    {
+      "id": "partners",
+      "label": "For partners"
     },
     {
       "id": "team",
@@ -147,7 +160,7 @@
       "aria": "Where to start",
       "teachers": "For teachers",
       "coordinators": "For coordinators",
-      "schools": "Schools and municipalities"
+      "schools": "For schools and partners"
     }
   },
   "fellowship": {
@@ -291,12 +304,29 @@
       "caveat": "Encouraging results, but still from a small group in an unusually friendly setting. We’ll see how they hold up in regular classrooms.",
       "results_title": "The first pilot"
     },
-    "note": {
-      "title": "Interested in bringing a program to your school or municipality?",
-      "body": "Tell us a little about your school and what you need. We’re looking for participants and places to practice, not just funding.",
-      "link": "Let’s talk"
-    },
     "join": "Join"
+  },
+  "partners": {
+    "title": "For schools and partners",
+    "lead": "We run our programs with partners: schools that host an extracurricular, organisations that already work with children, and municipalities that want the programs for their own teachers. We are looking for places to practice and people to practice with, not funding.",
+    "types": [
+      {
+        "title": "Schools",
+        "body": "A fellow runs an after-hours club with your children during the practice weeks. You give a room, a group, and a contact person; we bring the program, the mentor, and the stipend."
+      },
+      {
+        "title": "Organisations that work with children",
+        "body": "After-school programs, camps, and youth centres can host practice weeks and gain a trained teacher for a season."
+      },
+      {
+        "title": "Municipalities and networks",
+        "body": "Bring the programs to your own teachers and coordinators, cohort by cohort, with practice in your schools."
+      }
+    ],
+    "proof_before": "Our first pilot ran in Tbilisi in summer 2026: ",
+    "proof_link": "see what changed for the teachers and the children",
+    "proof_after": ".",
+    "cta": "Tell us about your school or organisation"
   },
   "team": {
     "eyebrow": "People behind Morim",
@@ -345,7 +375,7 @@
       },
       {
         "q": "Can a school or municipality work with Morim?",
-        "a": "Yes. We’re interested in working with schools, networks, and municipalities that want to bring our programs to their teachers or coordinators. We’re also looking for experienced educators who can help us build the programs."
+        "a": "Yes. We’re interested in working with schools, networks, and municipalities that want to bring our programs to their teachers or coordinators. We’re also looking for experienced educators who can help us build the programs. <a href=\"#partners\">Read about partnering with us.</a>"
       }
     ]
   },

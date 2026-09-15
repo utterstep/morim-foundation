@@ -171,14 +171,6 @@
     </article>
     {% endif %}
   </div>
-  {% if audience == 'leaders' %}
-  <p class="program-note" id="schools">
-    {{ t.programs.note.title }}
-    <br>
-    {{ t.programs.note.body }}
-    <a class="inline-button" href="{{ t.links.survey }}">{{ t.programs.note.link }}</a>
-  </p>
-  {% endif %}
 </div>
 {%- endmacro %}
 <!DOCTYPE html>
@@ -296,7 +288,7 @@
     <nav class="wwd-routes" aria-label="{{ t.what_we_do.routes.aria }}">
       <a href="#program-{{ t.programs.teachers[0].id }}">{{ t.what_we_do.routes.teachers }}</a>
       <a href="#program-{{ (t.programs.leaders | rejectattr('closed') | first).id }}">{{ t.what_we_do.routes.coordinators }}</a>
-      <a href="#schools">{{ t.what_we_do.routes.schools }}</a>
+      <a href="#partners">{{ t.what_we_do.routes.schools }}</a>
     </nav>
   </section>
 
@@ -352,6 +344,28 @@
       </div>
     </section>
   </div>
+
+  {# Schools, organisations with children, municipalities: what a partnership
+     is, the three shapes it takes, the pilot as proof, and how to start. #}
+  <section class="partners" id="partners" aria-labelledby="partners-title">
+    <h2 class="display" id="partners-title">{{ t.partners.title }}</h2>
+    <div class="prose partners-lead">
+      <p>{{ t.partners.lead }}</p>
+    </div>
+    <div class="wwd-beats partners-types">
+      {% for b in t.partners.types %}
+      <article class="wwd-beat">
+        <h3>{{ b.title }}</h3>
+        <p>{{ b.body }}</p>
+      </article>
+      {% endfor %}
+    </div>
+    <p class="partners-proof">{{ t.partners.proof_before }}<a href="#program-tbilisi">{{ t.partners.proof_link }}</a>{{ t.partners.proof_after }}</p>
+    <div class="partners-action">
+      <a class="button" href="{{ t.links.partners }}">{{ t.partners.cta }}</a>
+      <a class="partners-email" href="{{ t.links.email }}">{{ t.footer.email }}</a>
+    </div>
+  </section>
 
   <section class="team" id="team" aria-labelledby="team-title">
     <p class="eyebrow">{{ t.team.eyebrow }}</p>
