@@ -41,6 +41,33 @@
       "label": "FAQ"
     }
   ],
+  "header_nav": [
+    {
+      "id": "approach",
+      "label": "Approach"
+    },
+    {
+      "label": "Programs",
+      "items": [
+        {
+          "id": "fellowship",
+          "label": "Fellowship"
+        },
+        {
+          "id": "leaders",
+          "label": "Leaders"
+        }
+      ]
+    },
+    {
+      "id": "team",
+      "label": "Team"
+    },
+    {
+      "id": "faq",
+      "label": "FAQ"
+    }
+  ],
   "mobile_nav": [
     {
       "id": "approach",

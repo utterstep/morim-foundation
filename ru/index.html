@@ -4,6 +4,8 @@
 
 
 
+
+
 <!DOCTYPE html>
 <html lang="ru" dir="ltr">
 <head>
@@ -26,13 +28,13 @@
   <link rel="icon" href="../assets/favicon.png">
   <link rel="preload" href="../assets/fonts/Spectral-Regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="../assets/fonts/Spectral-Light.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="../css/base.css?v=a2ce8695">
-  <link rel="stylesheet" href="../css/sections.css?v=a2ce8695">
-  <link rel="stylesheet" href="../css/motion.css?v=a2ce8695">
-  <link rel="stylesheet" href="../css/mobile.css?v=a2ce8695">
-  <link rel="stylesheet" href="../css/header.css?v=a2ce8695">
-  <link rel="stylesheet" href="../css/hero.css?v=a2ce8695">
-  <link rel="stylesheet" href="../css/widgets.css?v=a2ce8695">
+  <link rel="stylesheet" href="../css/base.css?v=7c2b911c">
+  <link rel="stylesheet" href="../css/sections.css?v=7c2b911c">
+  <link rel="stylesheet" href="../css/motion.css?v=7c2b911c">
+  <link rel="stylesheet" href="../css/mobile.css?v=7c2b911c">
+  <link rel="stylesheet" href="../css/header.css?v=7c2b911c">
+  <link rel="stylesheet" href="../css/hero.css?v=7c2b911c">
+  <link rel="stylesheet" href="../css/widgets.css?v=7c2b911c">
 </head>
 <body>
 <main id="top" data-hero-variant="original" data-lang="ru">
@@ -42,19 +44,30 @@
       <a class="logo" href="#top" aria-label="Фонд Morim — на главную">morim foundation</a>
       <nav aria-label="Основная навигация">
         <a href="#approach">Подход</a>
-        <a href="#fellowship">Учителям</a>
-        <a href="#leaders">Координаторам</a>
+        <div class="nav-menu ">
+  <button type="button" class="nav-menu-button" aria-haspopup="true" aria-expanded="false"
+          aria-controls="programs-menu-list">
+    <span>Программы</span>
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+  </button>
+  <ul id="programs-menu-list" class="nav-menu-list" hidden>
+    <li><a href="#fellowship">Учителям</a></li>
+<li><a href="#leaders">Координаторам</a></li>
+
+  </ul>
+</div>
         <a href="#team">Команда</a>
         <a href="#faq">Вопросы</a>
-        <div class="lang-menu">
-  <button type="button" class="lang-menu-button" aria-haspopup="true" aria-expanded="false"
+        <div class="nav-menu lang-menu">
+  <button type="button" class="nav-menu-button" aria-haspopup="true" aria-expanded="false"
           aria-controls="lang-menu-list">
     <span>Другие языки</span>
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
   </button>
-  <ul id="lang-menu-list" class="lang-menu-list" hidden>
+  <ul id="lang-menu-list" class="nav-menu-list" hidden>
     <li><a href="../" hreflang="en" lang="en">English</a></li>
-    <li><a href="../he/" hreflang="he" lang="he">עברית</a></li>
+<li><a href="../he/" hreflang="he" lang="he">עברית</a></li>
+
   </ul>
 </div>
       </nav>
@@ -442,6 +455,6 @@
 </nav>
 </dialog>
 
-<script type="module" src="../js/main.js?v=a2ce8695"></script>
+<script type="module" src="../js/main.js?v=7c2b911c"></script>
 </body>
 </html>

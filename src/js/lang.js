@@ -20,7 +20,7 @@ export function legacyLanguageRedirect(search, available) {
  */
 export function startLanguage(main) {
   const current = main.dataset.lang ?? 'en';
-  const switchers = Array.from(document.querySelectorAll('.lang-switcher a, .lang-menu-list a'));
+  const switchers = Array.from(document.querySelectorAll('.lang-switcher a, .lang-menu .nav-menu-list a'));
   const others = switchers.map((a) => a.getAttribute('hreflang')).filter((code) => code && code !== current);
 
   if (current === 'en') {

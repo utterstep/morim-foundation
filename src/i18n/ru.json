@@ -42,6 +42,33 @@
       "label": "Вопросы"
     }
   ],
+  "header_nav": [
+    {
+      "id": "approach",
+      "label": "Подход"
+    },
+    {
+      "label": "Программы",
+      "items": [
+        {
+          "id": "fellowship",
+          "label": "Учителям"
+        },
+        {
+          "id": "leaders",
+          "label": "Координаторам"
+        }
+      ]
+    },
+    {
+      "id": "team",
+      "label": "Команда"
+    },
+    {
+      "id": "faq",
+      "label": "Вопросы"
+    }
+  ],
   "mobile_nav": [
     {
       "id": "approach",

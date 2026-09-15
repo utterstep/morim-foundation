@@ -17,20 +17,37 @@
 </nav>
 {%- endmacro %}
 
-{# The button says "Other languages" and the list holds only the other two, by name. #}
-{% macro lang_menu() -%}
-<div class="lang-menu">
-  <button type="button" class="lang-menu-button" aria-haspopup="true" aria-expanded="false"
-          aria-controls="lang-menu-list">
-    <span>{{ t.switcher.trigger }}</span>
+{# A disclosure menu in the header: a text button with a chevron opening a
+   small card of links. Used for the Programs group and for the languages;
+   the caller supplies the <li> items. #}
+{% macro nav_menu(id, label, class='') -%}
+<div class="nav-menu {{ class }}">
+  <button type="button" class="nav-menu-button" aria-haspopup="true" aria-expanded="false"
+          aria-controls="{{ id }}-list">
+    <span>{{ label }}</span>
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
   </button>
-  <ul id="lang-menu-list" class="lang-menu-list" hidden>
-    {% for l in langs if not l.current %}
-    <li><a href="{{ l.href }}" hreflang="{{ l.code }}" lang="{{ l.code }}">{{ l.name }}</a></li>
-    {% endfor %}
+  <ul id="{{ id }}-list" class="nav-menu-list" hidden>
+    {{ caller() }}
   </ul>
 </div>
+{%- endmacro %}
+
+{# The button says "Other languages" and the list holds only the other two, by name. #}
+{% macro lang_menu() -%}
+{% call nav_menu('lang-menu', t.switcher.trigger, 'lang-menu') %}
+{% for l in langs if not l.current %}
+<li><a href="{{ l.href }}" hreflang="{{ l.code }}" lang="{{ l.code }}">{{ l.name }}</a></li>
+{% endfor %}
+{% endcall %}
+{%- endmacro %}
+
+{% macro programs_menu(item) -%}
+{% call nav_menu('programs-menu', item.label) %}
+{% for sub in item['items'] %}
+<li><a href="#{{ sub.id }}">{{ sub.label }}</a></li>
+{% endfor %}
+{% endcall %}
 {%- endmacro %}
 
 {% macro apply_button(class, label=none) -%}
@@ -210,8 +227,12 @@
     <header class="site-header">
       <a class="logo" href="#top" aria-label="{{ t.header.logo_aria }}">{{ t.header.logo }}</a>
       <nav aria-label="{{ t.header.nav_aria }}">
-        {% for item in t.nav %}
+        {% for item in t.header_nav %}
+        {% if 'items' in item %}
+        {{ programs_menu(item) }}
+        {% else %}
         <a href="#{{ item.id }}">{{ item.label }}</a>
+        {% endif %}
         {% endfor %}
         {{ lang_menu() }}
       </nav>

@@ -42,6 +42,33 @@
       "label": "שאלות"
     }
   ],
+  "header_nav": [
+    {
+      "id": "approach",
+      "label": "הגישה"
+    },
+    {
+      "label": "תוכניות",
+      "items": [
+        {
+          "id": "fellowship",
+          "label": "למורים"
+        },
+        {
+          "id": "leaders",
+          "label": "לרכזים"
+        }
+      ]
+    },
+    {
+      "id": "team",
+      "label": "הצוות"
+    },
+    {
+      "id": "faq",
+      "label": "שאלות"
+    }
+  ],
   "mobile_nav": [
     {
       "id": "approach",

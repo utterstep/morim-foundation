@@ -1,18 +1,18 @@
-// Language drop-down in the header: a disclosure button that opens a list
-// of links to the other language pages (WAI-ARIA "disclosure navigation
-// menu"). The footer and the mobile menu keep plain link lists.
+// Header drop-downs (Programs, languages): a disclosure button that opens a
+// list of links (WAI-ARIA "disclosure navigation menu"). The footer and the
+// mobile menu keep plain link lists.
 //
 // Markup contract (rendered by the template):
-//   <div class="lang-menu">
-//     <button class="lang-menu-button" aria-expanded aria-controls>…</button>
-//     <ul class="lang-menu-list" hidden><li><a hreflang>…</a></li>…</ul>
+//   <div class="nav-menu">
+//     <button class="nav-menu-button" aria-expanded aria-controls>…</button>
+//     <ul class="nav-menu-list" hidden><li><a>…</a></li>…</ul>
 //   </div>
 
 /**
- * @param {HTMLElement} root  the `.lang-menu`
+ * @param {HTMLElement} root  the `.nav-menu`
  * @returns {() => void} stop
  */
-export function startLanguageMenu(root) {
+export function startNavMenu(root) {
   const button = root.querySelector('button');
   const list = root.querySelector('ul');
   if (!(button && list)) return () => {};
@@ -78,17 +78,21 @@ export function startLanguageMenu(root) {
   const onFocusOut = (event) => {
     if (!root.contains(event.relatedTarget)) close({ refocus: false });
   };
+  // Same-page links (#fellowship) do not reload, so the card closes itself.
+  const onLinkClick = () => close({ refocus: false });
 
   button.addEventListener('click', onButtonClick);
   button.addEventListener('keydown', onButtonKey);
   list.addEventListener('keydown', onListKey);
   root.addEventListener('focusout', onFocusOut);
+  list.addEventListener('click', onLinkClick);
   document.addEventListener('pointerdown', onOutsidePointer);
   return () => {
     button.removeEventListener('click', onButtonClick);
     button.removeEventListener('keydown', onButtonKey);
     list.removeEventListener('keydown', onListKey);
     root.removeEventListener('focusout', onFocusOut);
+    list.removeEventListener('click', onLinkClick);
     document.removeEventListener('pointerdown', onOutsidePointer);
   };
 }
