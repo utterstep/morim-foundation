@@ -125,7 +125,8 @@
     "help_compact": "Tap or press Enter to dismiss an item and show the next one. Swipe vertically to keep reading.",
     "label_icon": "Dismiss {app} and show the next app",
     "label_media_dismiss": "Dismiss {label} and show the next element",
-    "video_unavailable": "Video unavailable"
+    "video_unavailable": "Video unavailable",
+    "scroll_hint": "scroll"
   },
   "approach": {
     "aria": "Our approach",

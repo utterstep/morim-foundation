@@ -248,6 +248,13 @@
     <span class="hero-accents" role="group" aria-label="{{ t.hero.group_aria }}"></span>
     <span id="hero-app-help" class="sr-only">{{ t.hero.help_desktop }}</span>
   </section>
+  {# A small fixed hint at the bottom of the first screen; js/scroll-hint.js
+     hides it after the second scroll gesture, or at once if the page did not
+     open at the top. #}
+  <a class="scroll-hint" href="#what-we-do" data-scroll-hint>
+    <span>{{ t.hero.scroll_hint }}</span>
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+  </a>
 
   <section class="approach" id="approach" aria-label="{{ t.approach.aria }}">
     <div class="prose introduction">

@@ -126,7 +126,8 @@
     "help_compact": "הקישו או לחצו Enter כדי להסיר פריט ולהציג את הבא. גללו למטה כדי להמשיך לקרוא.",
     "label_icon": "להסיר את {app} ולהציג את האפליקציה הבאה",
     "label_media_dismiss": "להסיר את {label} ולהציג את הפריט הבא",
-    "video_unavailable": "הסרטון אינו זמין"
+    "video_unavailable": "הסרטון אינו זמין",
+    "scroll_hint": "גללו"
   },
   "approach": {
     "aria": "הגישה שלנו",

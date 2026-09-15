@@ -13,6 +13,7 @@ import { startPrograms } from './programs.js';
 import { startHero } from './hero/hero.js';
 import { startLanguage } from './lang.js';
 import { startNavMenu } from './nav-menu.js';
+import { startScrollHint } from './scroll-hint.js';
 
 const EASING = 'cubic-bezier(0.22, 1, 0.36, 1)';
 const FAQ_MOTION = { duration: 250, easing: EASING, fade: 200 };
@@ -43,5 +44,7 @@ if (root) {
   if (hero) startHero(hero);
 
   root.querySelectorAll('.nav-menu').forEach((menu) => startNavMenu(menu));
+  const hint = root.querySelector('[data-scroll-hint]');
+  if (hint) startScrollHint(hint);
   startLanguage(root);
 }

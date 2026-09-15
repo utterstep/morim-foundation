@@ -233,3 +233,72 @@ main[data-hero-variant='original'] .introduction {
     margin-top: -0.75rem;
   }
 }
+
+/* "scroll" hint: a small pill fixed at the bottom of the first screen,
+   centred without transforms so it needs no direction-specific rule. */
+.scroll-hint {
+  position: fixed;
+  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+  inset-inline: 0;
+  z-index: 4;
+  width: fit-content;
+  margin-inline: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-height: 2.25rem;
+  padding: 0.375rem 0.875rem 0.375rem 1rem;
+  border-radius: 999rem;
+  background: rgb(255 255 255 / 88%);
+  color: #6f7169;
+  font-size: 0.9375rem;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  box-shadow:
+    0 0 0 1px rgb(24 32 34 / 8%),
+    0 0.25rem 1rem rgb(0 0 0 / 6%);
+  transition:
+    opacity 300ms ease,
+    visibility 0s linear 300ms;
+}
+@supports (backdrop-filter: blur(0.5rem)) {
+  .scroll-hint {
+    background: rgb(255 255 255 / 76%);
+    backdrop-filter: blur(0.5rem);
+    -webkit-backdrop-filter: blur(0.5rem);
+  }
+}
+.scroll-hint:hover {
+  color: var(--ink);
+  text-decoration: none;
+}
+.scroll-hint svg {
+  width: 1rem;
+  height: 1rem;
+}
+.scroll-hint[data-hidden] {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-hint svg {
+    animation: scroll-hint-nod 1.8s ease-in-out infinite;
+  }
+  @keyframes scroll-hint-nod {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 0.2rem;
+    }
+  }
+}
+@media (max-width: 700px) {
+  .scroll-hint {
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    min-height: 2rem;
+    font-size: 0.875rem;
+  }
+}
