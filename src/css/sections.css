@@ -1050,3 +1050,218 @@
     margin-top: 0.75rem;
   }
 }
+/* "What we do": the structured answer between the story opening and the
+   program panels — identity heading, three beats (the stipend one keeps a
+   handwritten aside), the Tuesday-morning test, program pointers. */
+.what-we-do {
+  padding: 8rem 5% 3rem;
+  text-align: center;
+  background: var(--background);
+}
+/* A statement, not a greeting: a step below the "dear teachers," displays. */
+.what-we-do .display {
+  font-size: 5.5rem;
+  margin-top: 0;
+}
+.wwd-lead {
+  margin-top: 3.25rem;
+}
+.wwd-beats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 3.5rem 3rem;
+  width: min(72rem, 100%);
+  margin: 5.75rem auto 0;
+}
+.wwd-beat h3 {
+  font-size: 2.25rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-weight: 400;
+}
+.wwd-beat p {
+  max-width: 21.5rem;
+  margin: 1.125rem auto 0;
+  font-size: 1.3125rem;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: #55554e;
+}
+.beat-note {
+  display: block;
+  width: fit-content;
+  margin: 1.375rem auto 0;
+  color: #1c51e0;
+  font-family: var(--font-handwritten);
+  font-size: 1.625rem;
+  line-height: 1.1;
+  transform: rotate(-2deg);
+  text-transform: var(--handwritten-case);
+  letter-spacing: normal;
+}
+/* Kept tight under the beats so the apply block reads as this section's
+   close, not as a stray row floating toward the panel below. */
+.wwd-apply {
+  margin-top: 4.5rem;
+}
+.wwd-apply h3 {
+  font-size: 2.25rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-weight: 400;
+}
+.wwd-apply-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+.wwd-apply .button {
+  min-height: 3.5rem;
+  padding: 1.125rem 1.75rem;
+  border-radius: 2rem;
+  font-size: 1.25rem;
+}
+@media (max-width: 700px) {
+  .what-we-do {
+    padding: 4.5rem 5% 2.5rem;
+  }
+  /* Hard <br> breaks: "for teachers and" / "и координаторов" are the longest
+     lines, so the vw step is smaller than the wrapping displays above. */
+  .what-we-do .display {
+    font-size: clamp(2.5rem, 10.5vw, 4rem);
+    margin-top: 0;
+  }
+  html[lang='ru'] .what-we-do .display {
+    font-size: clamp(2.25rem, 10vw, 3.75rem);
+  }
+  .wwd-lead {
+    margin-top: 2.25rem;
+  }
+  .wwd-beats {
+    grid-template-columns: 1fr;
+    gap: 2.75rem;
+    margin-top: 3.25rem;
+  }
+  .wwd-beat h3 {
+    font-size: 1.875rem;
+  }
+  .wwd-beat p {
+    font-size: 1.25rem;
+  }
+  .wwd-apply {
+    margin-top: 3rem;
+  }
+  .wwd-apply h3 {
+    font-size: 1.875rem;
+  }
+}
+/* "How it works": the benefit blocks reshaped as a timeline after the
+   program list — a vertical rail with a dot per step, mirroring the
+   program block's rule-and-heading treatment. */
+.how-it-works {
+  margin-top: 6.25rem;
+  border-top: 1px solid var(--fellowship-rule);
+  padding-top: 4.375rem;
+  text-align: start;
+}
+.leaders .how-it-works {
+  border-color: #4a111633;
+}
+.how-it-works > h3 {
+  font-size: 3.375rem;
+  line-height: 2.875rem;
+  letter-spacing: -0.03em;
+  font-weight: 300;
+}
+.timeline {
+  position: relative;
+  width: min(46rem, 100%);
+  margin: 4.375rem 0 0;
+  padding-inline-start: 3.25rem;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 1rem;
+  bottom: 1rem;
+  inset-inline-start: 0.3125rem;
+  width: 2px;
+  background: var(--fellowship-rule);
+}
+.leaders .timeline::before {
+  background: #4a111633;
+}
+.timeline .benefit {
+  position: relative;
+}
+.timeline .benefit::before {
+  content: '';
+  position: absolute;
+  top: 0.85rem;
+  inset-inline-start: -3.25rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: var(--paper);
+}
+.leaders .timeline .benefit::before {
+  background: var(--leaders-ink);
+}
+.timeline .benefit h3 {
+  max-width: none;
+  margin: 0;
+  font-size: 2.5rem;
+  line-height: 1;
+  text-align: start;
+}
+.timeline .benefit > p {
+  max-width: 36rem;
+  margin: 1rem 0 0;
+  text-align: start;
+}
+.timeline .benefit + .benefit,
+.timeline .craft + .benefit {
+  margin-top: 3.75rem;
+}
+.timeline .questions {
+  --question-columns: 2;
+  gap: 1.75rem 2.5rem;
+  margin: 2rem 0 0;
+  padding: 0;
+  width: min(36rem, 100%);
+  text-align: start;
+}
+.timeline .questions span {
+  justify-self: start;
+}
+@media (max-width: 700px) {
+  .how-it-works {
+    margin-top: 4rem;
+    padding-top: 3rem;
+  }
+  .how-it-works > h3 {
+    font-size: 3rem;
+    line-height: 1;
+  }
+  .timeline {
+    padding-inline-start: 2.25rem;
+    margin-top: 3rem;
+  }
+  .timeline .benefit::before {
+    inset-inline-start: -2.25rem;
+    top: 0.65rem;
+  }
+  .timeline .benefit h3 {
+    font-size: 2rem;
+  }
+  .timeline .benefit > p {
+    font-size: 1.25rem;
+  }
+  .timeline .questions {
+    --question-columns: 1;
+    gap: 1.375rem;
+  }
+}

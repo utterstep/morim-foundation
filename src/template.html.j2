@@ -111,7 +111,7 @@
   <div class="program-list" aria-live="polite">
     {% if audience == 'leaders' %}
     {% for row in t.programs.leaders %}
-    <article class="program-row" data-program="{{ row.id }}"{% if row.closed %} data-closed{% endif %}>
+    <article class="program-row" id="program-{{ row.id }}" data-program="{{ row.id }}"{% if row.closed %} data-closed{% endif %}>
       {% if row.badge %}<span class="program-badge"><span>{{ row.badge }}</span></span>{% endif %}
       <h4>{{ row.title_html }}</h4>
       {% if row.closed %}
@@ -124,7 +124,7 @@
     {% endfor %}
     {% else %}
     {% for row in t.programs.teachers %}
-    <article class="program-row" data-program="{{ row.id }}" data-location="{{ row.location }}">
+    <article class="program-row" id="program-{{ row.id }}" data-program="{{ row.id }}" data-location="{{ row.location }}">
       <h4>{{ row.title_html }}</h4>
       {{ program_meta(row.where, row.when) }}
       {{ apply_button('button apply-button') }}
@@ -262,19 +262,32 @@
       <p data-hero-story-end>{{ t.approach.attention }}</p>
       <p>{{ t.approach.schools_html }}</p>
     </div>
-    <figure class="pilot" id="pilot">
-      <div class="photo-stack">
-        {{ photo('pilot-landscape', 'photo-landscape', landscape_widths, '(max-width: 700px) 58vw, 37vw', t.approach.pilot_landscape_alt, 511, 339) }}
-        {{ photo('pilot-portrait', 'photo-portrait', portrait_widths, '(max-width: 700px) 38vw, 26vw', t.approach.pilot_portrait_alt, 317, 412) }}
-      </div>
-      <figcaption>{{ t.approach.pilot_caption }}</figcaption>
-    </figure>
-    <div class="mission">
-      <div class="prose">
-        <p class="mission-intro">{{ t.approach.mission_intro_html }}</p>
-        {% for p in t.approach.mission %}
-        <p>{{ p }}</p>
-        {% endfor %}
+  </section>
+
+  {# The structured answer to "what is this?": identity heading, three
+     scannable beats (the stipend one keeps its handwritten aside), the
+     Tuesday-morning test as a closer, and pointers to the two programs. #}
+  <section class="what-we-do" id="what-we-do" aria-labelledby="what-we-do-title">
+    <h2 class="display" id="what-we-do-title">{{ t.what_we_do.title_html }}</h2>
+    <div class="prose wwd-lead">
+      <p>{{ t.what_we_do.lead_html }}</p>
+    </div>
+    <div class="wwd-beats">
+      {% for b in t.what_we_do.beats %}
+      <article class="wwd-beat">
+        <h3>{{ b.title }}</h3>
+        <p>{{ b.body }}</p>
+        {% if 'note' in b %}<span class="beat-note">{{ b.note }}</span>{% endif %}
+      </article>
+      {% endfor %}
+    </div>
+    <div class="wwd-apply">
+      <h3>{{ t.what_we_do.apply.title }}</h3>
+      <div class="wwd-apply-buttons">
+        {# Each button lands on the concrete program card: the first teachers
+           program, and the first coordinators cohort still open to join. #}
+        <a class="button" href="#program-{{ t.programs.teachers[0].id }}">{{ t.what_we_do.apply.teachers }}</a>
+        <a class="button" href="#program-{{ (t.programs.leaders | rejectattr('closed') | first).id }}">{{ t.what_we_do.apply.coordinators }}</a>
       </div>
     </div>
   </section>
@@ -284,51 +297,55 @@
       <div class="floating-apply-rail" inert>
         {{ apply_button('button apply-button floating-apply-button') }}
       </div>
-      <p class="eyebrow">{{ t.fellowship.eyebrow }}</p>
       <h2 class="display" id="fellowship-title">{{ t.fellowship.title_html }}</h2>
       <div class="prose fellowship-intro">
         {% for p in t.fellowship.intro %}
         <p>{{ p }}</p>
         {% endfor %}
       </div>
-      <div class="benefits">
-        {% for b in t.fellowship.benefits %}
-        <article class="benefit{% if b.class %} {{ b.class }}{% endif %}">
-          <h3>{{ b.title }}</h3>
-          <p>{{ b.body }}</p>
-          {% if b.questions is defined %}
-          <div class="questions" aria-label="{{ b.questions_aria }}">
-            {% for q in b.questions %}
-            <span>{{ q }}</span>
-            {% endfor %}
-          </div>
-          {% endif %}
-        </article>
-        {% endfor %}
-      </div>
       {{ programs('teachers') }}
+      <div class="how-it-works">
+        <h3>{{ t.fellowship.how_title }}</h3>
+        <div class="benefits timeline">
+          {% for b in t.fellowship.benefits %}
+          <article class="benefit{% if b.class %} {{ b.class }}{% endif %}">
+            <h3>{{ b.title }}</h3>
+            <p>{{ b.body }}</p>
+            {% if b.questions is defined %}
+            <div class="questions" aria-label="{{ b.questions_aria }}">
+              {% for q in b.questions %}
+              <span>{{ q }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </article>
+          {% endfor %}
+        </div>
+      </div>
     </section>
 
     <section class="leaders panel" id="leaders" aria-labelledby="leaders-title">
       <div class="floating-apply-rail" inert>
         {{ apply_button('button apply-button floating-apply-button', t.programs.join) }}
       </div>
-      <p class="eyebrow muted">{{ t.leaders.eyebrow }}</p>
       <h2 class="display" id="leaders-title">{{ t.leaders.title_html }}</h2>
       <div class="prose leaders-intro">
         {% for p in t.leaders.intro %}
         <p>{{ p }}</p>
         {% endfor %}
       </div>
-      <div class="leader-benefits">
-        {% for b in t.leaders.benefits %}
-        <article class="benefit">
-          <h3>{{ b.title }}</h3>
-          <p>{{ b.body }}</p>
-        </article>
-        {% endfor %}
-      </div>
       {{ programs('leaders') }}
+      <div class="how-it-works">
+        <h3>{{ t.leaders.how_title }}</h3>
+        <div class="leader-benefits timeline">
+          {% for b in t.leaders.benefits %}
+          <article class="benefit">
+            <h3>{{ b.title }}</h3>
+            <p>{{ b.body }}</p>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
     </section>
   </div>
 
