@@ -136,7 +136,7 @@
     "pilot_caption": "Our first pilot. July 2026"
   },
   "what_we_do": {
-    "title_html": "morim programs<br>for teachers and<br>coordinators",
+    "title_html": "Morim programs<br>for teachers and<br>coordinators",
     "lead_html": "The Foundation builds programs that make the everyday work in Israeli classrooms and schools stronger: inquiry-based learning, real practice, and <span class=\"mentor-highlight\">mentors<img src=\"{root}assets/imgRectangle70.svg\" alt=\"\" aria-hidden=\"true\"></span> who stay close.",
     "beats": [
       {
@@ -244,7 +244,7 @@
       {
         "id": "tel-aviv",
         "location": "tel-aviv",
-        "title_html": "Teaching in the<br>Attention Economy",
+        "title_html": "Teaching in the<br>attention economy",
         "where": "Zoom + monthly meetings in Tel&nbsp;Aviv",
         "when": "Starts in November 2026"
       }
@@ -254,13 +254,13 @@
         "id": "school-coordination-pilot",
         "closed": true,
         "badge": "Pilot in progress · closed cohort",
-        "title_html": "Coordinating in a School: Team, Systems, Projects"
+        "title_html": "Coordinating in a school: team, systems, projects"
       },
       {
         "id": "school-coordination",
         "closed": false,
         "badge": "",
-        "title_html": "Coordinating in a School: Team, Systems, Projects",
+        "title_html": "Coordinating in a school: team, systems, projects",
         "where": "Zoom + monthly meetings in Tel&nbsp;Aviv",
         "when": "Starts in late January 2027"
       }
@@ -268,7 +268,7 @@
     "tbilisi": {
       "id": "tbilisi",
       "location": "tbilisi",
-      "title_html": "Summer <span class=\"word\">C<span class=\"glyph small-a\"><span class=\"sr-only\">a</span><img src=\"{root}assets/imgA2.svg\" alt=\"\" width=\"28\" height=\"25\"></span>mp</span><br>in Tbilisi",
+      "title_html": "Summer <span class=\"word\">c<span class=\"glyph small-a\"><span class=\"sr-only\">a</span><img src=\"{root}assets/imgA2.svg\" alt=\"\" width=\"28\" height=\"25\"></span>mp</span><br>in Tbilisi",
       "where": "Tbilisi, Georgia",
       "when": "July–August 2026",
       "photos_aria": "Photos from the Tbilisi teacher intensive",
