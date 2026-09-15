@@ -126,6 +126,9 @@ Repo → Settings → Pages → Source: *Deploy from a branch*, branch `main`, f
 - The school-leader cards were assembled from the previous site's coordinator copy;
   confirm with the team. Two team members are placeholders.
 - Webfont licences: GT Alpina and the ABC Stefan *trial* font are shipped as in the PR.
-- The hero embeds TikTok, Twitch and YouTube players with muted autoplay; review the
-  chosen clips and any consent requirements.
+- The hero embeds TikTok and YouTube players with muted autoplay. The "Twitch" card
+  plays self-hosted stock footage of streamers from `src/assets/video/` (the clip
+  embed stuttered badly, and copying a real channel's clips would not be licensed);
+  the source pages are in `src/js/lib/hero-videos.js`. Footage by Yan Krukau and
+  Alena Darmel under the Pexels licence, no attribution required. Review the chosen clips and any consent requirements.
 - Footer social links open a "coming soon" dialog until the profiles exist.

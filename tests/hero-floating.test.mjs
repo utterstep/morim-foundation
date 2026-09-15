@@ -115,8 +115,8 @@ test('video cards have a full-face keyboard-accessible poof target', () => {
   assert(target.includes('inset: 0'));
   assert(target.includes('z-index: 2'));
   const hero = heroSource();
-  // Only the Twitch iframe stays interactive; other players are covered by the poof target.
-  assert(hero.includes("interactive: video.provider === 'twitch'"));
+  // Every player is covered by the poof target; none is interactive.
+  assert(!hero.includes('interactive'));
   assert(hero.includes("'hero-video-poof-target'"));
   const video = readFileSync(
     new URL('../src/js/hero/hero-player.js', import.meta.url),

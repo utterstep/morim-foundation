@@ -45,10 +45,9 @@
 }
 .hero-editorial .hero-app-item[data-provider='twitch'] {
   z-index: 8;
-  /* Twitch renders at its 400px native size and is scaled down by transform;
-     the px floor keeps the clip readable when 1rem shrinks with the viewport. */
+  /* The px floor keeps the clip readable when 1rem shrinks with the viewport. */
   --float-width: max(250px, 14.5rem);
-  --float-height: calc((var(--float-width) - 4px) * 0.75 + 4px);
+  --float-height: calc((var(--float-width) - 4px) * 360 / 640 + 4px);
 }
 .hero-live-media {
   display: block;
@@ -78,22 +77,6 @@
   outline: 3px solid #2357ec;
   outline-offset: -4px;
 }
-.hero-twitch-dismiss {
-  position: absolute;
-  inset-inline-end: -0.75rem;
-  top: -2rem;
-  width: 1.75rem;
-  height: 1.75rem;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: #182022;
-  color: white;
-  font:
-    1.25rem/1 system-ui,
-    sans-serif;
-  cursor: pointer;
-}
 .hero-video-player {
   display: block;
   position: relative;
@@ -111,6 +94,13 @@
   max-width: none;
   transform-origin: top left;
 }
+.hero-video-player video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
 .hero-video-status {
   display: grid;
   position: absolute;
@@ -125,15 +115,6 @@
 .hero-editorial .hero-app-bob {
   animation: none;
   transform: none;
-}
-.hero-editorial .hero-app-item[data-provider='twitch'] .hero-app-bob {
-  filter: none;
-}
-.hero-editorial .hero-app-item[data-provider='twitch'] .hero-app-face {
-  transform: none;
-}
-.hero-editorial .hero-app-item[data-provider='twitch'] .hero-live-media {
-  border-radius: 0;
 }
 .hero-editorial .hero-app-item[data-dismissing='true'] .hero-app-face {
   /* Vanish instantly under the smoke, then replace after the five frames. */
@@ -176,7 +157,7 @@
   }
   .hero-editorial .hero-app-item[data-provider='twitch'] {
     --float-width: min(13rem, calc(68vw - 2.8rem));
-    --float-height: calc((var(--float-width) - 4px) * 0.75 + 4px);
+    --float-height: calc((var(--float-width) - 4px) * 360 / 640 + 4px);
   }
   .hero-editorial .hero-notification {
     font-size: 0.75rem;
@@ -222,7 +203,7 @@ main[data-hero-variant='original'] .introduction {
   .hero-editorial[data-media-layout='static']
     .hero-app-item[data-provider='twitch'] {
     --float-width: max(250px, 16.5rem);
-    --float-height: calc((var(--float-width) - 4px) * 0.75 + 4px);
+    --float-height: calc((var(--float-width) - 4px) * 360 / 640 + 4px);
   }
 }
 @media (max-width: 700px) {

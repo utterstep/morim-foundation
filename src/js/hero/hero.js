@@ -88,10 +88,7 @@ export function startHero(section) {
     slot.el.append(bob);
     const { app, video, hasNotification } = describeFloater(item);
     if (video && playerShell) {
-      slot.player = createPlayer(playerShell, video, {
-        interactive: video.provider === 'twitch',
-        unavailableText: strings.videoUnavailable,
-      });
+      slot.player = createPlayer(playerShell, video, { unavailableText: strings.videoUnavailable });
     } else if (hasNotification) {
       slot.badge = createBadge(app.notifications, deriveHeroFlags(hero));
       face.append(slot.badge.el);

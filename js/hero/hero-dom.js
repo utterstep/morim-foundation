@@ -86,9 +86,8 @@ export function buildFace(item, strings) {
   if (video) {
     const dismiss = document.createElement('button');
     dismiss.type = 'button';
-    dismiss.className = video.provider === 'twitch' ? 'hero-twitch-dismiss' : 'hero-video-poof-target';
+    dismiss.className = 'hero-video-poof-target';
     dismiss.setAttribute('aria-label', formatTemplate(strings.labelMediaDismiss, { label: video.label }));
-    if (video.provider === 'twitch') dismiss.textContent = '×';
     const live = document.createElement('span');
     live.className = 'hero-live-media';
     playerShell = document.createElement('span');

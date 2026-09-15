@@ -2,7 +2,7 @@
 // Retry startup only. Stop after confirmed playback so user pause/unmute wins.
 /**
  * @param {HTMLIFrameElement} frame
- * @param {'tiktok' | 'youtube' | 'twitch'} provider
+ * @param {'tiktok' | 'youtube'} provider
  * @param {boolean} autoplay
  * @param {() => void} onError
  * @returns {() => void} cleanup
@@ -21,7 +21,7 @@ export function startHeroVideoAutoplay(
   let started = false;
   const stop = () => timers.splice(0).forEach(clearTimeout);
   const request = () => {
-    if (started || !autoplay || provider === 'twitch') return;
+    if (started || !autoplay) return;
     if (provider === 'tiktok') {
       for (const type of ['mute', 'play'])
         frame.contentWindow?.postMessage(
@@ -42,7 +42,7 @@ export function startHeroVideoAutoplay(
   };
   const load = () => {
     stop();
-    if (!autoplay || provider === 'twitch') return;
+    if (!autoplay) return;
     request();
     for (const delay of [500, 1500, 3000, 6000])
       timers.push(setTimeout(request, delay));
