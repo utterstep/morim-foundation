@@ -16,3 +16,11 @@ test('the second gesture, after a quiet gap, completes the count', () => {
   assert.equal(counter.scroll(100 + GESTURE_GAP_MS + 1 + GESTURE_GAP_MS), true);
   assert.equal(counter.count, 2);
 });
+
+test('one long continuous scroll is done once it has covered the distance', () => {
+  const counter = createGestureCounter(2, GESTURE_GAP_MS, 480);
+  let t = 0;
+  for (const y of [40, 120, 240, 400]) assert.equal(counter.scroll((t += 16), y), false);
+  assert.equal(counter.scroll((t += 16), 480), true);
+  assert.equal(counter.count, 1, 'still a single gesture');
+});
