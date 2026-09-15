@@ -107,6 +107,22 @@
   "hero": {
     "title_html": "one good<br>teacher can<br>shape hundreds<br>of children,<br><span class=\"hero-line\">but...</span>",
     "title_aria": "one good teacher can shape hundreds of children, but...",
+    "lede": "Practical programs for teachers and school coordinators — with mentoring and a stipend.",
+    "routes": [
+      {
+        "id": "fellowship",
+        "label": "For teachers"
+      },
+      {
+        "id": "leaders",
+        "label": "For coordinators"
+      }
+    ],
+    "routes_aria": "Who the programs are for",
+    "schools_route": {
+      "id": "schools",
+      "label": "Schools and municipalities"
+    },
     "group_aria": "App distractions",
     "help_desktop": "Drag an app to move it. Click or press Enter to dismiss it and show the next app.",
     "help_compact": "Tap or press Enter to dismiss an item and show the next one. Swipe vertically to keep reading.",

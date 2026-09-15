@@ -172,7 +172,7 @@
     {% endif %}
   </div>
   {% if audience == 'leaders' %}
-  <p class="program-note">
+  <p class="program-note" id="schools">
     {{ t.programs.note.title }}
     <br>
     {{ t.programs.note.body }}
@@ -250,6 +250,17 @@
            data-video-unavailable="{{ t.hero.video_unavailable }}"
            data-help-desktop="{{ t.hero.help_desktop }}"
            data-help-compact="{{ t.hero.help_compact }}">
+    {# Plain words before the headline: what this is and for whom, so the
+       first screen carries the offer without depending on the "but…" story. #}
+    <div class="hero-lede">
+      <p>{{ t.hero.lede }}</p>
+      <nav class="hero-routes" aria-label="{{ t.hero.routes_aria }}">
+        {% for r in t.hero.routes %}
+        <a class="hero-route" href="#{{ r.id }}">{{ r.label }}</a>
+        {% endfor %}
+        <a class="hero-route-minor" href="#{{ t.hero.schools_route.id }}">{{ t.hero.schools_route.label }}</a>
+      </nav>
+    </div>
     <div class="hero-mobile-content">
       <h1 id="hero-title" aria-label="{{ t.hero.title_aria }}">{{ t.hero.title_html }}</h1>
     </div>
