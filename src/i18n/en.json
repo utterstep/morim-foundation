@@ -2,7 +2,7 @@
   "_comment": "Source of truth for English copy. Values may contain inline HTML. Keys starting with an underscore are notes for editors and are ignored by the build and the parity test.",
   "meta": {
     "title": "Morim Foundation",
-    "description": "Programs for teachers and school coordinators: intensives, practice with children and real school cases, weekly mentoring, and a stipend for your time.",
+    "description": "Programs for teachers and school coordinators in Israel: intensives, practice with children and real school cases, weekly mentoring, and a stipend for your time.",
     "og_title": "Morim Foundation",
     "locale": "en_US"
   },
@@ -132,11 +132,11 @@
     "attention": "kids today are growing up inside an economy engineered to consume their attention. Wars. COVID. Zoom classes.",
     "schools_html": "Schools were never designed to handle that.<br>Our foundation is here to help.",
     "pilot_landscape_alt": "Teachers in discussion at the foundation’s Tbilisi pilot",
-    "pilot_caption": "Our first pilot in Tbilisi, Georgia. July 2026"
+    "pilot_caption": "Our first pilot. July 2026"
   },
   "what_we_do": {
     "title_html": "morim programs<br>for teachers and<br>coordinators",
-    "lead_html": "The Foundation builds programs that make the everyday work in class and school stronger: inquiry-based learning, real practice, and <span class=\"mentor-highlight\">mentors<img src=\"{root}assets/imgRectangle70.svg\" alt=\"\" aria-hidden=\"true\"></span> who stay close.",
+    "lead_html": "The Foundation builds programs that make the everyday work in Israeli classrooms and schools stronger: inquiry-based learning, real practice, and <span class=\"mentor-highlight\">mentors<img src=\"{root}assets/imgRectangle70.svg\" alt=\"\" aria-hidden=\"true\"></span> who stay close.",
     "beats": [
       {
         "title": "Practice first",
@@ -359,7 +359,7 @@
     "questions": [
       {
         "q": "Who is the Fellowship for?",
-        "a": "We currently focus on practicing teachers in the later years of primary school and the beginning of middle school. If you work with another age group, you can still get in touch and tell us about your experience."
+        "a": "We currently focus on practicing teachers in Israel, in the later years of primary school and the beginning of middle school. If you work with another age group, you can still get in touch and tell us about your experience."
       },
       {
         "q": "What about AI?",
