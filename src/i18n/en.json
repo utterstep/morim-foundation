@@ -21,8 +21,8 @@
   },
   "nav": [
     {
-      "id": "approach",
-      "label": "Approach"
+      "id": "what-we-do",
+      "label": "What we do"
     },
     {
       "id": "fellowship",
@@ -43,8 +43,8 @@
   ],
   "header_nav": [
     {
-      "id": "approach",
-      "label": "Approach"
+      "id": "what-we-do",
+      "label": "What we do"
     },
     {
       "label": "Programs",
@@ -70,8 +70,8 @@
   ],
   "mobile_nav": [
     {
-      "id": "approach",
-      "label": "Approach"
+      "id": "what-we-do",
+      "label": "What we do"
     },
     {
       "id": "fellowship",
@@ -117,24 +117,39 @@
   "approach": {
     "aria": "Our approach",
     "attention": "kids today are growing up inside an economy engineered to consume their attention. Wars. COVID. Zoom classes.",
-    "schools_html": "Schools were never designed to handle that.<br>Our foundation is here to help.",
-    "pilot_landscape_alt": "Teachers in discussion at the foundation’s Tbilisi pilot",
-    "pilot_portrait_alt": "Participants working on an activity during the Tbilisi pilot",
-    "pilot_caption": "Our first pilot in Tbilisi, Georgia. July 2026",
-    "mission_intro_html": "The Foundation runs programs for teachers and coordinators, with <span class=\"mentor-highlight\">mentors<img src=\"{root}assets/imgRectangle70.svg\" alt=\"\" aria-hidden=\"true\"></span> and <span class=\"funding\">funding<span class=\"funding-underline\" aria-hidden=\"true\"></span></span> built in.<span class=\"stipend-note\">Yes, a monthly stipend</span>",
-    "mission": [
-      "More than half of every program is practice. Each starts with an intensive and moves quickly into practical work: teachers lead lessons with children, while coordinators bring real situations from their schools and work through them together. A mentor stays with the group throughout.",
-      "We use approaches we trust and that have been well studied, such as inquiry-based learning, activity-based learning, and project work. We don’t have a new pedagogy to sell.",
-      "<strong>The test is simple: does it still work in a regular class of 35 on a Tuesday morning?</strong>"
-    ]
+    "schools_html": "Schools were never designed to handle that.<br>Our foundation is here to help."
+  },
+  "what_we_do": {
+    "title_html": "morim programs<br>for teachers and<br>coordinators",
+    "lead_html": "We build training programs that make the everyday work in class stronger: inquiry-based learning, real practice with children, and mentors who stay close.",
+    "beats": [
+      {
+        "title": "Practice first",
+        "body": "More than half of every program is hands-on: teachers lead lessons with real children, and coordinators work through live situations from their own schools."
+      },
+      {
+        "title": "Mentors who stay",
+        "body": "Each program starts with an intensive; then small groups meet with a mentor every week, through the whole stretch of practice."
+      },
+      {
+        "title": "Funding for your time",
+        "body": "You have more than enough work without us: participants receive a stipend for both the training and the practice with children.",
+        "note": "Yes, a monthly stipend"
+      }
+    ],
+    "apply": {
+      "title": "Apply to the program",
+      "teachers": "For teachers",
+      "coordinators": "For coordinators"
+    }
   },
   "fellowship": {
-    "eyebrow": "Morim Fellows",
     "title_html": "dear <span class=\"word\">te<span class=\"glyph teacher-a\"><span class=\"sr-only\">a</span><img src=\"{root}assets/imgA1.svg\" alt=\"\" width=\"73\" height=\"66\"></span>chers,</span>",
     "intro": [
       "You see the effects of years of classroom disruption better than anyone. We want to give you time to learn, try things out, and work through what happens in the classroom with a mentor.",
       "We start with the later years of primary school and the beginning of middle school — when many children begin to lose interest in learning."
     ],
+    "how_title": "How it works",
     "benefits": [
       {
         "class": "craft",
@@ -161,12 +176,12 @@
     ]
   },
   "leaders": {
-    "eyebrow": "Morim Leaders",
     "title_html": "dear <span class=\"word\">c<span class=\"glyph school-oo\"><span class=\"sr-only\">oo</span><img src=\"{root}assets/imgVector1.svg\" alt=\"\" width=\"106\" height=\"60\"></span>rdinators,</span>",
     "intro": [
       "Strong teachers need schools where they can do good work and want to stay. That’s why we work with teachers at more than one level: in their own classrooms and in the teams they help lead.",
       "Our first program for coordinators is being developed together with rakazim themselves. The first pilot is under way with a closed cohort."
     ],
+    "how_title": "How it works",
     "benefits": [
       {
         "title": "Leading without formal authority",

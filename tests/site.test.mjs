@@ -83,7 +83,7 @@ test('the header nav has the Programs and language drop-downs', () => {
   for (const page of Object.values(pages)) {
     const html = read(page);
     const nav = /<nav aria-label="[^"]+">([\s\S]*?)<\/nav>/.exec(html)?.[1] ?? '';
-    assert.match(nav, /href="#approach">[^<]+<\/a>\s*<div class="nav-menu ">/, `${page} lacks the Programs dropdown after Approach`);
+    assert.match(nav, /href="#what-we-do">[^<]+<\/a>\s*<div class="nav-menu ">/, `${page} lacks the Programs dropdown after What we do`);
     assert.match(nav, /href="#faq">[^<]+<\/a>\s*<div class="nav-menu lang-menu">/, `${page} lacks the language dropdown after FAQ`);
     const programs = /id="programs-menu-list"[\s\S]*?<\/ul>/.exec(html)?.[0] ?? '';
     assert.match(programs, /href="#fellowship"/);
