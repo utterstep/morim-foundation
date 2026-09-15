@@ -130,7 +130,7 @@
   "approach": {
     "aria": "Our approach",
     "attention": "kids today are growing up inside an economy engineered to consume their attention. Wars. COVID. Zoom classes.",
-    "schools_html": "Schools were never designed to handle that.<br>Our foundation is here to help.",
+    "schools_html": "Schools were never designed to handle&nbsp;that.<br>Our foundation is here to help.",
     "pilot_landscape_alt": "Teachers in discussion at the foundation’s Tbilisi pilot",
     "pilot_caption": "Our first pilot. July 2026"
   },
@@ -147,8 +147,8 @@
         "body": "A mentor stays with the group throughout. Teachers and coordinators meet their mentor in small groups every week, for the whole stretch of practice."
       },
       {
-        "title": "Funding for your time",
-        "body": "You have more than enough work without us, so we pay participants a stipend for both the training and the practice with children.",
+        "title": "Funding for teachers’ time",
+        "body": "Participants receive a stipend for both the training and the practice with children: teachers have more than enough work without us.",
         "note": "Yes, a monthly stipend"
       }
     ],
@@ -323,9 +323,6 @@
         "body": "Bring the programs to your own teachers and coordinators, cohort by cohort, with practice in your schools."
       }
     ],
-    "proof_before": "Our first pilot ran in Tbilisi in summer 2026: ",
-    "proof_link": "see what changed for the teachers and the children",
-    "proof_after": ".",
     "cta": "Tell us about your school or organisation"
   },
   "team": {

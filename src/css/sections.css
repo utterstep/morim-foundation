@@ -8,7 +8,7 @@
 .fellowship {
   background: var(--fellowship-bg);
   color: var(--paper);
-  padding: 6rem 8.3% 5rem;
+  padding: 6rem 8.3% 9rem; /* the bottom holds the sticky Apply at rest */
 }
 .eyebrow {
   font-size: 1.625rem;
@@ -517,8 +517,7 @@
   }
 }
 /* "For schools and partners": plain on paper after the two panels. Heading,
-   lead, three partner shapes set like the What-we-do beats, the pilot as
-   proof, then the form button with the email beside it. */
+   lead, three partner shapes set like the What-we-do beats, then the form button with the email beside it. */
 .partners {
   padding: 7rem 5% 2rem;
   text-align: center;
@@ -534,14 +533,6 @@
 .partners-types {
   margin-top: 4.5rem;
 }
-.partners-proof {
-  width: min(41.875rem, 90%);
-  margin: 4rem auto 0;
-  font-size: 1.3125rem;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
-}
-.partners-proof a,
 .partners-email {
   text-decoration: underline;
   text-underline-offset: 0.2em;
@@ -553,7 +544,7 @@
   justify-content: center;
   align-items: center;
   gap: 1rem 1.75rem;
-  margin-top: 2rem;
+  margin-top: 4rem;
 }
 .partners-action .button {
   min-height: 3.5rem;
@@ -578,16 +569,12 @@
   .partners-types {
     margin-top: 3rem;
   }
-  .partners-proof {
-    margin-top: 3rem;
-    font-size: 1.25rem;
-  }
 }
 .leaders {
   background: var(--leaders-bg);
   color: var(--leaders-ink);
   margin-top: 4.375rem;
-  padding: 6.5rem 3.125rem 7.1875rem;
+  padding: 6.5rem 3.125rem 9.5rem;
 }
 .leaders .programs {
   border-color: #4a111633;
