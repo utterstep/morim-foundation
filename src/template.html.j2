@@ -111,7 +111,7 @@
   <div class="program-list" aria-live="polite">
     {% if audience == 'leaders' %}
     {% for row in t.programs.leaders %}
-    <article class="program-row" data-program="{{ row.id }}"{% if row.closed %} data-closed{% endif %}>
+    <article class="program-row" id="program-{{ row.id }}" data-program="{{ row.id }}"{% if row.closed %} data-closed{% endif %}>
       {% if row.badge %}<span class="program-badge"><span>{{ row.badge }}</span></span>{% endif %}
       <h4>{{ row.title_html }}</h4>
       {% if row.closed %}
@@ -124,7 +124,7 @@
     {% endfor %}
     {% else %}
     {% for row in t.programs.teachers %}
-    <article class="program-row" data-program="{{ row.id }}" data-location="{{ row.location }}">
+    <article class="program-row" id="program-{{ row.id }}" data-program="{{ row.id }}" data-location="{{ row.location }}">
       <h4>{{ row.title_html }}</h4>
       {{ program_meta(row.where, row.when) }}
       {{ apply_button('button apply-button') }}
@@ -172,7 +172,7 @@
     {% endif %}
   </div>
   {% if audience == 'leaders' %}
-  <p class="program-note">
+  <p class="program-note" id="schools">
     {{ t.programs.note.title }}
     <br>
     {{ t.programs.note.body }}
@@ -262,21 +262,42 @@
       <p data-hero-story-end>{{ t.approach.attention }}</p>
       <p>{{ t.approach.schools_html }}</p>
     </div>
-    <figure class="pilot" id="pilot">
-      <div class="photo-stack">
-        {{ photo('pilot-landscape', 'photo-landscape', landscape_widths, '(max-width: 700px) 58vw, 37vw', t.approach.pilot_landscape_alt, 511, 339) }}
-        {{ photo('pilot-portrait', 'photo-portrait', portrait_widths, '(max-width: 700px) 38vw, 26vw', t.approach.pilot_portrait_alt, 317, 412) }}
-      </div>
-      <figcaption>{{ t.approach.pilot_caption }}</figcaption>
-    </figure>
-    <div class="mission">
+  </section>
+
+  {# The answer to "what is this?", right after the story: the Foundation
+     line beside one pilot photo, three beats, the approaches paragraph and
+     the Tuesday-morning test, then where to start. The routes land on the
+     first teachers program and the first coordinators cohort still open. #}
+  <section class="what-we-do" id="what-we-do" aria-labelledby="what-we-do-title">
+    <h2 class="display" id="what-we-do-title">{{ t.what_we_do.title_html }}</h2>
+    <div class="wwd-lead">
       <div class="prose">
-        <p class="mission-intro">{{ t.approach.mission_intro_html }}</p>
-        {% for p in t.approach.mission %}
-        <p>{{ p }}</p>
-        {% endfor %}
+        <p class="mission-intro">{{ t.what_we_do.lead_html }}</p>
       </div>
+      <figure class="wwd-photo">
+        {{ photo('wwd-photo-img', 'photo-landscape', landscape_widths, '(max-width: 700px) 86vw, 22rem', t.approach.pilot_landscape_alt, 511, 339) }}
+        <figcaption>{{ t.approach.pilot_caption }}</figcaption>
+      </figure>
     </div>
+    <div class="wwd-beats">
+      {% for b in t.what_we_do.beats %}
+      <article class="wwd-beat">
+        <h3>{{ b.title }}</h3>
+        <p>{{ b.body }}</p>
+        {% if 'note' in b %}<span class="beat-note">{{ b.note }}</span>{% endif %}
+      </article>
+      {% endfor %}
+    </div>
+    <div class="prose wwd-closing">
+      {% for p in t.what_we_do.closing %}
+      <p>{{ p }}</p>
+      {% endfor %}
+    </div>
+    <nav class="wwd-routes" aria-label="{{ t.what_we_do.routes.aria }}">
+      <a href="#program-{{ t.programs.teachers[0].id }}">{{ t.what_we_do.routes.teachers }}</a>
+      <a href="#program-{{ (t.programs.leaders | rejectattr('closed') | first).id }}">{{ t.what_we_do.routes.coordinators }}</a>
+      <a href="#schools">{{ t.what_we_do.routes.schools }}</a>
+    </nav>
   </section>
 
   <div class="story-stack">
@@ -291,6 +312,7 @@
         <p>{{ p }}</p>
         {% endfor %}
       </div>
+      {{ programs('teachers') }}
       <div class="benefits">
         {% for b in t.fellowship.benefits %}
         <article class="benefit{% if b.class %} {{ b.class }}{% endif %}">
@@ -306,7 +328,6 @@
         </article>
         {% endfor %}
       </div>
-      {{ programs('teachers') }}
     </section>
 
     <section class="leaders panel" id="leaders" aria-labelledby="leaders-title">
@@ -320,6 +341,7 @@
         <p>{{ p }}</p>
         {% endfor %}
       </div>
+      {{ programs('leaders') }}
       <div class="leader-benefits">
         {% for b in t.leaders.benefits %}
         <article class="benefit">
@@ -328,7 +350,6 @@
         </article>
         {% endfor %}
       </div>
-      {{ programs('leaders') }}
     </section>
   </div>
 

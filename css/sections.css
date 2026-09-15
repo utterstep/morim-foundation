@@ -391,6 +391,139 @@
   color: white;
   text-underline-offset: 3px;
 }
+/* "What we do": the answer to "what is this?", right after the story.
+   Display heading, the Foundation line beside one pilot photo, three beats
+   (the funding one keeps the handwritten aside), the approaches paragraph
+   and the Tuesday-morning test, then the three routes. */
+.what-we-do {
+  padding: 8rem 5% 3rem;
+  text-align: center;
+  background: var(--background);
+}
+.what-we-do .display {
+  font-size: 5.5rem;
+  margin-top: 0;
+}
+.wwd-lead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 22rem;
+  align-items: center;
+  gap: 3.5rem;
+  width: min(64rem, 100%);
+  margin: 3.5rem auto 0;
+  text-align: start;
+}
+.wwd-lead .prose {
+  width: auto;
+  margin: 0;
+  text-align: start;
+}
+.wwd-photo {
+  margin: 0;
+  text-align: center;
+}
+.wwd-photo-img {
+  width: 100%;
+  height: auto;
+  border: 0.3125rem solid white;
+  box-shadow: 0 1px 0.75rem #0000001a;
+  transform: rotate(-3deg);
+}
+.wwd-photo figcaption {
+  margin-top: 1.125rem;
+}
+.wwd-beats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 3.5rem 3rem;
+  width: min(72rem, 100%);
+  margin: 5.75rem auto 0;
+}
+.wwd-beat h3 {
+  font-size: 2.25rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-weight: 400;
+}
+.wwd-beat p {
+  max-width: 21.5rem;
+  margin: 1.125rem auto 0;
+  font-size: 1.3125rem;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: #55554e;
+}
+.beat-note {
+  display: block;
+  width: fit-content;
+  margin: 1.375rem auto 0;
+  color: #1c51e0;
+  font-family: var(--font-handwritten);
+  font-size: 1.625rem;
+  line-height: 1.1;
+  transform: rotate(-2deg);
+  text-transform: var(--handwritten-case);
+  letter-spacing: normal;
+}
+.wwd-closing {
+  margin-top: 4.5rem;
+}
+/* Three routes after the Tuesday line: one style, the order does the ranking. */
+.wwd-routes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1.75rem;
+  margin-top: 2.25rem;
+  font-size: 1.125rem;
+  letter-spacing: -0.03em;
+}
+.wwd-routes a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+@media (max-width: 700px) {
+  .what-we-do {
+    padding: 4.5rem 5% 2.5rem;
+  }
+  /* Hard <br> breaks: "for teachers and" / "и координаторов" are the longest
+     lines, so the vw step is smaller than the wrapping displays above. */
+  .what-we-do .display {
+    font-size: clamp(2.5rem, 10.5vw, 4rem);
+  }
+  html[lang='ru'] .what-we-do .display {
+    font-size: clamp(2.25rem, 10vw, 3.75rem);
+  }
+  .wwd-lead {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 2.25rem;
+    text-align: center;
+  }
+  .wwd-lead .prose {
+    text-align: center;
+  }
+  .wwd-photo {
+    width: min(20rem, 100%);
+    margin: 0 auto;
+  }
+  .wwd-beats {
+    grid-template-columns: 1fr;
+    gap: 2.75rem;
+    margin-top: 3.25rem;
+  }
+  .wwd-beat h3 {
+    font-size: 1.875rem;
+  }
+  .wwd-beat p {
+    font-size: 1.25rem;
+  }
+  .wwd-closing {
+    margin-top: 3rem;
+  }
+}
 .leaders {
   background: var(--leaders-bg);
   color: var(--leaders-ink);

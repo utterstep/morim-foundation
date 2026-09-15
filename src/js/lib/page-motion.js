@@ -100,7 +100,7 @@ export function startPageMotion(root) {
   };
 
   register(
-    '.prose > p, .eyebrow, .team-title, .faq > h2, .benefit > h3, .benefit > p, .program-heading, .program-note, .footer-message',
+    '.prose > p, .eyebrow, .team-title, .faq > h2, .benefit > h3, .benefit > p, .wwd-beat > h3, .wwd-beat > p, .wwd-routes, .program-heading, .program-note, .footer-message',
     'text',
     620,
   );

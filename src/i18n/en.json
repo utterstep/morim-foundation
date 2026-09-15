@@ -21,8 +21,8 @@
   },
   "nav": [
     {
-      "id": "approach",
-      "label": "Approach"
+      "id": "what-we-do",
+      "label": "What we do"
     },
     {
       "id": "fellowship",
@@ -43,8 +43,8 @@
   ],
   "header_nav": [
     {
-      "id": "approach",
-      "label": "Approach"
+      "id": "what-we-do",
+      "label": "What we do"
     },
     {
       "label": "Programs",
@@ -70,8 +70,8 @@
   ],
   "mobile_nav": [
     {
-      "id": "approach",
-      "label": "Approach"
+      "id": "what-we-do",
+      "label": "What we do"
     },
     {
       "id": "fellowship",
@@ -119,14 +119,36 @@
     "attention": "kids today are growing up inside an economy engineered to consume their attention. Wars. COVID. Zoom classes.",
     "schools_html": "Schools were never designed to handle that.<br>Our foundation is here to help.",
     "pilot_landscape_alt": "Teachers in discussion at the foundation’s Tbilisi pilot",
-    "pilot_portrait_alt": "Participants working on an activity during the Tbilisi pilot",
-    "pilot_caption": "Our first pilot in Tbilisi, Georgia. July 2026",
-    "mission_intro_html": "The Foundation runs programs for teachers and coordinators, with <span class=\"mentor-highlight\">mentors<img src=\"{root}assets/imgRectangle70.svg\" alt=\"\" aria-hidden=\"true\"></span> and <span class=\"funding\">funding<span class=\"funding-underline\" aria-hidden=\"true\"></span></span> built in.<span class=\"stipend-note\">Yes, a monthly stipend</span>",
-    "mission": [
-      "More than half of every program is practice. Each starts with an intensive and moves quickly into practical work: teachers lead lessons with children, while coordinators bring real situations from their schools and work through them together. A mentor stays with the group throughout.",
+    "pilot_caption": "Our first pilot in Tbilisi, Georgia. July 2026"
+  },
+  "what_we_do": {
+    "title_html": "morim programs<br>for teachers and<br>coordinators",
+    "lead_html": "The Foundation runs programs for teachers and coordinators, with <span class=\"mentor-highlight\">mentors<img src=\"{root}assets/imgRectangle70.svg\" alt=\"\" aria-hidden=\"true\"></span> and <span class=\"funding\">funding<span class=\"funding-underline\" aria-hidden=\"true\"></span></span> built in.",
+    "beats": [
+      {
+        "title": "Practice first",
+        "body": "More than half of every program is practice. Each starts with an intensive and moves quickly into practical work: teachers lead lessons with children, while coordinators bring real situations from their schools and work through them together."
+      },
+      {
+        "title": "Mentors who stay",
+        "body": "A mentor stays with the group throughout. Teachers and coordinators meet their mentor in small groups every week, for the whole stretch of practice."
+      },
+      {
+        "title": "Funding for your time",
+        "body": "You have more than enough work without us, so we pay participants a stipend for both the training and the practice with children.",
+        "note": "Yes, a monthly stipend"
+      }
+    ],
+    "closing": [
       "We use approaches we trust and that have been well studied, such as inquiry-based learning, activity-based learning, and project work. We don’t have a new pedagogy to sell.",
       "<strong>The test is simple: does it still work in a regular class of 35 on a Tuesday morning?</strong>"
-    ]
+    ],
+    "routes": {
+      "aria": "Where to start",
+      "teachers": "For teachers",
+      "coordinators": "For coordinators",
+      "schools": "Schools and municipalities"
+    }
   },
   "fellowship": {
     "eyebrow": "Morim Fellows",

@@ -109,36 +109,6 @@
   .introduction {
     margin-top: 3rem;
   }
-  .pilot {
-    margin-top: 3rem;
-  }
-  .photo-stack {
-    width: min(42rem, calc(100% - 2.5rem));
-    height: auto;
-    aspect-ratio: 850 / 456;
-  }
-  .pilot-landscape {
-    height: 74.3%;
-    top: 10%;
-    transform: rotate(-2deg);
-  }
-  .pilot-portrait {
-    height: 90.3%;
-    top: 2%;
-    transform: rotate(5deg);
-  }
-  .pilot figcaption {
-    margin: 0.875rem 1.5rem 0;
-  }
-  .mission {
-    margin: 3.5rem auto;
-  }
-  .stipend-note {
-    position: static;
-    display: block;
-    width: 100%;
-    margin: 1.25rem 0;
-  }
   .panel {
     width: calc(100% - 2rem);
     border-radius: 0.75rem;

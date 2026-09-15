@@ -32,7 +32,8 @@
   isolation: isolate;
   display: flow-root;
 }
-.approach {
+.approach,
+.what-we-do {
   display: flow-root;
   background: var(--background);
 }
