@@ -136,7 +136,7 @@
   },
   "what_we_do": {
     "title_html": "morim programs<br>for teachers and<br>coordinators",
-    "lead_html": "The Foundation runs programs for teachers and coordinators, with <span class=\"mentor-highlight\">mentors<img src=\"{root}assets/imgRectangle70.svg\" alt=\"\" aria-hidden=\"true\"></span> and <span class=\"funding\">funding<span class=\"funding-underline\" aria-hidden=\"true\"></span></span> built in.",
+    "lead_html": "The Foundation builds programs that make the everyday work in class and school stronger: inquiry-based learning, real practice, and <span class=\"mentor-highlight\">mentors<img src=\"{root}assets/imgRectangle70.svg\" alt=\"\" aria-hidden=\"true\"></span> who stay close.",
     "beats": [
       {
         "title": "Practice first",

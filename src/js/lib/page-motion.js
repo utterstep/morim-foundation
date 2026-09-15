@@ -104,20 +104,14 @@ export function startPageMotion(root) {
     'text',
     620,
   );
-  // Both photos follow one stable container over a longer scroll range.
-  // A small stagger replaces the previous overshoot and independent triggers.
-  register(
-    '.photo-stack img',
-    'photo',
-    1000,
-    (index) => index * 90,
-    '.photo-stack',
-  );
-  register('.pilot figcaption', 'text', 550, () => 240);
-  // These offsets now describe phases of one scroll timeline, not elapsed time.
+  // The pilot photo beside the lead follows its figure over a longer scroll
+  // range, its caption a little later.
+  register('.wwd-photo-img', 'photo', 1000, () => 0, '.wwd-photo');
+  register('.wwd-photo figcaption', 'text', 550, () => 240);
+  // The offset is a phase of the lead's scroll timeline, not elapsed time.
   register('.mentor-highlight img', 'mark', 500, () => 350, '.mission-intro');
-  register('.funding-underline', 'mark', 450, () => 950, '.mission-intro');
-  register('.stipend-note', 'note', 600, () => 1550, '.mission-intro');
+  // The handwritten stipend aside under the funding beat.
+  register('.beat-note', 'note', 600, () => 200);
   register('.teacher-a img, .school-oo img', 'glyph', 700, () => 200);
   register(
     '.questions span',

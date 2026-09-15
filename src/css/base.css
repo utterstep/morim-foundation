@@ -439,7 +439,6 @@ figcaption {
 .mission-intro {
   position: relative;
 }
-.funding,
 .mentor-highlight {
   display: inline-block;
   position: relative;
@@ -454,15 +453,6 @@ figcaption {
   width: calc(100% + 0.75rem);
   height: calc(100% + 0.25rem);
   max-width: none;
-  pointer-events: none;
-}
-.funding-underline {
-  position: absolute;
-  inset-inline-start: 0;
-  inset-inline-end: 0;
-  bottom: -0.1em;
-  height: 2px;
-  background: #1c51e0;
   pointer-events: none;
 }
 .sr-only {

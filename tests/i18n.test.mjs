@@ -34,7 +34,6 @@ test('translated fragments keep the markup the page motion depends on', () => {
     const t = load(lang);
     const html = t.what_we_do.lead_html;
     assert.match(html, /<span class="mentor-highlight">[^<]+<img /, `${lang} mentor highlight`);
-    assert.match(html, /<span class="funding">[^<]+<span class="funding-underline"/, `${lang} funding underline`);
     assert.ok(t.what_we_do.beats.at(-1).note?.length, `${lang} stipend note on the funding beat`);
   }
 });

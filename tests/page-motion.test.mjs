@@ -23,7 +23,7 @@ function setup(reduced = false, initialTop = 1000, insideCard = false) {
     top = 0;
     closest(selector) {
       if (selector === '.panel') return insideCard ? anchor : null;
-      if (selector === '.photo-stack') return photos;
+      if (selector === '.wwd-photo') return photos;
       return selector === '.mission-intro' ? intro : null;
     }
     getBoundingClientRect() {
@@ -82,13 +82,6 @@ function setup(reduced = false, initialTop = 1000, insideCard = false) {
       const node = selector.startsWith('.prose') ? intro : new FakeElement();
       node.parentElement = anchor;
       nodes.push(node);
-      if (selector === '.photo-stack img') {
-        const secondPhoto = new FakeElement();
-        secondPhoto.parentElement = anchor;
-        secondPhoto.top = 40;
-        nodes.push(secondPhoto);
-        return [node, secondPhoto];
-      }
       return [node];
     },
     addEventListener: (name, fn) => rootListeners.set(name, fn),
@@ -201,23 +194,17 @@ test('all reveals scrub forward, hold still, and reverse without playing a timer
   state.cleanup();
 });
 
-test('highlight, underline and stipend use ordered phases of the same scroll position', () => {
+test('the highlight is a phase of the lead\'s scroll position', () => {
   const state = setup();
-  const sequence = state.created.filter((animation) =>
-    [350, 950, 1550].includes(animation.options.delay),
-  );
-  assert.equal(sequence.length, 3);
-  state.scrollTo(650);
-  assert(sequence[0].currentTime >= 850);
-  assert(sequence[1].currentTime < 950);
-  assert(sequence[2].currentTime < 1550);
-  state.scrollTo(510);
-  assert.equal(sequence[1].currentTime, 1400);
-  assert(sequence[2].currentTime < 1550);
-  state.scrollTo(340);
-  assert.equal(sequence[2].currentTime, 2150);
+  const marks = state.created.filter((animation) => animation.options.delay === 350);
+  assert.equal(marks.length, 1);
   state.scrollTo(1000);
-  assert(sequence.every((animation) => animation.currentTime === 0));
+  assert.equal(marks[0].currentTime, 0);
+  state.scrollTo(650);
+  assert(marks[0].currentTime > 0);
+  const midway = marks[0].currentTime;
+  state.scrollTo(340);
+  assert(marks[0].currentTime > midway);
   state.cleanup();
 });
 
@@ -286,24 +273,19 @@ test('motion preserves authored transforms and ends at neutral offsets', () => {
   }
 });
 
-test('photos share a gradual scroll timeline without bounce or overshoot', () => {
+test('the pilot photo follows a gradual scroll timeline without bounce or overshoot', () => {
   const state = setup();
   const photos = state.created.filter(
     ({ frames }) => frames === motionFrames.photo,
   );
-  assert.equal(photos.length, 2);
+  assert.equal(photos.length, 1);
   assert.equal(motionFrames.photo.length, 2);
-  assert.deepEqual(
-    photos.map(({ options }) => options.delay),
-    [0, 90],
-  );
+  assert.equal(photos[0].options.delay, 0);
   state.scrollTo(600);
-  assert.equal(photos[0].currentTime, photos[1].currentTime);
   assert(photos[0].currentTime > 0 && photos[0].currentTime < 1000);
   const midway = photos[0].currentTime;
   state.scrollTo(300);
   assert.equal(photos[0].currentTime, 1000);
-  assert.equal(photos[1].currentTime, 1090);
   state.scrollTo(600);
   assert.equal(photos[0].currentTime, midway);
   state.cleanup();

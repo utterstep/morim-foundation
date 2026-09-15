@@ -137,7 +137,7 @@
   },
   "what_we_do": {
     "title_html": "תוכניות Morim<br>למורים ולרכזים",
-    "lead_html": "הקרן מפעילה תוכניות למורים ולרכזים — עם ליווי של <span class=\"mentor-highlight\">מנטורים<img src=\"{root}assets/imgRectangle70.svg\" alt=\"\" aria-hidden=\"true\"></span> ו<span class=\"funding\">מלגה<span class=\"funding-underline\" aria-hidden=\"true\"></span></span> למשתתפים.",
+    "lead_html": "הקרן בונה תוכניות שמחזקות את העבודה היומיומית בכיתה ובבית הספר: למידה בדרך החקר, תרגול אמיתי, ו<span class=\"mentor-highlight\">מנטורים<img src=\"{root}assets/imgRectangle70.svg\" alt=\"\" aria-hidden=\"true\"></span> שנשארים קרובים.",
     "beats": [
       {
         "title": "קודם כול תרגול",

@@ -137,7 +137,7 @@
   },
   "what_we_do": {
     "title_html": "программы morim<br>для учителей<br>и координаторов",
-    "lead_html": "Фонд проводит программы для учителей и координаторов — с <span class=\"mentor-highlight\">менторами<img src=\"{root}assets/imgRectangle70.svg\" alt=\"\" aria-hidden=\"true\"></span> и <span class=\"funding\">стипендией<span class=\"funding-underline\" aria-hidden=\"true\"></span></span> для участников.",
+    "lead_html": "Фонд создаёт программы, которые делают повседневную работу в классе и в школе сильнее: исследовательское обучение, настоящая практика и <span class=\"mentor-highlight\">менторы<img src=\"{root}assets/imgRectangle70.svg\" alt=\"\" aria-hidden=\"true\"></span>, которые остаются рядом.",
     "beats": [
       {
         "title": "Сначала практика",
