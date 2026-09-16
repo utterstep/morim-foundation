@@ -17,7 +17,7 @@
     "names": {
       "en": "EN",
       "ru": "RU",
-      "he": "עב"
+      "he": "עברית"
     }
   },
   "nav": [
@@ -154,7 +154,7 @@
       }
     ],
     "closing": [
-      "We use approaches we trust and that have been well studied, such as inquiry-based learning, activity-based learning, and project work. We don’t have a new pedagogy to sell.",
+      "We use approaches we trust and that have been well studied, such as inquiry-based learning, activity-based learning, and project-based learning. We don’t have a new pedagogy to sell.",
       "<strong>The test is simple: does it still work in a regular class of 35 on a Tuesday morning?</strong>"
     ],
     "routes": {
