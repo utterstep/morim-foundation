@@ -517,7 +517,7 @@
   <section class="camp" id="tbilisi-camp" aria-labelledby="tbilisi-promo-title" data-program="{{ tb.id }}">
     <div class="camp-copy">
       <h2 id="tbilisi-promo-title">{{ tb.title_html }}</h2>
-      <p class="promo-meta"><span>{{ tb.where }}</span><span>{{ tb.when }}</span></p>
+      <p class="promo-meta"><span>{{ tb.where }}</span><span><bdi dir="ltr">{{ tb.dates }}</bdi></span></p>
       <ul class="camp-figures" role="list">
         {% for s in tb.stats %}
         <li class="camp-figure">

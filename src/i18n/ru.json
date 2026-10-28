@@ -226,7 +226,6 @@
       "location": "tbilisi",
       "title_html": "<span class=\"camp-descriptor\">Пилот программы для учителей</span> <span class=\"camp-name\">Летний лагерь Тбилиси</span>",
       "where": "Тбилиси, Грузия",
-      "when": "Июль–август 2026",
       "dates": "1.07–1.09.2026",
       "city": "Тбилиси",
       "photos_aria": "Фотографии с интенсива для учителей в Тбилиси",
@@ -235,7 +234,7 @@
       "stats": [
         {
           "value_html": "17",
-          "label": "учителей закончили интенсив, июль–август 2026"
+          "label": "учителей закончили интенсив, <bdi dir=\"ltr\">1.07–1.09.2026</bdi>"
         },
         {
           "value_html": "8,8<span class=\"arrow\">→</span>9,5",

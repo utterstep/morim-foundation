@@ -225,7 +225,6 @@
       "location": "tbilisi",
       "title_html": "<span class=\"camp-descriptor\">Teacher program pilot</span> <span class=\"camp-name\">Summer Camp Tbilisi</span>",
       "where": "Tbilisi, Georgia",
-      "when": "July–August 2026",
       "dates": "1.07–1.09.2026",
       "city": "Tbilisi",
       "photos_aria": "Photos from the Tbilisi teacher intensive",
@@ -234,7 +233,7 @@
       "stats": [
         {
           "value_html": "17",
-          "label": "teachers finished the intensive, July–August 2026"
+          "label": "teachers finished the intensive, <bdi dir=\"ltr\">1.07–1.09.2026</bdi>"
         },
         {
           "value_html": "8.8<span class=\"arrow\">→</span>9.5",

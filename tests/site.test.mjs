@@ -217,7 +217,10 @@ test('the Tbilisi camp is its own section after the audiences, expanding its res
     const camp = /<section class="camp" id="tbilisi-camp" aria-labelledby="tbilisi-promo-title"[^>]*>([\s\S]*?)<\/section>/.exec(html);
     assert.ok(camp, `${page} has no camp section`);
     assert.match(camp[1], /<h2 id="tbilisi-promo-title">/);
-    assert.match(camp[1], /<p class="promo-meta">(<span>[^<]+<\/span>){2}<\/p>/);
+    // Where, then the same dates as the pilot card's badge.
+    const meta = /<p class="promo-meta"><span>[^<]+<\/span><span><bdi dir="ltr">([^<]+)<\/bdi><\/span><\/p>/.exec(camp[1]);
+    assert.ok(meta, `${page} camp meta should be the place and the dates`);
+    assert.equal(meta[1], /<p class="running-badge"><bdi dir="ltr">([^<]+)<\/bdi>/.exec(html)?.[1], `${page}: camp and badge dates differ`);
     assert.doesNotMatch(camp[1], /promo-meta">[^\n]*(Free|Бесплатно|חינם)/);
     assert.match(camp[1], /<img class="camp-photo" src="[^"]*assets\/camp-square-720\.webp"/);
     assert.doesNotMatch(html, /class="program-row[^"]*"[^>]*data-program="tbilisi"|promo-banner/);
@@ -225,7 +228,7 @@ test('the Tbilisi camp is its own section after the audiences, expanding its res
     const list = /<ul class="camp-figures" role="list">([\s\S]*?)<\/ul>/.exec(camp[1]);
     assert.ok(list, `${page} has no camp figures`);
     assert.equal(list[1].match(/<span class="stat-value">[^<]*\d/g)?.length, figures);
-    assert.equal(list[1].match(/<span class="stat-label">[^<]+<\/span>/g)?.length, figures);
+    assert.equal(list[1].match(/<span class="stat-label">[^<]+/g)?.length, figures);
     // A disclosure control, not a dialog trigger; it names the story block.
     assert.match(camp[1], /<button type="button" class="camp-more text-link" aria-expanded="false" aria-controls="tbilisi-details" data-expand hidden>/);
     assert.match(camp[1], /<div class="camp-details" id="tbilisi-details">[\s\S]*class="results-quote"/);
