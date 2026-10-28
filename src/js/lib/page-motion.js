@@ -1,6 +1,6 @@
 // Ported from PR #3 website/lib/page-motion.ts (plain ES module, no build step).
 // Individual transform properties preserve the artwork's existing CSS tilts.
-/** @type {Record<'text' | 'photo' | 'note' | 'glyph' | 'mark', Keyframe[]>} */
+/** @type {Record<'text' | 'photo' | 'note' | 'glyph', Keyframe[]>} */
 export const motionFrames = {
   text: [
     { opacity: 0, translate: '0 12px', scale: '0.995' },
@@ -20,7 +20,6 @@ export const motionFrames = {
     { rotate: '2deg', offset: 0.65 },
     { rotate: '0deg' },
   ],
-  mark: [{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)' }],
 };
 
 /**
@@ -65,7 +64,8 @@ export function startPageMotion(root) {
   ) => {
     root.querySelectorAll(selector).forEach((element, index) => {
       // Card copy stays fully readable throughout scrolling, including notes.
-      if ((kind === 'text' || kind === 'note') && element.closest('.panel'))
+      // So does a side panel: it scrolls on its own, not with the page.
+      if ((kind === 'text' || kind === 'note') && (element.closest('.panel') || element.closest('dialog')))
         return;
       const animation = element.animate(motionFrames[kind], {
         duration,
@@ -100,19 +100,16 @@ export function startPageMotion(root) {
   };
 
   register(
-    '.prose > p, .eyebrow, .team-title, .faq > h2, .benefit > h3, .benefit > p, .wwd-beat > h3, .wwd-beat > p, .wwd-routes, .partners-action, .program-heading, .footer-message',
+    '.prose > p, .eyebrow, .team-title, .faq > h2, .benefit > h3, .benefit > p, .wwd-beat > h3, .wwd-beat > p, .wwd-step > h4, .wwd-step > p, .wwd-routes, .partners-action, .program-heading, .footer-message',
     'text',
     620,
   );
   // The pilot photo beside the lead follows its figure over a longer scroll
   // range, its caption a little later.
   register('.wwd-photo-img', 'photo', 1000, () => 0, '.wwd-photo');
-  register('.wwd-photo figcaption', 'text', 550, () => 240);
-  // The offset is a phase of the lead's scroll timeline, not elapsed time.
-  register('.mentor-highlight img', 'mark', 500, () => 350, '.mission-intro');
   // The handwritten stipend aside under the funding beat.
   register('.beat-note', 'note', 600, () => 200);
-  register('.teacher-a img, .school-oo img', 'glyph', 700, () => 200);
+  register('.hand-a-ink', 'glyph', 700, () => 200);
   register(
     '.questions span',
     'note',
@@ -125,9 +122,13 @@ export function startPageMotion(root) {
     frame = 0;
     if (stopped) return;
     if (needsMeasurement) {
-      animations.forEach(({ animation, end }) => {
-        animation.currentTime = end;
-      });
+      // Measure at the authored positions, then restore each pending
+      // group's reached time below; finished groups are never rewound.
+      triggers.forEach(({ tracks }) =>
+        tracks.forEach(({ animation, end }) => {
+          animation.currentTime = end;
+        }),
+      );
       for (const [trigger, group] of triggers) {
         let anchor = trigger.parentElement ?? root;
         while (animations.has(anchor) && anchor.parentElement)
@@ -145,16 +146,29 @@ export function startPageMotion(root) {
       if (!positions.has(anchor))
         positions.set(anchor, anchor.getBoundingClientRect().top);
     });
-    triggers.forEach((group) => {
+    // Reveals run once. Scrolling down scrubs a group forward; it never
+    // scrubs back. Once a group is complete, or the reader turns back up
+    // while it is part-way, it plays to the end and is dropped for good.
+    for (const [trigger, group] of triggers) {
       const progress = scrollRevealProgress(
         positions.get(group.anchor) + group.offset,
         window.innerHeight,
         group.sequence,
       );
+      const reached = Math.max(group.reached ?? 0, progress);
+      if (reached >= 1 || (progress < reached && reached > 0)) {
+        group.tracks.forEach(({ animation, end }) => {
+          if (reached >= 1) animation.currentTime = end;
+          else animation.play();
+        });
+        triggers.delete(trigger);
+        continue;
+      }
+      group.reached = reached;
       group.tracks.forEach(({ animation, end }) => {
-        animation.currentTime = Math.min(end, progress * group.duration);
+        animation.currentTime = Math.min(end, reached * group.duration);
       });
-    });
+    }
   };
   const schedule = () => {
     if (!stopped && !frame) frame = requestAnimationFrame(update);

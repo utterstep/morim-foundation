@@ -6,6 +6,10 @@
 
 
 
+
+
+
+
 <!DOCTYPE html>
 <html lang="ru" dir="ltr">
 <head>
@@ -26,57 +30,86 @@
   <link rel="alternate" hreflang="he" href="https://morim.foundation/he/">
   <link rel="alternate" hreflang="x-default" href="https://morim.foundation/">
   <link rel="icon" href="../assets/favicon.png">
-  <link rel="preload" href="../assets/fonts/Spectral-Regular.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="../assets/fonts/Spectral-Light.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="../css/base.css?v=2c8b7826">
-  <link rel="stylesheet" href="../css/sections.css?v=2c8b7826">
-  <link rel="stylesheet" href="../css/motion.css?v=2c8b7826">
-  <link rel="stylesheet" href="../css/mobile.css?v=2c8b7826">
-  <link rel="stylesheet" href="../css/header.css?v=2c8b7826">
-  <link rel="stylesheet" href="../css/hero.css?v=2c8b7826">
-  <link rel="stylesheet" href="../css/widgets.css?v=2c8b7826">
+  <link rel="preload" href="../assets/fonts/Spectral-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/Spectral-Light.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/Onest-Variable-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/Onest-Variable-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/Caveat-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/GTAlpina-Medium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://www.youtube.com">
+  <link rel="preconnect" href="https://www.tiktok.com">
+  <link rel="modulepreload" href="../js/main.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/lib/page-motion.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/lib/card-depth.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/lib/floating-apply.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/header.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/dialog.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/mobile-menu.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/disclosure.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/program-motion.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/programs.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/hero/hero.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/lang.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/nav-menu.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/scroll-hint.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/audiences.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/hand-a.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/tabs.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/lib/hero-floating.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/lib/poof.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/hero/hero-state.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/hero/hero-dom.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/hero/hero-badge.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/hero/hero-player.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/hero/hero-drag.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/hero/hero-environment.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/lib/hero-videos.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/lib/hero-apps.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/lib/hero-notification.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/lib/hero-video-autoplay.js?v=2b917f56">
+  <link rel="preload" as="image" href="../assets/hero-app-discord-512.webp" imagesrcset="../assets/hero-app-discord-128.webp 128w, ../assets/hero-app-discord-256.webp 256w, ../assets/hero-app-discord-512.webp 512w" imagesizes="(max-width: 700px) 14vw, 7vw">
+  <link rel="preload" as="image" href="../assets/hero-app-tiktok-512.webp" imagesrcset="../assets/hero-app-tiktok-128.webp 128w, ../assets/hero-app-tiktok-256.webp 256w, ../assets/hero-app-tiktok-512.webp 512w" imagesizes="(max-width: 700px) 14vw, 7vw">
+  <link rel="preload" as="image" href="../assets/hero-app-chatgpt-512.webp" imagesrcset="../assets/hero-app-chatgpt-128.webp 128w, ../assets/hero-app-chatgpt-256.webp 256w, ../assets/hero-app-chatgpt-512.webp 512w" imagesizes="(max-width: 700px) 14vw, 7vw">
+  <link rel="preload" as="image" href="../assets/hero-app-fortnite-258.webp" imagesrcset="../assets/hero-app-fortnite-128.webp 128w, ../assets/hero-app-fortnite-258.webp 258w" imagesizes="(max-width: 700px) 14vw, 7vw">
+  <link rel="preload" as="image" href="../assets/hero-app-youtube-512.webp" imagesrcset="../assets/hero-app-youtube-128.webp 128w, ../assets/hero-app-youtube-256.webp 256w, ../assets/hero-app-youtube-512.webp 512w" imagesizes="(max-width: 700px) 14vw, 7vw">
+  <link rel="preload" as="image" href="../assets/video/stream-headset-neon.webp">
+  <link rel="preload" as="image" href="../assets/video/stream-floral-shirt.webp">
+  <link rel="preload" as="image" href="../assets/video/stream-blue-mic.webp">
+  <link rel="preload" as="image" href="../assets/video/stream-two-players.webp">
+  <link rel="stylesheet" href="../css/base.css?v=2b917f56">
+  <link rel="stylesheet" href="../css/sections.css?v=2b917f56">
+  <link rel="stylesheet" href="../css/motion.css?v=2b917f56">
+  <link rel="stylesheet" href="../css/mobile.css?v=2b917f56">
+  <link rel="stylesheet" href="../css/header.css?v=2b917f56">
+  <link rel="stylesheet" href="../css/hero.css?v=2b917f56">
+  <link rel="stylesheet" href="../css/widgets.css?v=2b917f56">
+  <link rel="stylesheet" href="../css/type.css?v=2b917f56">
+  <script src="../js/page-slide.js?v=2b917f56"></script>
+  <noscript><style>.side-panel{position:static;display:block;inline-size:auto;block-size:auto;max-block-size:none;overflow:visible;box-shadow:none;margin-block-start:1rem}.side-panel-close,[data-dialog]{display:none}</style></noscript>
 </head>
 <body>
 <main id="top" data-hero-variant="original" data-lang="ru">
 
   <div class="header-shell" data-compact="false">
-    <header class="site-header">
-      <a class="logo" href="#top" aria-label="Фонд Morim — на главную">morim foundation</a>
-      <nav aria-label="Основная навигация">
-        <a href="#what-we-do">Что мы делаем</a>
-        <div class="nav-menu ">
-  <button type="button" class="nav-menu-button" aria-haspopup="true" aria-expanded="false"
-          aria-controls="programs-menu-list">
-    <span>Программы</span>
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-  </button>
-  <ul id="programs-menu-list" class="nav-menu-list" hidden>
-    <li><a href="#fellowship">Учителям</a></li>
-<li><a href="#leaders">Координаторам</a></li>
-
-  </ul>
-</div>
-        <a href="#partners">Партнёрам</a>
-        <a href="#team">Команда</a>
-        <a href="#faq">Вопросы</a>
-        <div class="nav-menu lang-menu">
+    <div class="header-start">
+      <header class="site-header">
+        <a class="logo" href="#top" aria-label="Фонд Morim — на главную">morim foundation</a>
+      </header>
+    </div>
+    <nav class="lang-float" aria-label="Основная навигация">
+      <div class="nav-menu lang-menu">
   <button type="button" class="nav-menu-button" aria-haspopup="true" aria-expanded="false"
           aria-controls="lang-menu-list">
-    <span>Другие языки</span>
+    <svg class="flag" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><rect width="24" height="8" fill="#fff"/><rect y="8" width="24" height="8" fill="#0039a6"/><rect y="16" width="24" height="8" fill="#d52b1e"/></svg><span class="sr-only">Язык: </span><span>Рус</span>
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
   </button>
   <ul id="lang-menu-list" class="nav-menu-list" hidden>
-    <li><a href="../" hreflang="en" lang="en">English</a></li>
-<li><a href="../he/" hreflang="he" lang="he">עברית</a></li>
+    <li><a href="../" hreflang="en" lang="en"><svg class="flag" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><rect width="24" height="24" fill="#012169"/><path d="M0 0 24 24M24 0 0 24" stroke="#fff" stroke-width="4.8"/><path d="M0 0 24 24M24 0 0 24" stroke="#c8102e" stroke-width="1.6"/><path d="M12 0v24M0 12h24" stroke="#fff" stroke-width="6"/><path d="M12 0v24M0 12h24" stroke="#c8102e" stroke-width="3.6"/><rect x="12" width="12" height="24" fill="#fff"/><rect x="12" y="0.000" width="12" height="1.846" fill="#b31942"/><rect x="12" y="3.692" width="12" height="1.846" fill="#b31942"/><rect x="12" y="7.385" width="12" height="1.846" fill="#b31942"/><rect x="12" y="11.077" width="12" height="1.846" fill="#b31942"/><rect x="12" y="14.769" width="12" height="1.846" fill="#b31942"/><rect x="12" y="18.462" width="12" height="1.846" fill="#b31942"/><rect x="12" y="22.154" width="12" height="1.846" fill="#b31942"/><rect x="12" width="6" height="12.923" fill="#0a3161"/><path d="M12 0v24" stroke="#fff" stroke-width="0.6"/></svg><span>English</span></a></li>
+<li><a href="../he/" hreflang="he" lang="he" dir="rtl"><svg class="flag" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><rect width="24" height="24" fill="#fff"/><rect y="3" width="24" height="2.6" fill="#0038b8"/><rect y="18.4" width="24" height="2.6" fill="#0038b8"/><path d="M12 7.4 15.8 14H8.2ZM12 16.6 8.2 10H15.8Z" fill="none" stroke="#0038b8" stroke-width="1"/></svg><span>עברית</span></a></li>
 
   </ul>
 </div>
-      </nav>
-      <a class="button" href="mailto:contact@morim.foundation">Написать нам</a>
-      <button type="button" class="mobile-menu-trigger" data-dialog="mobile-menu" aria-haspopup="dialog" aria-label="Меню">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
-    </header>
+    </nav>
   </div>
 
   <section class="hero hero-editorial" aria-labelledby="hero-title"
@@ -96,220 +129,137 @@
     <span>Листайте</span>
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
   </a>
+  <div class="floating-apply-rail" data-anchor=".hero" inert>
+    <a class="button floating-apply-button" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=ru">Подать заявку</a>
+  </div>
 
   <section class="approach" id="approach" aria-label="Наш подход">
     <div class="prose introduction">
-      <p data-hero-story-end>сегодня дети растут в мире, где целая индустрия устроена так, чтобы захватывать и удерживать их внимание. Войны. Ковид. Уроки в Zoom.</p>
-      <p>Школа не была рассчитана на всё это.<br>Фонд помогает учителям работать в таких условиях.</p>
+      <p data-hero-story-end>сегодня дети растут в мире, где целая индустрия устроена так, чтобы захватывать и удерживать их внимание. Войны. Ковид. Уроки в Zoom. Школа не была рассчитана на всё&nbsp;это.</p>
+      <p>Фонд помогает учителям работать в таких условиях.</p>
     </div>
   </section>
 
   <section class="what-we-do" id="what-we-do" aria-labelledby="what-we-do-title">
-    <h2 class="display" id="what-we-do-title">Программы<br>для учителей<br>и координаторов</h2>
-    <div class="wwd-lead">
-      <div class="prose">
-        <p class="mission-intro">Фонд создаёт программы, которые помогают учителям и координаторам в повседневной работе в израильских школах. В основе — исследовательское обучение, практика и поддержка <span class="mentor-highlight">менторов<img src="../assets/imgRectangle70.svg" alt="" aria-hidden="true"></span>.</p>
+    <div class="wwd-head">
+      <h2 class="display" id="what-we-do-title">Программы, где учителя учатся строить уроки на <span class="approach-name">любопытстве</span>, <span class="approach-name">исследовании</span> и <span class="approach-name">проектах</span></h2>
+      <div class="prose wwd-lead">
+        <div class="wwd-lead-text">
+          <p class="mission-intro">Наши программы — про работу учителя и координатора <mark>сегодня</mark>: в мире, полном отвлечений, где школа каждый день борется за внимание и интерес ребёнка. Мы помогаем учителям вернуть это внимание самим уроком, а координаторам — собрать команду, в которой такие учителя хотят остаться.</p>
+          <p class="mission-intro">Мы не продаём новую педагогику. Мы берём хорошо изученные подходы, которым доверяем, учим учителей применять их как следует и показываем, как ИИ может снять часть нагрузки.</p>
+        </div>
+        <p class="wwd-stipend">Участники получают стипендию и за обучение, и за практику с детьми: у учителей и без нас достаточно работы.<a class="beat-note" href="#scholarship">Да, ежемесячная стипендия</a></p>
       </div>
-      <figure class="wwd-photo">
+    </div>
+    <figure class="wwd-photo">
+      <div class="wwd-photo-frame">
         <img class="wwd-photo-img" src="../assets/photo-landscape-720.webp"
      srcset="../assets/photo-landscape-480.webp 480w, ../assets/photo-landscape-720.webp 720w, ../assets/photo-landscape-1080.webp 1080w, ../assets/photo-landscape-1440.webp 1440w, ../assets/photo-landscape-2048.webp 2048w"
-     sizes="(max-width: 700px) 86vw, 22rem"
-     alt="Учителя участвуют в обсуждении на пилоте фонда в Тбилиси" width="511" height="339" loading="lazy" decoding="async">
-        <figcaption>Наш первый пилот. Июль 2026</figcaption>
-      </figure>
+     sizes="100vw"
+     alt="Учителя участвуют в обсуждении на пилоте фонда в Тбилиси" width="511" height="339" loading="eager" fetchpriority="low" decoding="async">
+      </div>
+    </figure>
+    <div class="wwd-steps">
+      <ol class="wwd-steps-list" aria-label="Как устроена программа">
+        <li class="wwd-step">
+          <span class="wwd-step-num" aria-hidden="true">1</span>
+          <h4>Интенсив</h4>
+          <p>Сначала теория и воркшопы: разбираем конкретные приёмы, пробуем их и смотрим, что получается.</p>
+        </li>
+        <li class="wwd-step">
+          <span class="wwd-step-num" aria-hidden="true">2</span>
+          <h4>Кружки</h4>
+          <p>Мы организуем детские кружки и собираем группы: <mark>больше половины программы</mark> проходит там. Несколько недель вы ведёте занятия и пробуете то, что разбирали вместе.</p>
+        </li>
+        <li class="wwd-step">
+          <span class="wwd-step-num" aria-hidden="true">3</span>
+          <h4>Ментор</h4>
+          <p><mark class="blue">Раз в неделю в малой группе</mark> вы разбираете свои занятия с ментором. Ментор остаётся с группой на всё время практики.</p>
+        </li>
+        <li class="wwd-step">
+          <span class="wwd-step-num" aria-hidden="true">4</span>
+          <h4>Свой класс</h4>
+          <p>То, что сработало, вы переносите в свой класс. Ради этого вся программа.</p>
+        </li>
+      </ol>
+      <div class="prose wwd-steps-close">
+        <p class="beat-note wwd-note">10+ занятий для учителей, чтобы попробовать это на настоящих детях</p>
+        <p>Координаторы проходят те же четыре шага, только практика у них — реальные случаи из своих школ, а не кружки.</p>
+      </div>
     </div>
-    <div class="wwd-beats">
-      <article class="wwd-beat">
-        <h3>Главное — практика</h3>
-        <p>Больше половины каждой программы — практика. Сначала — интенсив. Затем учителя ведут занятия с детьми, а координаторы вместе разбирают ситуации из своих школ.</p>
-      </article>
-      <article class="wwd-beat">
-        <h3>Менторы рядом</h3>
-        <p>Ментор сопровождает группу на протяжении всей программы. Во время практики учителя и координаторы встречаются с ним каждую неделю в небольших группах.</p>
-      </article>
-      <article class="wwd-beat">
-        <h3>Стипендия за участие</h3>
-        <p>Участники получают стипендию и за обучение, и за практику с детьми: у учителей и без нас достаточно работы.</p>
-<span class="beat-note">Да, ежемесячная стипендия</span>      </article>
-    </div>
-    <div class="prose wwd-closing">
-      <p>Мы работаем с хорошо изученными подходами, которым доверяем: исследовательским и деятельностным обучением, проектным обучением. Мы не пришли продавать новую педагогику.</p>
-      <p><strong>Проверка простая: работает ли это в обычном классе из 35 детей во вторник утром?</strong></p>
-    </div>
-    <nav class="wwd-routes" aria-label="С чего начать">
-      <a href="#program-tel-aviv">Учителям</a>
-      <a href="#program-school-coordination">Координаторам</a>
-      <a href="#partners">Школам и партнёрам</a>
-    </nav>
   </section>
 
   <div class="story-stack">
-    <section class="fellowship panel" id="fellowship" aria-labelledby="fellowship-title">
-      <div class="floating-apply-rail" inert>
-        <a class="button apply-button floating-apply-button" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=ru">Подать заявку</a>
-      </div>
-      <p class="eyebrow">Morim Fellows</p>
-      <h2 class="display" id="fellowship-title">Дорогие учителя,</h2>
-      <div class="prose fellowship-intro">
-        <p>Последние годы привычный школьный ритм то и дело нарушался. Вы лучше всех видите последствия. Мы хотим дать вам время учиться, пробовать новое и вместе с ментором разбирать то, что происходит в классе.</p>
-        <p>Начинаем с учителей, которые преподают в последних классах начальной школы и первых классах средней школы: в этом возрасте у многих детей начинает пропадать интерес к учёбе.</p>
-      </div>
-      <div class="programs" id="programs">
-  <div class="program-heading">
-    <h3>Наши программы</h3>
-    <div class="location-select-wrap">
-      <button type="button" class="location-select" id="teachers-location"
-              aria-haspopup="listbox" aria-expanded="false"
-              aria-controls="teachers-location-list">
-        <span class="sr-only">Фильтр программ по городу</span>
-        <span data-value-label>Все города</span>
-        <svg class="location-select-chevron" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-      <ul id="teachers-location-list" class="location-options" role="listbox"
-          aria-labelledby="teachers-location" tabindex="-1" hidden>
-        <li role="option" data-value="all" aria-selected="true" tabindex="0">
-          <span>Все города</span>
-          <svg class="location-option-check" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-        </li>
-        <li role="option" data-value="tel-aviv" aria-selected="false" tabindex="-1">
-          <span>Тель-Авив</span>
-          <svg class="location-option-check" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-        </li>
-        <li role="option" data-value="tbilisi" aria-selected="false" tabindex="-1">
-          <span>Тбилиси, Грузия</span>
-          <svg class="location-option-check" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-        </li>
-      </ul>
+    <section class="audiences" id="audiences" aria-label="С чего начать">
+    <div class="audience-nav">
+    <div class="audience-tabs" role="tablist" aria-label="С чего начать">
+      <a class="audience-tab" role="tab" id="tab-fellowship" href="#fellowship" aria-controls="fellowship"
+         aria-selected="true">
+        <span>Учителям</span>
+        <svg class="audience-loop" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M112 7C158 5 197 15 195 32C193 51 136 57 94 56C47 55 5 47 6 29C7 13 49 3 104 5C140 6 170 11 186 20"/></svg>
+      </a>
+      <a class="audience-tab" role="tab" id="tab-leaders" href="#leaders" aria-controls="leaders"
+         aria-selected="false">
+        <span>Координаторам</span>
+        <svg class="audience-loop" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M112 7C158 5 197 15 195 32C193 51 136 57 94 56C47 55 5 47 6 29C7 13 49 3 104 5C140 6 170 11 186 20"/></svg>
+      </a>
     </div>
-  </div>
-  <div class="program-list" aria-live="polite">
-    <article class="program-row" id="program-tel-aviv" data-program="tel-aviv" data-location="tel-aviv">
-      <h4>Учить в эпоху<br>экономики внимания</h4>
-      <p><span>Где</span>Zoom + ежемесячные встречи в Тель-Авиве</p>
-<p><span>Когда</span>Начало — в ноябре 2026 года</p>
-      <a class="button apply-button" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=ru">Подать заявку</a>
-    </article>
-    <article class="program-results-card" data-program="tbilisi" data-location="tbilisi" data-state="open">
-      <div class="program-row program-results-summary">
-        <h4 id="tbilisi-program-title">Летний <span class="word">л<span class="glyph small-a"><span class="sr-only">а</span><img src="../assets/imgA2.svg" alt="" width="28" height="25"></span>герь</span><br>в Тбилиси</h4>
-        <p><span>Где</span>Тбилиси, Грузия</p>
-<p><span>Когда</span>Июль–август 2026</p>
-        <button type="button" class="button results-button"
-                aria-expanded="true" aria-controls="tbilisi-results"
-                data-label-open="Свернуть"
-                data-label-closed="Результаты">Свернуть</button>
+    <a class="audience-trigger text-link" href="schools/">
+      <span>Школам и партнёрам</span><svg class="promo-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    </div>
+    <div class="audience-pane fellowship" id="fellowship" role="tabpanel" aria-labelledby="fellowship-title">
+      <h2 class="display" id="fellowship-title">Учить в эпоху экономики внимания</h2>
+      <div class="program-offer">
+  <article class="offer-terms" id="program-tel-aviv" data-program="tel-aviv" aria-labelledby="fellowship-title">
+<p class="offer-tags"><a class="offer-tag offer-scholarship" href="#scholarship">Стипендии всем участникам!</a></p>    <div class="offer-meta">
+<p><span>Стоимость</span><em class="offer-meta-cost">Бесплатно</em></p><p><span>Старт потоков</span><em class="offer-meta-frequency">Ежемесячно</em></p><p><span>Старт</span>дек. 2026</p>      <p><span>Где</span>Zoom + ежемесячные встречи в Тель-Авиве</p>
+    </div>
+  </article>
+  <a class="button apply-button offer-apply" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=ru" data-apply>Подать заявку</a>
+</div>
+      <a class="running-card pilot-link" href="#tbilisi-camp">
+        <span class="pilot-camp">Летний лагерь Тбилиси</span>
+        <h3>Пилот программы</h3>
+        <p class="running-badge"><bdi dir="ltr">1.07–1.09.2026</bdi></p>
+        <span class="running-status pilot-button text-link">Смотреть итоги<svg class="promo-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <div class="prose fellowship-intro">
+        <p>Дорогие учителя, Последние годы привычный школьный ритм то и дело нарушался. Вы лучше всех видите последствия. Мы хотим дать вам время учиться, пробовать новое и вместе с ментором разбирать то, что происходит в классе.</p>
+        <p>Morim Fellows, нашу программу для учителей, начинаем с тех, кто преподаёт в последних классах начальной школы и первых классах средней: в этом возрасте у многих детей начинает пропадать интерес к учёбе.</p>
       </div>
-      <div id="tbilisi-results" class="program-results-content" role="region" aria-labelledby="tbilisi-program-title">
-        <div class="program-results-body">
-          <figure class="program-results-photos" aria-label="Фотографии с интенсива для учителей в Тбилиси">
-            <img class="results-landscape" src="../assets/photo-landscape-720.webp"
-     srcset="../assets/photo-landscape-480.webp 480w, ../assets/photo-landscape-720.webp 720w, ../assets/photo-landscape-1080.webp 1080w, ../assets/photo-landscape-1440.webp 1440w, ../assets/photo-landscape-2048.webp 2048w"
-     sizes="(max-width: 700px) 50vw, 26vw"
-     alt="Учителя участвуют в обсуждении на интенсиве в Тбилиси" width="511" height="339" loading="lazy" decoding="async">
-            <img class="results-portrait" src="../assets/photo-portrait-500.webp"
-     srcset="../assets/photo-portrait-360.webp 360w, ../assets/photo-portrait-500.webp 500w, ../assets/photo-portrait-760.webp 760w, ../assets/photo-portrait-1024.webp 1024w, ../assets/photo-portrait-1536.webp 1536w"
-     sizes="(max-width: 700px) 36vw, 19vw"
-     alt="Участники вместе работают над учебным заданием" width="317" height="412" loading="lazy" decoding="async">
-          </figure>
-          <div class="program-results-copy">
-            <h5 class="program-results-title">Первый пилот</h5>
-            <div class="results-stats">
-              <div class="stat">
-                <span class="stat-value">17</span>
-                <span class="stat-label">учителей закончили интенсив, июль–август 2026</span>
-              </div>
-              <div class="stat">
-                <span class="stat-value">8,8<span class="arrow">→</span>9,5</span>
-                <span class="stat-label">средняя оценка готовности рекомендовать программу: после интенсива → после практики</span>
-              </div>
-              <div class="stat">
-                <span class="stat-value">40<span class="arrow">→</span>81<small>%</small></span>
-                <span class="stat-label">ответов «понимаю и могу применять» на вопросы об основах метода</span>
-              </div>
-              <div class="stat">
-                <span class="stat-value">60<span class="arrow">→</span>25<small>%</small></span>
-                <span class="stat-label">опрошенных учителей беспокоились о том, как перестроить урок, если он пойдёт не по плану</span>
-              </div>
-            </div>
-            <p>Наш первый интенсив в Тбилиси был посвящён исследовательскому обучению. Мы дважды опросили одних и тех же учителей: после интенсива и после нескольких недель практики с детьми и еженедельных встреч с ментором.</p>
-            <p>После практики ответы заметно изменились. На вопросы об основах метода — зачем нужен исследовательский урок, чем он отличается от просто интересного и какова роль учителя — участники чаще отвечали: «понимаю и могу применять». Доля таких ответов выросла с 40% до 81%. Учителя также реже говорили, что их беспокоит необходимость перестраивать урок, если он пойдёт не по плану.</p>
-            <blockquote class="results-quote">«Стала заметно меньше наводить на правильный ответ, а обращать внимание на ход рассуждения».</blockquote>
-            <p class="results-note">Одна из учительниц · именно таких изменений мы ждём</p>
-            <p>Не всё стало легче. Работа с групповой динамикой по-прежнему даётся трудно. Поэтому добавляем больше практики и разборов с ментором на эту тему.</p>
-            <p>Три четверти опрошенных детей сказали, что хотели бы таких уроков и в своей школе.</p>
-            <p class="results-caveat">Результаты обнадёживают, но группа была небольшой, а условия — необычно благоприятными. Ещё предстоит проверить, получатся ли похожие результаты в обычных классах.</p>
-          </div>
+      <div class="prose fellowship-practice">
+        <p>Мы организуем кружки и собираем группы. Несколько недель вы ведёте занятия с детьми и разбираете каждое с ментором. Ошибиться не страшно: это не ваш класс. То, что сработало, вы перенесёте в свои уроки.</p>
+        <p>На интенсивах разбираем методы по шагам, пробуем их и смотрим, что получается.</p>
+        <div class="questions" aria-label="Обычные вопросы — но трудные">
+          <span>«как привлечь внимание класса, не повышая голоса?»</span>
+          <span>«как развивать мотивацию, которая не зависит от оценок?»</span>
+          <span>«как начать урок с настоящего вопроса?»</span>
+          <span>«как помочь детям самим искать ответы, а не угадывать, что хочет услышать учитель?»</span>
         </div>
       </div>
-    </article>
-  </div>
-</div>
-      <div class="benefits">
-        <article class="benefit craft">
-          <h3>Конкретные педагогические практики</h3>
-          <p>На интенсивах разбираем методы по шагам, пробуем их и смотрим, что получается.</p>
-          <div class="questions" aria-label="Обычные вопросы — но трудные">
-            <span>«как привлечь внимание класса, не повышая голоса?»</span>
-            <span>«как развивать мотивацию, которая не зависит от оценок?»</span>
-            <span>«как начать урок с настоящего вопроса?»</span>
-            <span>«как помочь детям самим искать ответы, а не угадывать, что хочет услышать учитель?»</span>
-          </div>
-        </article>
-        <article class="benefit">
-          <h3>Практика с детьми</h3>
-          <p>После интенсива вы несколько недель ведёте занятия с детьми и каждую неделю разбираете свои уроки с ментором. Задача — научиться применять эти методы в своём классе.</p>
-        </article>
-        <article class="benefit">
-          <h3>Стипендия за участие</h3>
-          <p>У вас и без нас хватает работы. Поэтому мы платим стипендию и за обучение, и за практику с детьми.<br>Если мы ценим время учителя, логично за него платить.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="leaders panel" id="leaders" aria-labelledby="leaders-title">
-      <div class="floating-apply-rail" inert>
-        <a class="button apply-button floating-apply-button" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=ru">Присоединиться</a>
-      </div>
-      <p class="eyebrow muted">Morim Leaders</p>
-      <h2 class="display" id="leaders-title">Дорогие<br><span class="word">к<span class="glyph school-oo"><span class="sr-only">оо</span><img src="../assets/imgVector1.svg" alt="" width="106" height="60"></span>рдинаторы,</span></h2>
-      <div class="prose leaders-intro">
-        <p>Сильным учителям нужны школы, в которых можно хорошо работать и хочется оставаться. Поэтому мы помогаем учителям и в классе, и в работе с командой.</p>
-        <p>Первую программу для школьных координаторов — раказим — мы разрабатываем вместе с ними. Пилот уже идёт в закрытой группе.</p>
-      </div>
-      <div class="programs" id="leaders-programs">
-  <div class="program-heading">
-    <h3>Наши программы</h3>
-    <div class="location-select-wrap">
-      <button type="button" class="location-select" id="leaders-location"
-              aria-haspopup="listbox" aria-expanded="false"
-              aria-controls="leaders-location-list">
-        <span class="sr-only">Фильтр программ по городу</span>
-        <span data-value-label>Все города</span>
-        <svg class="location-select-chevron" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-      <ul id="leaders-location-list" class="location-options" role="listbox"
-          aria-labelledby="leaders-location" tabindex="-1" hidden>
-        <li role="option" data-value="all" aria-selected="true" tabindex="0">
-          <span>Все города</span>
-          <svg class="location-option-check" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-        </li>
-      </ul>
     </div>
-  </div>
-  <div class="program-list" aria-live="polite">
-    <article class="program-row" id="program-school-coordination-pilot" data-program="school-coordination-pilot" data-closed>
-<span class="program-badge"><span>Пилот идёт · закрытая группа</span></span>      <h4>Координация в школе: команда, процессы, проекты</h4>
-      <button type="button" class="button apply-button" disabled>Присоединиться</button>
-    </article>
-    <article class="program-row" id="program-school-coordination" data-program="school-coordination">
-      <h4>Координация в школе: команда, процессы, проекты</h4>
-      <p><span>Где</span>Zoom + ежемесячные встречи в Тель-Авиве</p>
-<p><span>Когда</span>Начало — в конце января 2027 года</p>
-      <a class="button apply-button" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=ru">Присоединиться</a>
-    </article>
-  </div>
+
+    <div class="audience-pane leaders" id="leaders" role="tabpanel" aria-labelledby="leaders-title">
+      <h2 class="display" id="leaders-title">Координация в школе: команда, процессы, проекты</h2>
+      <div class="program-offer">
+  <article class="offer-terms" id="program-school-coordination" data-program="school-coordination" aria-labelledby="leaders-title">
+<p class="offer-tags"><a class="offer-tag offer-scholarship" href="#scholarship">Стипендии всем участникам!</a></p>    <div class="offer-meta">
+<p><span>Стоимость</span><em class="offer-meta-cost">Бесплатно</em></p><p><span>Новые потоки обучения</span><em class="offer-meta-frequency">Ежемесячно</em></p><p><span>Старт</span>февр. 2027</p>      <p><span>Где</span>Zoom + встречи в Тель-Авиве</p>
+    </div>
+  </article>
+  <a class="button apply-button offer-apply" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=ru" data-apply>Подать заявку</a>
 </div>
-      <div class="leader-benefits">
+      <article class="running-card" id="program-school-coordination-pilot" data-closed>
+        <h3>Пилот программы</h3>
+        <p class="running-status">Итоги скоро</p>
+        <p class="running-badge running-now">Сейчас идёт</p>
+      </article>
+      <div class="prose leaders-intro">
+        <p>Дорогиекоординаторы, Сильным учителям нужны школы, в которых можно хорошо работать и хочется оставаться. Поэтому мы помогаем учителям и в классе, и в работе с командой.</p>
+        <p>Morim Leaders, первую программу для школьных координаторов — раказим, — мы разрабатываем вместе с ними. Пилот уже идёт в закрытой группе.</p>
+      </div>
+      <div class="leader-benefits feature-cards">
         <article class="benefit">
           <h3>Руководить без формальных полномочий</h3>
           <p>Координаторы тоже учителя. Они ведут уроки и помогают команде работать лучше — хотя коллеги часто им не подчиняются.<br>Как руководить командой в таких условиях?</p>
@@ -323,60 +273,100 @@
           <p>Как распределять нагрузку и находить время на профессиональное развитие — своё и коллег?<br>Разбираем, как планировать работу, выстраивать команду, налаживать повседневные процессы и вести проекты — так, чтобы работа координатора не отнимала время у преподавания.</p>
         </article>
       </div>
+    </div>
+
     </section>
   </div>
 
-  <section class="partners" id="partners" aria-labelledby="partners-title">
-    <h2 class="display" id="partners-title">Школам и партнёрам</h2>
-    <div class="prose partners-lead">
-      <p>Мы проводим программы вместе с партнёрами: школами, которые принимают у себя кружок, организациями, которые уже работают с детьми, и муниципалитетами, которые хотят программы для своих учителей. Мы ищем площадки и партнёров для практики — не финансирование.</p>
+  <section class="scholarship-band" id="scholarship" aria-labelledby="scholarship-title">
+    <h2 class="scholarship-word" id="scholarship-title">Стипендии за участие!</h2>
+    <div class="scholarship-text">
+      <p>У вас и без нас хватает работы. Поэтому мы платим стипендию и за обучение, и за практику с детьми.</p>
+      <p>Если мы ценим время учителя, логично за него платить.</p>
     </div>
-    <div class="wwd-beats partners-types">
-      <article class="wwd-beat">
-        <h3>Школы</h3>
-        <p>Во время практики участник программы ведёт кружок для ваших учеников после уроков. От вас — помещение, группа учеников и человек для связи; от нас — программа, ментор и стипендия участнику.</p>
-      </article>
-      <article class="wwd-beat">
-        <h3>Организации, работающие с детьми</h3>
-        <p>Кружки, группы продлённого дня, лагеря и молодёжные центры могут стать площадками для практики и привлечь на сезон учителя, прошедшего обучение.</p>
-      </article>
-      <article class="wwd-beat">
-        <h3>Муниципалитеты и сети школ</h3>
-        <p>Запускайте программы для своих учителей и координаторов, поток за потоком, с практикой в ваших школах.</p>
-      </article>
+    <dl class="scholarship-terms">
+      <div><dt>Как часто</dt><dd>Ежемесячно</dd></div>
+      <div><dt>Кто получает</dt><dd>Каждый учитель программы</dd></div>
+      <div><dt>Как получить</dt><dd>Отдельной заявки нет: стипендия идёт вместе с местом</dd></div>
+      <div><dt>Что нужно</dt><dd>Посещать занятия и вести уроки в кружке</dd></div>
+      <div><dt>Сумма</dt><dd>Сообщим до старта программы</dd></div>
+    </dl>
+  </section>
+
+  <section class="camp" id="tbilisi-camp" aria-labelledby="tbilisi-promo-title" data-program="tbilisi">
+    <div class="camp-copy">
+      <h2 id="tbilisi-promo-title"><span class="camp-descriptor">Пилот программы для учителей</span> <span class="camp-name">Летний лагерь Тбилиси</span></h2>
+      <p class="promo-meta"><span>Тбилиси, Грузия</span><span>Июль–август 2026</span></p>
+      <ul class="camp-figures" role="list">
+        <li class="camp-figure">
+          <span class="stat-value">17</span>
+          <span class="stat-label">учителей закончили интенсив, июль–август 2026</span>
+        </li>
+        <li class="camp-figure">
+          <span class="stat-value">8,8<span class="arrow">→</span>9,5</span>
+          <span class="stat-label">средняя оценка готовности рекомендовать программу: после интенсива → после практики</span>
+        </li>
+        <li class="camp-figure">
+          <span class="stat-value">40<span class="arrow">→</span>81<small>%</small></span>
+          <span class="stat-label">ответов «понимаю и могу применять» на вопросы об основах метода</span>
+        </li>
+        <li class="camp-figure">
+          <span class="stat-value">60<span class="arrow">→</span>25<small>%</small></span>
+          <span class="stat-label">опрошенных учителей беспокоились о том, как перестроить урок, если он пойдёт не по плану</span>
+        </li>
+      </ul>
+      <button type="button" class="camp-more text-link" aria-expanded="false" aria-controls="tbilisi-details" data-expand hidden>
+        <span>Подробнее</span><svg class="camp-more-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
     </div>
-    <div class="partners-action">
-      <a class="button" href="https://survey.morim.foundation/s/join-v1?src=partners&lang=ru">Расскажите о своей школе или организации</a>
-      <a class="partners-email" href="mailto:contact@morim.foundation">contact@morim.foundation</a>
+    <img class="camp-photo" src="../assets/camp-square-720.webp"
+     srcset="../assets/camp-square-480.webp 480w, ../assets/camp-square-720.webp 720w, ../assets/camp-square-1080.webp 1080w, ../assets/camp-square-1440.webp 1440w"
+     sizes="(max-width: 700px) 16rem, 26rem"
+     alt="" width="720" height="720" loading="lazy" decoding="async">
+    <div class="camp-details" id="tbilisi-details">
+      <div class="camp-story">
+        <div class="program-results-copy">
+          <h3 class="program-results-title">Первый пилот</h3>
+          <p>Наш первый интенсив в Тбилиси был посвящён исследовательскому обучению. Мы дважды опросили одних и тех же учителей: после интенсива и после нескольких недель практики с детьми и еженедельных встреч с ментором.</p>
+          <p>После практики ответы заметно изменились. На вопросы об основах метода — зачем нужен исследовательский урок, чем он отличается от просто интересного и какова роль учителя — участники чаще отвечали: «понимаю и могу применять». Доля таких ответов выросла с 40% до 81%. Учителя также реже говорили, что их беспокоит необходимость перестраивать урок, если он пойдёт не по плану.</p>
+          <p>Не всё стало легче. Работа с групповой динамикой по-прежнему даётся трудно. Поэтому добавляем больше практики и разборов с ментором на эту тему.</p>
+          <p>Три четверти опрошенных детей сказали, что хотели бы таких уроков и в своей школе.</p>
+          <p class="results-caveat">Результаты обнадёживают, но группа была небольшой, а условия — необычно благоприятными. Ещё предстоит проверить, получатся ли похожие результаты в обычных классах.</p>
+        </div>
+        <figure class="camp-voice">
+          <blockquote class="results-quote">«Стала заметно меньше наводить на правильный ответ, а обращать внимание на ход рассуждения».</blockquote>
+          <figcaption class="results-note">Одна из учительниц · именно таких изменений мы ждём</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
   <section class="team" id="team" aria-labelledby="team-title">
     <p class="eyebrow">Кто делает Morim</p>
     <h2 class="team-title" id="team-title">Мы много лет<br class="desktop-break"> работаем в образовании.<br class="desktop-break"> Теперь вместе<br class="desktop-break"> создаём Morim.</h2>
-    <div class="team-track" tabindex="0" role="region" aria-label="Команда фонда">
+    <div class="team-columns">
       <article class="person">
         <img class="portrait" src="../assets/team-elena.jpg" alt="Елена Бунина" width="420" height="510" loading="lazy">
-        <p class="person-role">Донор и основатель</p>
         <h3><a href="https://www.linkedin.com/in/elena-bunina-738522eb/" target="_blank" rel="noreferrer">Елена Бунина</a></h3>
+        <p class="person-role">Донор и основатель</p>
         <p>Профессор математики Университета Бар-Илан и руководитель <a href="https://academy.nebius.com/" target="_blank" rel="noreferrer">Nebius Academy</a>. Ранее — генеральный директор Яндекса.</p>
       </article>
       <article class="person">
         <img class="portrait" src="../assets/team-vlad.jpg" alt="Влад Степанов" width="420" height="510" loading="lazy">
-        <p class="person-role">Сооснователь и генеральный директор</p>
         <h3><a href="https://www.linkedin.com/in/utterstep/" target="_blank" rel="noreferrer">Влад Степанов</a></h3>
+        <p class="person-role">Сооснователь и генеральный директор</p>
         <p>Ранее — генеральный директор <a href="https://gradarius.com/" target="_blank" rel="noreferrer">Gradarius</a>, до этого — технический директор и руководитель направления «Информатика» в Яндекс Образовании. Более 13 лет опыта в образовательных технологиях в США и СНГ.</p>
       </article>
       <article class="person">
         <img class="portrait" src="../assets/team-ilya.jpg" alt="Илья Заславский" width="420" height="510" loading="lazy">
-        <p class="person-role">Руководитель направления «Мотивация учеников»</p>
         <h3><a href="https://www.linkedin.com/in/izaslavskiy/" target="_blank" rel="noreferrer">Илья Заславский</a></h3>
+        <p class="person-role">Руководитель направления «Мотивация учеников»</p>
         <p>Сооснователь международной гибридной средней школы «Платан», педагог-эксперт и учитель истории. Специалист по геймификации образования.</p>
       </article>
-      <article class="person person-note">
-        <h3>Команда</h3>
-        <p>Мы объединяем специалистов по профессиональному развитию учителей и практикующих педагогов. А ещё собираем круг опытных израильских педагогов и исследователей, которые скажут нам, когда мы ошибаемся, и помогут понять школьную систему изнутри.</p>
-      </article>
+    </div>
+    <div class="team-note">
+      <h3>Команда</h3>
+      <p>Мы объединяем специалистов по профессиональному развитию учителей и практикующих педагогов. А ещё собираем круг опытных израильских педагогов и исследователей, которые скажут нам, когда мы ошибаемся, и помогут понять школьную систему изнутри.</p>
     </div>
   </section>
 
@@ -386,7 +376,7 @@
       <details class="faq-item" data-state="closed">
         <summary class="faq-trigger">
           Для кого программа Morim Fellows?
-          <span class="faq-chevron" aria-hidden="true">›</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
         <div class="faq-answer">
           <div class="faq-answer-body">Сейчас программа рассчитана на тех, кто преподаёт в Израиле в последних классах начальной школы и первых классах средней школы. Если вы работаете с детьми другого возраста, всё равно напишите нам и расскажите о своём опыте.</div>
@@ -395,16 +385,16 @@
       <details class="faq-item" data-state="closed">
         <summary class="faq-trigger">
           А что с ИИ?
-          <span class="faq-chevron" aria-hidden="true">›</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
         <div class="faq-answer">
-          <div class="faq-answer-body">Мы учим учителей пользоваться ИИ и учить этому детей — а не обучаем ИИ заменять учителей.</div>
+          <div class="faq-answer-body">Мы учим учителей пользоваться ИИ и учить этому детей — а не обучаем ИИ заменять учителей. Хорошая педагогика всегда была <mark>дорогой</mark>. Новые технологии позволяют расширить её охват.</div>
         </div>
       </details>
       <details class="faq-item" data-state="closed">
         <summary class="faq-trigger">
           Как устроено обучение?
-          <span class="faq-chevron" aria-hidden="true">›</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
         <div class="faq-answer">
           <div class="faq-answer-body">Теоретические занятия и воркшопы чередуются с практикой. Учителя работают с детьми, координаторы разбирают ситуации из своих школ. Все участники каждую неделю встречаются с ментором в небольших группах.</div>
@@ -413,7 +403,7 @@
       <details class="faq-item" data-state="closed">
         <summary class="faq-trigger">
           Участники получают стипендию?
-          <span class="faq-chevron" aria-hidden="true">›</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
         <div class="faq-answer">
           <div class="faq-answer-body">Да. Стипендия предусмотрена и для учителей, и для координаторов. Размер и условия выплат сообщим в описании каждой программы.</div>
@@ -422,20 +412,21 @@
       <details class="faq-item" data-state="closed">
         <summary class="faq-trigger">
           Может ли школа или муниципалитет работать с Morim?
-          <span class="faq-chevron" aria-hidden="true">›</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
         <div class="faq-answer">
-          <div class="faq-answer-body">Да. Нам интересно работать со школами, сетями школ и муниципалитетами, которые хотят запустить наши программы для своих учителей или координаторов. Мы также ищем опытных педагогов, которые помогут нам создавать программы. <a href="#partners">Подробнее о партнёрстве.</a></div>
+          <div class="faq-answer-body">Да. Нам интересно работать со школами, сетями школ и муниципалитетами, которые хотят запустить наши программы для своих учителей или координаторов. Мы также ищем опытных педагогов, которые помогут нам создавать программы. <a href="schools/">Подробнее о партнёрстве.</a></div>
         </div>
       </details>
     </div>
   </section>
 
+
   <footer id="contact" class="site-footer">
     <div class="footer-message">
       <h2>Давайте поговорим</h2>
       <p class="footer-lead">Если вы учитель, работаете со школой или муниципалитетом — или просто думаете, что нам стоит поговорить, — <a href="https://survey.morim.foundation/s/join-v1?src=landing&lang=ru">оставьте контакты в форме</a> или напишите нам.</p>
-      <a class="button rounded-button" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=ru">Хотите что-то сделать вместе?</a>
+      <p class="footer-actions"><a class="button footer-apply" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=ru" data-apply>Подать заявку</a></p>
       <a class="footer-email" href="mailto:contact@morim.foundation">contact@morim.foundation</a>
     </div>
     <div class="footer-links">
@@ -445,15 +436,10 @@
           <a href="#what-we-do">Что мы делаем</a>
           <a href="#fellowship">Учителям</a>
           <a href="#leaders">Координаторам</a>
-          <a href="#partners">Партнёрам</a>
+          <a href="schools/">Партнёрам</a>
           <a href="#team">Команда</a>
           <a href="#faq">Вопросы</a>
         </nav>
-        <nav class="lang-switcher lang-switcher-footer" aria-label="Язык">
-  <a href="../" hreflang="en" lang="en">EN</a>
-  <a href="../ru/" hreflang="ru" lang="ru" aria-current="page">RU</a>
-  <a href="../he/" hreflang="he" lang="he">עברית</a>
-</nav>
       </div>
       <div>
         <p class="footer-label">Соцсети</p>
@@ -463,10 +449,18 @@
           <button type="button" class="text-button" data-dialog="dialog-social" data-dialog-title="X">X</button>
         </nav>
       </div>
-      <div class="footer-legal">
-        <a class="logo" href="#top" aria-label="Фонд Morim — на главную">morim foundation</a>
-        <p>© 2026, The Foundation for Teachers Growth LTD<br>Регистрационный номер компании: 517356374</p>
+      <div>
+        <p class="footer-label" aria-hidden="true">Язык</p>
+        <nav class="lang-switcher lang-switcher-footer" aria-label="Язык">
+  <a href="../" hreflang="en" lang="en">English</a>
+  <a href="../ru/" hreflang="ru" lang="ru" aria-current="page">Русский</a>
+  <a href="../he/" hreflang="he" lang="he" dir="rtl">עברית</a>
+</nav>
       </div>
+    </div>
+    <div class="footer-legal">
+      <a class="logo" href="#top" aria-label="Фонд Morim — на главную">morim foundation</a>
+      <p>© 2026, The Foundation for Teachers Growth LTD<br>Регистрационный номер компании: 517356374</p>
     </div>
   </footer>
 </main>
@@ -481,30 +475,7 @@
   </div>
 </dialog>
 
-<dialog class="mobile-menu-panel" id="mobile-menu" aria-labelledby="mobile-menu-title" aria-describedby="mobile-menu-desc">
-  <div class="mobile-menu-heading">
-    <h2 id="mobile-menu-title">morim foundation</h2>
-    <button type="button" class="mobile-menu-close" data-dialog-close aria-label="Закрыть">
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
-    </button>
-  </div>
-  <p id="mobile-menu-desc" class="sr-only">Разделы сайта фонда и его программы.</p>
-  <nav aria-label="Мобильная навигация">
-    <a href="#what-we-do">Что мы делаем</a>
-    <a href="#fellowship">Учителям</a>
-    <a href="#leaders">Координаторам</a>
-    <a href="#partners">Партнёрам</a>
-    <a href="#team">Команда</a>
-    <a href="#faq">Вопросы</a>
-    <a href="#contact">Написать нам</a>
-  </nav>
-  <nav class="lang-switcher lang-switcher-menu" aria-label="Язык">
-  <a href="../" hreflang="en" lang="en">EN</a>
-  <a href="../ru/" hreflang="ru" lang="ru" aria-current="page">RU</a>
-  <a href="../he/" hreflang="he" lang="he">עברית</a>
-</nav>
-</dialog>
 
-<script type="module" src="../js/main.js?v=2c8b7826"></script>
+<script type="module" src="../js/main.js?v=2b917f56"></script>
 </body>
 </html>

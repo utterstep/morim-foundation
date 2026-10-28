@@ -1,29 +1,33 @@
 // Entry point. Wires the static page up in the same order the React tree
 // mounted its effects in PR #3 (website/app/home-content.tsx).
 
-import { startPageMotion } from './lib/page-motion.js';
-import { startCardDepth } from './lib/card-depth.js';
-import { watchProgramsViewport } from './lib/floating-apply.js';
-import { startFloatingHeader } from './header.js';
-import { initDialogs } from './dialog.js';
-import { startMobileMenu } from './mobile-menu.js';
-import { initDetails, initDisclosureButton } from './disclosure.js';
-import { watchProgramMotionPreference } from './program-motion.js';
-import { startPrograms } from './programs.js';
-import { startHero } from './hero/hero.js';
-import { startLanguage } from './lang.js';
-import { startNavMenu } from './nav-menu.js';
-import { startScrollHint } from './scroll-hint.js';
+import { startPageMotion } from './lib/page-motion.js?v=2b917f56';
+import { startCardDepth } from './lib/card-depth.js?v=2b917f56';
+import { watchApplyButtons } from './lib/floating-apply.js?v=2b917f56';
+import { startFloatingHeader } from './header.js?v=2b917f56';
+import { initDialogs } from './dialog.js?v=2b917f56';
+import { startMobileMenu } from './mobile-menu.js?v=2b917f56';
+import { initDetails, initExpander } from './disclosure.js?v=2b917f56';
+import { watchProgramMotionPreference } from './program-motion.js?v=2b917f56';
+import { startPrograms } from './programs.js?v=2b917f56';
+import { startHero } from './hero/hero.js?v=2b917f56';
+import { startLanguage } from './lang.js?v=2b917f56';
+import { startNavMenu } from './nav-menu.js?v=2b917f56';
+import { startScrollHint } from './scroll-hint.js?v=2b917f56';
+import { startAudiences } from './audiences.js?v=2b917f56';
+import { dealHandLetters } from './hand-a.js?v=2b917f56';
 
 const EASING = 'cubic-bezier(0.22, 1, 0.36, 1)';
 const FAQ_MOTION = { duration: 250, easing: EASING, fade: 200 };
-const RESULTS_MOTION = { duration: 360, easing: EASING, fade: 240 };
+// The camp's story is a tall block: a slower height, the same curve.
+const EXPAND_MOTION = { duration: 450, easing: EASING, fade: 300 };
 
 const root = document.getElementById('top');
 if (root) {
+  dealHandLetters(root);
   startPageMotion(root);
   startCardDepth(root);
-  root.querySelectorAll('.floating-apply-rail').forEach((rail) => watchProgramsViewport(rail));
+  root.querySelectorAll('.floating-apply-rail').forEach((rail) => watchApplyButtons(rail, root));
 
   const shell = root.querySelector('.header-shell');
   if (shell) startFloatingHeader(shell);
@@ -33,17 +37,25 @@ if (root) {
   if (menu instanceof HTMLDialogElement) startMobileMenu(menu);
 
   root.querySelectorAll('details.faq-item').forEach((details) => initDetails(details, FAQ_MOTION));
-  root
-    .querySelectorAll('.results-button[aria-controls]')
-    .forEach((button) => initDisclosureButton(button, RESULTS_MOTION));
+  root.querySelectorAll('button[data-expand]').forEach((button) => initExpander(button, EXPAND_MOTION));
+  // The teachers' pilot card leads to the camp and opens its story on the way.
+  const campMore = root.querySelector('.camp-more');
+  root.querySelectorAll('.pilot-link').forEach((link) =>
+    link.addEventListener('click', () => {
+      if (campMore instanceof HTMLButtonElement && campMore.getAttribute('aria-expanded') !== 'true') campMore.click();
+    }),
+  );
 
   watchProgramMotionPreference();
   root.querySelectorAll('.programs').forEach((programs) => startPrograms(programs));
+  const audiences = root.querySelector('.audiences');
+  if (audiences) startAudiences(audiences);
 
   const hero = root.querySelector('.hero');
   if (hero) startHero(hero);
 
-  root.querySelectorAll('.nav-menu').forEach((menu) => startNavMenu(menu));
+  // The mobile menu dialog lives outside <main>, so look across the document.
+  document.querySelectorAll('.nav-menu').forEach((menu) => startNavMenu(menu));
   const hint = root.querySelector('[data-scroll-hint]');
   if (hint) startScrollHint(hint);
   startLanguage(root);

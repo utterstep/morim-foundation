@@ -23,10 +23,12 @@ import filecmp
 import hashlib
 import http.server
 import json
+import re
 import shutil
 import sys
 import tempfile
 from functools import partial
+from itertools import product
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
@@ -47,6 +49,10 @@ LANGS = {
     "ru": {"dir": "ltr", "path": "ru/", "name": "Русский"},
     "he": {"dir": "rtl", "path": "he/", "name": "עברית"},
 }
+
+# Pages per language, by their path under the language's own. The landing is
+# one long page; schools and partners have a page of their own.
+PAGES = {"home": "", "schools": "schools/"}
 
 
 def load_strings(lang: str, root: str) -> dict:
@@ -81,6 +87,60 @@ def asset_version() -> str:
     return digest.hexdigest()[:8]
 
 
+def stamp_imports(js: Path, version: str) -> None:
+    """Append `?v=` to every relative import in the copied scripts. main.js is
+    requested with the version, but a browser with a warm cache would pair
+    it with the old modules behind it (a renamed export then breaks every
+    script on the page); stamped, the whole graph changes together, and
+    the modulepreload links in the head name the same URLs."""
+    for file in js.rglob("*.js"):
+        source = file.read_text()
+        stamped = re.sub(
+            r"""((?:from|import)\s*['"])(\.[^'"?]+)(['"])""",
+            lambda m: f"{m.group(1)}{m.group(2)}?v={version}{m.group(3)}",
+            source,
+        )
+        if stamped != source:
+            file.write_text(stamped)
+
+
+def hero_hints(root: str) -> dict:
+    """Head hints so the hero collage is ready when the page is: the module
+    graph behind main.js (one modulepreload each, so the browser fetches them
+    in parallel instead of walking the import chain), the icons the opening
+    composition shows (preloaded with the same srcset/sizes the DOM uses) and
+    the stream posters. All read from the JS sources so the lists stay true."""
+    js = SRC / "js"
+    modules: list[Path] = []
+    todo = [js / "main.js"]
+    while todo:
+        module = todo.pop(0)
+        if module in modules or not module.exists():
+            continue
+        modules.append(module)
+        for match in re.finditer(r"""(?:from|import)\s*['"](\.[^'"]+)['"]""", module.read_text()):
+            todo.append((module.parent / match.group(1)).resolve())
+    apps_js = (js / "lib" / "hero-apps.js").read_text()
+    apps = re.findall(r"icon\('([a-z]+)', \[([\d, ]+)\]\)", apps_js)
+    sizes = re.search(r"heroAppSizes = '([^']+)'", apps_js).group(1)
+    opening = re.search(r"const apps = \[([\d, ]+)\]", (js / "lib" / "hero-floating.js").read_text())
+    icons = []
+    for index in (int(i) for i in opening.group(1).split(",")):
+        slug, widths = apps[index]
+        ws = [int(w) for w in widths.split(",")]
+        icons.append({
+            "href": f"{root}assets/hero-app-{slug}-{ws[-1]}.webp",
+            "srcset": ", ".join(f"{root}assets/hero-app-{slug}-{w}.webp {w}w" for w in ws),
+            "sizes": sizes,
+        })
+    posters = re.findall(r"poster: '([^']+)'", (js / "lib" / "hero-videos.js").read_text())
+    return {
+        "modules": [m.relative_to(js).as_posix() for m in modules],
+        "icons": icons,
+        "posters": [f"{root}assets/video/{p}" for p in posters],
+    }
+
+
 def render(out: Path) -> None:
     env = Environment(
         loader=FileSystemLoader(SRC),
@@ -92,40 +152,50 @@ def render(out: Path) -> None:
     )
     template = env.get_template("template.html.j2")
     version = asset_version()
-    for lang, meta in LANGS.items():
-        # Pages sit at /, /ru/ and /he/; shared files are addressed relative to
-        # the page so the output works at the domain root, under /site/, or
-        # from any local static server.
-        root = "../" if meta["path"] else ""
+    for (page, page_path), (lang, meta) in product(PAGES.items(), LANGS.items()):
+        # Pages sit at /, /ru/, /he/ and their schools/ below; shared files are
+        # addressed relative to the page so the output works at the domain
+        # root, under /site/, or from any local static server.
+        path = meta["path"] + page_path
+        root = "../" * path.count("/")
         html = template.render(
             t=load_strings(lang, root),
+            page=page,
+            # This language's landing, relative to the page ("" on the landing).
+            home="../" if page_path else "",
             lang=lang,
             dir=meta["dir"],
             root=root,
             v=version,
+            # The collage lives on the landing only.
+            hero=hero_hints(root) if not page_path else None,
             site=SITE,
-            canonical=SITE + meta["path"],
+            canonical=SITE + path,
+            x_default=SITE + page_path,
             langs=[
                 {
                     "code": code,
                     "name": m["name"],
-                    "href": root + m["path"],
-                    "url": SITE + m["path"],
+                    "dir": m["dir"],
+                    "href": root + m["path"] + page_path,
+                    "url": SITE + m["path"] + page_path,
                     "current": code == lang,
                 }
                 for code, m in LANGS.items()
             ],
         )
-        target = out / meta["path"] / "index.html"
+        target = out / path / "index.html"
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(html, encoding="utf-8")
     for name in STATIC_DIRS:
         shutil.copytree(SRC / name, out / name, dirs_exist_ok=True)
+    stamp_imports(out / "js", version)
 
 
 def generated() -> list[str]:
     """Everything the build owns at the root; nothing else is ever touched."""
     pages = [meta["path"].rstrip("/") or "index.html" for meta in LANGS.values()]
+    pages += [path.rstrip("/") for path in PAGES.values() if path]
     return pages + list(STATIC_DIRS)
 
 

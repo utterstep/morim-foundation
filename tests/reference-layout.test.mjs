@@ -46,8 +46,12 @@ test('desktop geometry shares the 1440px rem reference', () => {
     .match(/font-size:\s*([^;]+);/)?.[1];
   assert.equal(reference, '90rem');
   assert.equal(desktopSize, 'calc(100vw / 90)');
+  // The one fixed pixel value on purpose: team portraits are capped at the
+  // 420px source width so they never render above natural resolution.
+  const sourceCaps = new Set(['min(14rem, 420px)']);
   for (const style of styles) {
     for (const { prop, value } of declarations(style)) {
+      if (sourceCaps.has(value)) continue;
       for (const match of value.matchAll(/(-?\d*\.?\d+)px\b/g)) {
         assert(
           Math.abs(Number(match[1])) < 4,

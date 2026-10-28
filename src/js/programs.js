@@ -1,20 +1,19 @@
 // Ported from PR #3 website/app/sections.tsx (`Programs`). One `.programs`
-// block: the location listbox filters the rows, rows are detached rather
+// block: the location tabs (the audience tab pattern) filter the rows, rows are detached rather
 // than hidden (so the floating Apply rail and the FLIP animation see the
-// same DOM React produced), and a filtered-out results card is reset.
+// same DOM React produced).
 
-import { initListbox } from './listbox.js';
+import { startTabs } from './tabs.js';
 import { captureProgramLayout, animateProgramLayout } from './program-motion.js';
-import { resetDisclosure } from './disclosure.js';
 
 /**
  * @param {HTMLElement} programs  the `.programs` element
  * @returns {() => void} stop
  */
 export function startPrograms(programs) {
-  const wrap = programs.querySelector('.location-select-wrap');
+  const tablist = programs.querySelector('.program-tabs');
   const list = programs.querySelector('.program-list');
-  if (!(wrap && list)) return () => {};
+  if (!(tablist && list)) return () => {};
   // Document order is captured once; filtering re-inserts from this array.
   const rows = Array.from(list.children);
   const matches = (row, value) =>
@@ -22,13 +21,20 @@ export function startPrograms(programs) {
 
   const applyFilter = (value) => {
     const snapshot = captureProgramLayout(list);
-    rows.forEach((row) => {
-      if (!matches(row, value)) resetDisclosure(row);
-    });
     list.replaceChildren(...rows.filter((row) => matches(row, value)));
     animateProgramLayout(list, snapshot);
   };
 
-  const listbox = initListbox(wrap, applyFilter);
-  return () => listbox.destroy();
+  const values = Array.from(tablist.querySelectorAll(':scope > [role="tab"]'), (tab) => tab.dataset.value ?? 'all');
+  let first = true;
+  startTabs(tablist, (index) => {
+    // Show the first location's rows on start, without the animation.
+    if (first) {
+      first = false;
+      list.replaceChildren(...rows.filter((row) => matches(row, values[index])));
+      return;
+    }
+    applyFilter(values[index]);
+  });
+  return () => {};
 }

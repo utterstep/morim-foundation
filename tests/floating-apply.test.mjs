@@ -2,93 +2,39 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import {
   shouldShowFloatingApply,
-  watchProgramsViewport,
+  watchApplyButtons,
 } from '../src/js/lib/floating-apply.js';
 
-const offscreen = { top: 2000, bottom: 2400 };
+const above = { top: -400, bottom: -344 };
+const below = { top: 2000, bottom: 2056 };
 
-test('requires at least 70% of the viewport, including the exact boundary', () => {
-  assert.equal(
-    shouldShowFloatingApply({ top: 301, bottom: 3000 }, offscreen, 1000, true),
-    false,
-  );
-  assert.equal(
-    shouldShowFloatingApply({ top: 300, bottom: 3000 }, offscreen, 1000, true),
-    true,
-  );
-  assert.equal(
-    shouldShowFloatingApply({ top: -2000, bottom: 699 }, offscreen, 1000, true),
-    false,
-  );
-  assert.equal(
-    shouldShowFloatingApply({ top: -2000, bottom: 700 }, offscreen, 1000, true),
-    true,
-  );
+test('nothing floats until the anchor (the hero) has scrolled off the top', () => {
+  assert.equal(shouldShowFloatingApply({ top: 300, bottom: 356 }, [], 1000), false);
+  assert.equal(shouldShowFloatingApply({ top: -50, bottom: 1 }, [], 1000), false);
+  assert.equal(shouldShowFloatingApply({ top: -56, bottom: 0 }, [], 1000), true);
+  assert.equal(shouldShowFloatingApply(null, [], 1000), false);
+  assert.equal(shouldShowFloatingApply(above, [], 0), false);
 });
 
-test('uses viewport coverage, not the fraction of a tall card that is visible', () => {
-  assert.equal(
-    shouldShowFloatingApply({ top: -500, bottom: 5000 }, offscreen, 1000, true),
-    true,
-  );
+test('any Apply in view, including the exact edges, hides the floating one', () => {
+  assert.equal(shouldShowFloatingApply(above, [above, below], 1000), true);
+  assert.equal(shouldShowFloatingApply(above, [above, { top: 999, bottom: 1055 }], 1000), false);
+  assert.equal(shouldShowFloatingApply(above, [above, { top: 1000, bottom: 1056 }], 1000), true);
+  assert.equal(shouldShowFloatingApply(above, [above, { top: -55, bottom: 1 }], 1000), false);
+  assert.equal(shouldShowFloatingApply(above, [above, { top: -56, bottom: 0 }], 1000), true);
 });
 
-test('program visibility and availability override coverage', () => {
-  const card = { top: 0, bottom: 3000 };
-  assert.equal(
-    shouldShowFloatingApply(card, { top: 999, bottom: 1400 }, 1000, true),
-    false,
-  );
-  assert.equal(
-    shouldShowFloatingApply(card, { top: -400, bottom: 1 }, 1000, true),
-    false,
-  );
-  assert.equal(shouldShowFloatingApply(card, offscreen, 1000, false), false);
-  assert.equal(shouldShowFloatingApply(card, offscreen, 0, true), false);
-});
-
-test('excludes areas covered by the next card', () => {
-  const card = { top: -400, bottom: 950 };
-  assert.equal(
-    shouldShowFloatingApply(card, offscreen, 1000, true, 699),
-    false,
-  );
-  assert.equal(shouldShowFloatingApply(card, offscreen, 1000, true, 700), true);
-  assert.equal(
-    shouldShowFloatingApply(card, offscreen, 1000, true, -100),
-    false,
-  );
-});
-
-test('scroll, filters and resize update visibility; fading-out controls become inert', () => {
+test('scroll and resize update visibility; the fading rail becomes inert', () => {
   const listeners = new Map();
-  const observers = [];
   let scheduled;
-  const cardBounds = { top: 400, bottom: 3000 };
-  const programBounds = { ...offscreen };
-  let available = true;
-  const programs = {
-    getBoundingClientRect: () => programBounds,
-    querySelector: () => (available ? {} : null),
+  const hero = { top: -600, bottom: 356 };
+  const footer = { ...below };
+  const button = (bounds) => ({ getBoundingClientRect: () => bounds });
+  const root = {
+    querySelector: (s) => (s === '.hero' ? button(hero) : null),
+    querySelectorAll: () => [button(footer)],
   };
-  const card = {
-    getBoundingClientRect: () => cardBounds,
-    querySelector: () => programs,
-    nextElementSibling: null,
-  };
-  const rail = { dataset: {}, inert: true, closest: () => card };
-  class FakeObserver {
-    constructor(callback) {
-      this.callback = callback;
-      observers.push(this);
-    }
-    observe() {}
-    disconnect() {
-      this.disconnected = true;
-    }
-  }
-  globalThis.ResizeObserver = FakeObserver;
-  globalThis.MutationObserver = FakeObserver;
+  const rail = { dataset: { anchor: '.hero' }, inert: true };
   globalThis.requestAnimationFrame = (callback) => {
     scheduled = callback;
     return 1;
@@ -101,9 +47,11 @@ test('scroll, filters and resize update visibility; fading-out controls become i
     addEventListener: (name, fn) => listeners.set(name, fn),
     removeEventListener: (name) => listeners.delete(name),
   };
-  const cleanup = watchProgramsViewport(rail);
+  const cleanup = watchApplyButtons(rail, root);
   assert.equal(rail.dataset.applyVisible, 'false');
-  cardBounds.top = 300;
+  assert.equal(rail.inert, true);
+  hero.top = -1000;
+  hero.bottom = -44;
   listeners.get('scroll')();
   const pending = scheduled;
   listeners.get('scroll')();
@@ -111,36 +59,29 @@ test('scroll, filters and resize update visibility; fading-out controls become i
   scheduled();
   assert.equal(rail.dataset.applyVisible, 'true');
   assert.equal(rail.inert, false);
-  programBounds.top = 999;
+  footer.top = 900;
+  footer.bottom = 956;
   listeners.get('scroll')();
   scheduled();
   assert.equal(rail.dataset.applyVisible, 'false');
   assert.equal(rail.inert, true);
-  programBounds.top = 2000;
-  available = false;
-  observers[1].callback();
-  scheduled();
-  assert.equal(rail.dataset.applyVisible, 'false');
-  available = true;
-  observers[1].callback();
-  scheduled();
-  assert.equal(rail.dataset.applyVisible, 'true');
   window.innerHeight = 800;
   listeners.get('resize')();
   scheduled();
-  assert.equal(rail.dataset.applyVisible, 'false');
+  assert.equal(rail.dataset.applyVisible, 'true');
   listeners.get('scroll')();
   cleanup();
   assert.equal(scheduled, undefined);
   assert.equal(listeners.size, 0);
-  assert(observers.every((observer) => observer.disconnected));
   assert.equal(rail.dataset.applyVisible, undefined);
   assert.equal(rail.inert, true);
 });
 
-test('cards without programs remain hidden', () => {
-  const rail = { dataset: {}, closest: () => null };
-  watchProgramsViewport(rail)();
+test('a page without Apply buttons or anchor keeps the rail hidden', () => {
+  const rail = { dataset: {} };
+  watchApplyButtons(rail, { querySelector: () => null, querySelectorAll: () => [] })();
+  assert.equal(rail.dataset.applyVisible, undefined);
+  watchApplyButtons(rail, { querySelector: () => ({}), querySelectorAll: () => [] })();
   assert.equal(rail.dataset.applyVisible, undefined);
   assert.equal(rail.inert, true);
 });

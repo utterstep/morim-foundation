@@ -15,7 +15,7 @@ export function startMobileMenu(menu) {
     if (desktop.matches) closeDialog(menu);
   };
   const closeOnLink = (event) => {
-    if (event.target instanceof Element && event.target.closest('nav a')) closeDialog(menu);
+    if (event.target instanceof Element && event.target.closest('a')) closeDialog(menu);
   };
   desktop.addEventListener('change', closeOnDesktop);
   menu.addEventListener('click', closeOnLink);

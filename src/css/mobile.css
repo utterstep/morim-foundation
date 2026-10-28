@@ -7,16 +7,17 @@
   width: auto;
   max-width: 28rem;
   padding: 0.75rem 1.125rem 1.375rem 1.5rem;
-  background: rgb(255 255 255 / 94%);
+  background: var(--pill-solid);
   color: var(--ink);
   border-radius: 1.75rem;
   overflow-y: auto;
 }
-@supports (backdrop-filter: blur(1rem)) {
+@supports ((backdrop-filter: blur(1rem)) or (-webkit-backdrop-filter: blur(1rem))) { /* avoid-ai-design-ignore: K3 */
   .mobile-menu-panel {
-    background: rgb(255 255 255 / 88%);
-    backdrop-filter: blur(1rem);
-    -webkit-backdrop-filter: blur(1rem);
+    background: var(--pill-glass);
+    /* avoid-ai-design-ignore: K3 — sits over scrolling content, the blur is a real overlay */
+    backdrop-filter: var(--pill-blur);
+    -webkit-backdrop-filter: var(--pill-blur); /* avoid-ai-design-ignore: K3 */
   }
 }
 .mobile-menu-heading {
@@ -47,23 +48,31 @@
 .mobile-menu-close:hover {
   background: #1820220d;
 }
-.mobile-menu-panel nav {
-  display: grid;
+.mobile-menu-cta {
+  display: flex;
+  width: 100%;
   margin-top: 1.5rem;
-}
-.mobile-menu-panel nav a {
-  padding: 0.75rem 0;
-  border-bottom: 1px solid #18202214;
-  font-size: 1.375rem;
-  line-height: 1.2;
-}
-.mobile-menu-panel nav a:last-child {
-  border-bottom: 0;
+  min-height: 3rem;
+  border-radius: 999rem;
 }
 
 @media (max-width: 700px) {
   html {
     scroll-padding-top: 1.5rem;
+    /* Mobile type scale, same px on every language (en/ru/he) below the
+       700px breakpoint, where 1rem is a flat 16px (no vw scaling here). */
+    --m-hero: 3.5rem; /* 56px — hero title */
+    /* Section title sits above the lead: at 22/22 the heading read smaller
+       than the paragraph under it, and the lead ran 21-27 characters a line
+       (AUDIT.md, T2). */
+    --m-title: 2rem; /* 32px — section title (h2 and its equivalents) */
+    --m-lead: 1.25rem; /* 20px — section lead paragraph */
+    --m-item-title: 1.0625rem; /* 17px — item/card title (h3/h4 in sections) */
+    --m-body: 0.875rem; /* 14px — running text: paragraphs, lists, FAQ answers */
+    --m-closing: 1.0625rem; /* 17px — closing/highlighted line of a section */
+    /* One side margin for every section below 700px; before, blocks sat at
+       16, 19, 20, 24 and 26px from the edge (AUDIT.md, S2). */
+    --m-gutter: 1.25rem; /* 20px */
   }
   main {
     width: 100%;
@@ -113,9 +122,11 @@
     width: calc(100% - 2rem);
     border-radius: 0.75rem;
   }
-  .fellowship,
-  .leaders {
-    padding: 3.5rem 1.25rem 7rem;
+  .what-we-do {
+    padding-inline: var(--m-gutter);
+  }
+  .audiences {
+    padding: 2.5rem var(--m-gutter) 3.75rem;
   }
   .benefits,
   .leader-benefits {
@@ -146,72 +157,88 @@
     --program-columns: repeat(2, minmax(0, 1fr));
   }
   .program-row {
+    grid-template-rows: none;
     padding: 1.25rem;
     gap: 1.5rem 1rem;
     border-radius: 0.75rem;
+  }
+  .program-row > :is(h4, p, .button) {
+    grid-row: auto;
+  }
+  .program-row:has(> .program-cost) {
+    grid-template-rows: none;
+  }
+  .program-row > .program-cost {
+    grid-row: auto;
+    grid-column: 1 / -1;
+    margin-top: 0;
   }
   .program-row .button {
     grid-column: 1 / -1;
     min-height: 3rem;
   }
-  .program-results-card {
-    border-radius: 0.75rem;
-  }
   .floating-apply-rail {
-    top: calc(100svh - 4.5rem - env(safe-area-inset-bottom, 0px));
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
   }
   .floating-apply-button {
-    min-width: 8rem;
     min-height: 3rem;
-    box-shadow: 0 0.25rem 1rem #00000018;
   }
   .team {
     padding-top: 4rem;
   }
-  .team-track {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 1.5rem;
-    padding: 0 1.5rem 1.5rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: 1.5rem;
-  }
-  .person {
-    flex: 0 0 78vw;
-    max-width: 22.5rem;
-    min-width: 0;
+  /* Single column: photo, then name, role, bio, stacked. */
+  .team-columns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    width: calc(100% - 2 * var(--m-gutter));
+    margin-inline: auto;
   }
   .portrait,
   .portrait-placeholder {
+    width: min(100%, 11rem);
     height: auto;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 420 / 510;
+  }
+  .team-note {
+    width: calc(100% - 2 * var(--m-gutter));
+    margin-inline: auto;
+    margin-top: 3.75rem;
   }
   .faq {
+    width: calc(100% - 2 * var(--m-gutter));
     margin-top: 4rem;
+  }
+  .team-title {
+    width: auto;
+    margin-inline: var(--m-gutter);
   }
   .faq h2 {
     margin-bottom: 1.5rem;
   }
-  .faq-item,
-  .faq-trigger {
+  .faq-list {
     border-radius: 0.75rem;
   }
   .faq-trigger {
     min-height: 4.5rem;
-    padding: 1.5rem 1.25rem;
+    padding: 1.25rem 1.25rem;
   }
   .faq-answer {
     padding: 0 1.25rem 1.5rem !important;
   }
   .site-footer {
-    margin: 4rem 1.5rem 0;
+    margin: 4rem var(--m-gutter) 0;
     gap: 2.5rem;
     padding-bottom: max(2rem, env(safe-area-inset-bottom));
   }
   .footer-links {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* Columns fit their longest link (RU "Координаторам") so no label runs into the next column. */
+    grid-template-columns: repeat(3, auto);
+    justify-content: space-between;
     gap: 2rem 1rem;
+  }
+  .footer-links > div {
+    grid-column: auto;
   }
   .footer-links nav a,
   .footer-links nav button {
@@ -219,7 +246,26 @@
     display: inline-flex;
     align-items: center;
   }
+  /* Short labels (EN, RU, X) and the logos were 10-22px wide or 17-18px
+     tall, under the 24px minimum of WCAG 2.5.8 (AUDIT.md, A1). */
+  .footer-links nav :is(a, button),
+  .lang-switcher a {
+    min-width: 2.75rem;
+  }
+  .site-header .logo,
+  .footer-legal .logo {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
   .footer-legal {
     grid-column: 1 / -1;
   }
+}
+
+/* Every button is a full pill at every width; last in the cascade so the
+   per-component radii above (row buttons, location select)
+   stay in one place instead of drifting apart again. */
+:root :is(.button, .location-select) {
+  border-radius: 999rem;
 }

@@ -158,7 +158,7 @@ test('card text and handwritten notes do not receive reveal animations', () => {
   state.cleanup();
 });
 
-test('all reveals scrub forward, hold still, and reverse without playing a timer', () => {
+test('reveals scrub forward once and never run in reverse', () => {
   const state = setup();
   assert(
     state.created.every(
@@ -167,44 +167,33 @@ test('all reveals scrub forward, hold still, and reverse without playing a timer
   );
   state.scrollTo(780);
   const midway = state.created.map((animation) => animation.currentTime);
+  assert(midway.some((time) => time > 0));
   state.scrollTo(780);
   assert.deepEqual(
     state.created.map((animation) => animation.currentTime),
     midway,
   );
   state.scrollTo(300);
-  assert(
-    state.created.every(
-      (animation) =>
-        animation.currentTime ===
-        animation.options.duration + animation.options.delay,
-    ),
-  );
+  const done = (animation) =>
+    animation.currentTime === animation.options.duration + animation.options.delay;
+  assert(state.created.every(done));
   state.scrollTo(780);
-  assert.deepEqual(
-    state.created.map((animation) => animation.currentTime),
-    midway,
-  );
   state.scrollTo(1000);
-  assert(
-    state.created.every(
-      (animation) => animation.currentTime === 0 && animation.plays === 0,
-    ),
-  );
+  assert(state.created.every(done));
   state.cleanup();
 });
 
-test('the highlight is a phase of the lead\'s scroll position', () => {
+test('turning back part-way plays the rest of the reveal instead of rewinding', () => {
   const state = setup();
-  const marks = state.created.filter((animation) => animation.options.delay === 350);
-  assert.equal(marks.length, 1);
+  state.scrollTo(780);
+  const midway = state.created.map((animation) => animation.currentTime);
   state.scrollTo(1000);
-  assert.equal(marks[0].currentTime, 0);
-  state.scrollTo(650);
-  assert(marks[0].currentTime > 0);
-  const midway = marks[0].currentTime;
-  state.scrollTo(340);
-  assert(marks[0].currentTime > midway);
+  state.created.forEach((animation, i) => {
+    assert(animation.currentTime >= midway[i]);
+    if (midway[i] > 0) assert.equal(animation.plays, 1);
+  });
+  state.scrollTo(1000);
+  assert(state.created.every((animation) => animation.plays <= 1));
   state.cleanup();
 });
 
@@ -214,7 +203,8 @@ test('restored scroll positions initialize correctly and resize recalculates', (
   window.innerHeight = 300;
   state.windowListeners.get('resize')();
   state.flush();
-  assert(state.created.every((animation) => animation.currentTime === 0));
+  // Content already revealed stays revealed after a resize.
+  assert(state.created.every((animation) => animation.currentTime > 0));
   state.cleanup();
 });
 
@@ -287,6 +277,7 @@ test('the pilot photo follows a gradual scroll timeline without bounce or oversh
   state.scrollTo(300);
   assert.equal(photos[0].currentTime, 1000);
   state.scrollTo(600);
-  assert.equal(photos[0].currentTime, midway);
+  assert.equal(photos[0].currentTime, 1000);
+  assert(midway < 1000);
   state.cleanup();
 });

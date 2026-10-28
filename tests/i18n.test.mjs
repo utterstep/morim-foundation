@@ -27,14 +27,10 @@ test('ru and he carry the same keys as en', () => {
   }
 });
 
-test('translated fragments keep the markup the page motion depends on', () => {
-  // Display-heading glyphs are a per-language editorial choice, but the
-  // lead's highlight spans drive scroll animations and must survive.
+test('translated fragments keep the notes the page motion depends on', () => {
   for (const lang of ['en', 'ru', 'he']) {
     const t = load(lang);
-    const html = t.what_we_do.lead_html;
-    assert.match(html, /<span class="mentor-highlight">[^<]+<img /, `${lang} mentor highlight`);
-    assert.ok(t.what_we_do.beats.at(-1).note?.length, `${lang} stipend note on the funding beat`);
+    assert.ok(t.what_we_do.stipend_note?.length, `${lang} stipend note beside the heading`);
   }
 });
 

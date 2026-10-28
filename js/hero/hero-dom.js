@@ -1,8 +1,8 @@
 // DOM builders for the hero collage, ported from the JSX in PR #3
 // website/app/hero.tsx (`AppItem`, lines 588-770). No state lives here.
 
-import { heroAppSizes } from '../lib/hero-apps.js';
-import { describeFloater, floaterLabel, floaterStyle, formatTemplate } from './hero-state.js';
+import { heroAppSizes } from '../lib/hero-apps.js?v=2b917f56';
+import { describeFloater, floaterLabel, floaterStyle, formatTemplate } from './hero-state.js?v=2b917f56';
 
 /**
  * @typedef {{labelIcon: string, labelMediaDismiss: string, videoUnavailable: string}} HeroStrings
@@ -109,6 +109,8 @@ export function buildFace(item, strings) {
     img.width = 73;
     img.height = 73;
     img.draggable = false;
+    img.fetchPriority = 'high';
+    img.decoding = 'async';
     mask.append(img);
     face.append(mask);
   }

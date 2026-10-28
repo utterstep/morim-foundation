@@ -3,7 +3,7 @@
 // component had on top: close on link click, close when the viewport grows
 // past the mobile breakpoint.
 
-import { closeDialog } from './dialog.js';
+import { closeDialog } from './dialog.js?v=2b917f56';
 
 /**
  * @param {HTMLDialogElement} menu
@@ -15,7 +15,7 @@ export function startMobileMenu(menu) {
     if (desktop.matches) closeDialog(menu);
   };
   const closeOnLink = (event) => {
-    if (event.target instanceof Element && event.target.closest('nav a')) closeDialog(menu);
+    if (event.target instanceof Element && event.target.closest('a')) closeDialog(menu);
   };
   desktop.addEventListener('change', closeOnDesktop);
   menu.addEventListener('click', closeOnLink);

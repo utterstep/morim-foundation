@@ -6,6 +6,10 @@
 
 
 
+
+
+
+
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -26,56 +30,85 @@
   <link rel="alternate" hreflang="he" href="https://morim.foundation/he/">
   <link rel="alternate" hreflang="x-default" href="https://morim.foundation/">
   <link rel="icon" href="../assets/favicon.png">
-  <link rel="preload" href="../assets/fonts/FrankRuhlLibre-Variable.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="../css/base.css?v=2c8b7826">
-  <link rel="stylesheet" href="../css/sections.css?v=2c8b7826">
-  <link rel="stylesheet" href="../css/motion.css?v=2c8b7826">
-  <link rel="stylesheet" href="../css/mobile.css?v=2c8b7826">
-  <link rel="stylesheet" href="../css/header.css?v=2c8b7826">
-  <link rel="stylesheet" href="../css/hero.css?v=2c8b7826">
-  <link rel="stylesheet" href="../css/widgets.css?v=2c8b7826">
+  <link rel="preload" href="../assets/fonts/FrankRuhlLibre-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/Heebo-Variable-hebrew.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/Heebo-Variable-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/GveretLevin-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/GTAlpina-Medium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://www.youtube.com">
+  <link rel="preconnect" href="https://www.tiktok.com">
+  <link rel="modulepreload" href="../js/main.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/lib/page-motion.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/lib/card-depth.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/lib/floating-apply.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/header.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/dialog.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/mobile-menu.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/disclosure.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/program-motion.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/programs.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/hero/hero.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/lang.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/nav-menu.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/scroll-hint.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/audiences.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/hand-a.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/tabs.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/lib/hero-floating.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/lib/poof.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/hero/hero-state.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/hero/hero-dom.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/hero/hero-badge.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/hero/hero-player.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/hero/hero-drag.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/hero/hero-environment.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/lib/hero-videos.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/lib/hero-apps.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/lib/hero-notification.js?v=2b917f56">
+  <link rel="modulepreload" href="../js/lib/hero-video-autoplay.js?v=2b917f56">
+  <link rel="preload" as="image" href="../assets/hero-app-discord-512.webp" imagesrcset="../assets/hero-app-discord-128.webp 128w, ../assets/hero-app-discord-256.webp 256w, ../assets/hero-app-discord-512.webp 512w" imagesizes="(max-width: 700px) 14vw, 7vw">
+  <link rel="preload" as="image" href="../assets/hero-app-tiktok-512.webp" imagesrcset="../assets/hero-app-tiktok-128.webp 128w, ../assets/hero-app-tiktok-256.webp 256w, ../assets/hero-app-tiktok-512.webp 512w" imagesizes="(max-width: 700px) 14vw, 7vw">
+  <link rel="preload" as="image" href="../assets/hero-app-chatgpt-512.webp" imagesrcset="../assets/hero-app-chatgpt-128.webp 128w, ../assets/hero-app-chatgpt-256.webp 256w, ../assets/hero-app-chatgpt-512.webp 512w" imagesizes="(max-width: 700px) 14vw, 7vw">
+  <link rel="preload" as="image" href="../assets/hero-app-fortnite-258.webp" imagesrcset="../assets/hero-app-fortnite-128.webp 128w, ../assets/hero-app-fortnite-258.webp 258w" imagesizes="(max-width: 700px) 14vw, 7vw">
+  <link rel="preload" as="image" href="../assets/hero-app-youtube-512.webp" imagesrcset="../assets/hero-app-youtube-128.webp 128w, ../assets/hero-app-youtube-256.webp 256w, ../assets/hero-app-youtube-512.webp 512w" imagesizes="(max-width: 700px) 14vw, 7vw">
+  <link rel="preload" as="image" href="../assets/video/stream-headset-neon.webp">
+  <link rel="preload" as="image" href="../assets/video/stream-floral-shirt.webp">
+  <link rel="preload" as="image" href="../assets/video/stream-blue-mic.webp">
+  <link rel="preload" as="image" href="../assets/video/stream-two-players.webp">
+  <link rel="stylesheet" href="../css/base.css?v=2b917f56">
+  <link rel="stylesheet" href="../css/sections.css?v=2b917f56">
+  <link rel="stylesheet" href="../css/motion.css?v=2b917f56">
+  <link rel="stylesheet" href="../css/mobile.css?v=2b917f56">
+  <link rel="stylesheet" href="../css/header.css?v=2b917f56">
+  <link rel="stylesheet" href="../css/hero.css?v=2b917f56">
+  <link rel="stylesheet" href="../css/widgets.css?v=2b917f56">
+  <link rel="stylesheet" href="../css/type.css?v=2b917f56">
+  <script src="../js/page-slide.js?v=2b917f56"></script>
+  <noscript><style>.side-panel{position:static;display:block;inline-size:auto;block-size:auto;max-block-size:none;overflow:visible;box-shadow:none;margin-block-start:1rem}.side-panel-close,[data-dialog]{display:none}</style></noscript>
 </head>
 <body>
 <main id="top" data-hero-variant="original" data-lang="he">
 
   <div class="header-shell" data-compact="false">
-    <header class="site-header">
-      <a class="logo" href="#top" aria-label="קרן Morim — לעמוד הבית">morim foundation</a>
-      <nav aria-label="ניווט ראשי">
-        <a href="#what-we-do">מה אנחנו עושים</a>
-        <div class="nav-menu ">
-  <button type="button" class="nav-menu-button" aria-haspopup="true" aria-expanded="false"
-          aria-controls="programs-menu-list">
-    <span>תוכניות</span>
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-  </button>
-  <ul id="programs-menu-list" class="nav-menu-list" hidden>
-    <li><a href="#fellowship">למורים</a></li>
-<li><a href="#leaders">לרכזים</a></li>
-
-  </ul>
-</div>
-        <a href="#partners">לשותפים</a>
-        <a href="#team">הצוות</a>
-        <a href="#faq">שאלות</a>
-        <div class="nav-menu lang-menu">
+    <div class="header-start">
+      <header class="site-header">
+        <a class="logo" href="#top" aria-label="קרן Morim — לעמוד הבית">morim foundation</a>
+      </header>
+    </div>
+    <nav class="lang-float" aria-label="ניווט ראשי">
+      <div class="nav-menu lang-menu">
   <button type="button" class="nav-menu-button" aria-haspopup="true" aria-expanded="false"
           aria-controls="lang-menu-list">
-    <span>שפות אחרות</span>
+    <svg class="flag" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><rect width="24" height="24" fill="#fff"/><rect y="3" width="24" height="2.6" fill="#0038b8"/><rect y="18.4" width="24" height="2.6" fill="#0038b8"/><path d="M12 7.4 15.8 14H8.2ZM12 16.6 8.2 10H15.8Z" fill="none" stroke="#0038b8" stroke-width="1"/></svg><span class="sr-only">שפה: </span><span>עברית</span>
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
   </button>
   <ul id="lang-menu-list" class="nav-menu-list" hidden>
-    <li><a href="../" hreflang="en" lang="en">English</a></li>
-<li><a href="../ru/" hreflang="ru" lang="ru">Русский</a></li>
+    <li><a href="../" hreflang="en" lang="en"><svg class="flag" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><rect width="24" height="24" fill="#012169"/><path d="M0 0 24 24M24 0 0 24" stroke="#fff" stroke-width="4.8"/><path d="M0 0 24 24M24 0 0 24" stroke="#c8102e" stroke-width="1.6"/><path d="M12 0v24M0 12h24" stroke="#fff" stroke-width="6"/><path d="M12 0v24M0 12h24" stroke="#c8102e" stroke-width="3.6"/><rect x="12" width="12" height="24" fill="#fff"/><rect x="12" y="0.000" width="12" height="1.846" fill="#b31942"/><rect x="12" y="3.692" width="12" height="1.846" fill="#b31942"/><rect x="12" y="7.385" width="12" height="1.846" fill="#b31942"/><rect x="12" y="11.077" width="12" height="1.846" fill="#b31942"/><rect x="12" y="14.769" width="12" height="1.846" fill="#b31942"/><rect x="12" y="18.462" width="12" height="1.846" fill="#b31942"/><rect x="12" y="22.154" width="12" height="1.846" fill="#b31942"/><rect x="12" width="6" height="12.923" fill="#0a3161"/><path d="M12 0v24" stroke="#fff" stroke-width="0.6"/></svg><span>English</span></a></li>
+<li><a href="../ru/" hreflang="ru" lang="ru"><svg class="flag" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><rect width="24" height="8" fill="#fff"/><rect y="8" width="24" height="8" fill="#0039a6"/><rect y="16" width="24" height="8" fill="#d52b1e"/></svg><span>Русский</span></a></li>
 
   </ul>
 </div>
-      </nav>
-      <a class="button" href="mailto:contact@morim.foundation">צרו קשר</a>
-      <button type="button" class="mobile-menu-trigger" data-dialog="mobile-menu" aria-haspopup="dialog" aria-label="תפריט">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
-    </header>
+    </nav>
   </div>
 
   <section class="hero hero-editorial" aria-labelledby="hero-title"
@@ -86,7 +119,7 @@
            data-help-desktop="גררו אפליקציה כדי להזיז אותה. לחצו או הקישו Enter כדי להסיר אותה ולהציג את הבאה."
            data-help-compact="הקישו או לחצו Enter כדי להסיר פריט ולהציג את הבא. גללו למטה כדי להמשיך לקרוא.">
     <div class="hero-mobile-content">
-      <h1 id="hero-title" aria-label="מורה טוב אחד יכול להשפיע על חייהם של מאות ילדים, אבל...">מורה טוב אחד<br>יכול להשפיע<br>על חייהם<br>של מאות ילדים,<br><span class="hero-line">אבל...</span></h1>
+      <h1 id="hero-title" aria-label="מורה טוב אחד יכול להשפיע על חייהם של מאות ילדים, אבל...">מורה טוב אחד<br>יכול להשפיע<br>על חייהם<br>של מאות ילדים, <span class="hero-line">אבל...</span></h1>
     </div>
     <span class="hero-accents" role="group" aria-label="אפליקציות שמסיחות את הדעת"></span>
     <span id="hero-app-help" class="sr-only">גררו אפליקציה כדי להזיז אותה. לחצו או הקישו Enter כדי להסיר אותה ולהציג את הבאה.</span>
@@ -95,220 +128,137 @@
     <span>גללו</span>
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
   </a>
+  <div class="floating-apply-rail" data-anchor=".hero" inert>
+    <a class="button floating-apply-button" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=he">להגשת מועמדות</a>
+  </div>
 
   <section class="approach" id="approach" aria-label="הגישה שלנו">
     <div class="prose introduction">
-      <p data-hero-story-end>ילדים גדלים היום בעולם שבו תעשייה שלמה נועדה ללכוד את תשומת הלב שלהם. מלחמות. קורונה. שיעורים בזום.</p>
-      <p>בתי הספר לא נבנו להתמודד עם כל זה.<br>הקרן עוזרת למורים לעבוד בתנאים האלה.</p>
+      <p data-hero-story-end>ילדים גדלים היום בעולם שבו תעשייה שלמה נועדה ללכוד את תשומת הלב שלהם. מלחמות. קורונה. שיעורים בזום. בתי הספר לא נבנו להתמודד עם כל&nbsp;זה.</p>
+      <p>הקרן עוזרת למורים לעבוד בתנאים האלה.</p>
     </div>
   </section>
 
   <section class="what-we-do" id="what-we-do" aria-labelledby="what-we-do-title">
-    <h2 class="display" id="what-we-do-title">תוכניות<br>למורים ולרכזים</h2>
-    <div class="wwd-lead">
-      <div class="prose">
-        <p class="mission-intro">הקרן מפתחת תוכניות שמסייעות למורים ולרכזים בעבודה היומיומית בכיתות ובבתי הספר בישראל. הן משלבות למידה בדרך החקר, התנסות מעשית וליווי של <span class="mentor-highlight">מנטורים<img src="../assets/imgRectangle70.svg" alt="" aria-hidden="true"></span> לאורך כל הדרך.</p>
+    <div class="wwd-head">
+      <h2 class="display" id="what-we-do-title">תוכניות שבהן מורים לומדים לבנות שיעורים סביב <span class="approach-name">סקרנות</span>, <span class="approach-name">חקר</span> <span class="approach-name">ופרויקטים</span></h2>
+      <div class="prose wwd-lead">
+        <div class="wwd-lead-text">
+          <p class="mission-intro">התוכניות שלנו עוסקות בעבודת המורה והרכז <mark>היום</mark>: בעולם מלא הסחות דעת, שבו בית הספר נאבק מדי יום על תשומת הלב והעניין של הילד. אנחנו עוזרים למורים להחזיר את תשומת הלב הזאת דרך השיעור עצמו, ולרכזים לבנות צוות שמורים כאלה רוצים להישאר בו.</p>
+          <p class="mission-intro">אין לנו פדגוגיה חדשה למכור. אנחנו משתמשים בגישות מבוססות ונחקרות שאנחנו סומכים עליהן, מכשירים מורים ליישם אותן היטב, ומראים איך בינה מלאכותית יכולה להקל על העומס.</p>
+        </div>
+        <p class="wwd-stipend">המשתתפים מקבלים מלגה גם על ההכשרה וגם על ההתנסות בהוראה: למורים יש די והותר עבודה גם בלעדינו.<a class="beat-note" href="#scholarship">כן, מלגה חודשית</a></p>
       </div>
-      <figure class="wwd-photo">
+    </div>
+    <figure class="wwd-photo">
+      <div class="wwd-photo-frame">
         <img class="wwd-photo-img" src="../assets/photo-landscape-720.webp"
      srcset="../assets/photo-landscape-480.webp 480w, ../assets/photo-landscape-720.webp 720w, ../assets/photo-landscape-1080.webp 1080w, ../assets/photo-landscape-1440.webp 1440w, ../assets/photo-landscape-2048.webp 2048w"
-     sizes="(max-width: 700px) 86vw, 22rem"
-     alt="מורים בדיון בפיילוט של הקרן בטביליסי" width="511" height="339" loading="lazy" decoding="async">
-        <figcaption>הפיילוט הראשון שלנו. יולי 2026</figcaption>
-      </figure>
+     sizes="100vw"
+     alt="מורים בדיון בפיילוט של הקרן בטביליסי" width="511" height="339" loading="eager" fetchpriority="low" decoding="async">
+      </div>
+    </figure>
+    <div class="wwd-steps">
+      <ol class="wwd-steps-list" aria-label="איך התוכנית בנויה">
+        <li class="wwd-step">
+          <span class="wwd-step-num" aria-hidden="true">1</span>
+          <h4>הכשרה אינטנסיבית</h4>
+          <p>מתחילים בתיאוריה ובסדנאות: מפרקים שיטות הוראה מעשיות, מנסים אותן ורואים מה קורה.</p>
+        </li>
+        <li class="wwd-step">
+          <span class="wwd-step-num" aria-hidden="true">2</span>
+          <h4>חוגים</h4>
+          <p>אנחנו מארגנים חוגים לילדים ומגבשים את הקבוצות: <mark>יותר ממחצית התוכנית</mark> מתרחשת שם. במשך כמה שבועות אתם מלמדים ומנסים את מה שעבדנו עליו יחד.</p>
+        </li>
+        <li class="wwd-step">
+          <span class="wwd-step-num" aria-hidden="true">3</span>
+          <h4>מנטור</h4>
+          <p><mark class="blue">מדי שבוע, בקבוצה קטנה,</mark> אתם עוברים על השיעורים שלכם עם מנטור. המנטור מלווה את הקבוצה לאורך כל תקופת ההתנסות.</p>
+        </li>
+        <li class="wwd-step">
+          <span class="wwd-step-num" aria-hidden="true">4</span>
+          <h4>הכיתה שלכם</h4>
+          <p>את מה שעובד אתם מביאים לכיתה שלכם. בשביל זה כל התוכנית.</p>
+        </li>
+      </ol>
+      <div class="prose wwd-steps-close">
+        <p class="beat-note wwd-note">יותר מ־10 שיעורים למורים לנסות את זה על ילדים אמיתיים</p>
+        <p>רכזים עוברים את אותם ארבעה שלבים, אלא שההתנסות שלהם היא מקרים אמיתיים מבתי הספר שלהם, לא חוגים.</p>
+      </div>
     </div>
-    <div class="wwd-beats">
-      <article class="wwd-beat">
-        <h3>דגש על התנסות מעשית</h3>
-        <p>יותר ממחצית הזמן בכל תוכנית מוקדשת להתנסות מעשית. מתחילים בהכשרה אינטנסיבית. בהמשך, המורים מלמדים ילדים והרכזים מנתחים יחד מצבים מבתי הספר שלהם.</p>
-      </article>
-      <article class="wwd-beat">
-        <h3>ליווי לאורך כל הדרך</h3>
-        <p>מנטור מלווה את הקבוצה לאורך כל התוכנית. מורים ורכזים נפגשים עם המנטור שלהם בקבוצות קטנות בכל שבוע, לאורך כל תקופת ההתנסות.</p>
-      </article>
-      <article class="wwd-beat">
-        <h3>מלגה למשתתפים</h3>
-        <p>המשתתפים מקבלים מלגה גם על ההכשרה וגם על ההתנסות בהוראה: למורים יש די והותר עבודה גם בלעדינו.</p>
-<span class="beat-note">כן, מלגה חודשית</span>      </article>
-    </div>
-    <div class="prose wwd-closing">
-      <p>אנחנו משתמשים בגישות שאנחנו סומכים עליהן ושנחקרו היטב, כמו למידה בדרך החקר, למידה דרך עשייה ולמידה מבוססת פרויקטים. אין לנו פדגוגיה חדשה למכור.</p>
-      <p><strong>המבחן פשוט: האם זה עובד גם בכיתה רגילה של 35 ילדים ביום שלישי בבוקר?</strong></p>
-    </div>
-    <nav class="wwd-routes" aria-label="מאיפה להתחיל">
-      <a href="#program-tel-aviv">למורים</a>
-      <a href="#program-school-coordination">לרכזים</a>
-      <a href="#partners">לבתי ספר ולשותפים</a>
-    </nav>
   </section>
 
   <div class="story-stack">
-    <section class="fellowship panel" id="fellowship" aria-labelledby="fellowship-title">
-      <div class="floating-apply-rail" inert>
-        <a class="button apply-button floating-apply-button" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=he">להגשת מועמדות</a>
-      </div>
-      <p class="eyebrow">Morim Fellows</p>
-      <h2 class="display" id="fellowship-title">מורים ומורות יקרים,</h2>
-      <div class="prose fellowship-intro">
-        <p>שגרת הלימודים השתבשה שוב ושוב בשנים האחרונות. אתם רואים את ההשלכות טוב מכולם. אנחנו רוצים לתת לכם זמן ללמוד, להתנסות ולנתח עם מנטור את מה שקורה בכיתה.</p>
-        <p>אנחנו מתחילים בכיתות הגבוהות של היסודי ובתחילת חטיבת הביניים — בגיל שבו ילדים רבים מתחילים לאבד עניין בלמידה.</p>
-      </div>
-      <div class="programs" id="programs">
-  <div class="program-heading">
-    <h3>התוכניות שלנו</h3>
-    <div class="location-select-wrap">
-      <button type="button" class="location-select" id="teachers-location"
-              aria-haspopup="listbox" aria-expanded="false"
-              aria-controls="teachers-location-list">
-        <span class="sr-only">סינון תוכניות לפי מיקום</span>
-        <span data-value-label>כל המקומות</span>
-        <svg class="location-select-chevron" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-      <ul id="teachers-location-list" class="location-options" role="listbox"
-          aria-labelledby="teachers-location" tabindex="-1" hidden>
-        <li role="option" data-value="all" aria-selected="true" tabindex="0">
-          <span>כל המקומות</span>
-          <svg class="location-option-check" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-        </li>
-        <li role="option" data-value="tel-aviv" aria-selected="false" tabindex="-1">
-          <span>תל&nbsp;אביב</span>
-          <svg class="location-option-check" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-        </li>
-        <li role="option" data-value="tbilisi" aria-selected="false" tabindex="-1">
-          <span>טביליסי, גאורגיה</span>
-          <svg class="location-option-check" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-        </li>
-      </ul>
+    <section class="audiences" id="audiences" aria-label="מאיפה להתחיל">
+    <div class="audience-nav">
+    <div class="audience-tabs" role="tablist" aria-label="מאיפה להתחיל">
+      <a class="audience-tab" role="tab" id="tab-fellowship" href="#fellowship" aria-controls="fellowship"
+         aria-selected="true">
+        <span>למורים</span>
+        <svg class="audience-loop" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M112 7C158 5 197 15 195 32C193 51 136 57 94 56C47 55 5 47 6 29C7 13 49 3 104 5C140 6 170 11 186 20"/></svg>
+      </a>
+      <a class="audience-tab" role="tab" id="tab-leaders" href="#leaders" aria-controls="leaders"
+         aria-selected="false">
+        <span>לרכזים</span>
+        <svg class="audience-loop" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M112 7C158 5 197 15 195 32C193 51 136 57 94 56C47 55 5 47 6 29C7 13 49 3 104 5C140 6 170 11 186 20"/></svg>
+      </a>
     </div>
-  </div>
-  <div class="program-list" aria-live="polite">
-    <article class="program-row" id="program-tel-aviv" data-program="tel-aviv" data-location="tel-aviv">
-      <h4>ללמד<br>בעידן כלכלת הקשב</h4>
-      <p><span>איפה</span>זום + מפגשים חודשיים בתל&nbsp;אביב</p>
-<p><span>מתי</span>פתיחה בנובמבר 2026</p>
-      <a class="button apply-button" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=he">להגשת מועמדות</a>
-    </article>
-    <article class="program-results-card" data-program="tbilisi" data-location="tbilisi" data-state="open">
-      <div class="program-row program-results-summary">
-        <h4 id="tbilisi-program-title">מחנה קיץ<br>בטביליסי</h4>
-        <p><span>איפה</span>טביליסי, גאורגיה</p>
-<p><span>מתי</span>יולי–אוגוסט 2026</p>
-        <button type="button" class="button results-button"
-                aria-expanded="true" aria-controls="tbilisi-results"
-                data-label-open="הסתרת התוצאות"
-                data-label-closed="הצגת התוצאות">הסתרת התוצאות</button>
+    <a class="audience-trigger text-link" href="schools/">
+      <span>לבתי ספר ולשותפים</span><svg class="promo-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    </div>
+    <div class="audience-pane fellowship" id="fellowship" role="tabpanel" aria-labelledby="fellowship-title">
+      <h2 class="display" id="fellowship-title">ללמד בעידן כלכלת הקשב</h2>
+      <div class="program-offer">
+  <article class="offer-terms" id="program-tel-aviv" data-program="tel-aviv" aria-labelledby="fellowship-title">
+<p class="offer-tags"><a class="offer-tag offer-scholarship" href="#scholarship">מלגות לכל המשתתפים!</a></p>    <div class="offer-meta">
+<p><span>עלות</span><em class="offer-meta-cost">חינם</em></p><p><span>מחזורים נפתחים</span><em class="offer-meta-frequency">חודשי</em></p><p><span>מועד הבא</span>דצמ׳ 2026</p>      <p><span>איפה</span>זום + מפגשים חודשיים בתל&nbsp;אביב</p>
+    </div>
+  </article>
+  <a class="button apply-button offer-apply" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=he" data-apply>להגשת מועמדות</a>
+</div>
+      <a class="running-card pilot-link" href="#tbilisi-camp">
+        <span class="pilot-camp">מחנה קיץ טביליסי</span>
+        <h3>פיילוט התוכנית</h3>
+        <p class="running-badge"><bdi dir="ltr">1.07–1.09.2026</bdi></p>
+        <span class="running-status pilot-button text-link">לתוצאות<svg class="promo-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <div class="prose fellowship-intro">
+        <p>מורים ומורות יקרים, שגרת הלימודים השתבשה שוב ושוב בשנים האחרונות. אתם רואים את ההשלכות טוב מכולם. אנחנו רוצים לתת לכם זמן ללמוד, להתנסות ולנתח עם מנטור את מה שקורה בכיתה.</p>
+        <p>תוכנית Morim Fellows למורים מתחילה בכיתות הגבוהות של היסודי ובתחילת חטיבת הביניים — בגיל שבו ילדים רבים מתחילים לאבד עניין בלמידה.</p>
       </div>
-      <div id="tbilisi-results" class="program-results-content" role="region" aria-labelledby="tbilisi-program-title">
-        <div class="program-results-body">
-          <figure class="program-results-photos" aria-label="תמונות מההכשרה האינטנסיבית למורים בטביליסי">
-            <img class="results-landscape" src="../assets/photo-landscape-720.webp"
-     srcset="../assets/photo-landscape-480.webp 480w, ../assets/photo-landscape-720.webp 720w, ../assets/photo-landscape-1080.webp 1080w, ../assets/photo-landscape-1440.webp 1440w, ../assets/photo-landscape-2048.webp 2048w"
-     sizes="(max-width: 700px) 50vw, 26vw"
-     alt="מורים בדיון במהלך ההכשרה האינטנסיבית בטביליסי" width="511" height="339" loading="lazy" decoding="async">
-            <img class="results-portrait" src="../assets/photo-portrait-500.webp"
-     srcset="../assets/photo-portrait-360.webp 360w, ../assets/photo-portrait-500.webp 500w, ../assets/photo-portrait-760.webp 760w, ../assets/photo-portrait-1024.webp 1024w, ../assets/photo-portrait-1536.webp 1536w"
-     sizes="(max-width: 700px) 36vw, 19vw"
-     alt="משתתפים עובדים יחד על פעילות הוראה" width="317" height="412" loading="lazy" decoding="async">
-          </figure>
-          <div class="program-results-copy">
-            <h5 class="program-results-title">הפיילוט הראשון</h5>
-            <div class="results-stats">
-              <div class="stat">
-                <span class="stat-value">17</span>
-                <span class="stat-label">מורים ומורות סיימו את ההכשרה האינטנסיבית, יולי–אוגוסט 2026</span>
-              </div>
-              <div class="stat">
-                <span class="stat-value">8.8<span class="arrow">→</span>9.5</span>
-                <span class="stat-label">ציון ממוצע לנכונות להמליץ על התוכנית: אחרי ההכשרה ← אחרי ההתנסות</span>
-              </div>
-              <div class="stat">
-                <span class="stat-value">40<span class="arrow">→</span>81<small>%</small></span>
-                <span class="stat-label">מהתשובות לשאלות על יסודות השיטה היו “אני מבין/ה ויכול/ה ליישם”</span>
-              </div>
-              <div class="stat">
-                <span class="stat-value">60<span class="arrow">→</span>25<small>%</small></span>
-                <span class="stat-label">מהמורים שהשיבו לסקר היו מוטרדים מהצורך לשנות את מהלך השיעור כשהוא לא מתנהל כמתוכנן</span>
-              </div>
-            </div>
-            <p>ההכשרה האינטנסיבית הראשונה שלנו בטביליסי עסקה בלמידה בדרך החקר. אותם מורים השיבו לסקר פעמיים: לאחר ההכשרה, ושוב לאחר כמה שבועות שבהם לימדו ילדים ונפגשו עם מנטור מדי שבוע.</p>
-            <p>אחרי ההתנסות ראינו שינוי ברור בתשובות. בשאלות על יסודות השיטה — מה מטרת שיעור החקר, במה הוא שונה משיעור שהוא רק מעניין ומה תפקיד המורה בו — שיעור התשובות “אני מבין/ה ויכול/ה ליישם” עלה מ־40% ל־81%. פחות מורים דיווחו שהם מוטרדים מהצורך לשנות את מהלך השיעור כשהוא לא מתנהל כמתוכנן.</p>
-            <blockquote class="results-quote">“אני נוטה הרבה פחות לכוון את הילדים לתשובה הנכונה, ושמה לב יותר לדרך שבה הם חושבים.”</blockquote>
-            <p class="results-note">אחת המורות · זה בדיוק השינוי שאנחנו מחפשים</p>
-            <p>לא הכול נהיה קל יותר. ההתמודדות עם הדינמיקה בקבוצה עדיין הייתה קשה, ולכן אנחנו מוסיפים עוד תרגול וליווי בתחום הזה.</p>
-            <p>שלושה רבעים מהילדים שהשיבו לסקר אמרו שהיו רוצים שיעורים כאלה בבית הספר.</p>
-            <p class="results-caveat">התוצאות מעודדות, אבל הקבוצה הייתה קטנה והתנאים היו נוחים במיוחד. עוד נצטרך לבדוק אם נראה תוצאות דומות גם בכיתות רגילות.</p>
-          </div>
+      <div class="prose fellowship-practice">
+        <p>אנחנו מארגנים את החוגים ומרכיבים את הקבוצות. במשך כמה שבועות אתם מעבירים שיעורים לילדים ועוברים על כל אחד מהם עם מנטור. לא צריך לחשוש לטעות: זו לא הכיתה שלכם. את מה שעובד אתם מביאים לכיתה שלכם.</p>
+        <p>בהכשרות האינטנסיביות בוחנים דרכי הוראה שלב אחר שלב, מתנסים בהן ורואים מה קורה בפועל.</p>
+        <div class="questions" aria-label="שאלות יומיומיות, אבל קשות">
+          <span>“איך מושכים את תשומת הלב של הכיתה בלי להרים את הקול?”</span>
+          <span>“איך בונים מוטיבציה שלא תלויה בציונים?”</span>
+          <span>“איך מתחילים שיעור בשאלה אמיתית?”</span>
+          <span>“איך עוזרים לילדים לחפש תשובות בעצמם במקום לנסות לנחש מה המורה רוצה לשמוע?”</span>
         </div>
       </div>
-    </article>
-  </div>
-</div>
-      <div class="benefits">
-        <article class="benefit craft">
-          <h3>דרכי הוראה מעשיות</h3>
-          <p>בהכשרות האינטנסיביות בוחנים דרכי הוראה שלב אחר שלב, מתנסים בהן ורואים מה קורה בפועל.</p>
-          <div class="questions" aria-label="שאלות יומיומיות, אבל קשות">
-            <span>“איך מושכים את תשומת הלב של הכיתה בלי להרים את הקול?”</span>
-            <span>“איך בונים מוטיבציה שלא תלויה בציונים?”</span>
-            <span>“איך מתחילים שיעור בשאלה אמיתית?”</span>
-            <span>“איך עוזרים לילדים לחפש תשובות בעצמם במקום לנסות לנחש מה המורה רוצה לשמוע?”</span>
-          </div>
-        </article>
-        <article class="benefit">
-          <h3>התנסות בהוראה</h3>
-          <p>אחרי ההכשרה המשתתפים מלמדים ילדים במשך כמה שבועות, ובכל שבוע עוברים על השיעורים שלהם עם מנטור. המטרה היא ליישם בכיתות שלהם את מה שלמדו.</p>
-        </article>
-        <article class="benefit">
-          <h3>מלגה למשתתפים</h3>
-          <p>יש לכם מספיק עבודה גם בלעדינו. לכן אנחנו משלמים מלגה גם על ההכשרה וגם על ההתנסות בהוראה.<br>אם אנחנו מעריכים את הזמן שלכם, הגיוני גם לשלם עליו.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="leaders panel" id="leaders" aria-labelledby="leaders-title">
-      <div class="floating-apply-rail" inert>
-        <a class="button apply-button floating-apply-button" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=he">להצטרפות</a>
-      </div>
-      <p class="eyebrow muted">Morim Leaders</p>
-      <h2 class="display" id="leaders-title">רכזים ורכזות יקרים,</h2>
-      <div class="prose leaders-intro">
-        <p>מורים טובים צריכים בתי ספר שבהם יוכלו לעבוד היטב וירצו להישאר. לכן אנחנו עובדים עם מורים גם על ההוראה בכיתה וגם על הובלת צוותים.</p>
-        <p>את התוכנית הראשונה שלנו לרכזים ולרכזות אנחנו בונים יחד איתם. הפיילוט הראשון כבר מתקיים בקבוצה סגורה.</p>
-      </div>
-      <div class="programs" id="leaders-programs">
-  <div class="program-heading">
-    <h3>התוכניות שלנו</h3>
-    <div class="location-select-wrap">
-      <button type="button" class="location-select" id="leaders-location"
-              aria-haspopup="listbox" aria-expanded="false"
-              aria-controls="leaders-location-list">
-        <span class="sr-only">סינון תוכניות לפי מיקום</span>
-        <span data-value-label>כל המקומות</span>
-        <svg class="location-select-chevron" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-      <ul id="leaders-location-list" class="location-options" role="listbox"
-          aria-labelledby="leaders-location" tabindex="-1" hidden>
-        <li role="option" data-value="all" aria-selected="true" tabindex="0">
-          <span>כל המקומות</span>
-          <svg class="location-option-check" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-        </li>
-      </ul>
     </div>
-  </div>
-  <div class="program-list" aria-live="polite">
-    <article class="program-row" id="program-school-coordination-pilot" data-program="school-coordination-pilot" data-closed>
-<span class="program-badge"><span>הפיילוט מתקיים כעת · קבוצה סגורה</span></span>      <h4>עבודת הריכוז בבית הספר: צוות, תהליכי עבודה ופרויקטים</h4>
-      <button type="button" class="button apply-button" disabled>להצטרפות</button>
-    </article>
-    <article class="program-row" id="program-school-coordination" data-program="school-coordination">
-      <h4>עבודת הריכוז בבית הספר: צוות, תהליכי עבודה ופרויקטים</h4>
-      <p><span>איפה</span>זום + מפגשים חודשיים בתל&nbsp;אביב</p>
-<p><span>מתי</span>פתיחה בסוף ינואר 2027</p>
-      <a class="button apply-button" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=he">להצטרפות</a>
-    </article>
-  </div>
+
+    <div class="audience-pane leaders" id="leaders" role="tabpanel" aria-labelledby="leaders-title">
+      <h2 class="display" id="leaders-title">עבודת הריכוז בבית הספר: צוות, תהליכי עבודה ופרויקטים</h2>
+      <div class="program-offer">
+  <article class="offer-terms" id="program-school-coordination" data-program="school-coordination" aria-labelledby="leaders-title">
+<p class="offer-tags"><a class="offer-tag offer-scholarship" href="#scholarship">מלגות לכל המשתתפים!</a></p>    <div class="offer-meta">
+<p><span>עלות</span><em class="offer-meta-cost">חינם</em></p><p><span>מחזורי הכשרה חדשים</span><em class="offer-meta-frequency">חודשי</em></p><p><span>מועד הבא</span>פבר׳ 2027</p>      <p><span>איפה</span>זום + מפגשים בתל&nbsp;אביב</p>
+    </div>
+  </article>
+  <a class="button apply-button offer-apply" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=he" data-apply>להגשת מועמדות</a>
 </div>
-      <div class="leader-benefits">
+      <article class="running-card" id="program-school-coordination-pilot" data-closed>
+        <h3>פיילוט התוכנית</h3>
+        <p class="running-status">התוצאות בקרוב</p>
+        <p class="running-badge running-now">פועל כעת</p>
+      </article>
+      <div class="prose leaders-intro">
+        <p>רכזים ורכזות יקרים, מורים טובים צריכים בתי ספר שבהם יוכלו לעבוד היטב וירצו להישאר. לכן אנחנו עובדים עם מורים גם על ההוראה בכיתה וגם על הובלת צוותים.</p>
+        <p>את Morim Leaders, התוכנית הראשונה שלנו לרכזים ולרכזות, אנחנו בונים יחד איתם. הפיילוט הראשון כבר מתקיים בקבוצה סגורה.</p>
+      </div>
+      <div class="leader-benefits feature-cards">
         <article class="benefit">
           <h3>להוביל בלי סמכות פורמלית</h3>
           <p>רכזים ורכזות הם גם מורים. הם מלמדים בכיתות שלהם ועוזרים לצוות שלם לעבוד טוב יותר — לעיתים קרובות בלי סמכות פורמלית על האנשים שהם מובילים.<br>איך מקדמים צוות כשהאנשים בו לא כפופים לכם?</p>
@@ -322,60 +272,100 @@
           <p>איך מחלקים את העומס בצוות ומשאירים זמן להתפתחות מקצועית — שלכם ושל חברי הצוות?<br>בתוכנית עוסקים בתכנון, בבניית צוות, בשגרות עבודה ובניהול פרויקטים — בלי שעבודת הריכוז תבוא על חשבון ההוראה.</p>
         </article>
       </div>
+    </div>
+
     </section>
   </div>
 
-  <section class="partners" id="partners" aria-labelledby="partners-title">
-    <h2 class="display" id="partners-title">לבתי ספר ולשותפים</h2>
-    <div class="prose partners-lead">
-      <p>אנחנו מפעילים את התוכניות שלנו עם שותפים: בתי ספר שמארחים חוג, ארגונים שכבר עובדים עם ילדים, ורשויות מקומיות שרוצות את התוכניות למורים שלהן. אנחנו מחפשים שותפים ומקומות להתנסות מעשית — לא מימון.</p>
+  <section class="scholarship-band" id="scholarship" aria-labelledby="scholarship-title">
+    <h2 class="scholarship-word" id="scholarship-title">מלגות על השתתפות!</h2>
+    <div class="scholarship-text">
+      <p>יש לכם מספיק עבודה גם בלעדינו. לכן אנחנו משלמים מלגה גם על ההכשרה וגם על ההתנסות בהוראה.</p>
+      <p>אם אנחנו מעריכים את הזמן שלכם, הגיוני גם לשלם עליו.</p>
     </div>
-    <div class="wwd-beats partners-types">
-      <article class="wwd-beat">
-        <h3>בתי ספר</h3>
-        <p>בשבועות ההתנסות, מורה שמשתתף בתוכנית מעביר חוג לתלמידי בית הספר אחרי שעות הלימודים. מכם — חדר, קבוצת תלמידים ואיש קשר; מאיתנו — התוכנית, ליווי של מנטור ומלגה למורה.</p>
-      </article>
-      <article class="wwd-beat">
-        <h3>ארגונים שעובדים עם ילדים</h3>
-        <p>מסגרות אחר הצהריים, מחנות ומרכזי נוער יכולים לארח את שבועות ההתנסות ולשלב בפעילות שלהם למשך עונה מורה שעבר את ההכשרה.</p>
-      </article>
-      <article class="wwd-beat">
-        <h3>רשויות מקומיות ורשתות חינוך</h3>
-        <p>הביאו את התוכניות למורים ולרכזים שלכם, מחזור אחרי מחזור, עם התנסות מעשית בבתי הספר שלכם.</p>
-      </article>
+    <dl class="scholarship-terms">
+      <div><dt>באיזו תדירות</dt><dd>מדי חודש</dd></div>
+      <div><dt>מי מקבל</dt><dd>כל מורה בתוכנית</dd></div>
+      <div><dt>איך מקבלים</dt><dd>אין צורך בבקשה נפרדת: המלגה מגיעה עם המקום בתוכנית</dd></div>
+      <div><dt>מה נדרש</dt><dd>להשתתף במפגשים ולהעביר את השיעורים בחוג</dd></div>
+      <div><dt>סכום</dt><dd>נודיע לפני תחילת התוכנית</dd></div>
+    </dl>
+  </section>
+
+  <section class="camp" id="tbilisi-camp" aria-labelledby="tbilisi-promo-title" data-program="tbilisi">
+    <div class="camp-copy">
+      <h2 id="tbilisi-promo-title"><span class="camp-descriptor">פיילוט של תוכנית המורים</span> <span class="camp-name">מחנה קיץ טביליסי</span></h2>
+      <p class="promo-meta"><span>טביליסי, גאורגיה</span><span>יולי–אוגוסט 2026</span></p>
+      <ul class="camp-figures" role="list">
+        <li class="camp-figure">
+          <span class="stat-value">17</span>
+          <span class="stat-label">מורים ומורות סיימו את ההכשרה האינטנסיבית, יולי–אוגוסט 2026</span>
+        </li>
+        <li class="camp-figure">
+          <span class="stat-value">8.8<span class="arrow">→</span>9.5</span>
+          <span class="stat-label">ציון ממוצע לנכונות להמליץ על התוכנית: אחרי ההכשרה ← אחרי ההתנסות</span>
+        </li>
+        <li class="camp-figure">
+          <span class="stat-value">40<span class="arrow">→</span>81<small>%</small></span>
+          <span class="stat-label">מהתשובות לשאלות על יסודות השיטה היו “אני מבין/ה ויכול/ה ליישם”</span>
+        </li>
+        <li class="camp-figure">
+          <span class="stat-value">60<span class="arrow">→</span>25<small>%</small></span>
+          <span class="stat-label">מהמורים שהשיבו לסקר היו מוטרדים מהצורך לשנות את מהלך השיעור כשהוא לא מתנהל כמתוכנן</span>
+        </li>
+      </ul>
+      <button type="button" class="camp-more text-link" aria-expanded="false" aria-controls="tbilisi-details" data-expand hidden>
+        <span>למידע נוסף</span><svg class="camp-more-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
     </div>
-    <div class="partners-action">
-      <a class="button" href="https://survey.morim.foundation/s/join-v1?src=partners&lang=he">ספרו לנו על בית הספר או הארגון שלכם</a>
-      <a class="partners-email" href="mailto:contact@morim.foundation">contact@morim.foundation</a>
+    <img class="camp-photo" src="../assets/camp-square-720.webp"
+     srcset="../assets/camp-square-480.webp 480w, ../assets/camp-square-720.webp 720w, ../assets/camp-square-1080.webp 1080w, ../assets/camp-square-1440.webp 1440w"
+     sizes="(max-width: 700px) 16rem, 26rem"
+     alt="" width="720" height="720" loading="lazy" decoding="async">
+    <div class="camp-details" id="tbilisi-details">
+      <div class="camp-story">
+        <div class="program-results-copy">
+          <h3 class="program-results-title">הפיילוט הראשון</h3>
+          <p>ההכשרה האינטנסיבית הראשונה שלנו בטביליסי עסקה בלמידה בדרך החקר. אותם מורים השיבו לסקר פעמיים: לאחר ההכשרה, ושוב לאחר כמה שבועות שבהם לימדו ילדים ונפגשו עם מנטור מדי שבוע.</p>
+          <p>אחרי ההתנסות ראינו שינוי ברור בתשובות. בשאלות על יסודות השיטה — מה מטרת שיעור החקר, במה הוא שונה משיעור שהוא רק מעניין ומה תפקיד המורה בו — שיעור התשובות “אני מבין/ה ויכול/ה ליישם” עלה מ־40% ל־81%. פחות מורים דיווחו שהם מוטרדים מהצורך לשנות את מהלך השיעור כשהוא לא מתנהל כמתוכנן.</p>
+          <p>לא הכול נהיה קל יותר. ההתמודדות עם הדינמיקה בקבוצה עדיין הייתה קשה, ולכן אנחנו מוסיפים עוד תרגול וליווי בתחום הזה.</p>
+          <p>שלושה רבעים מהילדים שהשיבו לסקר אמרו שהיו רוצים שיעורים כאלה בבית הספר.</p>
+          <p class="results-caveat">התוצאות מעודדות, אבל הקבוצה הייתה קטנה והתנאים היו נוחים במיוחד. עוד נצטרך לבדוק אם נראה תוצאות דומות גם בכיתות רגילות.</p>
+        </div>
+        <figure class="camp-voice">
+          <blockquote class="results-quote">“אני נוטה הרבה פחות לכוון את הילדים לתשובה הנכונה, ושמה לב יותר לדרך שבה הם חושבים.”</blockquote>
+          <figcaption class="results-note">אחת המורות · זה בדיוק השינוי שאנחנו מחפשים</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
   <section class="team" id="team" aria-labelledby="team-title">
     <p class="eyebrow">האנשים שמאחורי Morim</p>
     <h2 class="team-title" id="team-title">שנים אנחנו<br class="desktop-break"> עובדים בחינוך.<br class="desktop-break"> עכשיו אנחנו בונים<br class="desktop-break"> את Morim יחד.</h2>
-    <div class="team-track" tabindex="0" role="region" aria-label="צוות הקרן">
+    <div class="team-columns">
       <article class="person">
         <img class="portrait" src="../assets/team-elena.jpg" alt="אלנה בונינה" width="420" height="510" loading="lazy">
-        <p class="person-role">תורמת ומייסדת</p>
         <h3><a href="https://www.linkedin.com/in/elena-bunina-738522eb/" target="_blank" rel="noreferrer">אלנה בונינה</a></h3>
+        <p class="person-role">תורמת ומייסדת</p>
         <p>פרופסור למתמטיקה באוניברסיטת בר-אילן וראש <a href="https://academy.nebius.com/" target="_blank" rel="noreferrer">Nebius Academy</a>. לשעבר מנכ״לית Yandex.</p>
       </article>
       <article class="person">
         <img class="portrait" src="../assets/team-vlad.jpg" alt="ולאד סטפנוב" width="420" height="510" loading="lazy">
-        <p class="person-role">מייסד שותף ומנכ״ל</p>
         <h3><a href="https://www.linkedin.com/in/utterstep/" target="_blank" rel="noreferrer">ולאד סטפנוב</a></h3>
+        <p class="person-role">מייסד שותף ומנכ״ל</p>
         <p>לשעבר מנכ״ל <a href="https://gradarius.com/" target="_blank" rel="noreferrer">Gradarius</a>; קודם לכן מנהל טכנולוגיות ראשי וראש תחום Informatika ב־Yandex Education. יותר מ־13 שנות ניסיון בטכנולוגיות חינוך בארה״ב ובחבר המדינות.</p>
       </article>
       <article class="person">
         <img class="portrait" src="../assets/team-ilya.jpg" alt="איליה זסלבסקי" width="420" height="510" loading="lazy">
-        <p class="person-role">ראש תחום מוטיבציה של תלמידים</p>
         <h3><a href="https://www.linkedin.com/in/izaslavskiy/" target="_blank" rel="noreferrer">איליה זסלבסקי</a></h3>
+        <p class="person-role">ראש תחום מוטיבציה של תלמידים</p>
         <p>מייסד שותף של Platan, חטיבת ביניים היברידית בינלאומית; מומחה פדגוגי ומורה להיסטוריה. מומחה למשחוק בחינוך.</p>
       </article>
-      <article class="person person-note">
-        <h3>הצוות</h3>
-        <p>אנחנו מחברים בין מומחים לפיתוח מקצועי של מורים לבין מורים שעובדים בכיתה. אנחנו גם בונים מעגל של אנשי חינוך וחוקרים ישראלים מנוסים שיוכלו להגיד לנו כשאנחנו טועים ולעזור לנו להבין את מערכת החינוך מבפנים.</p>
-      </article>
+    </div>
+    <div class="team-note">
+      <h3>הצוות</h3>
+      <p>אנחנו מחברים בין מומחים לפיתוח מקצועי של מורים לבין מורים שעובדים בכיתה. אנחנו גם בונים מעגל של אנשי חינוך וחוקרים ישראלים מנוסים שיוכלו להגיד לנו כשאנחנו טועים ולעזור לנו להבין את מערכת החינוך מבפנים.</p>
     </div>
   </section>
 
@@ -385,7 +375,7 @@
       <details class="faq-item" data-state="closed">
         <summary class="faq-trigger">
           למי מיועדת תוכנית Morim Fellows?
-          <span class="faq-chevron" aria-hidden="true">›</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
         <div class="faq-answer">
           <div class="faq-answer-body">כרגע התוכנית מיועדת למורים בישראל שמלמדים בכיתות הגבוהות של בית הספר היסודי ובתחילת חטיבת הביניים. גם אם אתם מלמדים תלמידים בגילים אחרים, אפשר לפנות אלינו ולספר על הניסיון שלכם.</div>
@@ -394,16 +384,16 @@
       <details class="faq-item" data-state="closed">
         <summary class="faq-trigger">
           ומה עם בינה מלאכותית?
-          <span class="faq-chevron" aria-hidden="true">›</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
         <div class="faq-answer">
-          <div class="faq-answer-body">אנחנו מלמדים מורים להשתמש בבינה מלאכותית — וללמד ילדים להשתמש בה — במקום לאמן אותה להחליף מורים.</div>
+          <div class="faq-answer-body">אנחנו מלמדים מורים להשתמש בבינה מלאכותית — וללמד ילדים להשתמש בה — במקום לאמן אותה להחליף מורים. פדגוגיה טובה תמיד הייתה <mark>יקרה</mark>. הטכנולוגיה החדשה מאפשרת להרחיב את טווח ההגעה שלה.</div>
         </div>
       </details>
       <details class="faq-item" data-state="closed">
         <summary class="faq-trigger">
           איך התוכנית בנויה?
-          <span class="faq-chevron" aria-hidden="true">›</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
         <div class="faq-answer">
           <div class="faq-answer-body">לאורך התוכנית משלבים לימוד תיאורטי, סדנאות והתנסות מעשית. המורים עובדים עם ילדים, והרכזים מנתחים מצבים מבתי הספר שלהם. כל המשתתפים נפגשים מדי שבוע בקבוצות קטנות עם מנטור.</div>
@@ -412,7 +402,7 @@
       <details class="faq-item" data-state="closed">
         <summary class="faq-trigger">
           האם המשתתפים מקבלים מלגה?
-          <span class="faq-chevron" aria-hidden="true">›</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
         <div class="faq-answer">
           <div class="faq-answer-body">כן. גם התוכנית למורים וגם התוכנית לרכזים כוללות מלגה. הסכום ותנאי התשלום יימסרו עם פרטי כל תוכנית.</div>
@@ -421,20 +411,21 @@
       <details class="faq-item" data-state="closed">
         <summary class="faq-trigger">
           האם בית ספר או רשות מקומית יכולים לעבוד עם Morim?
-          <span class="faq-chevron" aria-hidden="true">›</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
         <div class="faq-answer">
-          <div class="faq-answer-body">כן. אנחנו רוצים לעבוד עם בתי ספר, רשתות חינוך ורשויות מקומיות שרוצים להביא את התוכניות שלנו למורים או לרכזים שלהם. אנחנו גם מחפשים אנשי חינוך מנוסים שיעזרו לנו לבנות את התוכניות. <a href="#partners">עוד על שותפות איתנו.</a></div>
+          <div class="faq-answer-body">כן. אנחנו רוצים לעבוד עם בתי ספר, רשתות חינוך ורשויות מקומיות שרוצים להביא את התוכניות שלנו למורים או לרכזים שלהם. אנחנו גם מחפשים אנשי חינוך מנוסים שיעזרו לנו לבנות את התוכניות. <a href="schools/">עוד על שותפות איתנו.</a></div>
         </div>
       </details>
     </div>
   </section>
 
+
   <footer id="contact" class="site-footer">
     <div class="footer-message">
       <h2>בואו נדבר</h2>
       <p class="footer-lead">אם אתם מורים, עובדים עם בית ספר או רשות מקומית — או פשוט חושבים שכדאי לנו לדבר — <a href="https://survey.morim.foundation/s/join-v1?src=landing&lang=he">השאירו פרטים בטופס</a> או כתבו לנו.</p>
-      <a class="button rounded-button" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=he">רוצים לעשות משהו יחד?</a>
+      <p class="footer-actions"><a class="button footer-apply" href="https://survey.morim.foundation/s/join-v1?src=landing&lang=he" data-apply>להגשת מועמדות</a></p>
       <a class="footer-email" href="mailto:contact@morim.foundation">contact@morim.foundation</a>
     </div>
     <div class="footer-links">
@@ -444,15 +435,10 @@
           <a href="#what-we-do">מה אנחנו עושים</a>
           <a href="#fellowship">למורים</a>
           <a href="#leaders">לרכזים</a>
-          <a href="#partners">לשותפים</a>
+          <a href="schools/">לשותפים</a>
           <a href="#team">הצוות</a>
           <a href="#faq">שאלות</a>
         </nav>
-        <nav class="lang-switcher lang-switcher-footer" aria-label="שפה">
-  <a href="../" hreflang="en" lang="en">EN</a>
-  <a href="../ru/" hreflang="ru" lang="ru">RU</a>
-  <a href="../he/" hreflang="he" lang="he" aria-current="page">עברית</a>
-</nav>
       </div>
       <div>
         <p class="footer-label">רשתות חברתיות</p>
@@ -462,10 +448,18 @@
           <button type="button" class="text-button" data-dialog="dialog-social" data-dialog-title="X">X</button>
         </nav>
       </div>
-      <div class="footer-legal">
-        <a class="logo" href="#top" aria-label="קרן Morim — לעמוד הבית">morim foundation</a>
-        <p>© 2026, The Foundation for Teachers Growth LTD<br>מספר חברה: 517356374</p>
+      <div>
+        <p class="footer-label" aria-hidden="true">שפה</p>
+        <nav class="lang-switcher lang-switcher-footer" aria-label="שפה">
+  <a href="../" hreflang="en" lang="en">English</a>
+  <a href="../ru/" hreflang="ru" lang="ru">Русский</a>
+  <a href="../he/" hreflang="he" lang="he" aria-current="page" dir="rtl">עברית</a>
+</nav>
       </div>
+    </div>
+    <div class="footer-legal">
+      <a class="logo" href="#top" aria-label="קרן Morim — לעמוד הבית">morim foundation</a>
+      <p>© 2026, The Foundation for Teachers Growth LTD<br>מספר חברה: 517356374</p>
     </div>
   </footer>
 </main>
@@ -480,30 +474,7 @@
   </div>
 </dialog>
 
-<dialog class="mobile-menu-panel" id="mobile-menu" aria-labelledby="mobile-menu-title" aria-describedby="mobile-menu-desc">
-  <div class="mobile-menu-heading">
-    <h2 id="mobile-menu-title">morim foundation</h2>
-    <button type="button" class="mobile-menu-close" data-dialog-close aria-label="סגירה">
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
-    </button>
-  </div>
-  <p id="mobile-menu-desc" class="sr-only">חלקי האתר של הקרן והתוכניות שלה.</p>
-  <nav aria-label="ניווט למובייל">
-    <a href="#what-we-do">מה אנחנו עושים</a>
-    <a href="#fellowship">למורים</a>
-    <a href="#leaders">לרכזים</a>
-    <a href="#partners">לשותפים</a>
-    <a href="#team">הצוות</a>
-    <a href="#faq">שאלות</a>
-    <a href="#contact">צרו קשר</a>
-  </nav>
-  <nav class="lang-switcher lang-switcher-menu" aria-label="שפה">
-  <a href="../" hreflang="en" lang="en">EN</a>
-  <a href="../ru/" hreflang="ru" lang="ru">RU</a>
-  <a href="../he/" hreflang="he" lang="he" aria-current="page">עברית</a>
-</nav>
-</dialog>
 
-<script type="module" src="../js/main.js?v=2c8b7826"></script>
+<script type="module" src="../js/main.js?v=2b917f56"></script>
 </body>
 </html>

@@ -1,0 +1,207 @@
+/* One type scale for running text (Onest; Heebo in Hebrew). Loaded last so
+   it overrides the per-component sizes the port carried over from PR #3:
+   twelve Onest sizes and three weights collapse into five roles here.
+   Phones keep their own scale (--m-* in mobile.css); this layer only sets
+   the desktop sizes and the text weight for every width. #top lifts the
+   selectors above the component rules without !important. */
+:root {
+  --text-weight: 400;
+  /* Sizes at the 1440px reference. Between 701 and 1439px 1rem follows the
+     viewport (base.css), so every role carries a px floor: without it body
+     text fell to 9.6px and captions to 7.5px at 768px (AUDIT.md, T1). The
+     floors are the phone scale, so no width shows text smaller than a phone. */
+  --t-num: 3rem; /* 48px — stat figures (scale with their columns, no floor) */
+  --t-section: 6.875rem; /* 110px — section title (h2 and its equivalents) */
+  --t-item: max(2rem, 17px); /* 32px — item/card title: beats, benefits, programs, people */
+  --t-lead: max(1.375rem, 17px); /* 22px — section lead and intro paragraphs, FAQ questions */
+  --t-body: max(1.125rem, 14px); /* 18px — running text, rows, buttons, footer */
+  --t-small: max(0.875rem, 12px); /* 14px — captions, labels, notes, legal */
+}
+body,
+#top :is(.benefit > h3, .program-row h4, .faq-trigger, .footer-message h2) {
+  font-weight: var(--text-weight);
+}
+@media (min-width: 701px) {
+  #top :is(.benefit > h3, .program-row h4, .wwd-beat h3, .wwd-step h4, .person h3) {
+    font-size: var(--t-item);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+  #top :is(.prose p, .benefit > p, .eyebrow, .faq-trigger) {
+    font-size: var(--t-lead);
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+  }
+  #top :is(
+      .person > p,
+      .person-role,
+      .faq-answer-body,
+      .wwd-beat p,
+      .wwd-step p,
+      .mission-intro,
+      .program-row > span,
+      .program-row p > span,
+      .program-row .cost-value,
+      .program-results-copy p,
+      .program-results-title,
+      .results-caveat,
+      .footer-lead,
+      .footer-label,
+      .footer-links a,
+      .footer-links button,
+      .footer-email,
+      .lang-switcher-footer a
+    ) {
+    font-size: var(--t-body);
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+  }
+  #top :is(.button, .text-button, .audience-tab, .audience-trigger, .location-select) {
+    font-size: var(--t-body);
+    letter-spacing: -0.01em;
+  }
+  /* One size for every section title; the tabbed panel used to jump from
+     120px (teachers, coordinators) to 88px (schools) on a tab switch. */
+  #top :is(.display, .what-we-do .display, .partners .display, .team-title, .faq h2) {
+    font-size: var(--t-section);
+    line-height: 0.84;
+  }
+  /* Header navigation keeps its own tracking; only the size gets the body floor. */
+  #top :is(.site-header nav, .nav-menu-button, .nav-menu-list a, .lang-switcher) {
+    font-size: var(--t-body);
+  }
+  /* Handwritten questions: per-language size, floored like the text roles. */
+  #top .questions {
+    font-size: max(var(--question-size, 0.9375rem), 13px);
+  }
+  /* FAQ answers ran the full card width: 85-96 characters a line at 1440. */
+  #top .faq-answer-body {
+    max-inline-size: 48rem;
+  }
+  #top :is(.wwd-photo figcaption, .wwd-stipend, .stat-label, .results-note, .footer-legal p, .scroll-hint span, .program-row > p, .program-scholarship) {
+    font-size: var(--t-small);
+    line-height: 1.35;
+    letter-spacing: 0;
+  }
+  #top .stat-value {
+    font-size: var(--t-num);
+  }
+}
+
+/* The approaches line closes What-we-do as a display pull line; the named
+   approaches carry marker strokes. */
+#top .wwd-closing p {
+  font-family: var(--font-display);
+  font-size: var(--t-item);
+  line-height: 1.25;
+  max-width: 26em;
+  margin-inline: auto;
+  text-wrap: balance;
+}
+/* Each approach gets a marker stroke like the lead's "mentors", one hue
+   apiece: yellow, pen blue, peach. The phrase stays on one line. */
+#top :is(.wwd-closing, #what-we-do-title) .approach-name {
+  /* Inline, not inline-block: the comma after it stays on its line. */
+  white-space: nowrap;
+  padding-inline: 0.3em;
+  margin-inline: -0.3em;
+  background: url('../assets/highlight-yellow.svg') center / 100% 100% no-repeat;
+}
+#top :is(.wwd-closing, #what-we-do-title) .approach-name:nth-of-type(2) {
+  background-image: url('../assets/highlight-blue.svg');
+}
+#top :is(.wwd-closing, #what-we-do-title) .approach-name:nth-of-type(3) {
+  background-image: url('../assets/highlight-peach.svg');
+}
+@media (max-width: 700px) {
+  #top .wwd-closing p { font-size: 1.5rem; }
+
+  /* Mobile roles (AUDIT.md, T2-T4). Each role had drifted into its own
+     line-height and a few sizes sat off the scale; one value per role. */
+  #top :is(.display, .what-we-do .display, .partners .display, .team-title, .faq h2, .footer-message h2) {
+    font-size: var(--m-title);
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+  #top :is(.prose, .footer-lead, .eyebrow) {
+    font-size: var(--m-lead);
+    line-height: 1.3;
+  }
+  #top :is(.wwd-beat h3, .wwd-step h4, .benefit h3, .program-heading h3, .program-row h4, .person h3, .faq-trigger) {
+    font-size: var(--m-item-title);
+    line-height: 1.15;
+  }
+  #top :is(
+      .wwd-beat > p,
+      .wwd-step > p,
+      .mission-intro,
+      .benefit > p,
+      .person > p,
+      .person-role,
+      .program-row > p,
+      .program-scholarship,
+      .program-results-copy p,
+      .faq-answer-body,
+      .footer-legal p,
+      figcaption,
+      .wwd-stipend,
+      .stat-label,
+      .results-note,
+      .footer-label
+    ) {
+    font-size: var(--m-body);
+    line-height: 1.45;
+  }
+  /* The lead sits in .prose (-0.03em); as card body it tracks like the cards. */
+  #top .mission-intro {
+    letter-spacing: -0.02em;
+  }
+  /* The role under a name was 20px, larger than the 17px name above it. */
+  #top .person-role {
+    font-size: var(--m-body) !important;
+  }
+  #top :is(.button, .text-button, .location-select, .footer-links a:not(.logo), .footer-email, .lang-switcher-footer a) {
+    font-size: var(--m-item-title);
+  }
+}
+
+/* Card and row titles: no single word left alone on the last line
+   ("Funding for teachers’ / time" at 768-1440, AUDIT.md, T6). */
+#top :is(.wwd-beat h3, .benefit h3, .program-row h4, .person h3) {
+  text-wrap: balance;
+}
+
+/* The teacher's line is the evidence the pilot is after: a pull quote in the
+   display face, full ink on the camp's peach, no rule; the attribution sits under it as a
+   small label. */
+#top blockquote.results-quote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-display);
+  font-size: max(2.5rem, 28px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+#top .results-note {
+  margin: 1.25rem 0 0;
+  padding: 0;
+  font-size: var(--t-small);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  color: var(--camp-muted);
+}
+@media (max-width: 700px) {
+  #top blockquote.results-quote {
+    margin-top: 0.5rem;
+    font-size: 1.75rem;
+    line-height: 1.12;
+  }
+  #top .results-note {
+    margin-bottom: 0;
+    font-size: var(--m-body);
+  }
+}

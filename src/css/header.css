@@ -11,7 +11,9 @@
 .header-shell .site-header {
   position: relative;
   isolation: isolate;
-  width: calc(100% - 12.5%);
+  /* Pill padding sits outside the gutter so the logo text lines up with
+     the page edge shared by audiences, team and footer (AUDIT.md, S1). */
+  width: calc(100% - 2 * (var(--gutter) - 1.125rem));
   max-width: none;
   margin-inline: auto;
   height: var(--header-rest-height);
@@ -23,6 +25,7 @@
   translate: 0 0;
   transition:
     height 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    padding 420ms cubic-bezier(0.22, 1, 0.36, 1),
     translate 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .header-shell .site-header::before {
@@ -32,49 +35,69 @@
   z-index: -1;
   pointer-events: none;
   border-radius: inherit;
-  background: rgb(255 255 255 / 94%);
-  box-shadow:
-    0 0.375rem 1.5rem #18202212,
-    inset 0 0 0 1px #1820220a;
+  background: var(--pill-solid);
+  box-shadow: var(--pill-shadow);
   opacity: 0;
-  transition: opacity 420ms ease;
+  transition:
+    opacity 420ms ease,
+    inset 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
+/* Floating pill: the contact button sits concentric in the end cap (0.5rem
+   on every side) and the logo keeps the same distance to the start edge as
+   the button's label keeps to the end edge (0.5rem + 1.375rem), so both
+   ends read as the same margin. */
+/* The content box and its padding never change, so the logo, nav and
+   button stay put when the header collapses; only the painted pill moves its
+   start edge 0.75rem out; its end edge stays on the header box, so the
+   contact button keeps the same 0.5rem inset as above and below it. */
 .header-shell[data-compact='true'] .site-header {
   height: 4.5rem;
   translate: 0 0.75rem;
 }
+/* Desktop: the contact button sits as far from the pill's end edge as
+   from its top and bottom (0.5rem), the logo 1.5rem further in. The same
+   inline padding holds at rest and compact, so nothing slides sideways
+   when the header turns into the floating pill. */
+@media (min-width: 701px) {
+  .header-shell .site-header {
+    padding-inline: 2.625rem 0.5rem;
+  }
+}
 .header-shell[data-compact='true'] .site-header::before {
   opacity: 1;
+  inset-inline: -0.75rem 0;
 }
 .header-shell .site-header > .button,
 .header-shell .mobile-menu-trigger {
   border-radius: 999rem;
   flex-shrink: 0;
 }
-/* Desktop: logo | nav | contact on a three-column grid, so the nav (with the
-   language menu) sits in the true centre whatever the outer widths are. */
+/* Desktop: logo | languages | contact. With no anchor links left the nav is
+   just the language menu, so it sits at the end beside the contact button
+   rather than alone in the centre. */
 @media (min-width: 701px) {
   .header-shell .site-header {
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns: 1fr auto auto;
     align-items: center;
   }
   .header-shell .site-header > .logo {
     justify-self: start;
   }
   .header-shell .site-header > nav {
-    justify-self: center;
+    justify-self: end;
     align-items: center;
   }
   .header-shell .site-header > .button {
     justify-self: end;
   }
 }
-@supports (backdrop-filter: blur(1rem)) {
+@supports ((backdrop-filter: blur(1rem)) or (-webkit-backdrop-filter: blur(1rem))) { /* avoid-ai-design-ignore: K3 */
   .header-shell .site-header::before {
-    background: rgb(255 255 255 / 88%);
-    backdrop-filter: blur(1rem);
-    -webkit-backdrop-filter: blur(1rem);
+    background: var(--pill-glass);
+    /* avoid-ai-design-ignore: K3 — sits over scrolling content, the blur is a real overlay */
+    backdrop-filter: var(--pill-blur);
+    -webkit-backdrop-filter: var(--pill-blur); /* avoid-ai-design-ignore: K3 */
   }
 }
 html:has(.header-shell) {
@@ -87,17 +110,25 @@ html:has(.header-shell) {
     top: env(safe-area-inset-top, 0px);
   }
   .header-shell .site-header {
-    width: calc(100% - 2.5rem);
+    width: calc(100% - 2 * var(--m-gutter));
     padding-block: 0.5rem 0.5rem;
-    padding-inline: 1.125rem 0.75rem;
+    /* The burger glyph is inset ~0.92rem inside its 2.75rem target; 0.25rem
+       more puts the drawn lines as far from the end edge as the logo text
+       is from the start edge. */
+    padding-inline: 1.125rem 0.25rem;
     gap: 1.25rem;
   }
   .header-shell[data-compact='true'] .site-header {
     height: 4.25rem;
-    translate: 0 0.5rem;
+    padding-inline: 1.125rem 0.25rem;
+    /* Same distance from the screen top as from its sides. */
+    translate: 0 var(--m-gutter);
+  }
+  .header-shell[data-compact='true'] .site-header::before {
+    inset-inline: 0;
   }
   html:has(.header-shell) {
-    scroll-padding-top: calc(5.75rem + env(safe-area-inset-top, 0px));
+    scroll-padding-top: calc(5.25rem + var(--m-gutter) + env(safe-area-inset-top, 0px));
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -106,28 +137,37 @@ html:has(.header-shell) {
     transition: none;
   }
 }
-/* Language switcher (new in the static port; not part of PR #3). */
+/* Language switch: EN RU HE as plain links, the current one in ink and
+   underlined, the others muted. Header, mobile menu and footer share it. */
 .lang-switcher {
   display: flex;
   flex-shrink: 0;
+  align-items: center;
   white-space: nowrap;
   gap: 0.75rem;
   font-size: 1.125rem;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.02em;
+}
+.lang-switcher a {
+  color: color-mix(in srgb, currentColor 64%, transparent);
+  text-decoration: none;
+  transition: color 120ms ease;
+}
+.lang-switcher a:hover {
+  color: inherit;
+  text-decoration: none;
 }
 .lang-switcher a[aria-current='page'] {
+  color: inherit;
   text-decoration: underline;
+  text-decoration-thickness: 1px;
   text-underline-offset: 0.3125rem;
 }
 .lang-switcher-footer {
   margin-top: 1rem;
 }
-.lang-switcher-menu {
-  margin-top: 1.25rem;
-  font-size: 1.125rem;
-}
-/* Header drop-downs (Programs, languages): a text button with a chevron,
-   opening a small card of links styled like the programs filter popup. */
+/* Drop-downs (Programs, languages): a text button with a chevron, opening
+   a small card of links styled like the programs filter popup. */
 .nav-menu {
   position: relative;
   flex-shrink: 0;
@@ -184,8 +224,13 @@ html:has(.header-shell) {
 .nav-menu-list a:hover,
 .nav-menu-list a:focus-visible {
   background: #f4f3f0;
+  color: var(--nav-hover);
   text-decoration: none;
   outline: none;
+}
+/* Background alone is 1.11:1 against white, not a visible focus (AUDIT.md, F3). */
+.nav-menu-list a:focus-visible {
+  box-shadow: inset 0 0 0 2px #1c51e0;
 }
 .nav-menu-list a svg {
   width: 1rem;
@@ -195,13 +240,178 @@ html:has(.header-shell) {
 .nav-menu-list a[aria-current='page'] svg {
   visibility: visible;
 }
+/* Main menu hover: colour only, no underline. --nav-hover is a vivid lilac
+   in the hue family of the plum accent (#5a3757), 5.4:1 on white. */
+.site-header nav a:hover,
+.site-header .nav-menu-button:hover,
+.site-header .nav-menu-button[aria-expanded='true'] {
+  color: var(--nav-hover);
+  text-decoration: none;
+}
+.nav-menu-button {
+  transition: color 120ms ease;
+}
+/* The Hebrew item carries dir="rtl" for its name, but the row itself keeps
+   the page's direction so every check mark sits on the same side. */
+.lang-menu .nav-menu-list a[dir] {
+  direction: inherit;
+}
+.lang-menu .nav-menu-list a[dir='rtl'] > span {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+/* Flags: small round icons before the language name; the generic svg
+   rules above (chevron size and flip, hidden check mark) must not reach them. */
+.nav-menu-button svg.flag,
+.nav-menu-list a svg.flag {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgb(24 32 34 / 0.12);
+  visibility: visible;
+  transform: none;
+}
+.nav-menu-button svg.flag { margin-inline-end: 0.125rem; }
+.lang-menu .nav-menu-list a {
+  justify-content: flex-start;
+  gap: 0.625rem;
+}
 /* The language menu sits at the end of the nav, so its card hangs from the end edge. */
 .lang-menu .nav-menu-list {
   inset-inline-start: auto;
   inset-inline-end: 0;
 }
 @media (max-width: 700px) {
-  .nav-menu {
+  .site-header .nav-menu {
     display: none;
+  }
+}
+
+/* v4-bar: no menu. Two white pills float over the page at a fixed height:
+   the logo at the start (its text on the page gutter), the languages at the
+   end. The shell keeps its 9rem so the page below does not move; the pills
+   neither grow nor shrink with the scroll. */
+.header-shell {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  box-sizing: border-box;
+  padding: 1.25rem calc(var(--gutter) - 1.5rem) 0;
+}
+.header-shell .site-header {
+  display: flex;
+  align-items: center;
+  width: auto;
+  height: 4rem;
+  margin: 0;
+  padding: 0 1.5rem;
+}
+.header-shell[data-compact='true'] .site-header {
+  height: 4rem;
+  translate: 0 0;
+}
+.header-shell .site-header::before,
+.header-shell[data-compact='true'] .site-header::before {
+  opacity: 1;
+  inset: 0;
+}
+.header-start {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.back-float:hover {
+  background: rgb(255 255 255);
+}
+.back-float:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+:dir(rtl) .back-float svg {
+  scale: -1 1;
+}
+.lang-float,
+.back-float {
+  display: flex;
+  align-items: center;
+  height: 4rem;
+  box-sizing: border-box;
+  padding-inline: 0.5rem;
+  border-radius: 999rem;
+  background: var(--pill-solid);
+  box-shadow: var(--pill-shadow);
+  pointer-events: auto;
+}
+@supports ((backdrop-filter: blur(1rem)) or (-webkit-backdrop-filter: blur(1rem))) { /* avoid-ai-design-ignore: K3 */
+  .lang-float,
+  .back-float {
+    background: var(--pill-glass);
+    /* avoid-ai-design-ignore: K3 — sits over scrolling content, the blur is a real overlay */
+    backdrop-filter: var(--pill-blur);
+    -webkit-backdrop-filter: var(--pill-blur); /* avoid-ai-design-ignore: K3 */
+  }
+}
+/* Back to the landing: the same white pill as the languages, set after
+   the shared rule so its own padding wins. */
+.back-float {
+  gap: 0.5rem;
+  padding-inline: 1.25rem 1.5rem;
+  font-size: 1.125rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+.lang-float .nav-menu-button {
+  padding: 0.625rem 1rem;
+  border-radius: 999rem;
+}
+.lang-float .nav-menu-button:hover,
+.lang-float .nav-menu-button[aria-expanded='true'] {
+  background: #1820220d;
+}
+html:has(.header-shell) {
+  scroll-padding-top: 6.5rem;
+}
+@media (max-width: 700px) {
+  .header-shell {
+    padding: 0.75rem var(--m-gutter) 0;
+  }
+  .header-shell .site-header {
+    width: auto;
+    height: 3.25rem;
+    padding: 0 1.125rem;
+  }
+  .header-shell[data-compact='true'] .site-header {
+    height: 3.25rem;
+    padding-inline: 1.125rem;
+    translate: 0 0;
+  }
+  .lang-float {
+    height: 3.25rem;
+    padding-inline: 0.25rem;
+  }
+  .header-start {
+    gap: 0.5rem;
+  }
+  /* On a phone the three pills share one row: Back keeps only its arrow. */
+  .back-float {
+    width: 3.25rem;
+    height: 3.25rem;
+    justify-content: center;
+    padding-inline: 0;
+  }
+  .back-float > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .lang-float .nav-menu-button {
+    padding: 0.5rem 0.75rem;
+  }
+  html:has(.header-shell) {
+    scroll-padding-top: calc(4.5rem + env(safe-area-inset-top, 0px));
   }
 }

@@ -1,31 +1,31 @@
 /* Ported from PR #3 website/app/globals.css. Physical inline-axis properties were converted to logical ones for RTL. */
 @font-face {
   font-family: Alpina;
-  src: url('../assets/fonts/GTAlpina-Regular.otf') format('opentype');
+  src: url('../assets/fonts/GTAlpina-Regular.woff2') format('woff2');
   font-weight: 400 700;
   font-display: swap;
 }
 @font-face {
   font-family: Alpina;
-  src: url('../assets/fonts/GTAlpina-Light.otf') format('opentype');
+  src: url('../assets/fonts/GTAlpina-Light.woff2') format('woff2');
   font-weight: 300;
   font-display: swap;
 }
 @font-face {
   font-family: Alpina Wordmark;
-  src: url('../assets/fonts/GTAlpina-Medium.otf') format('opentype');
+  src: url('../assets/fonts/GTAlpina-Medium.woff2') format('woff2');
   font-weight: 500;
   font-display: swap;
 }
 @font-face {
   font-family: Stefan;
-  src: url('../assets/fonts/ABCStefanTrial-Simple.otf') format('opentype');
+  src: url('../assets/fonts/ABCStefanTrial-Simple.woff2') format('woff2');
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
   font-family: Caveat;
-  src: url('../assets/fonts/Caveat-Regular.ttf') format('truetype');
+  src: url('../assets/fonts/Caveat-Regular.woff2') format('woff2');
   font-weight: 400;
   font-display: swap;
 }
@@ -37,48 +37,144 @@
 }
 @font-face {
   font-family: Spectral;
-  src: url('../assets/fonts/Spectral-Light.ttf') format('truetype');
+  src: url('../assets/fonts/Spectral-Light.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: Spectral;
-  src: url('../assets/fonts/Spectral-Regular.ttf') format('truetype');
+  src: url('../assets/fonts/Spectral-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: Spectral;
-  src: url('../assets/fonts/Spectral-Medium.ttf') format('truetype');
+  src: url('../assets/fonts/Spectral-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: Spectral;
-  src: url('../assets/fonts/Spectral-Bold.ttf') format('truetype');
+  src: url('../assets/fonts/Spectral-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: Spectral;
-  src: url('../assets/fonts/Spectral-LightItalic.ttf') format('truetype');
+  src: url('../assets/fonts/Spectral-LightItalic.woff2') format('woff2');
   font-weight: 300;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: Frank Ruhl Libre;
-  src: url('../assets/fonts/FrankRuhlLibre-Variable.ttf') format('truetype');
+  src: url('../assets/fonts/FrankRuhlLibre-Variable.woff2') format('woff2');
   font-weight: 300 900;
   font-display: swap;
 }
+/* Metric-matched stand-ins for the serif displays: Georgia sized and
+   spaced to Alpina (en) and Spectral (ru), so text set before the webfont
+   arrives keeps its line count and the swap does not reflow (George,
+   27.10: "шрифты прогрузились сильно позже и показывались fallback").
+   Width ratio: letter-frequency-weighted advances of the two faces;
+   vertical: the webfont's hhea metrics over that ratio. Without Georgia
+   (Android) the stack falls through to the system serif as before. */
+@font-face {
+  font-family: 'Alpina Fallback';
+  src: local('Georgia');
+  size-adjust: 98.7%;
+  ascent-override: 90.7%;
+  descent-override: 24.5%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Spectral Fallback';
+  src: local('Georgia');
+  size-adjust: 99.2%;
+  ascent-override: 106.8%;
+  descent-override: 46.7%;
+  line-gap-override: 0%;
+}
+/* Onest: body/running-text face for en and ru. Subset to cyrillic + latin,
+   the same split Google Fonts serves from css2 for family=Onest:wght@100..900. */
+@font-face {
+  font-family: Onest;
+  src: url('../assets/fonts/Onest-Variable-cyrillic-ext.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: Onest;
+  src: url('../assets/fonts/Onest-Variable-cyrillic.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: Onest;
+  src: url('../assets/fonts/Onest-Variable-latin-ext.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0,
+    U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: Onest;
+  src: url('../assets/fonts/Onest-Variable-latin.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Heebo: Onest has no Hebrew, so Heebo carries the he body text; subset to
+   hebrew + latin, the same split Google Fonts serves for family=Heebo:wght@100..900. */
+@font-face {
+  font-family: Heebo;
+  src: url('../assets/fonts/Heebo-Variable-hebrew.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+}
+@font-face {
+  font-family: Heebo;
+  src: url('../assets/fonts/Heebo-Variable-latin-ext.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0,
+    U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: Heebo;
+  src: url('../assets/fonts/Heebo-Variable-latin.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 :root {
-  --font-text: Alpina, Georgia, serif;
+  /* Display face: the hero title and section headings (h1, h2). Same values
+     as the old --font-text, kept under a name that says what it is for now
+     that running text uses --font-body instead. */
+  --font-display: Alpina, 'Alpina Fallback', Georgia, serif;
+  --font-body: Onest, Heebo, system-ui, sans-serif;
   --font-handwritten: Stefan, cursive;
+  /* Blue pen notes (beat note, Free, tab loop): a lowercase hand in every
+     language, since Stefan is caps-only. */
+  --font-scribble: Caveat, cursive;
+  --scribble-blue: #1c51e0;
+  --scribble-blue-on-plum: #8fb8ff;
+  /* The camp's section is a light apricot; its scribble a deeper peach on
+     it (3.5:1, large text), and a neon peach on the plum (3.7:1). */
+  --promo-peach: #ffd6ae;
+  --scribble-peach: #c8481a;
+  --scribble-peach-on-plum: #ff9e6b;
   --question-size: 1.03125rem;
   --question-size-mobile: 0.9625rem;
   --handwritten-case: uppercase;
@@ -86,6 +182,7 @@
   --background: #fff;
   --foreground: #212121;
   --fellowship-bg: #5a3757;
+  --nav-hover: #9b3fc0;
   --fellowship-rule: #8c7189;
   --fellowship-muted: #cbbfca;
   --leaders-bg: #f4f3f0;
@@ -95,9 +192,23 @@
   --ink: #182022;
   --body-size: 1.625rem;
   --page-width: 90rem;
+  /* Floating pills (header capsule, language and back pills, mobile menu):
+     one frosted material. The solid value is the fallback where the
+     browser cannot blur what lies behind. */
+  --pill-solid: rgb(255 255 255 / 94%);
+  --pill-glass: rgb(255 255 255 / 72%);
+  --pill-blur: blur(1.25rem) saturate(1.6);
+  --pill-shadow:
+    0 0.375rem 1.5rem #18202212,
+    inset 0 0 0 1px #1820220a,
+    inset 0 1px 0 rgb(255 255 255 / 70%);
+  /* One outer margin for every full-width block at the 1440 reference (96px).
+     Before, header, audiences, team and footer used 88/90/96/120px from four
+     different percentages (AUDIT.md, S1). */
+  --gutter: 6rem;
 }
 html[lang='ru'] {
-  --font-text: Spectral, Georgia, serif;
+  --font-display: Spectral, 'Spectral Fallback', Georgia, serif;
   --font-handwritten: Caveat, cursive;
   --question-size: 2rem;
   --question-size-mobile: 1.75rem;
@@ -107,8 +218,10 @@ html[lang='ru'] {
   --handwritten-spacing: normal;
 }
 html[lang='he'] {
-  --font-text: Frank Ruhl Libre, Georgia, serif;
+  --font-display: Frank Ruhl Libre, Georgia, serif;
+  --font-body: Heebo, Onest, system-ui, sans-serif;
   --font-handwritten: Gveret Levin, cursive;
+  --font-scribble: Gveret Levin, cursive;
   --question-size: 1.171875rem;
   --question-size-mobile: 1.09375rem;
   --handwritten-case: none;
@@ -205,9 +318,16 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-text);
+  font-family: var(--font-body);
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
+}
+/* The hero title and section headings (h2 and its equivalents) keep the
+   per-language display face; every other heading level and running text
+   fall through to body's --font-body. */
+h1,
+h2 {
+  font-family: var(--font-display);
 }
 button,
 input,
@@ -224,8 +344,17 @@ button,
 a {
   touch-action: manipulation;
 }
-button {
+/* Everything that reacts to a click shows the hand. */
+button,
+summary,
+label[for],
+[role='tab'],
+[role='option'],
+[data-dialog] {
   cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
 }
 a {
   color: inherit;
@@ -271,6 +400,7 @@ main {
   font-family:
     Alpina Wordmark,
     Alpina,
+    'Alpina Fallback',
     Georgia,
     serif;
   font-size: 1.5rem;
@@ -288,27 +418,67 @@ main {
   font-size: 1.125rem;
   letter-spacing: -0.03em;
 }
+/* Buttons: one pill, two colours. Primary is "Apply" to the form: ink on
+   the paper, white on the plum (.apply-button), in the offers and the
+   footer, floating once the hero has gone while none is in view; on the
+   schools page the one button is "Partner with us" (a mailto). Writing to
+   us is the address in the footer, a text link, once. A label is a verb and
+   its object, three words at most; questions belong in headings. Everything
+   that leads around the site is a .text-link. */
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 3.5rem;
-  padding: 1.125rem 1.375rem;
+  padding: 1rem 1.5rem;
   background: var(--ink);
   color: white;
   border: 0;
-  border-radius: 1.0625rem;
+  border-radius: 999rem;
   font-size: 1.125rem;
   line-height: 1;
   letter-spacing: -0.03em;
+  white-space: nowrap;
+  /* Hover is a colour change only: no lift, no scale. */
   transition:
-    background 0.2s,
-    transform 0.2s;
+    background-color 120ms ease,
+    color 120ms ease;
 }
 .button:hover {
-  background: var(--foreground);
+  background: var(--fellowship-bg);
   text-decoration: none;
-  transform: translateY(-2px);
+}
+/* Text links: a word and an arrow, the size of their line, the arrow
+   nudging along on hover. The schools link after the tabs, "Check results"
+   on the pilot card, "Learn more" under the camp. */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.text-link .promo-arrow {
+  flex: none;
+  inline-size: 1em;
+  block-size: 1em;
+  transition: translate 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+:is(.text-link:hover, .pilot-link:hover .text-link) .promo-arrow {
+  translate: 0.2rem 0;
+}
+:is(.text-link:hover, .pilot-link:hover .text-link) .promo-arrow:dir(rtl) {
+  translate: -0.2rem 0;
+}
+.text-link:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
 }
 .hero {
   position: relative;
@@ -321,6 +491,10 @@ main {
 .hero h1 {
   font-size: 10rem;
   line-height: 0.8125;
+  /* Five lines of height whatever the language breaks to: the floating
+     apps are placed against the hero box, so a shorter title would lift them. */
+  min-height: calc(5 * 0.8125em);
+  min-height: 5lh;
   font-weight: 400;
   letter-spacing: -0.03em;
   max-width: 72rem;
@@ -391,6 +565,8 @@ main {
 }
 .hero-notification {
   position: absolute;
+  direction: ltr;
+  unicode-bidi: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -439,22 +615,6 @@ figcaption {
 .mission-intro {
   position: relative;
 }
-.mentor-highlight {
-  display: inline-block;
-  position: relative;
-}
-.mentor-highlight {
-  isolation: isolate;
-}
-.mentor-highlight img {
-  z-index: -1;
-  position: absolute;
-  inset: -2px -0.375rem;
-  width: calc(100% + 0.75rem);
-  height: calc(100% + 0.25rem);
-  max-width: none;
-  pointer-events: none;
-}
 .sr-only {
   position: absolute;
   width: 1px;
@@ -473,7 +633,7 @@ figcaption {
     margin: 0 5%;
   }
   .prose {
-    font-size: 1.5rem;
+    font-size: var(--m-lead);
   }
 }
 @media (max-width: 700px) {
@@ -502,21 +662,25 @@ figcaption {
     padding-top: 4rem;
     padding-bottom: 5.5rem;
   }
-  /* Lines are hard breaks in the copy, so the widest line sets the size:
-     "shape hundreds" fits ~15.5vw; Cyrillic runs wider, so Russian steps down. */
+  /* Fixed mobile kegl (56px) rather than the old per-language vw clamp: same
+     size on every language, so wrapping now depends on line-height/breaks
+     alone. Comfortably below the old clamp's ceiling, so it does not
+     overflow the panel on any measured width. */
   .hero h1 {
-    font-size: clamp(3.5rem, 15.5vw, 6.5rem);
+    /* 56px touched the edge of a 360px screen (1px in EN); cap by width. */
+    font-size: min(var(--m-hero), 13.9vw);
     line-height: 0.93;
-  }
-  html[lang='ru'] .hero h1 {
-    font-size: clamp(3rem, 13.5vw, 5.5rem);
+    /* At 0.93 the last line's descenders leave the box by ~0.3em, and the
+       collage below starts 0.75rem early (hero.css); keep the two apart. */
+    margin-bottom: 0.5em;
   }
   .introduction {
     margin-top: 4.375rem;
   }
   .prose {
-    font-size: 1.35rem;
-    width: 86%;
+    font-size: var(--m-lead);
+    width: auto;
+    margin-inline: var(--m-gutter);
   }
   .prose p + p {
     margin-top: 1.625rem;

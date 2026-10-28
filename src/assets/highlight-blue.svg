@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" width="112" height="36" viewBox="0 0 112 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g opacity="0.6" filter="url(#f)">
+<path d="M8 5H102L108 31H12L8 5Z" fill="#8FB8FF"/>
+</g>
+<defs>
+<filter id="f" x="0" y="0" width="112" height="36" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feGaussianBlur stdDeviation="2"/>
+</filter>
+</defs>
+</svg>

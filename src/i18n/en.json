@@ -9,16 +9,10 @@
   "links": {
     "survey": "https://survey.morim.foundation/s/join-v1?src=landing&lang=en",
     "email": "mailto:contact@morim.foundation",
-    "partners": "https://survey.morim.foundation/s/join-v1?src=partners&lang=en"
+    "partners": "mailto:contact@morim.foundation?subject=Partnership%20with%20Morim%20Foundation"
   },
   "switcher": {
-    "label": "Language",
-    "trigger": "Other languages",
-    "names": {
-      "en": "EN",
-      "ru": "RU",
-      "he": "עברית"
-    }
+    "label": "Language"
   },
   "nav": [
     {
@@ -35,6 +29,7 @@
     },
     {
       "id": "partners",
+      "href": "schools/",
       "label": "For partners"
     },
     {
@@ -44,81 +39,20 @@
     {
       "id": "faq",
       "label": "FAQ"
-    }
-  ],
-  "header_nav": [
-    {
-      "id": "what-we-do",
-      "label": "What we do"
-    },
-    {
-      "label": "Programs",
-      "items": [
-        {
-          "id": "fellowship",
-          "label": "Fellowship"
-        },
-        {
-          "id": "leaders",
-          "label": "Leaders"
-        }
-      ]
-    },
-    {
-      "id": "partners",
-      "label": "For partners"
-    },
-    {
-      "id": "team",
-      "label": "Team"
-    },
-    {
-      "id": "faq",
-      "label": "FAQ"
-    }
-  ],
-  "mobile_nav": [
-    {
-      "id": "what-we-do",
-      "label": "What we do"
-    },
-    {
-      "id": "fellowship",
-      "label": "Fellowship"
-    },
-    {
-      "id": "leaders",
-      "label": "Leaders"
-    },
-    {
-      "id": "partners",
-      "label": "For partners"
-    },
-    {
-      "id": "team",
-      "label": "Team"
-    },
-    {
-      "id": "faq",
-      "label": "FAQ"
-    },
-    {
-      "id": "contact",
-      "label": "Get in touch"
     }
   ],
   "header": {
     "logo": "morim foundation",
     "logo_aria": "Morim Foundation home",
+    "back": "Back",
     "nav_aria": "Main navigation",
     "contact": "Get in touch",
     "menu": "Menu",
     "menu_close": "Close",
-    "menu_nav_aria": "Mobile navigation",
-    "menu_description": "Explore the foundation and its programs."
+    "menu_description": "Choose a language or get in touch."
   },
   "hero": {
-    "title_html": "One good<br>teacher can<br>shape hundreds<br>of children,<br><span class=\"hero-line\">but...</span>",
+    "title_html": "One good<br>teacher can<br>shape hundreds<br>of children, <span class=\"hero-line\">but...</span>",
     "title_aria": "One good teacher can shape hundreds of children, but...",
     "group_aria": "App distractions",
     "help_desktop": "Drag an app to move it. Click or press Enter to dismiss it and show the next app.",
@@ -130,33 +64,42 @@
   },
   "approach": {
     "aria": "Our approach",
-    "attention": "kids today are growing up inside an economy engineered to consume their attention. Wars. COVID. Zoom classes.",
-    "schools_html": "Schools were never designed to handle&nbsp;that.<br>Our foundation is here to help.",
-    "pilot_landscape_alt": "Teachers in discussion at the foundation’s Tbilisi pilot",
-    "pilot_caption": "Our first pilot. July 2026"
+    "attention_html": "kids today are growing up inside an economy engineered to consume their attention. Wars. COVID. Zoom classes. Schools were never designed to handle&nbsp;that.",
+    "help": "Our foundation is here to help.",
+    "pilot_landscape_alt": "Teachers in discussion at the foundation’s Tbilisi pilot"
   },
   "what_we_do": {
-    "title_html": "Programs<br>for teachers and<br>coordinators",
-    "lead_html": "The Foundation builds programs that make the everyday work in Israeli classrooms and schools stronger: inquiry-based learning, real practice, and <span class=\"mentor-highlight\">mentors<img src=\"{root}assets/imgRectangle70.svg\" alt=\"\" aria-hidden=\"true\"></span> who stay close.",
-    "beats": [
-      {
-        "title": "Practice first",
-        "body": "More than half of every program is practice. Each starts with an intensive and moves quickly into practical work: teachers lead lessons with children, while coordinators bring real situations from their schools and work through them together."
-      },
-      {
-        "title": "Mentors who stay",
-        "body": "A mentor stays with the group throughout. Teachers and coordinators meet their mentor in small groups every week, for the whole stretch of practice."
-      },
-      {
-        "title": "Funding for teachers’ time",
-        "body": "Participants receive a stipend for both the training and the practice with children: teachers have more than enough work without us.",
-        "note": "Yes, a monthly stipend"
-      }
-    ],
-    "closing": [
-      "We use approaches we trust and that have been well studied, such as inquiry-based learning, activity-based learning, and project-based learning. We don’t have a new pedagogy to sell.",
-      "<strong>The test is simple: does it still work in a regular class of 35 on a Tuesday morning?</strong>"
-    ],
+    "title_html": "Programs where teachers learn to build lessons on <span class=\"approach-name\">curiosity</span>, <span class=\"approach-name\">inquiry</span> and <span class=\"approach-name\">projects</span>",
+    "lead_html": "Our programs are about teaching <mark>today</mark>: a teacher’s and a coordinator’s work in a world full of distractions, where a school competes for a child’s attention and interest every day. We help teachers win that attention back with the lesson itself, and coordinators build teams where such teachers want to stay.",
+    "lead_2_html": "We don’t have a new pedagogy to sell. We use well-studied approaches we trust, train teachers to use them well, and show how AI can lighten the load.",
+    "stipend": "Participants receive a stipend for both the training and the practice with children: teachers have more than enough work without us.",
+    "stipend_note": "Yes, a monthly stipend",
+    "stipend_href": "#scholarship",
+    "practice_note": "10+ lessons for teachers to try it on real children",
+    "how_it_works": {
+      "_how_it_works": "Four steps in place of the beats (Vlad, 23.10: the beats read as '12 lessons and clubs'; George: the beats and the steps said the same thing). The theses that used to be handwritten slots under a step now live inside `body_html` as <mark> (George, 23.10: 'включи выноски в тело буллита и подчеркни эти же тезисы цветным фоном'). Numbers only from a source. <mark> is one piece: it never wraps (George, 23.10), so keep a thesis short enough for the column; `class=\"blue\"` / `class=\"peach\"` pick the hue, yellow is the default.",
+      "heading": "How the program works",
+      "steps": [
+        {
+          "title": "Intensive",
+          "body_html": "Theory and workshops first: we take practical teaching methods apart, try them, and see what happens."
+        },
+        {
+          "title": "Clubs",
+          "body_html": "We organise children’s clubs and gather the groups: <mark>over half the program</mark> happens there. For several weeks you lead sessions and try what we worked on together."
+        },
+        {
+          "title": "Mentor",
+          "body_html": "<mark class=\"blue\">Every week, in a small group,</mark> you go over your sessions with a mentor. The mentor stays with the group for the whole stretch of practice."
+        },
+        {
+          "title": "Your class",
+          "body_html": "What works, you bring back to your own classroom. That is what the whole program is for."
+        }
+      ],
+      "note": "Coordinators go through the same four steps; their practice is real cases from their own schools rather than clubs."
+    },
+    "closing": [],
     "routes": {
       "aria": "Where to start",
       "teachers": "For teachers",
@@ -165,17 +108,16 @@
     }
   },
   "fellowship": {
-    "eyebrow": "Morim Fellows",
-    "title_html": "Dear <span class=\"word\">te<span class=\"glyph teacher-a\"><span class=\"sr-only\">a</span><img src=\"{root}assets/imgA1.svg\" alt=\"\" width=\"73\" height=\"66\"></span>chers,</span>",
+    "title_html": "Dear <span class=\"word\">te<span class=\"glyph hand-a\" data-alt=\"caveat-bold\"><span class=\"sr-only\">a</span><span class=\"hand-a-ink\" aria-hidden=\"true\"></span></span>chers,</span>",
     "intro": [
       "You see the effects of years of classroom disruption better than anyone. We want to give you time to learn, try things out, and work through what happens in the classroom with a mentor.",
-      "We start with the later years of primary school and the beginning of middle school — when many children begin to lose interest in learning."
+      "Morim Fellows, our program for teachers, starts with the later years of primary school and the beginning of middle school — when many children begin to lose interest in learning."
     ],
     "benefits": [
       {
         "class": "craft",
         "title": "Specific teaching practices",
-        "body": "Intensives where we take practical teaching methods apart, try them, and see what happens.",
+        "body": "In the intensives we take practical teaching methods apart, try them, and see what happens.",
         "questions_aria": "Ordinary questions, hard ones",
         "questions": [
           "“how do you get a class’s attention without raising your voice?”",
@@ -186,22 +128,22 @@
       },
       {
         "class": "",
-        "title": "Practice with children",
-        "body": "After the intensive, participants spend several weeks teaching children and go over their lessons with a mentor every week. The point is to bring what they learn back to their own classrooms."
+        "title": "Practice with children in a safe setting",
+        "body": "After the intensive, we organise clubs where you lead sessions with children for several weeks, trying out what we worked on together. Every week you go over your sessions with a mentor. A club is low stakes: no fear of getting it wrong in front of your own class. The point is to bring what works back to your classroom.",
+        "prose_html": "We organise the clubs and gather the groups. For several weeks you lead sessions with children and go over each one with a mentor. No fear of getting it wrong in front of your own class, and what works, you bring back to it."
       },
       {
-        "class": "",
+        "class": "scholarship",
         "title": "A stipend for your time",
         "body": "You have more than enough work without us, so we pay participants a stipend for both the training and the practice with children.<br>If we believe a teacher’s time matters, it makes sense to act like it."
       }
     ]
   },
   "leaders": {
-    "eyebrow": "Morim Leaders",
-    "title_html": "Dear <span class=\"word\">c<span class=\"glyph school-oo\"><span class=\"sr-only\">oo</span><img src=\"{root}assets/imgVector1.svg\" alt=\"\" width=\"106\" height=\"60\"></span>rdinators,</span>",
+    "title_html": "Dear <span class=\"word\">coordinators,</span>",
     "intro": [
       "Strong teachers need schools where they can do good work and want to stay. That’s why we work with teachers at more than one level: in their own classrooms and in the teams they help lead.",
-      "Our first program for coordinators is being developed together with rakazim themselves. The first pilot is under way with a closed cohort."
+      "Morim Leaders, our first program for coordinators, is being developed together with rakazim themselves. The first pilot is under way with a closed cohort."
     ],
     "benefits": [
       {
@@ -220,12 +162,12 @@
   },
   "programs": {
     "heading": "Our programs",
+    "running": "Currently running",
+    "pilot_running": "Pilot currently running",
+    "pilot_camp": "Summer Camp Tbilisi",
+    "pilot_title": "Program Pilot",
     "filter_aria": "Filter programs by location",
     "locations": [
-      {
-        "value": "all",
-        "label": "All locations"
-      },
       {
         "value": "tel-aviv",
         "label": "Tel&nbsp;Aviv"
@@ -237,23 +179,31 @@
     ],
     "where": "Where",
     "when": "When",
+    "cost": "Cost",
+    "frequency": "How often",
+    "next": "Next",
     "apply": "Apply",
-    "see_results": "See results",
-    "collapse": "Collapse",
+    "apply_now": "Apply",
+    "learn_more": "Learn more",
     "teachers": [
       {
         "id": "tel-aviv",
         "location": "tel-aviv",
-        "title_html": "Teaching in the<br>attention economy",
+        "title_html": "Teaching in the attention economy",
         "where": "Zoom + monthly meetings in Tel&nbsp;Aviv",
-        "when": "Starts in November 2026"
+        "frequency_label": "Cohorts start",
+        "frequency": "Monthly",
+        "next": "Dec 2026",
+        "scholarship": "Stipends for all participants!",
+        "cost": "Free",
+        "cost_note": "Monthly"
       }
     ],
     "leaders": [
       {
         "id": "school-coordination-pilot",
         "closed": true,
-        "badge": "Pilot in progress · closed cohort",
+        "badge": "Closed cohort",
         "title_html": "Coordinating in a school: team, systems, projects"
       },
       {
@@ -261,16 +211,23 @@
         "closed": false,
         "badge": "",
         "title_html": "Coordinating in a school: team, systems, projects",
-        "where": "Zoom + monthly meetings in Tel&nbsp;Aviv",
-        "when": "Starts in late January 2027"
+        "where": "Zoom + meetings in Tel&nbsp;Aviv",
+        "frequency_label": "New training cohorts",
+        "frequency": "Monthly",
+        "next": "Feb 2027",
+        "scholarship": "Stipends for all participants!",
+        "cost": "Free",
+        "cost_note": "Monthly"
       }
     ],
     "tbilisi": {
       "id": "tbilisi",
       "location": "tbilisi",
-      "title_html": "Summer <span class=\"word\">c<span class=\"glyph small-a\"><span class=\"sr-only\">a</span><img src=\"{root}assets/imgA2.svg\" alt=\"\" width=\"28\" height=\"25\"></span>mp</span><br>in Tbilisi",
+      "title_html": "<span class=\"camp-descriptor\">Teacher program pilot</span> <span class=\"camp-name\">Summer Camp Tbilisi</span>",
       "where": "Tbilisi, Georgia",
       "when": "July–August 2026",
+      "dates": "1.07–1.09.2026",
+      "city": "Tbilisi",
       "photos_aria": "Photos from the Tbilisi teacher intensive",
       "landscape_alt": "Teachers in discussion during the Tbilisi intensive",
       "portrait_alt": "Participants working together on a teaching activity",
@@ -305,7 +262,10 @@
       "caveat": "Encouraging results, but still from a small group in an unusually friendly setting. We’ll see how they hold up in regular classrooms.",
       "results_title": "The first pilot"
     },
-    "join": "Join"
+    "join": "Join",
+    "results_soon": "Results coming soon",
+    "check_results": "Check results",
+    "banner_more": "Learn more"
   },
   "partners": {
     "title": "For schools and partners",
@@ -324,7 +284,7 @@
         "body": "Bring the programs to your own teachers and coordinators, cohort by cohort, with practice in your schools."
       }
     ],
-    "cta": "Tell us about your school or organisation"
+    "cta": "Partner with us"
   },
   "team": {
     "eyebrow": "People behind Morim",
@@ -368,7 +328,7 @@
       },
       {
         "q": "What about AI?",
-        "a": "We teach teachers to use AI — and to teach children how to use it — instead of training AI to replace teachers."
+        "a": "We teach teachers to use AI — and to teach children how to use it — instead of training AI to replace teachers. Good pedagogy has always been <mark>costly</mark>. New technology lets us widen its reach."
       },
       {
         "q": "How is the program structured?",
@@ -380,7 +340,7 @@
       },
       {
         "q": "Can a school or municipality work with Morim?",
-        "a": "Yes. We’re interested in working with schools, networks, and municipalities that want to bring our programs to their teachers or coordinators. We’re also looking for experienced educators who can help us build the programs. <a href=\"#partners\">Read about partnering with us.</a>"
+        "a": "Yes. We’re interested in working with schools, networks, and municipalities that want to bring our programs to their teachers or coordinators. We’re also looking for experienced educators who can help us build the programs. <a href=\"schools/\">Read about partnering with us.</a>"
       }
     ]
   },
@@ -395,7 +355,6 @@
     "lead_before": "If you’re a teacher, work with a school or municipality, or just think we should talk — ",
     "lead_link": "leave your contact in the form",
     "lead_after": " or write to us.",
-    "cta": "Want to do something together?",
     "email": "contact@morim.foundation",
     "foundation_label": "Foundation",
     "nav_aria": "Footer navigation",
@@ -407,5 +366,30 @@
       "X"
     ],
     "legal_html": "© 2026, The Foundation for Teachers Growth LTD<br>Company Number: 517356374"
+  },
+  "scholarship": {
+    "title": "Stipends for participation!",
+    "terms": [
+      {
+        "label": "How often",
+        "value": "Monthly"
+      },
+      {
+        "label": "Who gets it",
+        "value": "Every teacher in the program"
+      },
+      {
+        "label": "How to get it",
+        "value": "No separate application: it comes with your place"
+      },
+      {
+        "label": "What it asks",
+        "value": "Attend the sessions and lead your club lessons"
+      },
+      {
+        "label": "Amount",
+        "value": "Announced before the program starts"
+      }
+    ]
   }
 }

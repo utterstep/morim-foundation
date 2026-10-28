@@ -2,9 +2,7 @@
 // website/components/ui/accordion.tsx, collapsible.tsx, and the transitions
 // in motion.css / sections.css).
 //
-// Two shapes share one height animation:
 //   <details class="faq-item" data-state><summary>…</summary><div class="faq-answer">…</div></details>
-//   <button aria-expanded aria-controls="id" data-label-open data-label-closed> + <div id="id" hidden>
 //
 // The content wrapper has overflow:hidden and no padding of its own; its
 // height is animated with the Web Animations API from 0 to its natural
@@ -97,60 +95,42 @@ export function initDetails(details, motion) {
 }
 
 /**
- * Button + region disclosure (the Tbilisi "See results" card).
+ * In-place expander: a button with aria-controls grows the block it names
+ * (the Tbilisi camp's story). The block ships open so it reads without JS;
+ * here it collapses to hidden="until-found", so find-in-page still reaches
+ * the text and opens it.
  * @param {HTMLButtonElement} button
  * @param {{duration: number, easing: string, fade: number}} motion
  * @returns {() => void} stop
  */
-export function initDisclosureButton(button, motion) {
+export function initExpander(button, motion) {
   const content = document.getElementById(button.getAttribute('aria-controls') ?? '');
-  const card = button.closest('[data-state]');
-  if (!content) return () => {};
+  if (!(content instanceof HTMLElement)) return () => {};
+  content.hidden = 'until-found';
+  button.hidden = false;
 
-  const setLabel = (open) => {
-    const label = open ? button.dataset.labelOpen : button.dataset.labelClosed;
-    if (label) button.textContent = label;
-  };
-  const toggle = async () => {
+  const onClick = async () => {
     const open = button.getAttribute('aria-expanded') !== 'true';
     button.setAttribute('aria-expanded', String(open));
-    if (card) card.dataset.state = open ? 'open' : 'closed';
-    setLabel(open);
     if (open) {
       content.hidden = false;
+      // A one-way expander hides its button once open (the camp has no
+      // "Show less"); focus moves to the story so it is not lost.
+      if (!button.checkVisibility()) {
+        content.tabIndex = -1;
+        content.focus({ preventScroll: true });
+      }
       await animateHeight(content, true, motion);
     } else {
       await animateHeight(content, false, motion);
-      content.hidden = true;
+      content.hidden = 'until-found';
     }
   };
-  button.addEventListener('click', toggle);
-  return () => button.removeEventListener('click', toggle);
-}
-
-/**
- * Close a disclosure instantly and without animation (used when a program
- * row leaves the list, matching the React remount that reset its state).
- * @param {Element} root  a `.faq-item` or a card containing a `[aria-controls]` button
- */
-export function resetDisclosure(root) {
-  const button = root.querySelector('button[aria-controls]');
-  if (root instanceof HTMLDetailsElement) {
-    const content = root.querySelector('summary ~ *');
-    running.get(content)?.cancel();
-    running.delete(content);
-    root.open = false;
-    root.dataset.state = 'closed';
-    return;
-  }
-  if (!(button instanceof HTMLButtonElement)) return;
-  const content = document.getElementById(button.getAttribute('aria-controls') ?? '');
-  if (!content) return;
-  running.get(content)?.cancel();
-  running.delete(content);
-  content.hidden = true;
-  button.setAttribute('aria-expanded', 'false');
-  if (button.dataset.labelClosed) button.textContent = button.dataset.labelClosed;
-  const card = button.closest('[data-state]');
-  if (card) card.dataset.state = 'closed';
+  const onMatch = () => button.setAttribute('aria-expanded', 'true');
+  button.addEventListener('click', onClick);
+  content.addEventListener('beforematch', onMatch);
+  return () => {
+    button.removeEventListener('click', onClick);
+    content.removeEventListener('beforematch', onMatch);
+  };
 }

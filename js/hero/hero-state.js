@@ -1,9 +1,9 @@
 // Pure hero logic, ported from PR #3 website/app/hero.tsx. Nothing in this
 // file touches the DOM, so it is covered by `node --test`.
 
-import { heroApps } from '../lib/hero-apps.js';
-import { heroVideos } from '../lib/hero-videos.js';
-import { heroCompositionSlots, replaceHeroFloater } from '../lib/hero-floating.js';
+import { heroApps } from '../lib/hero-apps.js?v=2b917f56';
+import { heroVideos } from '../lib/hero-videos.js?v=2b917f56';
+import { heroCompositionSlots, replaceHeroFloater } from '../lib/hero-floating.js?v=2b917f56';
 
 export const LAST_VIDEOS_KEY = 'morim-hero-last-videos';
 

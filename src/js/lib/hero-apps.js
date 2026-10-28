@@ -33,8 +33,8 @@ export const heroApps = [
     notifications: 2,
   },
   {
-    name: 'Messages',
-    ...icon('messages', [128, 250]),
+    name: 'Discord',
+    ...icon('discord', [128, 256, 512]),
     notifications: '99+',
   },
   {

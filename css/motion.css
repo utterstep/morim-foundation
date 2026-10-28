@@ -1,19 +1,18 @@
 /* Ported from PR #3 website/app/motion.css. Physical inline-axis properties were converted to logical ones for RTL. */
-/* Quiet reading, with a persistent two-icon rhythm confined to the hero. */
+/* The floating Apply: fixed at the bottom of the screen, centred without
+   transforms; js/lib/floating-apply.js sets data-apply-visible. */
 .floating-apply-rail {
+  position: fixed;
+  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+  inset-inline: 0;
+  z-index: 5;
   display: flex;
+  justify-content: center;
   opacity: 0;
   visibility: hidden;
   transition:
     opacity 220ms ease,
     visibility 0s linear 220ms;
-  position: sticky;
-  top: calc(100svh - 5.5rem - env(safe-area-inset-bottom, 0px));
-  z-index: 5;
-  height: 3.5rem;
-  margin-bottom: -3.5rem;
-  align-items: center;
-  justify-content: center;
   pointer-events: none;
 }
 .floating-apply-rail[data-apply-visible='true'] {
@@ -22,10 +21,18 @@
   transition-delay: 0s;
 }
 .floating-apply-button {
+  min-inline-size: 9rem;
+  box-shadow: 0 0.25rem 1rem #00000030;
   pointer-events: none;
 }
 .floating-apply-rail[data-apply-visible='true'] .floating-apply-button {
   pointer-events: auto;
+}
+/* The two share the bottom of the screen; the scroll hint gives way. */
+:root:has(.floating-apply-rail[data-apply-visible='true']) .scroll-hint {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 .story-stack {
   position: relative;
@@ -33,8 +40,7 @@
   display: flow-root;
 }
 .approach,
-.what-we-do,
-.partners {
+.what-we-do {
   display: flow-root;
   background: var(--background);
 }
@@ -83,28 +89,15 @@
     scale: 1.2;
   }
 }
-.teacher-a img,
-.school-oo img {
+.hand-a-ink {
   transform-origin: 50% 85%;
 }
 .program-list {
   position: relative;
   min-height: 0;
 }
-.button,
 .carousel-controls button {
-  transition:
-    background 180ms ease,
-    transform 180ms ease;
-}
-@media (hover: hover) and (pointer: fine) {
-  .carousel-controls button:hover {
-    transform: translateY(-2px);
-  }
-}
-.button:active,
-.carousel-controls button:active {
-  transform: translateY(0) scale(0.97);
+  transition: background-color 120ms ease;
 }
 /* FAQ answer height and opacity are animated by js/disclosure.js: 250ms cubic-bezier(0.22, 1, 0.36, 1) and 200ms ease. */
 .faq-answer {
@@ -114,15 +107,84 @@
   transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 @media (prefers-reduced-motion: reduce) {
-  .button:hover,
-  .button:active,
-  .carousel-controls button:hover,
-  .carousel-controls button:active {
-    transform: none;
-  }
   .hero-app-face,
   .hero-notification[data-complete='true'] {
     animation: none;
     transition: none;
   }
+}
+
+/* Landing <-> schools: the new page pushes the old one out sideways (to
+   schools from the inline end, back from the inline start); the header
+   stays put. Types are set in js/page-slide.js; with no type, or reduced
+   motion, the pages change without animation. */
+@view-transition {
+  navigation: auto;
+}
+/* Named only while a transition runs: a standing name lifts the header
+   into its own layer, and the pills' backdrop blur then has nothing
+   behind it to blur. */
+:root:active-view-transition .header-shell {
+  view-transition-name: site-header;
+}
+::view-transition-group(root) {
+  animation-duration: 0s;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root:active-view-transition-type(slide-forward, slide-back)::view-transition-old(root),
+  :root:active-view-transition-type(slide-forward, slide-back)::view-transition-new(root) {
+    animation-duration: 640ms;
+    animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+    animation-fill-mode: both;
+    mix-blend-mode: normal;
+  }
+  :root:active-view-transition-type(slide-forward)::view-transition-old(root) {
+    animation-name: page-out-start;
+  }
+  :root:active-view-transition-type(slide-forward)::view-transition-new(root) {
+    animation-name: page-in-end;
+  }
+  :root:active-view-transition-type(slide-back)::view-transition-old(root) {
+    animation-name: page-out-end;
+  }
+  :root:active-view-transition-type(slide-back)::view-transition-new(root) {
+    animation-name: page-in-start;
+  }
+  /* In Hebrew the inline end is on the left: mirror the push. */
+  :root[dir='rtl']:active-view-transition-type(slide-forward)::view-transition-old(root) {
+    animation-name: page-out-end;
+  }
+  :root[dir='rtl']:active-view-transition-type(slide-forward)::view-transition-new(root) {
+    animation-name: page-in-start;
+  }
+  :root[dir='rtl']:active-view-transition-type(slide-back)::view-transition-old(root) {
+    animation-name: page-out-start;
+  }
+  :root[dir='rtl']:active-view-transition-type(slide-back)::view-transition-new(root) {
+    animation-name: page-in-end;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+@keyframes page-out-start {
+  to { translate: -100% 0; }
+}
+@keyframes page-out-end {
+  to { translate: 100% 0; }
+}
+@keyframes page-in-end {
+  from { translate: 100% 0; }
+}
+@keyframes page-in-start {
+  from { translate: -100% 0; }
 }

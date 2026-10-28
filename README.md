@@ -57,7 +57,9 @@ are served locally from `src/assets/fonts/` (copied to `assets/fonts/`).
 ### Photographs
 
 `assets/photo-landscape-*.webp` and `assets/photo-portrait-*.webp` are the two
-workshop scans, used in both the Tbilisi results and the pilot photo stack. Each
+workshop scans, used in both the Tbilisi results and the pilot photo stack.
+`assets/camp-landscape-*.webp` is the Tbilisi camp section's photo, from
+`session-photos/Day2 (Kids)/R0016201.JPG` (the children's day, 12 Aug 2026). Each
 ships as a ladder of widths; the `photo()` macro emits them as a `srcset` of width
 descriptors with a `sizes` value per placement, and the hero app icons do the same
 through `icon()` in `src/js/lib/hero-apps.js`.

@@ -1,5 +1,5 @@
 // Ported from PR #3 website/lib/hero-floating.ts (plain ES module, no build step).
-import { heroVideos, heroVideoPools } from './hero-videos.js';
+import { heroVideos, heroVideoPools } from './hero-videos.js?v=2b917f56';
 
 const HERO_VIDEO_COUNT = heroVideos.length;
 export const HERO_DISMISS_MS = 450;
@@ -139,7 +139,9 @@ export function createHeroStoryFloaters(
   random = Math.random,
   lastVideoIds = [],
 ) {
-  const apps = [1, 2, 0, 5, 6];
+  // Opening icons: Discord, TikTok, ChatGPT, Fortnite, YouTube; Instagram
+  // and Twitch come in through replacements.
+  const apps = [1, 3, 0, 5, 6];
   return heroCompositionSlots.map((placement, slot) => {
     const choices =
       'previews' in placement

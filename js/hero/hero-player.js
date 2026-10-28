@@ -4,8 +4,8 @@
 // so repeated updates never reload the embed. Self-hosted clips (see
 // `heroVideoFile`) use a native <video> instead of an iframe.
 
-import { heroVideoEmbed, heroVideoFile } from '../lib/hero-videos.js';
-import { startHeroVideoAutoplay } from '../lib/hero-video-autoplay.js';
+import { heroVideoEmbed, heroVideoFile } from '../lib/hero-videos.js?v=2b917f56';
+import { startHeroVideoAutoplay } from '../lib/hero-video-autoplay.js?v=2b917f56';
 
 // The embeds are the heaviest thing on the page by a wide margin: a couple of
 // megabytes of provider script plus their own webfonts, none of which the hero

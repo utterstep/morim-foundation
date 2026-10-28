@@ -20,8 +20,9 @@ dialog {
 }
 dialog::backdrop {
   background: rgb(0 0 0 / 0.1);
+  /* avoid-ai-design-ignore: K3 — sits over scrolling content, the blur is a real overlay */
   backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px); /* avoid-ai-design-ignore: K3 */
 }
 
 /* Content dialog: centred card, fade + scale from 95% (shadcn zoom-in-95). */
@@ -88,6 +89,59 @@ dialog::backdrop {
   background: #f4f3f0;
 }
 
+/* Side panel: a wide modal sheet from the inline-end edge (the Tbilisi
+   results, the partners page), sliding in over a dimmed page. Surfaces live
+   in sections.css. Without JS the panels stay in place as sections (the
+   <noscript> style in the template). */
+.side-panel {
+  position: fixed;
+  inset-block: 0;
+  inset-inline: auto 0;
+  margin: 0;
+  inline-size: 46vw;
+  max-inline-size: 100%;
+  block-size: 100dvh;
+  max-block-size: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  box-shadow: 0 0 3rem rgb(0 0 0 / 0.25);
+}
+.side-panel[open] {
+  translate: 0 0;
+  transition: translate 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.side-panel[open]::backdrop {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+@starting-style {
+  .side-panel[open] {
+    translate: 100% 0;
+  }
+  .side-panel[open]:dir(rtl) {
+    translate: -100% 0;
+  }
+  .side-panel[open]::backdrop {
+    opacity: 0;
+  }
+}
+.side-panel[data-closing] {
+  translate: 100% 0;
+  transition: translate 200ms ease-in;
+}
+.side-panel[data-closing]:dir(rtl) {
+  translate: -100% 0;
+}
+.side-panel[data-closing]::backdrop {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+@media (max-width: 700px) {
+  .side-panel {
+    inline-size: 100%;
+  }
+}
+
 /* Mobile menu: a floating card where the header pill sits, dropping in
    with a 0.75rem slide + fade. Surface and colours live in mobile.css. */
 .mobile-menu-panel {
@@ -149,7 +203,7 @@ dialog::backdrop {
   align-items: center;
   justify-content: space-between;
   white-space: nowrap;
-  cursor: default;
+  cursor: pointer;
   user-select: none;
   transition: color 150ms, background-color 150ms, border-color 150ms;
 }
@@ -191,7 +245,7 @@ dialog::backdrop {
   gap: 0.375rem;
   padding-inline: 0.375rem 2rem; /* padding-block comes from sections.css */
   border-radius: 0.375rem;
-  cursor: default;
+  cursor: pointer;
   user-select: none;
   outline: none;
   white-space: nowrap;
@@ -231,12 +285,8 @@ dialog::backdrop {
 .faq-trigger::marker {
   content: '';
 }
-.faq-answer,
-.program-results-content {
+.faq-answer {
   overflow: hidden;
-}
-.program-results-content[hidden] {
-  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -247,7 +297,11 @@ dialog::backdrop {
   .mobile-menu-panel[open],
   .mobile-menu-panel[data-closing],
   .mobile-menu-panel[open]::backdrop,
-  .mobile-menu-panel[data-closing]::backdrop {
+  .mobile-menu-panel[data-closing]::backdrop,
+  .side-panel[open],
+  .side-panel[data-closing],
+  .side-panel[open]::backdrop,
+  .side-panel[data-closing]::backdrop {
     transition: none;
   }
 }

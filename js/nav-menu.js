@@ -1,6 +1,6 @@
-// Header drop-downs (Programs, languages): a disclosure button that opens a
-// list of links (WAI-ARIA "disclosure navigation menu"). The footer and the
-// mobile menu keep plain link lists.
+// Drop-downs (Programs in the header; languages in the header and the mobile
+// menu): a disclosure button that opens a list of links (WAI-ARIA
+// "disclosure navigation menu"). The footer keeps plain link lists.
 //
 // Markup contract (rendered by the template):
 //   <div class="nav-menu">

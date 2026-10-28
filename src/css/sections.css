@@ -5,10 +5,151 @@
   border-radius: 0.75rem;
   text-align: center;
 }
-.fellowship {
+/* Teachers, coordinators, schools in one full-bleed band. Each pane keeps its own
+   heading; the tabs above it pick which one is shown. */
+.audiences {
+  text-align: center;
   background: var(--fellowship-bg);
   color: var(--paper);
-  padding: 6rem 8.3% 9rem; /* the bottom holds the sticky Apply at rest */
+  padding: 4.5rem var(--gutter) 6rem;
+}
+.audience-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1rem;
+  margin-bottom: 4rem;
+  font-size: 1.25rem;
+  letter-spacing: -0.03em;
+}
+.audience-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: inherit;
+}
+.audience-tab,
+.audience-trigger {
+  position: relative;
+  padding: 0.75rem 1.375rem;
+  color: inherit;
+  opacity: 0.62;
+  transition: opacity 0.2s;
+}
+.audience-tab:hover,
+.audience-tab[aria-selected='true'],
+.audience-trigger:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+/* The nav sits in the plum block, then sticks to the top as a plum pill as
+   tall as the logo and the languages (data-stuck, js/audiences.js): on a
+   wide screen in their row, in the middle of it; narrower, just under
+   them. It leaves with the block. Stuck, it keeps the look of the nav in
+   the block while that fits (--fit 1) and tightens its type and spacing
+   towards the compact pill as room runs out (--fit 0); past that it keeps
+   to one line, the schools link shortening to an ellipsis before its
+   arrow, and its margin grows by what the line lost so the panes below do
+   not move. */
+.audience-nav {
+  --pill-height: 4rem;
+  position: sticky;
+  inset-block-start: var(--nav-top, 1.25rem);
+  z-index: 20;
+}
+.audience-nav[data-stuck] {
+  flex-wrap: nowrap;
+  align-items: center;
+  inline-size: fit-content;
+  max-inline-size: var(--nav-width, calc(100vw - 2 * var(--gutter)));
+  block-size: var(--pill-height);
+  box-sizing: border-box;
+  margin-inline: auto;
+  margin-block-end: var(--nav-gap, 4rem);
+  padding-inline: calc(1.25rem - 0.625rem * var(--fit, 0)) 0.5rem;
+  column-gap: calc(1rem + 6rem * var(--fit, 0));
+  border-radius: 999rem;
+  background: var(--fellowship-bg);
+  /* Over the plum panes a light ring keeps the pill apart from them. */
+  box-shadow:
+    0 0.375rem 1.5rem #18202224,
+    inset 0 0 0 1px rgb(255 255 255 / 16%);
+  font-size: calc(1.125rem + 0.125rem * var(--fit, 0));
+}
+.audience-nav[data-stuck] :is(.audience-tab, .audience-trigger) {
+  padding: 0.5rem calc(0.75rem + 0.625rem * var(--fit, 0));
+}
+.audience-nav[data-stuck] .audience-tabs {
+  flex-wrap: nowrap;
+  flex: none;
+  column-gap: calc(1rem * var(--fit, 0));
+}
+.audience-nav[data-stuck] .audience-trigger {
+  display: flex;
+  align-items: center;
+  min-inline-size: 0;
+}
+.audience-nav[data-stuck] .audience-trigger > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* Schools and partners: not a tab but a way out to its own page, so it
+   stands apart from the tabs by a wider gap and carries the promo arrow
+   instead of the pen loop. The tabs keep their own 1rem between them. */
+.audience-nav {
+  column-gap: 7rem;
+}
+.audience-tabs {
+  column-gap: 1rem;
+}
+.audience-trigger {
+  white-space: nowrap;
+}
+/* The same hand as the glyphs in the headings: a loose pen loop, drawn in
+   when its tab becomes active. */
+.audience-loop {
+  position: absolute;
+  inset: -0.125rem -0.25rem;
+  width: calc(100% + 0.5rem);
+  height: calc(100% + 0.25rem);
+  overflow: visible;
+  pointer-events: none;
+}
+.audience-loop path {
+  fill: none;
+  stroke: var(--scribble-blue-on-plum);
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0; /* the round cap would leave a dot at the start */
+  transition:
+    stroke-dashoffset 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0s 0.55s;
+}
+.audience-tab[aria-selected='true'] .audience-loop path {
+  stroke-dashoffset: 0;
+  opacity: 1;
+  transition:
+    stroke-dashoffset 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0s;
+}
+/* No JS: every pane is shown, the tabs are plain anchors without a loop. */
+.audiences:not([data-tabs]) .audience-pane + .audience-pane {
+  margin-top: 8rem;
+}
+.audiences:not([data-tabs]) .audience-loop {
+  display: none;
+}
+.audience-pane[hidden] {
+  display: none;
+}
+.audience-pane:focus-visible {
+  outline: none;
+}
+/* The shared blue ring is 1.56:1 on the plum strip; paper is 8.93:1 (AUDIT.md, F1). */
+.audiences :is(a, button, summary, [tabindex]):focus-visible {
+  outline-color: var(--paper);
 }
 .eyebrow {
   font-size: 1.625rem;
@@ -39,20 +180,25 @@
   max-width: none;
   object-fit: contain;
 }
-.teacher-a {
-  width: 0.61em;
+/* Hand-drawn «a» in display headings: outlines of four handwriting faces
+   (Caveat, Caveat Bold, Kalam, Gochi Hand) baked into SVG so no font ships.
+   The SVG is a mask over currentColor, so it takes the heading's ink on any
+   background; hand-a.js deals a different alternate to each heading. */
+.hand-a {
+  margin-inline: 0.02em;
 }
-.teacher-a img {
-  width: 0.608em;
-  height: 0.55em;
-}
-.school-oo {
-  width: 0.9em;
-}
-.school-oo img {
-  width: 0.883em;
+.hand-a-ink {
+  display: block;
   height: 0.5em;
+  width: calc(0.5em * var(--a-ratio, 1.11));
+  background: currentColor;
+  -webkit-mask: var(--a-mask) center / contain no-repeat;
+  mask: var(--a-mask) center / contain no-repeat;
 }
+.hand-a[data-alt='caveat'] { --a-ratio: 1.135; --a-mask: url('../assets/hand-a-caveat.svg'); }
+.hand-a[data-alt='caveat-bold'] { --a-ratio: 1.116; --a-mask: url('../assets/hand-a-caveat-bold.svg'); }
+.hand-a[data-alt='kalam'] { --a-ratio: 0.901; --a-mask: url('../assets/hand-a-kalam.svg'); }
+.hand-a[data-alt='gochi'] { --a-ratio: 1.263; --a-mask: url('../assets/hand-a-gochi.svg'); }
 .fellowship-intro {
   margin-top: 3.625rem;
   width: min(41.625rem, 100%);
@@ -106,6 +252,9 @@
 .questions span:nth-child(2) {
   margin-top: 1.75rem;
 }
+.questions span:nth-child(3) {
+  margin-top: 1.25rem;
+}
 .questions span:last-child {
   margin-top: 0.5rem;
   transform: rotate(-8deg);
@@ -115,7 +264,6 @@
 }
 .programs {
   margin-top: 8.875rem;
-  border-top: 1px solid var(--fellowship-rule);
   padding-top: 4.375rem;
   text-align: start;
 }
@@ -127,6 +275,7 @@
   margin-bottom: 3.125rem;
 }
 .program-heading h3 {
+  font-family: var(--font-display);
   font-size: 3.375rem;
   line-height: 2.875rem;
   letter-spacing: -0.03em;
@@ -151,13 +300,16 @@
   padding: 0.5rem;
 }
 .location-options [role='option'] {
-  font-family: var(--font-text);
+  font-family: var(--font-body);
   font-size: 1.125rem;
   padding-block: 0.625rem;
 }
 .program-list {
-  /* Every row shares content-independent tracks, including expanded results. */
-  --program-columns: minmax(0, 1fr) 9rem 11rem minmax(8.5rem, auto);
+  /* Every row shares content-independent tracks, including expanded results.
+     The title track ends one gap before the card's centre, so Where starts on
+     the page's centre line: 50% of the content box, shifted by half the
+     padding difference (1.875rem left, 1.5rem right), minus the 1.5rem gap. */
+  --program-columns: calc(50% - 1.6875rem) minmax(0, 1fr) minmax(0, 1fr) auto;
   display: grid;
   gap: 0.875rem;
   min-height: 17.75rem;
@@ -167,8 +319,11 @@
   min-height: 8.4375rem;
   display: grid;
   grid-template-columns: var(--program-columns);
-  align-items: center;
-  gap: 1.5rem;
+  /* Title and Where/When start on the top edge; the button sits in the
+     bottom-right corner, pushed down by the last 1fr track. */
+  grid-template-rows: auto 1fr;
+  align-items: first baseline;
+  gap: 0 1.5rem;
   padding-block: 1.375rem;
   padding-inline: 1.875rem 1.5rem;
   border: 0;
@@ -178,8 +333,80 @@
 .program-row > * {
   min-width: 0;
 }
+.program-row > .button,
+.program-row > h4 {
+  grid-row: 1 / -1;
+}
+.program-row > h4 {
+  align-self: start;
+}
+.program-row > p {
+  grid-row: 1;
+}
 .program-row > .button {
+  align-self: end;
   justify-self: end;
+}
+/* The terms line of an open offer (free to join, plus what the foundation
+   pays) sits under Where/When as a third caption of the same kind, so
+   the row keeps one voice instead of growing a badge. */
+.program-row:has(> .program-cost) {
+  grid-template-rows: auto auto 1fr;
+}
+.program-row > .program-cost {
+  grid-row: 2;
+  grid-column: 2 / 4;
+  margin-top: 0.875rem;
+}
+/* Cost reads as one line, caption then value; the open offers' "Free" is
+   set in the scribble blue so it stands out from Where/When. */
+.program-row > .program-cost > span {
+  display: inline;
+  margin: 0;
+  margin-inline-end: 0.5rem;
+}
+#top .program-row .cost-value {
+  font-style: normal;
+  color: var(--scribble-blue-on-plum);
+  white-space: nowrap;
+}
+.program-row > .program-cost.is-plain {
+  color: var(--fellowship-muted);
+}
+/* Scholarship line under an open row's title: a hand-written note in the
+   scribble blue, tilted from its start edge, with the Monthly tag on its
+   own line beneath it. */
+.program-scholarship {
+  display: block;
+  margin-top: 0.5rem;
+}
+#top .program-scholarship > span {
+  display: block;
+  inline-size: fit-content;
+  font-family: var(--font-scribble);
+  font-size: 2rem;
+  line-height: 1.1;
+  letter-spacing: normal;
+  color: var(--scribble-blue-on-plum);
+  transform: rotate(-3deg);
+  transform-origin: 0 50%;
+}
+#top .program-scholarship > span:dir(rtl) {
+  transform: rotate(3deg);
+  transform-origin: 100% 50%;
+}
+/* Monthly: a tag set like the closed-cohort status line, in the same
+   lime-mustard accent, so it reads as a label rather than more terms. */
+#top .program-row .cost-note {
+  display: block;
+  inline-size: fit-content;
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #d3dc3c;
+  white-space: nowrap;
 }
 .program-row h4 {
   font-size: 2.438rem;
@@ -187,145 +414,6 @@
   font-weight: 300;
   letter-spacing: -0.03em;
   white-space: normal;
-}
-.program-results-card {
-  border: 0;
-  border-radius: 1.25rem;
-  background: #ffffff12;
-}
-.program-results-summary {
-  border: 0;
-  background: transparent;
-}
-.program-results-summary .results-button {
-  min-width: 8.375rem;
-}
-/* Height and opacity are animated by js/disclosure.js: 360ms cubic-bezier(0.22, 1, 0.36, 1) and 240ms ease. */
-.program-results-content {
-  overflow: hidden;
-}
-.program-results-body {
-  margin: 0 1.5rem;
-  padding: 1.75rem 0.75rem 2.25rem;
-  border-top: 1px solid #ffffff14;
-}
-.program-results-photos {
-  position: relative;
-  width: min(41.25rem, 100%);
-  aspect-ratio: 1.8;
-  margin: 0 auto 1.625rem;
-}
-.program-results-photos img {
-  position: absolute;
-  border: 0.25rem solid white;
-  box-shadow: 0 1px 0.75rem #0000001a;
-  height: auto;
-  object-fit: cover;
-}
-.results-landscape {
-  width: 60%;
-  inset-inline-start: 3%;
-  top: 14%;
-  z-index: 1;
-  transform: rotate(-3.11deg);
-}
-.results-portrait {
-  width: 36%;
-  inset-inline-end: 4%;
-  top: 0;
-  transform: rotate(8.78deg);
-}
-.program-results-copy {
-  width: min(41.25rem, 100%);
-  margin-inline: auto;
-  font-size: 1.25rem;
-  line-height: 1.3;
-  letter-spacing: -0.01em; /* running text: not the display tracking */
-  text-align: start; /* one axis with the stat strip above */
-  color: var(--paper);
-}
-.program-results-copy p + p {
-  margin-top: 1.75rem;
-}
-.program-results-title {
-  font-size: inherit;
-  line-height: inherit;
-  font-weight: 500;
-  margin-bottom: 1.75rem;
-}
-/* Survey figures before the story: four stats across, then prose, a block
-   quotation with a caption-style attribution, and the caveat in the muted
-   tone. One family throughout: Light for the numbers, Regular for the text,
-   Medium for the title; no synthesised italic. */
-.results-stats {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
-  text-align: start;
-}
-.stat {
-  border-top: 1px solid var(--fellowship-rule);
-  padding-top: 0.75rem;
-}
-.stat-value {
-  display: block;
-  direction: ltr; /* before → after reads left to right in every language */
-  font-size: 3rem;
-  line-height: 0.95;
-  letter-spacing: -0.04em;
-  font-variant-numeric: tabular-nums;
-}
-.stat-value small {
-  font-size: 1rem;
-  letter-spacing: 0;
-}
-.stat-value .arrow {
-  color: var(--fellowship-muted);
-  font-size: 1.4rem;
-  margin-inline: 0.1em;
-}
-.stat-label {
-  display: block;
-  margin-top: 0.45rem;
-  font-size: 0.9375rem;
-  line-height: 1.25;
-  color: var(--fellowship-muted);
-}
-.results-quote {
-  margin: 1.75rem 0 0;
-  padding-inline-start: 1.25rem;
-  border-inline-start: 1px solid var(--fellowship-rule);
-}
-.results-note {
-  margin-top: 0.5rem;
-  padding-inline-start: 1.25rem;
-  font-size: 0.9375rem;
-  line-height: 1.25;
-  color: var(--fellowship-muted);
-}
-.results-caveat {
-  color: var(--fellowship-muted);
-}
-@media (max-width: 700px) {
-  .program-results-body {
-    margin-inline: 1.125rem;
-    padding: 1.5rem 0 1.875rem;
-  }
-  .program-results-copy {
-    font-size: 1.125rem;
-    line-height: 1.4;
-  }
-  .results-stats {
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem 0.75rem;
-  }
-  .stat-value {
-    font-size: 2.5rem;
-  }
-  .program-results-photos img {
-    border-width: 3px;
-  }
 }
 .program-row p {
   font-size: 1.25rem;
@@ -339,13 +427,7 @@
   margin-bottom: 0.3125rem;
 }
 .program-row .button,
-.button.apply-button {
-  font-size: 1.25rem;
-  padding: 1rem 1.5rem;
-  min-height: 3.5rem;
-  border-radius: 1.25rem;
-  white-space: nowrap;
-}
+/* The primary on the plum. */
 .apply-button {
   background: #fff;
   color: #27291d;
@@ -355,19 +437,6 @@
 .apply-button:hover {
   background: #f4f3f0;
   color: var(--fellowship-bg);
-}
-.results-button {
-  background: #27291d33;
-}
-.results-button:hover {
-  background: #ffffff25;
-}
-.small-a {
-  width: 0.72em;
-}
-.small-a img {
-  width: 0.72em;
-  height: 0.64em;
 }
 .inline-button {
   display: inline;
@@ -388,41 +457,117 @@
    (the funding one keeps the handwritten aside), the approaches paragraph
    and the Tuesday-morning test, then the three routes. */
 .what-we-do {
-  padding: 8rem 5% 3rem;
+  /* The Tuesday line closes the section: three times the air it had under it. */
+  padding: 8rem 5% 7.5rem;
   text-align: center;
   background: var(--background);
 }
-.what-we-do .display {
-  font-size: 5.5rem;
-  margin-top: 0;
-}
-.wwd-lead {
+/* Heading on the left, the Foundation line on the right, on one 12-column
+   grid; the lead sits on the heading's last line. */
+.wwd-head {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 22rem;
-  align-items: center;
-  gap: 3.5rem;
-  width: min(64rem, 100%);
-  margin: 3.5rem auto 0;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 2rem;
+  width: min(81rem, 100%);
+  margin: 0 auto;
   text-align: start;
 }
-.wwd-lead .prose {
+/* The heading names the three approaches and wraps on its own; the
+   approach phrases keep nowrap so a marker never splits. */
+.what-we-do .display {
+  grid-column: 1 / 9;
+  font-size: 5.5rem;
+  margin: 0;
+  text-align: start;
+  white-space: normal;
+  text-wrap: balance;
+}
+.wwd-lead {
+  grid-column: 9 / 13;
+  /* The column spans the heading: the lead opens it on the cap line, the
+     stipend note closes it on the heading's last line; space-between pins
+     the two ends (George, 23.10: "стипендия это примечание"). The "12+
+     lessons" callout that used to open the column moved to the foot of
+     the section (George, 23.10: "внизу и только внизу"). */
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
   width: auto;
   margin: 0;
   text-align: start;
 }
-.wwd-photo {
+/* The stipend is a note: the note colour of the card bodies, the note
+   size (type.css), the handwritten link under it on the start edge. */
+.wwd-stipend {
   margin: 0;
-  text-align: center;
+  color: #55554e;
+}
+.wwd-stipend .beat-note {
+  margin: 0.875rem 0 0;
+  font-size: 1.625rem;
+}
+/* Russian sets longer words in Spectral; one size down keeps the heading
+   near the English line count. */
+@media (min-width: 701px) {
+  html[lang='ru'] #top .what-we-do .display {
+    /* #top matches the type.css role rule, which an html[lang] selector alone loses to;
+       desktop only, phones keep the mobile title role. */
+    font-size: 5.25rem;
+  }
+}
+/* The pilot photo, bled to both edges of the viewport, with hard edges.
+   The figure keeps the content box, so the
+   caption hangs on the section's edge; only the image bleeds (main clips
+   the overflow, so there is no horizontal scroll). */
+.wwd-photo {
+  margin: 5rem 0 0;
+  text-align: start;
+}
+/* The frame bleeds and clips; the image moves inside it. */
+.wwd-photo-frame {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
+  /* A 32px copy of the photo, inline, stretched under the real one: the
+     frame is never white while the file loads. */
+  background: #b3a79a url('data:image/webp;base64,UklGRugAAABXRUJQVlA4INwAAAAwBQCdASogABUAPwFsrU8rJiQiMAgBYCAJQBb3A8MtDtmMbeXpf2rZre8IrFmHxynoQAD+B/kPxpu1zZ6VngMYlIdtV/uCpf3W25bfvaYtXiDgmkvztl90OvXpCzzWuopMQ0P4PzRpaUKMgc3re4fV/7o9YvFgIRh6m0bJgMGKzwEgN+baBydosORcWul8EMljZ1XpR2VgVbxWkJ8BxzBczZDZ26WfymB577Z/R8OiPKGUE9jDSmvj5B9XALtSuXisVQaamCTQ4FpJFS9yQ5pbfZXgz8KVSmd+zSgA') center / cover no-repeat;
+  view-timeline-name: --wwd-photo;
 }
 .wwd-photo-img {
+  display: block;
   width: 100%;
-  height: auto;
-  border: 0.3125rem solid white;
-  box-shadow: 0 1px 0.75rem #0000001a;
-  transform: rotate(-3deg);
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
 }
-.wwd-photo figcaption {
-  margin-top: 1.125rem;
+/* Parallax (George, 23.10): the image is taller than the frame and drifts
+   up as the frame crosses the viewport. It rides `transform`, so the entry
+   motion on translate/rotate/scale (page-motion.js) composes with it.
+   Browsers without scroll timelines keep the still photo.
+   The travel equals the overhang, so the overhang sets how strong the
+   effect reads: 18% was spread over the whole crossing and barely
+   registered (George, 23.10: "слишком маленький параллакс"). At 150% the
+   3:2 photo at full width is almost uncropped, so the drift shows more
+   of the frame rather than a zoomed crop. translateY is a share of the
+   image's own height: overhang / (100% + overhang). */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .wwd-photo-img {
+      --wwd-photo-drift: -33.333%;
+      height: 150%;
+      animation: wwd-photo-drift linear both;
+      animation-timeline: --wwd-photo;
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
+@keyframes wwd-photo-drift {
+  from { transform: translateY(0); }
+  to { transform: translateY(var(--wwd-photo-drift, -33.333%)); }
 }
 .wwd-beats {
   display: grid;
@@ -450,56 +595,161 @@
   display: block;
   width: fit-content;
   margin: 1.375rem auto 0;
-  color: #1c51e0;
-  font-family: var(--font-handwritten);
-  font-size: 1.625rem;
+  color: var(--scribble-blue);
+  font-family: var(--font-scribble);
+  font-size: 1.875rem;
   line-height: 1.1;
   transform: rotate(-2deg);
-  text-transform: var(--handwritten-case);
   letter-spacing: normal;
+}
+/* The "12+ lessons" callout: the same scribble as the notes, one size up,
+   centred at the foot of the steps. */
+#top .prose p.wwd-note {
+  /* Out-ranks the type.css prose role (#top :is(.prose p, …)) on desktop. */
+  /* The step notes above it are handwritten too: more air than between the notes, so the two hands do not read as one line. */
+  margin: 5rem auto 0;
+  font-size: 3.5rem;
+  line-height: 1;
+  transform: rotate(-3deg);
+}
+[dir='rtl'] #top .prose p.wwd-note {
+  transform: rotate(3deg);
 }
 .wwd-closing {
   margin-top: 4.5rem;
+  margin-bottom: 6.5rem;
 }
-/* Three routes after the Tuesday line: one style, the order does the ranking. */
-.wwd-routes {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.75rem 1.75rem;
-  margin-top: 2.25rem;
-  font-size: 1.125rem;
+/* "How the program works": four steps in a row under the pilot photo.
+   Vlad, 23.10: the section read as "12 lessons and clubs" because the
+   sequence (intensive, clubs, mentor, own class) was spread over the lead,
+   the beats and the FAQ and nowhere stood as steps. The three beats went
+   the same day (George: they and the steps said the same thing). The
+   number is set in the handwritten hand so the row belongs to the notes;
+   the handwritten line under a step is the slot for the specifics (hours,
+   weeks). Subgrid rows keep number, title, body and detail aligned across
+   the four columns. The callout, the coordinators line and the stipend
+   line close the section under the row. */
+.wwd-steps {
+  width: min(72rem, 100%);
+  margin: 5.75rem auto 0;
+  text-align: start;
+}
+.wwd-steps-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 2.5rem;
+  row-gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.wwd-step {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  align-content: start;
+}
+.wwd-step-num {
+  display: inline-block;
+  width: fit-content;
+  color: var(--scribble-blue);
+  font-family: var(--font-scribble);
+  font-size: 2.75rem;
+  line-height: 1;
+  transform: rotate(-6deg);
+}
+[dir='rtl'] .wwd-step-num {
+  transform: rotate(6deg);
+}
+.wwd-step h4 {
+  align-self: end;
+  margin: 0.875rem 0 0;
+  font-size: 1.75rem;
+  line-height: 1.05;
   letter-spacing: -0.03em;
+  font-weight: 400;
 }
-.wwd-routes a {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-  text-decoration-thickness: 1px;
+.wwd-step p {
+  margin: 0.875rem 0 0;
+  font-size: 1.125rem;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: #55554e;
+}
+/* The theses inside a step body carry the heading's marker strokes, one
+   hue apiece (George, 23.10: "красиво декоративно как в заголовке выше,
+   разными цветами, выделяемый блок одним куском"). The stroke is a
+   slanted shape stretched to the box, so a thesis never wraps and gets
+   the heading's side room in absolute terms (0.3em of the display size
+   is about 22px): the blue stroke's empty edge is 11% of its width, and
+   at body size with less room it left the first letter on white. The
+   copy keeps each thesis short enough for the column (the Russian
+   "Каждую неделю…" ran 15px past it; "Раз в неделю…" fits). The lead's
+   "today" and the FAQ's "costly" carry the same stroke (Vlad's copy
+   notes, 26.10). */
+:is(.wwd-step, .wwd-lead-text, .faq-answer-body) mark {
+  color: inherit;
+  white-space: nowrap;
+  padding-inline: 1.2em;
+  margin-inline: -1.2em;
+  background: url('../assets/highlight-yellow.svg') center / 100% 100% no-repeat;
+}
+:is(.wwd-step, .wwd-lead-text, .faq-answer-body) mark.blue {
+  background-image: url('../assets/highlight-blue.svg');
+}
+:is(.wwd-step, .wwd-lead-text, .faq-answer-body) mark.peach {
+  background-image: url('../assets/highlight-peach.svg');
+}
+/* A single word mid-sentence: the theses' 1.2em of side room painted the
+   neighbours ("teachin[g today: a]"); 0.4em keeps the stroke on the word
+   and still clears the stroke's empty edge. */
+:is(.wwd-lead-text, .faq-answer-body) mark {
+  padding-inline: 0.4em;
+  margin-inline: -0.4em;
+}
+.wwd-steps-close {
+  margin-top: 0;
+  text-align: center;
+}
+.wwd-steps-close > p + p {
+  margin-top: 1.75rem;
 }
 @media (max-width: 700px) {
   .what-we-do {
-    padding: 4.5rem 5% 2.5rem;
+    padding: 4.5rem 5% 6.25rem;
   }
   /* Hard <br> breaks: "for teachers and" / "и координаторов" are the longest
      lines, so the vw step is smaller than the wrapping displays above. */
-  .what-we-do .display {
-    font-size: clamp(2.5rem, 10.5vw, 4rem);
+  .wwd-head {
+    grid-template-columns: 1fr;
   }
-  html[lang='ru'] .what-we-do .display {
-    font-size: clamp(2.25rem, 10vw, 3.75rem);
+  .what-we-do .display,
+  .wwd-lead {
+    grid-column: 1;
   }
   .wwd-lead {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.75rem;
     margin-top: 2.25rem;
-    text-align: center;
   }
-  .wwd-lead .prose {
-    text-align: center;
+  .wwd-stipend .beat-note {
+    font-size: 1.5rem;
+  }
+  /* 3.5rem ran to six lines in Hebrew and into the gutter. */
+  #top .prose p.wwd-note {
+    margin-top: 2.5rem;
+    font-size: 2.5rem;
   }
   .wwd-photo {
-    width: min(20rem, 100%);
-    margin: 0 auto;
+    margin-top: 3rem;
+  }
+  .wwd-photo-frame {
+    aspect-ratio: 4 / 3;
+  }
+  /* The 4:3 frame is taller than the photo's own shape: 150% would zoom
+     into a crop, so phones take a smaller overhang. */
+  .wwd-photo-img {
+    --wwd-photo-drift: -23.077%;
+    height: 130%;
   }
   .wwd-beats {
     grid-template-columns: 1fr;
@@ -507,36 +757,86 @@
     margin-top: 3.25rem;
   }
   .wwd-beat h3 {
-    font-size: 1.875rem;
+    font-size: var(--m-item-title);
   }
   .wwd-beat p {
+    font-size: var(--m-body);
+  }
+  /* Phones stack the steps; the subgrid rows are no longer shared, so the
+     gap between steps is a margin and the empty slot collapses. */
+  .wwd-steps {
+    margin-top: 4rem;
+  }
+  .wwd-steps-list {
+    grid-template-columns: 1fr;
+  }
+  .wwd-step {
+    display: block;
+  }
+  .wwd-step + .wwd-step {
+    margin-top: 2.5rem;
+  }
+  /* One step up from the mobile item roles, still on the start edge
+     (George, 27.10: "1 2 3 4 блок в мобильном набрать чуть крупнее",
+     then "не равнять по центру"). One class more than the type.css roles
+     (#top :is(.wwd-step h4)), which load later and tie on #top alone. */
+  .wwd-step-num {
+    font-size: 2.5rem;
+  }
+  #top .wwd-steps .wwd-step h4 {
+    margin-top: 0.5rem;
     font-size: 1.25rem;
+  }
+  #top .wwd-steps .wwd-step > p {
+    font-size: 1rem;
+  }
+  .wwd-steps-close > p + p {
+    margin-top: 1.25rem;
   }
   .wwd-closing {
     margin-top: 3rem;
+    margin-bottom: 3.5rem;
   }
 }
-/* "For schools and partners": plain on paper after the two panels. Heading,
-   lead, three partner shapes set like the What-we-do beats, then the form button with the email beside it. */
-.partners {
-  padding: 7rem 5% 2rem;
-  text-align: center;
+/* "For schools and partners", its own page (src/schools.html.j2): heading
+   and lead on the start side, the three partner shapes as the landing's
+   beats, then the plum form button with the email beside it. */
+.schools-page {
+  padding: 4rem var(--gutter) 9rem;
+  text-align: start;
   background: var(--background);
+  color: var(--ink);
 }
-.partners .display {
-  font-size: 5.5rem;
-  margin-top: 0;
+.schools-page .display {
+  margin: 0;
+  font-size: 6rem;
+  line-height: 0.9;
+  text-wrap: balance;
+}
+#top .schools-page .partners-lead,
+#top .schools-page .partners-lead p {
+  text-align: start;
+}
+#top .schools-page .partners-lead {
+  width: min(41.625rem, 100%);
+  margin: 2.5rem 0 0;
+}
+#top .schools-page .wwd-beats {
+  width: auto;
+  margin: 6rem 0 0;
+  text-align: start;
+}
+#top .schools-page .wwd-beat p {
+  margin-inline: 0;
+}
+#top .schools-page .partners-action {
+  justify-content: flex-start;
 }
 .partners-lead {
   margin-top: 3.25rem;
 }
 .partners-types {
   margin-top: 4.5rem;
-}
-.partners-email {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-  text-decoration-thickness: 1px;
 }
 .partners-action {
   display: flex;
@@ -546,47 +846,22 @@
   gap: 1rem 1.75rem;
   margin-top: 4rem;
 }
-.partners-action .button {
-  min-height: 3.5rem;
-  padding: 1.125rem 1.75rem;
-  border-radius: 2rem;
-  font-size: 1.25rem;
-}
-.partners-email {
-  font-size: 1.125rem;
-  letter-spacing: -0.03em;
-}
 @media (max-width: 700px) {
-  .partners {
-    padding: 4.5rem 5% 1rem;
+  .schools-page {
+    padding: 2rem var(--m-gutter) 5rem;
   }
-  .partners .display {
-    font-size: clamp(2.5rem, 10.5vw, 4rem);
+  .schools-page .display {
+    font-size: var(--m-title);
   }
-  .partners-lead {
-    margin-top: 2.25rem;
+  #top .schools-page .partners-lead {
+    margin-top: 1.5rem;
   }
-  .partners-types {
+  #top .schools-page .wwd-beats {
     margin-top: 3rem;
   }
 }
-.leaders {
-  background: var(--leaders-bg);
-  color: var(--leaders-ink);
-  margin-top: 4.375rem;
-  padding: 6.5rem 3.125rem 9.5rem;
-}
-.leaders .programs {
-  border-color: #4a111633;
-}
 .leaders .program-list {
   min-height: 0;
-}
-.leaders .program-row,
-.leaders .location-select {
-  background: #4a11160a;
-  border: 0;
-  color: var(--leaders-ink);
 }
 /* Sticker on a row's top edge ("pilot in progress"); the row is the anchor.
    Leaders rows carry no where/when yet, so it is title + button only. */
@@ -596,103 +871,906 @@
 .leaders .program-row[data-closed] {
   grid-template-columns: minmax(0, 1fr) auto;
 }
-/* A closed cohort: the row stays listed, its button is inert and muted. */
-.leaders .apply-button:disabled {
-  background: #4a111614;
-  color: var(--leaders-muted);
-  cursor: not-allowed;
+/* The coordinators' closed cohort: a compact card under the offer's Apply,
+   as wide as the intro. The heading names its state, the status line says
+   what comes next. */
+#top .running-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: "title badge status";
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+  width: min(41.625rem, 100%);
+  margin: 3rem auto 0;
+  padding: 0.875rem 1.5rem 1rem;
+  border-radius: 1.25rem;
+  background: #ffffff12;
+  font-size: var(--t-small);
+  line-height: 1.35;
+  text-align: start;
+}
+#top .running-card > h3 {
+  grid-area: title;
+  max-width: none;
+  margin: 0;
+  font: inherit;
+  text-wrap: pretty;
+}
+#top .running-status {
+  grid-area: status;
+  margin: 0;
+  color: var(--fellowship-muted);
+  white-space: nowrap;
+}
+#top .running-badge {
+  grid-area: badge;
+  margin: 0;
+  color: #d3dc3c;
+}
+/* The coordinators' pilot: "Program Pilot • Currently running", the state
+   in green after a muted bullet. */
+#top .running-card[data-closed] {
+  column-gap: 0.5rem;
+}
+#top .running-now {
+  color: #8fe0a6;
+}
+#top .running-now::before {
+  content: "•";
+  margin-inline-end: 0.5rem;
+  color: var(--fellowship-muted);
+}
+/* The teachers' past pilot: the coordinators' card as it is, the whole
+   card a link to the camp section. "Program Pilot", a muted bullet, the
+   dates and place in the badge yellow, then "Check results" with an arrow. */
+#top .pilot-link {
+  align-items: center;
+  column-gap: 0.5rem;
+  color: inherit;
+  text-decoration: none;
+}
+/* "Summer camp" in the peach scribble sits over the card's top edge,
+   out of its grid; the card keeps the coordinators' layout. */
+#top .pilot-link {
+  position: relative;
+}
+/* One line: title, dates and place, the link. */
+#top .pilot-link > h3,
+#top .pilot-link .running-badge,
+#top .pilot-button {
+  white-space: nowrap;
+}
+#top .pilot-camp {
+  position: absolute;
+  inset-block-start: -0.75em;
+  inset-inline-start: 0.5rem;
+  rotate: -4deg;
+  pointer-events: none;
+  color: var(--scribble-peach-on-plum);
+  /* A soft glow of its own colour reads as neon on the plum. */
+  text-shadow: 0 0 0.5em color-mix(in srgb, var(--scribble-peach-on-plum) 55%, transparent);
+  font-family: var(--font-scribble);
+  font-size: 2.4em;
+  line-height: 1;
+  white-space: nowrap;
+}
+#top .pilot-link .running-badge::before {
+  content: "•";
+  margin-inline-end: 0.5rem;
+  color: var(--fellowship-muted);
+}
+#top .pilot-button {
+  justify-self: end;
+  color: inherit;
+}
+@media (max-width: 700px) {
+  #top .running-card {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "title badge"
+      "status status";
+    margin-top: 2.25rem;
+    padding: 0.75rem 1.125rem 0.875rem;
+  }
+  #top .running-card {
+    font-size: 0.75rem;
+  }
+  #top .running-status {
+    margin-top: 0.25rem;
+  }
+}
+/* On a phone the card stacks like the coordinators', without the bullet. */
+@media (max-width: 700px) {
+  /* The rotated scribble needs more room above the first row. */
+  #top .pilot-link {
+    margin-top: 3rem;
+    padding-block-start: 1.375rem;
+  }
+  #top .pilot-camp {
+    rotate: -2deg;
+  }
+  #top .pilot-link .running-badge::before {
+    content: none;
+  }
+  #top .pilot-button {
+    justify-self: start;
+  }
+  #top .pilot-link .running-badge {
+    white-space: normal;
+  }
 }
 .leaders .program-list {
   padding-top: 0.75rem;
 }
-/* A short piece of caution tape on the row's top-left corner: striped ends
-   around a solid segment carrying the words, a slight tilt, a lift shadow. */
+/* Status of a closed row, under its title, set like the "+ monthly
+   scholarship" note but in the lime-mustard accent so it reads as state,
+   not as terms. */
 .program-badge {
-  position: absolute;
-  top: -0.75rem;
-  inset-inline-start: 1.875rem;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  height: 1.75rem;
-  padding-inline: 1rem;
-  background: repeating-linear-gradient(
-    -45deg,
-    var(--leaders-ink) 0 0.625rem,
-    var(--leaders-bg) 0.625rem 1.25rem
-  );
-  box-shadow: 0 0.125rem 0.625rem #4a111633;
-  transform: rotate(-1.5deg);
-  transform-origin: center;
+  display: block;
+  margin-top: 0.875rem;
   pointer-events: none;
 }
-.program-badge > span {
-  display: inline-flex;
-  align-items: center;
-  height: 100%;
-  padding: 0 1.25rem;
-  background: var(--leaders-ink);
-  color: var(--leaders-bg);
-  font-size: 0.9375rem;
+#top .program-badge > span {
+  font-size: 0.8125rem;
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #d3dc3c;
   white-space: nowrap;
 }
-.leaders .location-select svg {
-  color: var(--leaders-ink) !important;
+@media (min-width: 701px) {
+  /* Title and status stack in the first column; a row this short has no
+     corner to pin the button to, so it sits centred on the row's height. */
+  .program-row:has(> .program-badge) {
+    grid-template-rows: auto auto;
+    align-content: center;
+  }
+  .program-row:has(> .program-badge) > h4 {
+    grid-row: 1;
+  }
+  .program-row > .program-badge {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .program-row:has(> .program-badge) > .button {
+    align-self: center;
+  }
+  /* An open row keeps its corners: title and scholarship line top-left,
+     the button bottom-right. */
+  /* Where/When span the title's row and the scholarship's, so the note
+     sits right under the title; Cost follows Where/When in row 3, and the
+     note spans down into the 1fr track instead of pushing Cost. */
+  .program-row:has(> .program-scholarship) {
+    grid-template-rows: auto auto auto 1fr;
+  }
+  .program-row:has(> .program-scholarship) > h4 {
+    grid-row: 1;
+  }
+  .program-row:has(> .program-scholarship) > p:not(.program-cost) {
+    grid-row: 1 / 3;
+  }
+  .program-row:has(> .program-scholarship) > .program-cost {
+    grid-row: 3;
+  }
+  .program-row > .program-scholarship {
+    grid-column: 1;
+    grid-row: 2 / -1;
+    align-self: start;
+  }
+}
+@media (max-width: 700px) {
+  .program-row > .program-scholarship {
+    grid-column: 1 / -1;
+    margin-top: -1rem;
+  }
+  .program-row > .program-badge {
+    grid-column: 1 / -1;
+    margin-top: -0.75rem;
+  }
 }
 .leaders .program-row h4 {
   white-space: normal;
   text-wrap: balance;
 }
-.leaders .program-row p > span,
-.leaders .muted {
-  color: var(--leaders-muted);
-}
-.leaders .inline-button:hover {
-  color: var(--leaders-ink);
-}
-.leaders .apply-button {
-  background: var(--leaders-ink);
-  color: var(--leaders-bg);
-}
-.leaders .apply-button:hover {
-  background: #62171d;
-  color: var(--leaders-bg);
-}
-/* The "oo" artwork is a purple stroke; paint it in the panel's ink by using
-   the SVG as a mask over currentColor instead of a filter approximation. */
-.leaders .school-oo {
-  background: currentColor;
-  -webkit-mask: url('../assets/imgVector1.svg') center / 0.883em 0.5em no-repeat;
-  mask: url('../assets/imgVector1.svg') center / 0.883em 0.5em no-repeat;
-}
-.leaders .teacher-a {
-  background: currentColor;
-  -webkit-mask: url('../assets/imgA1.svg') center / 0.608em 0.55em no-repeat;
-  mask: url('../assets/imgA1.svg') center / 0.608em 0.55em no-repeat;
-}
-.leaders .glyph img {
-  opacity: 0;
-}
 .muted {
   color: #777970;
 }
-.leaders .display {
-  line-height: 0.833;
-}
 .leaders-intro {
-  margin-top: 2.75rem;
-  width: min(43.875rem, 94%);
+  margin-top: 3.625rem;
+  width: min(41.625rem, 100%);
 }
 .leader-benefits {
   margin-top: 5rem;
 }
-.leader-benefits .benefit + .benefit {
-  margin-top: 6.25rem;
-}
 .leader-benefits .benefit > p {
-  color: var(--leaders-muted);
+  color: var(--fellowship-muted);
+}
+/* Features of the programs as a whole sit above the program list in three
+   start-aligned columns straight on the pane, set as What-we-do's beats: no card
+   behind them, the headings share a baseline row (subgrid) so the bodies
+   start level. */
+#top .feature-cards {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  gap: 0 3rem;
+  width: min(72rem, 100%);
+  margin: 3.5rem auto 0;
+  text-align: start;
+}
+#top .feature-cards .benefit {
+  display: grid;
+  grid-row: span 2;
+  grid-template-rows: subgrid;
+  align-content: start;
+  margin: 0;
+}
+#top .feature-cards .benefit > h3 {
+  align-self: end;
+}
+/* The scholarship word and the What-we-do note link down to its band: the scribble keeps its
+   colour, a dotted underline is the only hint. */
+#top a.offer-scholarship,
+#top a.beat-note {
+  text-decoration: underline dotted 1px;
+  text-underline-offset: 0.2em;
+}
+#top a.offer-scholarship:focus-visible {
+  outline: 2px solid var(--scribble-blue-on-plum);
+  outline-offset: 3px;
+  border-radius: 0.25rem;
+}
+#top a.beat-note:focus-visible {
+  outline: 2px solid var(--scribble-blue);
+  outline-offset: 3px;
+  border-radius: 0.25rem;
+}
+#top .offer-meta {
+  margin: 0;
+  padding: 1.75rem 1.875rem 2rem;
+  border-radius: 1.25rem;
+  background: #ffffff12;
+}
+/* Fellowship: the two practice cards share the first row; the scholarship
+   runs full width beneath them on a blue tint, since it is money to the
+   teacher rather than part of the practice. */
+#top .benefits.feature-cards {
+  grid-auto-flow: row;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+#top .benefits.feature-cards .scholarship {
+  grid-column: 1 / -1;
+  background: color-mix(in srgb, var(--scribble-blue-on-plum) 22%, transparent);
+}
+#top .benefits.feature-cards .scholarship > p {
+  color: #e4e6f5;
+}
+#top .feature-cards .benefit > h3 {
+  max-width: none;
+  margin: 0;
+  font-size: var(--t-item);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+#top .feature-cards .benefit > p {
+  max-width: 21.5rem;
+  margin: 1rem 0 0;
+  font-size: var(--t-body);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: var(--fellowship-muted);
+}
+/* The handwritten questions stack inside the card instead of fanning out. */
+#top .feature-cards .questions {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.625rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+}
+#top .feature-cards .questions span {
+  width: auto;
+  justify-self: start;
+  margin: 0;
+  transform: none;
+}
+/* The open program's terms sit right under the pane heading, straight on
+   the plum and centred with it: the program's tags (cadence in mustard, cost
+   in the scribble blue), then Where and When side by
+   side in a card of the intro's measure (read from the start edge), then
+   Apply on its own. */
+#top .program-offer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 2.5rem;
+  text-align: center;
+}
+#top .offer-terms {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  inline-size: min(41.625rem, 100%);
+}
+/* One row of coloured words, bullets between them. Each word is unbreakable,
+   so a narrow row wraps only at a bullet; the bullet rides at the end of the
+   line it closes. */
+#top .offer-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  column-gap: 0.625rem;
+  font-size: var(--t-body);
+  font-weight: 600;
+  line-height: 1.3;
+}
+#top .offer-tag {
+  color: #d3dc3c;
+  white-space: nowrap;
+}
+#top .offer-tag:not(:last-child)::after {
+  content: "\00b7";
+  margin-inline-start: 0.625rem;
+  color: var(--fellowship-muted);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  font-weight: 600;
+}
+/* The scribble leads the row at about one and a half times its neighbours. */
+#top .offer-scholarship {
+  color: var(--scribble-blue-on-plum);
+  font-family: var(--font-scribble);
+  font-size: calc(var(--t-body) * 1.9);
+  font-weight: 400;
+  line-height: 1;
+}
+/* Shrinks to its answers, one column each (2x2 on phones); the column
+   holding it centres it. Cost and How often carry the tag colours. No card
+   behind it: the answers sit straight on the pane. */
+#top .offer-meta {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: auto;
+  column-gap: 2.5rem;
+  row-gap: 0.75rem;
+  inline-size: fit-content;
+  max-inline-size: min(48rem, 100%);
+  padding: 0;
+  background: none;
+  text-align: start;
+}
+#top .offer-meta p {
+  font-size: var(--t-small);
+  line-height: 1.35;
+}
+#top .offer-meta em {
+  font-style: normal;
+}
+#top .offer-meta-cost {
+  color: var(--scribble-blue-on-plum);
+}
+#top .offer-meta-frequency {
+  color: #d3dc3c;
+}
+#top .offer-meta p > span {
+  display: block;
+  margin-block-end: 0.25rem;
+  color: var(--fellowship-muted);
+}
+/* "Apply" is one short word: a minimum width keeps the button broad. */
+#top .offer-apply {
+  min-inline-size: 14rem;
+  border-radius: 999rem;
+}
+/* On a phone the button stays a 44px touch target, not a banner. */
+@media (max-width: 700px) {
+  #top .offer-apply {
+    min-inline-size: 9rem;
+    min-height: 2.75rem;
+    padding-block: 0.75rem;
+    font-size: 1rem;
+  }
+}
+/* The program title is a phrase, not one word: it wraps in balanced lines
+   instead of the nowrap every other section title keeps. */
+#top :is(#fellowship-title, #leaders-title) {
+  white-space: normal;
+  text-wrap: balance;
+  max-inline-size: 16ch;
+}
+/* "Dear teachers" opens the intro as a pen note, a little above the text. */
+/* The practice continues the intro's prose; the intensives' questions
+   stay in the handwritten face, in the scribble blue. */
+.fellowship-practice {
+  margin-top: 2rem;
+  width: min(41.625rem, 100%);
+}
+#top .fellowship-practice .questions {
+  /* Wider than the prose column it sits in, centred on it. */
+  --questions-width: min(56rem, calc(100vw - 2 * var(--gutter)));
+  width: var(--questions-width);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 3rem;
+  margin-top: 2rem;
+  margin-inline: calc(50% - var(--questions-width) / 2);
+  padding: 0;
+  font-size: calc(var(--question-size, 0.9375rem) * 1.2);
+  color: var(--scribble-blue-on-plum);
+}
+#top .fellowship-practice .questions span {
+  width: auto;
+  margin: 0;
+  transform: none;
+}
+@media (max-width: 700px) {
+  #top .fellowship-practice .questions {
+    width: auto;
+    margin-inline: 0;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+    font-size: calc(var(--question-size-mobile, 0.9375rem) * 1.15);
+  }
+}
+/* Scholarship: a blue band of its own between the plum audiences and the
+   peach camp, on the light pen blue with --ink text. The pen word is the
+   band's one heading, large and in the dark pen blue, on the start side; the
+   two sentences sit on the end side, read from the heading's baseline, the
+   reason also in the pen blue. The terms run full width below, label over
+   value as in the offers. */
+.scholarship-band {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 46%;
+  align-items: start;
+  column-gap: 5rem;
+  row-gap: 4.5rem;
+  box-sizing: border-box;
+  padding-block: 7rem;
+  padding-inline: var(--gutter);
+  background: var(--scribble-blue-on-plum);
+  color: var(--ink);
+}
+#top .scholarship-word {
+  /* The pen word's ink starts ~0.18em below its box; this puts it on the
+     first line of the text column. */
+  margin: 0.18em 0 0;
+  font-family: var(--font-scribble);
+  font-size: 7rem;
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: 0;
+  color: var(--scribble-blue);
+  text-align: start;
+  text-wrap: balance;
+  rotate: -2deg;
+}
+#top .scholarship-word:dir(rtl) {
+  rotate: 2deg;
+}
+.scholarship-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  text-align: start;
+}
+#top .scholarship-text > p {
+  max-inline-size: 30rem;
+  margin: 0;
+  font-size: var(--t-lead);
+  line-height: 1.4;
+}
+/* The reason reads as the band's pull line, in the display face. */
+#top .scholarship-text > p + p {
+  font-family: var(--font-display);
+  font-size: var(--t-item);
+  line-height: 1.2;
+  color: var(--scribble-blue);
+}
+.scholarship-terms {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1.5rem 2.5rem;
+  margin: 0;
+  padding-block-start: 2rem;
+  border-block-start: 1px solid color-mix(in srgb, var(--ink) 25%, transparent);
+  text-align: start;
+}
+#top .scholarship-terms dt {
+  margin-block-end: 0.375rem;
+  font-size: var(--t-small);
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--ink) 62%, transparent);
+}
+#top .scholarship-terms dd {
+  margin: 0;
+  font-size: var(--t-body);
+  line-height: 1.35;
+}
+@media (max-width: 700px) {
+  .scholarship-band {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 1.75rem;
+    padding: 3rem var(--m-gutter);
+  }
+  #top .scholarship-word {
+    font-size: 3.25rem;
+  }
+  .scholarship-text {
+    gap: 1rem;
+  }
+  #top .scholarship-text > p {
+    font-size: var(--m-lead);
+    line-height: 1.35;
+  }
+  #top .scholarship-text > p + p {
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+  .scholarship-terms {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 1.5rem;
+    padding-block-start: 1.5rem;
+  }
+}
+/* Tbilisi camp: a peach section of its own after the audiences. Copy and
+   the survey figures on the start side, a small square photo centred in
+   the end column (46% of the width), inside the section's padding and vertically centred.
+   Square corners, as every other photo on the site. "Learn more" grows the
+   section downward with the pilot's story, full width under both columns. */
+.camp {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 46%;
+  align-items: center;
+  align-content: center;
+  column-gap: 5rem;
+  min-block-size: 60rem;
+  box-sizing: border-box;
+  padding-block: 5rem;
+  padding-inline: var(--gutter) 3.5rem;
+  background: var(--promo-peach);
+  color: var(--ink);
+  --camp-muted: color-mix(in srgb, var(--ink) 68%, var(--promo-peach));
+}
+.camp-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.25rem;
+  text-align: start;
+}
+#top .camp-copy > h2 {
+  margin: 0;
+  font-size: 4.5rem;
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+/* The heading is two lines: the descriptor small in the serif, and the
+   camp's name under it in the peach scribble. */
+#top .camp-descriptor,
+#top .camp-name {
+  display: block;
+}
+#top .camp-descriptor {
+  margin-block-end: 0.15em;
+  font-size: 0.5em;
+  letter-spacing: -0.02em;
+}
+#top .camp-name {
+  color: var(--scribble-peach);
+  font-family: var(--font-scribble);
+  font-size: 1.4em;
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+.camp-photo {
+  display: block;
+  justify-self: center;
+  inline-size: min(100%, 26rem);
+  block-size: auto;
+  background: #737272 url('data:image/webp;base64,UklGRrAAAABXRUJQVlA4IKQAAAAQBQCdASoYABgAPwF2slQrJyQjKAgBYCAJQBerAY7zKIxOxu0MAg4vwNw+9pcFF64AAP7l2QyOaz4Oahmxv26Co5KXHq0jSGtTj78Ft04RwKHfNFJjBunvIO0rl3LE8AZXblMfiHd5JaF3DhPNG0IHZu+sKw2gP4TvSoFTiyrwkr56C8ui0r4yomG55Lljj3apGnmWRgkjFTvZZScXsKTaXYAAAA==') center / cover no-repeat;
+  aspect-ratio: 1;
+  object-fit: cover;
+  /* The team portraits' corner. */
+  border-radius: 1.25rem;
+}
+/* Open, the story needs twice the closing space below it. */
+.camp:has(.camp-more[aria-expanded='true']) {
+  padding-block-end: 10rem;
+}
+/* Key figures from the pilot survey, two by two: the number in the display
+   face, its label under it in the muted ink. */
+.camp-figures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 2.5rem; /* rows: subgrid below, spaced by the item's margin */
+  inline-size: 100%;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.stat-value {
+  display: block;
+  direction: ltr; /* before → after reads left to right in every language */
+  inline-size: fit-content;
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+#top .camp-figures .stat-value {
+  font-size: 2.5rem;
+}
+.stat-value small {
+  font-size: 0.5em;
+  letter-spacing: 0;
+}
+.stat-value .arrow {
+  color: var(--camp-muted);
+  font-size: 0.5em;
+  margin-inline: 0.1em;
+  vertical-align: 0.3em;
+}
+.stat-label {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--camp-muted);
+}
+/* "Learn more" reads as a text link: underline, a chevron that turns over
+   when the story is open. Semantically a disclosure button. */
+/* The last row's spacing already sits under the figures; the link follows
+   them at the copy's own gap. */
+.camp-figure:nth-last-child(-n + 2) {
+  margin-bottom: 0;
+}
+#top .camp-more {
+  margin-block-start: 2.5rem;
+  font-size: var(--t-body);
+  line-height: 1.3;
+}
+/* One way: open, the story stays; there is no "Show less". */
+#top .camp-more[aria-expanded='true'],
+#top .camp-more[hidden] {
+  display: none;
+}
+#top .camp-more:hover {
+  color: var(--camp-muted);
+}
+.camp-more-arrow {
+  flex: none;
+  inline-size: 1em;
+  block-size: 1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: rotate 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* The story row: its height is animated (js/disclosure.js), so the wrapper
+   has no padding of its own; the reading column sits on the copy's edge. */
+.camp-details {
+  grid-column: 1 / -1;
+  overflow: hidden;
+}
+/* Inside, the same two columns as the section above. */
+.camp-story {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 46%;
+  align-items: start;
+  column-gap: 5rem;
+  padding-block: 4rem 0.5rem;
+}
+.program-results-copy {
+  max-inline-size: 41.25rem;
+  text-align: start;
+}
+.camp-voice {
+  margin: 0;
+}
+.program-results-copy p + p {
+  margin-top: 1.5rem;
+}
+.program-results-title {
+  margin: 0 0 1.5rem;
+  font-weight: 500;
+}
+.results-caveat {
+  color: var(--camp-muted);
+}
+#top .promo-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
+  margin: 0;
+  font-size: var(--t-body);
+  line-height: 1.3;
+}
+#top .promo-meta > span + span::before {
+  content: '\00b7';
+  margin-inline-end: 0.75rem;
+}
+#top .camp-copy > .promo-meta {
+  font-size: var(--t-lead);
+}
+.promo-arrow {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: translate 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.promo-arrow:dir(rtl) {
+  scale: -1 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .promo-arrow,
+  .camp-more-arrow {
+    transition: none;
+  }
+}
+@media (max-width: 700px) {
+  .camp {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 1.75rem;
+    min-block-size: 0;
+    padding: 2rem var(--m-gutter) 3rem;
+  }
+  .camp-photo {
+    order: -1;
+    justify-self: start;
+    inline-size: min(100%, 16rem);
+  }
+  .camp:has(.camp-more[aria-expanded='true']) {
+    padding-block-end: 6rem;
+  }
+  .camp-copy {
+    gap: 0.75rem;
+  }
+  #top .camp-copy > h2 {
+    font-size: var(--m-title);
+  }
+  #top .promo-meta {
+    font-size: var(--m-body);
+  }
+  #top .camp-copy > .promo-meta {
+    font-size: var(--m-body);
+  }
+  .camp-figures {
+    column-gap: 1rem;
+    margin-top: 0.75rem;
+  }
+  #top .camp-figures .stat-value {
+    font-size: 2.5rem;
+  }
+  #top .camp-more {
+    margin-top: 1.75rem;
+    font-size: var(--m-body);
+  }
+  /* The grid's row gap would open under the collapsed story; the story
+     carries its own space above instead. */
+  .camp-details {
+    margin-top: -1.75rem;
+  }
+  .camp-story {
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: 2.5rem;
+    row-gap: 2.25rem;
+  }
+}
+
+/* Side panel surfaces (structure and motion in widgets.css). */
+#top .side-panel {
+  text-align: start;
+}
+#top .side-panel-head {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
+  padding: 2rem 5rem 1.75rem 2.5rem;
+}
+#top .side-panel-head > h2 {
+  margin: 0 0 0.5rem;
+  font-size: 2.75rem;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+#top .side-panel-close {
+  position: absolute;
+  inset-block-start: 1.5rem;
+  inset-inline-end: 1.5rem;
+  display: grid;
+  place-items: center;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+#top .side-panel-close:hover {
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+#top .side-panel-body {
+  margin: 0;
+  padding: 2.5rem 2.5rem 3.5rem;
+}
+@media (max-width: 700px) {
+  #top .side-panel-head {
+    padding: 1.25rem 4rem 1.25rem 1.25rem;
+  }
+  #top .side-panel-head > h2 {
+    font-size: 1.75rem;
+  }
+  #top .side-panel-close {
+    inset-block-start: 1rem;
+    inset-inline-end: 1rem;
+  }
+  #top .side-panel-body {
+    padding: 1.75rem 1.25rem 2.5rem;
+  }
+}
+#top .feature-cards + .programs {
+  margin-top: 0;
+  padding-top: 3.5rem;
+}
+@media (max-width: 700px) {
+  #top .feature-cards {
+    grid-auto-flow: row;
+    grid-template-rows: none;
+    gap: 2.75rem;
+    margin-top: 2.5rem;
+  }
+  #top .benefits.feature-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #top .feature-cards .benefit {
+    display: block;
+  }
+  #top .feature-cards .benefit > h3 {
+    font-size: var(--m-item-title);
+  }
+  #top .feature-cards .benefit > p {
+    font-size: var(--m-body);
+  }
+  #top .feature-cards + .programs {
+    padding-top: 2.5rem;
+  }
+  #top .program-offer {
+    gap: 1.75rem;
+    margin-top: 2rem;
+  }
+  #top .offer-terms {
+    gap: 1rem;
+  }
+  #top .offer-meta {
+    grid-auto-flow: row;
+    /* Two equal columns that can shrink: "Zoom + monthly meetings in
+       Tel Aviv" (Vlad, 26.10) ran past the card on auto columns. */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 2rem;
+  }
+  #top .offer-meta p {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  #top .offer-meta p {
+    font-size: 0.75rem;
+  }
 }
 .team {
   padding-top: 10rem;
@@ -706,52 +1784,41 @@
   margin: 2.125rem auto 5.75rem;
   max-width: 61.875rem;
 }
-.team-track {
-  display: flex;
-  gap: 2.5rem;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  padding: 0 6.67% 1.5rem;
-  scroll-padding-inline: 6.67%;
-}
-.team-track::-webkit-scrollbar {
-  display: none;
-}
-.person {
-  flex: 0 0 23.625rem;
-  scroll-snap-align: start;
+.team-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 2.5rem;
+  width: calc(100% - 2 * var(--gutter));
+  margin: 0 auto;
 }
 .portrait,
 .portrait-placeholder {
-  height: 29.5rem;
+  /* Same crop as minimal: a portrait frame at the source photos' own
+     aspect ratio, no per-person object-position; kept small at the start
+     of its column so the names and bios lead. */
+  width: min(100%, 13.5rem);
+  height: auto;
+  aspect-ratio: 420 / 510;
   border-radius: 1.25rem;
   background: #182022;
 }
 .portrait {
   display: block;
-  width: 100%;
   object-fit: cover;
-  object-position: 50% 25%;
-}
-.person-note {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-.person-role {
-  margin-top: 2.25rem;
-  margin-bottom: 0.875rem;
-  font-size: 1.375rem !important;
-  line-height: 2rem !important;
 }
 .person h3 {
   font-weight: 400;
   font-size: 2.25rem;
   line-height: 2.25rem;
   letter-spacing: -0.03em;
+  margin-top: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+.person-role {
+  margin-top: 0;
   margin-bottom: 1.125rem;
+  font-size: 1.375rem;
+  line-height: 2rem;
 }
 .person > p {
   font-size: 1.375rem;
@@ -763,9 +1830,31 @@
   text-decoration-color: #999;
   text-underline-offset: 3px;
 }
+/* The team note: intro to the wider circle, on the same gutters as the
+   leader columns and no wider than one of them. */
+.team-note {
+  width: calc(100% - 2 * var(--gutter));
+  margin: 5.75rem auto 0;
+  text-align: start;
+}
+.team-note > * {
+  max-inline-size: 34rem;
+}
+.team-note h3 {
+  font-weight: 400;
+  font-size: 2.25rem;
+  line-height: 2.25rem;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.125rem;
+}
+.team-note p {
+  font-size: 1.375rem;
+  line-height: 1.625rem;
+  letter-spacing: -0.03em;
+}
+/* Same measure as the program rows: gutter to gutter. */
 .faq {
-  max-width: 64.125rem;
-  width: calc(100% - 6.25rem);
+  width: calc(100% - 2 * var(--gutter));
   margin: 9.625rem auto 0;
 }
 .faq h2 {
@@ -779,30 +1868,39 @@
 .faq-list {
   gap: 0;
 }
-.faq-item {
+/* One panel: the questions read as a list rather than a stack of
+   separate cards. */
+.faq-list {
+  display: flex;
+  flex-direction: column;
   background: #f9f8f5;
-  border: 0;
   border-radius: 3.125rem;
-  transition: background-color 180ms ease;
+  overflow: hidden;
+}
+.faq-item {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  transition: background-color 120ms ease;
 }
 .faq-item:hover {
-  background: #f0efea;
+  background: #f2f1ec;
 }
 .faq-trigger {
-  min-height: 8.4375rem;
+  min-height: 7rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   list-style: none;
   width: 100%;
-  padding: 2.8125rem 3.25rem;
-  font-family: var(--font-text);
+  padding: 2.25rem 3.25rem;
+  font-family: var(--font-body);
   font-size: 1.625rem;
   line-height: 2rem;
   font-weight: 300;
   letter-spacing: -0.03em;
   border: 0;
-  border-radius: 3.125rem;
+  border-radius: 0;
   gap: 1.5rem;
 }
 .faq-trigger::-webkit-details-marker {
@@ -815,18 +1913,19 @@
   text-decoration: none;
   background: transparent;
 }
+/* A plain drawn chevron, the same stroke as the header and filter chevrons:
+   down when closed, flipped when open (symmetric, so RTL needs nothing). */
 .faq-chevron {
-  display: inline-block;
-  transform: rotate(90deg);
-  font-size: 2rem;
-  line-height: 1;
-  transition: transform 0.2s;
+  flex: none;
+  width: 1.75rem;
+  height: 1.75rem;
+  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .faq-item[data-state='open'] .faq-chevron {
-  transform: rotate(-90deg);
+  transform: rotate(180deg);
 }
 .faq-answer {
-  font-family: var(--font-text);
+  font-family: var(--font-body);
   font-size: 1.375rem;
   line-height: 1.3;
   color: #66685f;
@@ -836,11 +1935,17 @@
   padding-inline: 3.25rem 5.75rem !important;
 }
 .site-footer {
-  margin: 12.875rem 6.1% 0;
+  /* One 12-column grid: message on the first six, three equal link columns
+     (Foundation, Socials, Language) on the last six, legal bar across. */
+  margin: 12.875rem var(--gutter) 0;
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 8.75rem;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 2.5rem;
+  row-gap: 7.5rem;
   padding-bottom: 4.0625rem;
+}
+.footer-message {
+  grid-column: 1 / 7;
 }
 .footer-message h2 {
   font-size: 3.375rem;
@@ -860,24 +1965,33 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.rounded-button {
-  border-radius: 6.25rem;
-  background: #000;
-  margin-top: 3rem;
+/* The landing's Apply; the address follows it, or the lead on schools. */
+.footer-actions {
+  margin: 3rem 0 0;
 }
 .footer-email {
   display: block;
   width: fit-content;
-  margin-top: 1.5rem;
+  margin-top: 3rem;
   font-size: 1.125rem;
   letter-spacing: -0.03em;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+.footer-actions + .footer-email {
+  margin-top: 1.5rem;
+}
 .footer-links {
+  grid-column: 7 / -1;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3.75rem;
+  grid-template-columns: subgrid;
+  align-content: start;
+}
+.footer-links > div {
+  grid-column: span 2;
+}
+.footer-links .lang-switcher-footer {
+  margin-top: 0;
 }
 .footer-links nav {
   display: flex;
@@ -891,7 +2005,7 @@
 .footer-label {
   font-size: 1.125rem;
   line-height: 1;
-  color: #7c7e76;
+  color: #66685f; /* was #7c7e76: 4.12:1 on white, below AA (AUDIT.md, T8) */
   margin-bottom: 1.125rem;
 }
 .text-button {
@@ -906,11 +2020,19 @@
   text-underline-offset: 0.3125rem;
 }
 .footer-legal {
-  grid-column: 1/-1;
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgb(24 32 34 / 0.12);
 }
 .footer-legal .logo {
   font-size: 2.1rem;
-  margin-bottom: 1.25rem;
+}
+.footer-legal p {
+  text-align: end;
 }
 .footer-legal p {
   font-size: 0.875rem;
@@ -927,13 +2049,13 @@
   gap: 1.5rem;
 }
 .morim-dialog h2 {
-  font-family: var(--font-text);
+  font-family: var(--font-display);
   font-size: 2.5rem;
   line-height: 1;
   font-weight: 400;
 }
 .morim-dialog p {
-  font-family: var(--font-text);
+  font-family: var(--font-body);
   font-size: 1.375rem;
   line-height: 1.3;
 }
@@ -941,24 +2063,15 @@
   .panel {
     width: calc(100% - 6.25rem);
   }
-  .fellowship {
+  .audiences {
     padding-inline: 6%;
-  }
-  .display {
-    font-size: 6.5rem;
   }
   .program-list {
     --program-columns: minmax(0, 1fr) 8rem 10rem 8.5rem;
   }
   .program-row {
-    gap: 0.875rem;
+    gap: 0 0.875rem;
     padding: 1.25rem;
-  }
-  .program-row h4 {
-    font-size: 2rem;
-  }
-  .program-row p {
-    font-size: 1.1rem;
   }
   .program-row .button,
   .button.apply-button {
@@ -966,19 +2079,10 @@
     padding-inline: 1.125rem;
   }
   .site-footer {
-    gap: 4.375rem;
-  }
-  .team-title {
-    font-size: 6rem;
+    row-gap: 4.375rem;
   }
 }
 @media (max-width: 700px) {
-  .display {
-    font-size: 5.5rem;
-  }
-  .benefit h3 {
-    font-size: 3rem;
-  }
   .program-list {
     --program-columns: minmax(0, 1fr) 8rem 10rem;
   }
@@ -986,36 +2090,71 @@
     grid-column: 1/-1;
     justify-self: end;
   }
-  .program-heading h3 {
-    font-size: 3rem;
-  }
-  .team-title {
-    font-size: 5.4rem;
-  }
   .site-footer {
-    grid-template-columns: 1fr 1fr;
-    gap: 3.125rem;
+    grid-template-columns: minmax(0, 1fr);
   }
-  .footer-message h2 {
-    font-size: 2.8rem;
+  .footer-message,
+  .footer-links {
+    grid-column: 1 / -1;
   }
   .footer-links {
-    gap: 2.375rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 1rem;
+  }
+  .footer-links > div {
+    grid-column: auto;
+  }
+  .footer-legal {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding-top: 1.5rem;
+  }
+  .footer-legal p {
+    text-align: start;
   }
   .person {
     flex-basis: 20.625rem;
   }
-  .portrait,
-  .portrait-placeholder {
-    height: 25.75rem;
-  }
+
 }
 @media (max-width: 700px) {
   .panel {
     width: calc(100% - 2rem);
   }
-  .fellowship {
-    padding: 3.75rem 1.375rem;
+  .audiences {
+    padding: 2.5rem 1.375rem 3.75rem;
+  }
+  .audience-nav {
+    --pill-height: 3.25rem;
+    gap: 0.25rem 0.25rem;
+    margin-bottom: 2.5rem;
+    font-size: var(--m-body);
+  }
+  .audience-tab,
+  .audience-trigger {
+    padding: 0.625rem 0.875rem;
+  }
+  .audience-nav {
+    row-gap: 0.5rem;
+  }
+  .audience-tabs {
+    column-gap: 0.25rem;
+  }
+  .audience-nav[data-stuck] {
+    padding-inline: 0.75rem 0.25rem;
+    max-inline-size: var(--nav-width, calc(100vw - 2 * var(--m-gutter)));
+    column-gap: calc(1rem - 0.75rem * var(--fit, 0));
+    font-size: var(--m-body);
+  }
+  .audience-nav[data-stuck] :is(.audience-tab, .audience-trigger) {
+    padding: 0.5rem calc(0.625rem + 0.25rem * var(--fit, 0));
+  }
+  .audience-nav[data-stuck] .audience-tabs {
+    column-gap: calc(0.25rem * var(--fit, 0));
+  }
+  .audiences:not([data-tabs]) .audience-pane + .audience-pane {
+    margin-top: 5rem;
   }
   .eyebrow {
     font-size: 1.25rem;
@@ -1023,23 +2162,28 @@
   }
   /* Big enough that "dear teachers," wraps to two lines; the desktop
      nowrap is lifted here so nothing runs past the panel. */
-  .display {
-    font-size: clamp(3.5rem, 17vw, 6rem);
-    line-height: 0.88;
+  .display,
+  .what-we-do .display,
+  .partners .display {
+    font-size: var(--m-title);
+    line-height: 1.1;
     margin-top: 1.875rem;
     white-space: normal;
     text-wrap: balance;
   }
-  html[lang='ru'] .display {
-    font-size: clamp(3rem, 13.5vw, 5rem);
+  /* The pane already has the gutter; .prose would add a second one. */
+  .fellowship-intro,
+  .fellowship-practice,
+  .leaders-intro {
+    margin-inline: 0;
   }
-  /* "coordinators," / "координаторы," is one unbreakable word with the "oo"
-     glyph inside it; a step smaller keeps it inside the panel on phones. */
-  .leaders h2.display {
-    font-size: clamp(3rem, 12vw, 5rem);
-  }
-  html[lang='ru'] .leaders h2.display {
-    font-size: clamp(2.25rem, 11.5vw, 5rem);
+  /* The program description on the plum sets on the start edge on phones,
+     not centred like the desktop prose (George, 27.10: "текст описания
+     программы на сиреневом фоне тоже по левому краю"). */
+  .fellowship-intro,
+  .fellowship-practice,
+  .leaders-intro {
+    text-align: start;
   }
   .fellowship-intro {
     margin-top: 2.25rem;
@@ -1048,11 +2192,11 @@
     margin-top: 5.3125rem;
   }
   .benefit h3 {
-    font-size: 2.8rem;
+    font-size: var(--m-item-title);
     line-height: 0.96;
   }
   .benefit > p {
-    font-size: 1.25rem;
+    font-size: var(--m-body);
     line-height: 1.625rem;
     margin-top: 1.375rem;
   }
@@ -1093,7 +2237,7 @@
     margin-bottom: 1.75rem;
   }
   .program-heading h3 {
-    font-size: 3rem;
+    font-size: var(--m-item-title);
     line-height: 0.95;
   }
   .location-select {
@@ -1111,10 +2255,10 @@
   }
   .program-row h4 {
     grid-column: 1/-1;
-    font-size: 2rem;
+    font-size: var(--m-item-title);
   }
   .program-row p {
-    font-size: 1rem;
+    font-size: var(--m-body);
     white-space: normal;
   }
   .program-row .button {
@@ -1125,22 +2269,9 @@
   .button.apply-button {
     min-height: 3rem;
   }
-  .leaders {
-    padding: 4.0625rem 1.375rem 4.6875rem;
-    margin-top: 2rem;
-  }
-  .program-badge {
-    inset-inline-start: 1.125rem;
-    height: 1.5rem;
-    padding-inline: 0.75rem;
-  }
-  .program-badge > span {
-    padding-inline: 0.875rem;
-    font-size: 0.6875rem;
-  }
   .leaders-intro {
     width: 100%;
-    margin-top: 2.375rem;
+    margin-top: 2.25rem;
   }
   .leader-benefits {
     margin-top: 3.75rem;
@@ -1152,55 +2283,53 @@
     padding-top: 5.5rem;
   }
   .team-title {
-    font-size: clamp(3.5rem, 16vw, 6rem);
+    font-size: var(--m-title);
     line-height: 0.92;
     width: 90%;
     margin: 1.625rem auto 3.125rem;
   }
-  .person {
-    flex-basis: 78vw;
-    max-width: 22.5rem;
-  }
-  .team-track {
-    gap: 1.5rem;
-    padding-inline: 1.5rem;
-    scroll-padding-inline: 1.5rem;
-  }
-  .portrait,
-  .portrait-placeholder {
-    height: 24.375rem;
+  .person h3 {
+    font-size: var(--m-item-title);
+    margin-top: 1.5rem;
+    margin-bottom: 0.375rem;
   }
   .person-role {
-    margin-top: 1.5rem;
-    font-size: 1.25rem !important;
+    margin-top: 0;
+    margin-bottom: 0.875rem;
+    font-size: var(--m-body) !important;
   }
   .person > p {
-    font-size: 1.2rem;
+    font-size: var(--m-body);
+  }
+  .team-note h3 {
+    font-size: var(--m-item-title);
+    margin-bottom: 0.375rem;
+  }
+  .team-note p {
+    font-size: var(--m-body);
   }
   .faq {
     width: calc(100% - 2rem);
     margin-top: 5rem;
   }
   .faq h2 {
-    font-size: clamp(4.5rem, 22vw, 7rem);
+    font-size: var(--m-title);
     line-height: 0.95;
     margin-bottom: 2.25rem;
   }
-  .faq-item {
-    border-radius: 1.625rem;
-  }
   .faq-trigger {
-    font-size: 1.35rem;
+    font-size: var(--m-item-title);
     line-height: 1.15;
     min-height: 6.25rem;
     padding: 1.875rem 1.625rem;
-    border-radius: 1.625rem;
   }
   .faq-answer {
-    font-size: 1.2rem;
+    font-size: var(--m-body);
   }
+  /* The answer's inset comes from .faq-answer (mobile.css), so its text
+     starts on the question's edge. */
   .faq-answer-body {
-    padding: 0 1.875rem 1.875rem !important;
+    padding: 0 0 0.25rem !important;
   }
   .site-footer {
     margin: 6.25rem 1.625rem 0;
@@ -1209,17 +2338,75 @@
     padding-bottom: 2.375rem;
   }
   .footer-message h2 {
-    font-size: clamp(3rem, 14vw, 4rem);
+    font-size: var(--m-title);
     line-height: 0.92;
     max-width: 27.5rem;
   }
-  .rounded-button {
+  .footer-lead {
+    font-size: var(--m-lead);
+  }
+  .footer-actions,
+  .footer-lead + .footer-email {
     margin-top: 2.25rem;
   }
-  .footer-links {
-    gap: 2.875rem;
-  }
   .footer-legal {
-    margin-top: 0.75rem;
+    margin-top: 0;
+  }
+}
+
+/* Multi-column blocks share row tracks through subgrid, so every body text
+   starts on one line even when a heading above it wraps to two. Beats have
+   heading / body (the handwritten note rides inside the body so it stays
+   under its own text); stats have figure / label. The parent
+   row gap is zero so the subgrid tracks carry only the item's own margins;
+   spacing between stacked beats on mobile comes from a margin. */
+.wwd-beats {
+  row-gap: 0;
+}
+.wwd-beat {
+  display: grid;
+  grid-row: span 2;
+  grid-template-rows: subgrid;
+  align-content: start;
+}
+.wwd-beat h3 {
+  align-self: end;
+}
+.camp-figures {
+  row-gap: 0;
+}
+.camp-figure {
+  display: grid;
+  grid-row: span 2;
+  grid-template-rows: subgrid;
+  margin-bottom: 1.75rem;
+}
+.stat-value {
+  align-self: end;
+}
+@media (max-width: 700px) {
+  .wwd-beats {
+    row-gap: 0;
+  }
+  .wwd-beat + .wwd-beat {
+    margin-top: 2.75rem;
+  }
+  .camp-figure {
+    margin-bottom: 1.25rem;
+  }
+}
+
+/* The location selector in the programs heading reuses the audience tabs. */
+.program-tabs {
+  justify-content: flex-end;
+  margin-bottom: 0;
+}
+.program-tabs:not([data-ready]) {
+  visibility: hidden;
+}
+@media (max-width: 700px) {
+  .program-tabs {
+    justify-content: flex-start;
+    margin-inline-start: -0.875rem;
   }
 }

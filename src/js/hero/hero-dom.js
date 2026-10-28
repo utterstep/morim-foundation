@@ -109,6 +109,8 @@ export function buildFace(item, strings) {
     img.width = 73;
     img.height = 73;
     img.draggable = false;
+    img.fetchPriority = 'high';
+    img.decoding = 'async';
     mask.append(img);
     face.append(mask);
   }

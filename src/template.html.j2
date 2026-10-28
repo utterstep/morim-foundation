@@ -9,22 +9,30 @@
   mobile-menu.tsx). Interactive widgets are native elements wired up by
   js/main.js; the hero collage is built entirely by JavaScript.
 #}
-{% macro switcher(class) -%}
-<nav class="lang-switcher {{ class }}" aria-label="{{ t.switcher.label }}">
+{# The footer's language list: every language by its own name, the current
+   one marked. #}
+{% macro switcher(class, tag='nav') -%}
+<{{ tag }} class="lang-switcher {{ class }}"{% if tag != 'nav' %} role="group"{% endif %} aria-label="{{ t.switcher.label }}">
   {% for l in langs %}
-  <a href="{{ l.href }}" hreflang="{{ l.code }}" lang="{{ l.code }}"{% if l.current %} aria-current="page"{% endif %}>{{ t.switcher.names[l.code] }}</a>
+  <a href="{{ l.href }}" hreflang="{{ l.code }}" lang="{{ l.code }}"{% if l.current %} aria-current="page"{% endif %}{% if l.dir == 'rtl' %} dir="rtl"{% endif %}>{{ l.name }}</a>
   {% endfor %}
-</nav>
+</{{ tag }}>
+{%- endmacro %}
+
+{# Round flag icons for the language menu, drawn inline so no image ships.
+   English is half Union Jack, half Stars and Stripes. #}
+{% macro flag(code) -%}
+<svg class="flag" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">{% if code == 'en' %}<rect width="24" height="24" fill="#012169"/><path d="M0 0 24 24M24 0 0 24" stroke="#fff" stroke-width="4.8"/><path d="M0 0 24 24M24 0 0 24" stroke="#c8102e" stroke-width="1.6"/><path d="M12 0v24M0 12h24" stroke="#fff" stroke-width="6"/><path d="M12 0v24M0 12h24" stroke="#c8102e" stroke-width="3.6"/><rect x="12" width="12" height="24" fill="#fff"/><rect x="12" y="0.000" width="12" height="1.846" fill="#b31942"/><rect x="12" y="3.692" width="12" height="1.846" fill="#b31942"/><rect x="12" y="7.385" width="12" height="1.846" fill="#b31942"/><rect x="12" y="11.077" width="12" height="1.846" fill="#b31942"/><rect x="12" y="14.769" width="12" height="1.846" fill="#b31942"/><rect x="12" y="18.462" width="12" height="1.846" fill="#b31942"/><rect x="12" y="22.154" width="12" height="1.846" fill="#b31942"/><rect x="12" width="6" height="12.923" fill="#0a3161"/><path d="M12 0v24" stroke="#fff" stroke-width="0.6"/>{% elif code == 'ru' %}<rect width="24" height="8" fill="#fff"/><rect y="8" width="24" height="8" fill="#0039a6"/><rect y="16" width="24" height="8" fill="#d52b1e"/>{% elif code == 'he' %}<rect width="24" height="24" fill="#fff"/><rect y="3" width="24" height="2.6" fill="#0038b8"/><rect y="18.4" width="24" height="2.6" fill="#0038b8"/><path d="M12 7.4 15.8 14H8.2ZM12 16.6 8.2 10H15.8Z" fill="none" stroke="#0038b8" stroke-width="1"/>{% endif %}</svg>
 {%- endmacro %}
 
 {# A disclosure menu in the header: a text button with a chevron opening a
-   small card of links. Used for the Programs group and for the languages;
-   the caller supplies the <li> items. #}
-{% macro nav_menu(id, label, class='') -%}
+   small card of links. Used for the languages; the caller supplies the <li>
+   items. #}
+{% macro nav_menu(id, label, class='', icon='', sr='') -%}
 <div class="nav-menu {{ class }}">
   <button type="button" class="nav-menu-button" aria-haspopup="true" aria-expanded="false"
           aria-controls="{{ id }}-list">
-    <span>{{ label }}</span>
+    {{ icon }}{% if sr %}<span class="sr-only">{{ sr }}: </span>{% endif %}<span>{{ label }}</span>
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
   </button>
   <ul id="{{ id }}-list" class="nav-menu-list" hidden>
@@ -33,25 +41,19 @@
 </div>
 {%- endmacro %}
 
-{# The button says "Other languages" and the list holds only the other two, by name. #}
+{# The button shows the current language as a flag and a short name; the
+   list holds only the other two, each with its flag and full name. #}
 {% macro lang_menu() -%}
-{% call nav_menu('lang-menu', t.switcher.trigger, 'lang-menu') %}
+{% set short = {'en': 'Eng', 'ru': 'Рус', 'he': 'עברית'} %}
+{% call nav_menu('lang-menu', short[lang], 'lang-menu', flag(lang), t.switcher.label) %}
 {% for l in langs if not l.current %}
-<li><a href="{{ l.href }}" hreflang="{{ l.code }}" lang="{{ l.code }}">{{ l.name }}</a></li>
-{% endfor %}
-{% endcall %}
-{%- endmacro %}
-
-{% macro programs_menu(item) -%}
-{% call nav_menu('programs-menu', item.label) %}
-{% for sub in item['items'] %}
-<li><a href="#{{ sub.id }}">{{ sub.label }}</a></li>
+<li><a href="{{ l.href }}" hreflang="{{ l.code }}" lang="{{ l.code }}"{% if l.dir == 'rtl' %} dir="rtl"{% endif %}>{{ flag(l.code) }}<span>{{ l.name }}</span></a></li>
 {% endfor %}
 {% endcall %}
 {%- endmacro %}
 
 {% macro apply_button(class, label=none) -%}
-<a class="{{ class }}" href="{{ t.links.survey }}">{{ label or t.programs.apply }}</a>
+<a class="{{ class }}" href="{{ t.links.survey }}" data-apply>{{ label or t.programs.apply }}</a>
 {%- endmacro %}
 
 {# The workshop scans (see README, "Photographs").
@@ -64,11 +66,11 @@
 
    `width`/`height` are the layout box, not the file: the CSS crops with
    object-fit, so they stay put whatever candidate is chosen. #}
-{% macro photo(class, stem, widths, sizes, alt, width, height) -%}
+{% macro photo(class, stem, widths, sizes, alt, width, height, loading='lazy') -%}
 <img class="{{ class }}" src="{{ root }}assets/{{ stem }}-{{ widths[1] }}.webp"
      srcset="{% for w in widths %}{{ root }}assets/{{ stem }}-{{ w }}.webp {{ w }}w{{ ", " if not loop.last }}{% endfor %}"
      sizes="{{ sizes }}"
-     alt="{{ alt }}" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async">
+     alt="{{ alt }}" width="{{ width }}" height="{{ height }}" loading="{{ loading }}"{{ ' fetchpriority="low"' if loading == 'eager' else '' }} decoding="async">
 {%- endmacro %}
 
 {# Measured in Chromium across 360-3840px: the mobile stop, then the vw the
@@ -76,99 +78,103 @@
 {% set landscape_widths = [480, 720, 1080, 1440, 2048] %}
 {% set portrait_widths = [360, 500, 760, 1024, 1536] %}
 
-{% macro program_meta(where, when) -%}
+{# `cost` is set per row, never page-wide: a stipend is money paid to the
+   participant, and future children's clubs may be paid by parents, so each
+   offer states its own terms. A row without a cost key stays unlabelled. #}
+{% macro program_meta(where, when, cost=none, cost_plain=none) -%}
 <p><span>{{ t.programs.where }}</span>{{ where }}</p>
 <p><span>{{ t.programs.when }}</span>{{ when }}</p>
+{% if cost %}<p class="program-cost"><span>{{ t.programs.cost }}</span><em class="cost-value">{{ cost }}</em></p>{% endif %}
+{% if cost_plain %}<p class="program-cost is-plain"><span>{{ t.programs.cost }}</span>{{ cost_plain }}</p>{% endif %}
 {%- endmacro %}
 
+{# The pen loop drawn around the selected tab; every tab selector shares it. #}
+{% macro tab_loop() -%}
+<svg class="audience-loop" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M112 7C158 5 197 15 195 32C193 51 136 57 94 56C47 55 5 47 6 29C7 13 49 3 104 5C140 6 170 11 186 20"/></svg>
+{%- endmacro %}
+
+{# The scholarship line of an open offer sits under its title, in the slot the
+   closed-cohort status uses, with the Monthly tag beside it. #}
+{% macro program_scholarship(row) -%}
+{% if row.scholarship is defined and row.scholarship %}<span class="program-scholarship"><span>{{ row.scholarship }}</span>{% if row.cost_note is defined %}<small class="cost-note">{{ row.cost_note }}</small>{% endif %}</span>{% endif %}
+{%- endmacro %}
+
+{% macro teacher_row(row) -%}
+<article class="program-row" id="program-{{ row.id }}" data-program="{{ row.id }}" data-location="{{ row.location }}">
+  <h4>{{ row.title_html }}</h4>
+  {{ program_scholarship(row) }}
+  {{ program_meta(row.where, row.when, row.cost, row.cost_plain | default(none)) }}
+  {{ apply_button('button apply-button') }}
+</article>
+{%- endmacro %}
+
+{# The open program of a pane: its title is the pane heading (`heading` is
+   that heading's id). The terms follow straight on the plum: the
+   scholarship word (a link down to the scholarship band), then a card of the fields the row
+   has (Cost, How often, Next, Where); the Apply stands apart below. #}
+{% macro program_offer(row, heading, action=none) -%}
+<div class="program-offer">
+  <article class="offer-terms" id="program-{{ row.id }}" data-program="{{ row.id }}" aria-labelledby="{{ heading }}">
+    {% set scholarship = row.scholarship if row.scholarship is defined else none %}
+    {% if scholarship %}<p class="offer-tags"><a class="offer-tag offer-scholarship" href="#scholarship">{{ scholarship }}</a></p>{% endif %}
+    <div class="offer-meta">
+      {% if row.cost %}<p><span>{{ t.programs.cost }}</span><em class="offer-meta-cost">{{ row.cost }}</em></p>{% endif %}
+      {% if row.frequency is defined %}<p><span>{{ row.frequency_label | default(t.programs.frequency) }}</span><em class="offer-meta-frequency">{{ row.frequency }}</em></p>{% endif %}
+      {% if row.next is defined %}<p><span>{{ t.programs.next }}</span>{{ row.next }}</p>{% endif %}
+      <p><span>{{ t.programs.where }}</span>{{ row.where }}</p>
+    </div>
+  </article>
+  {{ apply_button('button apply-button offer-apply', action) }}
+</div>
+{%- endmacro %}
+
+{# The first teachers' row is the current open program: its terms sit under
+   the fellowship heading (see the pane below), outside the filtered list. The
+   location filter lists only the locations left in the list, and shows
+   only when there are two or more of them. #}
 {% macro programs(audience) -%}
-{% set locations = t.programs.locations if audience == 'teachers' else t.programs.locations[:1] %}
+{% if audience == 'teachers' %}
+{% set present = t.programs.teachers[1:] | map(attribute='location') | list %}
+{% set locations = t.programs.locations | selectattr('value', 'in', present) | list %}
+{% else %}
+{% set locations = t.programs.locations[:1] %}
+{% endif %}
 <div class="programs" id="{{ 'programs' if audience == 'teachers' else 'leaders-programs' }}">
   <div class="program-heading">
-    <h3>{{ t.programs.heading }}</h3>
-    <div class="location-select-wrap">
-      {# The purpose is spoken first, then the current value, rather than an
-         aria-label that replaces the value: a name that drops the visible text
-         leaves voice-control users with nothing to say (WCAG 2.5.3). #}
-      <button type="button" class="location-select" id="{{ audience }}-location"
-              aria-haspopup="listbox" aria-expanded="false"
-              aria-controls="{{ audience }}-location-list">
-        <span class="sr-only">{{ t.programs.filter_aria }}</span>
-        <span data-value-label>{{ locations[0].label }}</span>
-        <svg class="location-select-chevron" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    <h3>{{ t.programs.running }}</h3>
+    {% if locations | length > 1 %}
+    {# Same selector as the audience tabs; here the tabs filter the rows. #}
+    <div class="audience-tabs program-tabs" role="tablist" aria-label="{{ t.programs.filter_aria }}">
+      {% for loc in locations %}
+      <button type="button" class="audience-tab" role="tab" id="{{ audience }}-location-{{ loc.value }}" data-value="{{ loc.value }}"
+              aria-controls="{{ audience }}-program-list" aria-selected="{{ 'true' if loop.first else 'false' }}"{% if not loop.first %} tabindex="-1"{% endif %}>
+        <span>{{ loc.label }}</span>
+        {{ tab_loop() }}
       </button>
-      <ul id="{{ audience }}-location-list" class="location-options" role="listbox"
-          aria-labelledby="{{ audience }}-location" tabindex="-1" hidden>
-        {% for loc in locations %}
-        <li role="option" data-value="{{ loc.value }}" aria-selected="{{ 'true' if loop.first else 'false' }}" tabindex="{{ '0' if loop.first else '-1' }}">
-          <span>{{ loc.label }}</span>
-          <svg class="location-option-check" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-        </li>
-        {% endfor %}
-      </ul>
+      {% endfor %}
     </div>
+    {% endif %}
   </div>
-  <div class="program-list" aria-live="polite">
+  <div class="program-list" id="{{ audience }}-program-list" aria-live="polite">
     {% if audience == 'leaders' %}
-    {% for row in t.programs.leaders %}
+    {# The open row is the pane's offer; the list keeps the rest. #}
+    {% for row in t.programs.leaders if row.closed %}
     <article class="program-row" id="program-{{ row.id }}" data-program="{{ row.id }}"{% if row.closed %} data-closed{% endif %}>
-      {% if row.badge %}<span class="program-badge"><span>{{ row.badge }}</span></span>{% endif %}
       <h4>{{ row.title_html }}</h4>
+      {% if row.badge %}<span class="program-badge"><span>{{ row.badge }}</span></span>{% endif %}
+      {{ program_scholarship(row) }}
       {% if row.closed %}
-      <button type="button" class="button apply-button" disabled>{{ t.programs.join }}</button>
+      <p class="program-soon">{{ t.programs.results_soon }}</p>
       {% else %}
-      {{ program_meta(row.where, row.when) }}
+      {{ program_meta(row.where, row.when, row.cost, row.cost_plain | default(none)) }}
       {{ apply_button('button apply-button', t.programs.join) }}
       {% endif %}
     </article>
     {% endfor %}
     {% else %}
-    {% for row in t.programs.teachers %}
-    <article class="program-row" id="program-{{ row.id }}" data-program="{{ row.id }}" data-location="{{ row.location }}">
-      <h4>{{ row.title_html }}</h4>
-      {{ program_meta(row.where, row.when) }}
-      {{ apply_button('button apply-button') }}
-    </article>
+    {% for row in t.programs.teachers[1:] %}
+    {{ teacher_row(row) }}
     {% endfor %}
-    {% set tb = t.programs.tbilisi %}
-    <article class="program-results-card" data-program="{{ tb.id }}" data-location="{{ tb.location }}" data-state="open">
-      <div class="program-row program-results-summary">
-        <h4 id="tbilisi-program-title">{{ tb.title_html }}</h4>
-        {{ program_meta(tb.where, tb.when) }}
-        <button type="button" class="button results-button"
-                aria-expanded="true" aria-controls="tbilisi-results"
-                data-label-open="{{ t.programs.collapse }}"
-                data-label-closed="{{ t.programs.see_results }}">{{ t.programs.collapse }}</button>
-      </div>
-      <div id="tbilisi-results" class="program-results-content" role="region" aria-labelledby="tbilisi-program-title">
-        <div class="program-results-body">
-          <figure class="program-results-photos" aria-label="{{ tb.photos_aria }}">
-            {{ photo('results-landscape', 'photo-landscape', landscape_widths, '(max-width: 700px) 50vw, 26vw', tb.landscape_alt, 511, 339) }}
-            {{ photo('results-portrait', 'photo-portrait', portrait_widths, '(max-width: 700px) 36vw, 19vw', tb.portrait_alt, 317, 412) }}
-          </figure>
-          <div class="program-results-copy">
-            <h5 class="program-results-title">{{ tb.results_title }}</h5>
-            <div class="results-stats">
-              {% for s in tb.stats %}
-              <div class="stat">
-                <span class="stat-value">{{ s.value_html }}</span>
-                <span class="stat-label">{{ s.label }}</span>
-              </div>
-              {% endfor %}
-            </div>
-            {% for p in tb.results %}
-            <p>{{ p }}</p>
-            {% endfor %}
-            <blockquote class="results-quote">{{ tb.quote }}</blockquote>
-            <p class="results-note">{{ tb.quote_note }}</p>
-            {% for p in tb.results_after %}
-            <p>{{ p }}</p>
-            {% endfor %}
-            <p class="results-caveat">{{ tb.caveat }}</p>
-          </div>
-        </div>
-      </div>
-    </article>
     {% endif %}
   </div>
 </div>
@@ -178,8 +184,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% if page == 'schools' %}
+  <title>{{ t.partners.title }} · Morim Foundation</title>
+  <meta name="description" content="{{ t.partners.lead }}">
+  {% else %}
   <title>{{ t.meta.title }}</title>
   <meta name="description" content="{{ t.meta.description }}">
+  {% endif %}
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ t.meta.og_title }}">
   <meta property="og:description" content="{{ t.meta.description }}">
@@ -192,16 +203,45 @@
   {% for l in langs %}
   <link rel="alternate" hreflang="{{ l.code }}" href="{{ l.url }}">
   {% endfor %}
-  <link rel="alternate" hreflang="x-default" href="{{ site }}">
+  <link rel="alternate" hreflang="x-default" href="{{ x_default }}">
   <link rel="icon" href="{{ root }}assets/favicon.png">
+  {# The faces the first screen sets, requested with the page: the display,
+     the body subset the language needs, the wordmark in the header, and
+     the pen hand of the notes. All WOFF2 (George, 27.10: fonts arrived
+     late and the fallback showed). #}
   {% if lang == 'ru' %}
-  <link rel="preload" href="{{ root }}assets/fonts/Spectral-Regular.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="{{ root }}assets/fonts/Spectral-Light.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="{{ root }}assets/fonts/Spectral-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ root }}assets/fonts/Spectral-Light.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ root }}assets/fonts/Onest-Variable-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ root }}assets/fonts/Onest-Variable-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ root }}assets/fonts/Caveat-Regular.woff2" as="font" type="font/woff2" crossorigin>
   {% elif lang == 'he' %}
-  <link rel="preload" href="{{ root }}assets/fonts/FrankRuhlLibre-Variable.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="{{ root }}assets/fonts/FrankRuhlLibre-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ root }}assets/fonts/Heebo-Variable-hebrew.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ root }}assets/fonts/Heebo-Variable-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ root }}assets/fonts/GveretLevin-Regular.woff2" as="font" type="font/woff2" crossorigin>
   {% else %}
-  <link rel="preload" href="{{ root }}assets/fonts/GTAlpina-Regular.otf" as="font" type="font/otf" crossorigin>
-  <link rel="preload" href="{{ root }}assets/fonts/GTAlpina-Light.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="{{ root }}assets/fonts/GTAlpina-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ root }}assets/fonts/GTAlpina-Light.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ root }}assets/fonts/Onest-Variable-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ root }}assets/fonts/Caveat-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  {% endif %}
+  <link rel="preload" href="{{ root }}assets/fonts/GTAlpina-Medium.woff2" as="font" type="font/woff2" crossorigin>
+  {% if hero %}
+  {# The hero collage: its scripts, opening icons and stream posters are
+     requested with the page, so the first screen does not wait for the
+     module chain. The embeds come from two origins; warm them up. #}
+  <link rel="preconnect" href="https://www.youtube.com">
+  <link rel="preconnect" href="https://www.tiktok.com">
+  {% for m in hero.modules %}
+  <link rel="modulepreload" href="{{ root }}js/{{ m }}?v={{ v }}">
+  {% endfor %}
+  {% for i in hero.icons %}
+  <link rel="preload" as="image" href="{{ i.href }}" imagesrcset="{{ i.srcset }}" imagesizes="{{ i.sizes }}">
+  {% endfor %}
+  {% for p in hero.posters %}
+  <link rel="preload" as="image" href="{{ p }}">
+  {% endfor %}
   {% endif %}
   {# Same order as the PR's layout.tsx imports: the cascade depends on it. #}
   <link rel="stylesheet" href="{{ root }}css/base.css?v={{ v }}">
@@ -211,30 +251,40 @@
   <link rel="stylesheet" href="{{ root }}css/header.css?v={{ v }}">
   <link rel="stylesheet" href="{{ root }}css/hero.css?v={{ v }}">
   <link rel="stylesheet" href="{{ root }}css/widgets.css?v={{ v }}">
+  <link rel="stylesheet" href="{{ root }}css/type.css?v={{ v }}">
+  <script src="{{ root }}js/page-slide.js?v={{ v }}"></script>
+  {# Without JS the side panels read in place as sections; their openers
+     and close buttons have nothing to do. #}
+  <noscript><style>.side-panel{position:static;display:block;inline-size:auto;block-size:auto;max-block-size:none;overflow:visible;box-shadow:none;margin-block-start:1rem}.side-panel-close,[data-dialog]{display:none}</style></noscript>
 </head>
 <body>
 <main id="top" data-hero-variant="original" data-lang="{{ lang }}">
 
   <div class="header-shell" data-compact="false">
-    <header class="site-header">
-      <a class="logo" href="#top" aria-label="{{ t.header.logo_aria }}">{{ t.header.logo }}</a>
-      <nav aria-label="{{ t.header.nav_aria }}">
-        {% for item in t.header_nav %}
-        {% if 'items' in item %}
-        {{ programs_menu(item) }}
-        {% else %}
-        <a href="#{{ item.id }}">{{ item.label }}</a>
-        {% endif %}
-        {% endfor %}
-        {{ lang_menu() }}
-      </nav>
-      <a class="button" href="{{ t.links.email }}">{{ t.header.contact }}</a>
-      <button type="button" class="mobile-menu-trigger" data-dialog="mobile-menu" aria-haspopup="dialog" aria-label="{{ t.header.menu }}">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
-    </header>
+    {# v4-bar: no menu. The logo sits alone on its white pill; the languages
+       float on a pill of their own at the other end. The only call to action
+       is Apply on the program bar at the bottom. #}
+    <div class="header-start">
+      <header class="site-header">
+        <a class="logo" href="{{ home }}#top" aria-label="{{ t.header.logo_aria }}">{{ t.header.logo }}</a>
+      </header>
+      {# A page of its own (schools) gets a way back to the audiences it was
+         opened from, on a pill of its own beside the logo. #}
+      {% if page != 'home' %}
+      <a class="back-float" href="{{ home }}#audiences">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>{{ t.header.back }}</span>
+      </a>
+      {% endif %}
+    </div>
+    <nav class="lang-float" aria-label="{{ t.header.nav_aria }}">
+      {{ lang_menu() }}
+    </nav>
   </div>
 
+  {% if page == 'schools' %}
+  {% include 'schools.html.j2' %}
+  {% else %}
   <section class="hero hero-editorial" aria-labelledby="hero-title"
            data-playing="false" data-looping="false" data-media-layout="static"
            data-label-icon="{{ t.hero.label_icon }}"
@@ -255,93 +305,173 @@
     <span>{{ t.hero.scroll_hint }}</span>
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
   </a>
+  {# The floating Apply: js/lib/floating-apply.js shows it once the hero has
+     scrolled off and no Apply (offers, footer) is in view. Not a [data-apply]
+     itself, or it would hide on its own appearance. #}
+  <div class="floating-apply-rail" data-anchor=".hero" inert>
+    <a class="button floating-apply-button" href="{{ t.links.survey }}">{{ t.programs.apply }}</a>
+  </div>
 
   <section class="approach" id="approach" aria-label="{{ t.approach.aria }}">
     <div class="prose introduction">
-      <p data-hero-story-end>{{ t.approach.attention }}</p>
-      <p>{{ t.approach.schools_html }}</p>
+      <p data-hero-story-end>{{ t.approach.attention_html }}</p>
+      <p>{{ t.approach.help }}</p>
     </div>
   </section>
 
   {# The answer to "what is this?", right after the story: the Foundation
-     line beside one pilot photo, three beats, the approaches paragraph and
-     the Tuesday-morning test, then where to start. The routes land on the
+     line beside the heading, one pilot photo edge to edge, three beats,
+     the approaches paragraph, then where to start. The routes land on the
      first teachers program and the first coordinators cohort still open. #}
   <section class="what-we-do" id="what-we-do" aria-labelledby="what-we-do-title">
-    <h2 class="display" id="what-we-do-title">{{ t.what_we_do.title_html }}</h2>
-    <div class="wwd-lead">
-      <div class="prose">
-        <p class="mission-intro">{{ t.what_we_do.lead_html }}</p>
+    <div class="wwd-head">
+      <h2 class="display" id="what-we-do-title">{{ t.what_we_do.title_html }}</h2>
+      <div class="prose wwd-lead">
+        {# Two paragraphs in one box so space-between still pins the lead
+           to the cap line and the stipend to the last line. #}
+        <div class="wwd-lead-text">
+          <p class="mission-intro">{{ t.what_we_do.lead_html }}</p>
+          <p class="mission-intro">{{ t.what_we_do.lead_2_html }}</p>
+        </div>
+        {# The lead opens the column on the cap line; the stipend closes it
+           on the heading's last line as a note, in the note size (George,
+           23.10: "давай этот блок перенесем к первому, где Programs where
+           teachers" → "поменяй местами, стипендия это примечание"). #}
+        <p class="wwd-stipend">{{ t.what_we_do.stipend }}<a class="beat-note" href="{{ t.what_we_do.stipend_href }}">{{ t.what_we_do.stipend_note }}</a></p>
       </div>
-      <figure class="wwd-photo">
-        {{ photo('wwd-photo-img', 'photo-landscape', landscape_widths, '(max-width: 700px) 86vw, 22rem', t.approach.pilot_landscape_alt, 511, 339) }}
-        <figcaption>{{ t.approach.pilot_caption }}</figcaption>
-      </figure>
     </div>
-    <div class="wwd-beats">
-      {% for b in t.what_we_do.beats %}
-      <article class="wwd-beat">
-        <h3>{{ b.title }}</h3>
-        <p>{{ b.body }}</p>
-        {% if 'note' in b %}<span class="beat-note">{{ b.note }}</span>{% endif %}
-      </article>
-      {% endfor %}
+    {# The program as a sequence (Vlad, 23.10): the lead, the beats and the
+       FAQ each told the mechanics in prose, and the one number on the page,
+       "12+ lessons", stood in for the whole program. Four steps in order,
+       the number in the handwritten hand; the theses ("more than half of
+       the program", "every week, in a small group") sit inside the body as
+       <mark> with the heading's marker stroke (George, 23.10: "включи
+       выноски в тело буллита и подчеркни эти же тезисы цветным фоном"); the
+       handwritten slots under a step went with that. The three beats
+       went (George, 23.10: they and the steps said the same thing); the
+       "12+ lessons" callout closes the section instead, and only here
+       (George: "внизу и только внизу"); the stipend line sits beside the
+       heading. The steps were briefly lifted above the photo and put back
+       the same day (George, 23.10: "отмени вынос шагов над фото"). #}
+    {# The pilot photo, edge to edge; its top edge fades into the paper. #}
+    <figure class="wwd-photo">
+      <div class="wwd-photo-frame">
+        {# Eager: the second screen, and lazy loading left a white frame when it
+           scrolled in (George, 27.10: "картинка группового фото грузилась долго
+           и была дыра"). Low priority keeps it behind the hero assets. #}
+        {{ photo('wwd-photo-img', 'photo-landscape', landscape_widths, '100vw', t.approach.pilot_landscape_alt, 511, 339, loading='eager') }}
+      </div>
+    </figure>
+    <div class="wwd-steps">
+      {# No visible heading (George, 23.10: "How the program works — убери
+         заголовок"): the row follows the photo on its own, the name stays
+         on the list for readers. #}
+      <ol class="wwd-steps-list" aria-label="{{ t.what_we_do.how_it_works.heading }}">
+        {% for s in t.what_we_do.how_it_works.steps %}
+        <li class="wwd-step">
+          <span class="wwd-step-num" aria-hidden="true">{{ loop.index }}</span>
+          <h4>{{ s.title }}</h4>
+          <p>{{ s.body_html }}</p>
+        </li>
+        {% endfor %}
+      </ol>
+      <div class="prose wwd-steps-close">
+        <p class="beat-note wwd-note">{{ t.what_we_do.practice_note }}</p>
+        <p>{{ t.what_we_do.how_it_works.note }}</p>
+      </div>
     </div>
+    {% if t.what_we_do.closing %}
     <div class="prose wwd-closing">
       {% for p in t.what_we_do.closing %}
       <p>{{ p }}</p>
       {% endfor %}
     </div>
-    <nav class="wwd-routes" aria-label="{{ t.what_we_do.routes.aria }}">
-      <a href="#program-{{ t.programs.teachers[0].id }}">{{ t.what_we_do.routes.teachers }}</a>
-      <a href="#program-{{ (t.programs.leaders | rejectattr('closed') | first).id }}">{{ t.what_we_do.routes.coordinators }}</a>
-      <a href="#partners">{{ t.what_we_do.routes.schools }}</a>
-    </nav>
+    {% endif %}
   </section>
 
+  {# Teachers, coordinators, schools: one panel, one audience at a time. The
+     selector sits over the heading and draws a loop around the active word;
+     without JS all three panes stay visible in order and the tabs are anchors. #}
   <div class="story-stack">
-    <section class="fellowship panel" id="fellowship" aria-labelledby="fellowship-title">
-      <div class="floating-apply-rail" inert>
-        {{ apply_button('button apply-button floating-apply-button') }}
-      </div>
-      <p class="eyebrow">{{ t.fellowship.eyebrow }}</p>
-      <h2 class="display" id="fellowship-title">{{ t.fellowship.title_html }}</h2>
+    <section class="audiences" id="audiences" aria-label="{{ t.what_we_do.routes.aria }}">
+    {# Schools and partners have a page of their own: the link sits after
+       the tablist with an arrow. #}
+    <div class="audience-nav">
+    <div class="audience-tabs" role="tablist" aria-label="{{ t.what_we_do.routes.aria }}">
+      {% for key, pane in [('teachers', 'fellowship'), ('coordinators', 'leaders')] %}
+      <a class="audience-tab" role="tab" id="tab-{{ pane }}" href="#{{ pane }}" aria-controls="{{ pane }}"
+         aria-selected="{{ 'true' if loop.first else 'false' }}">
+        <span>{{ t.what_we_do.routes[key] }}</span>
+        {{ tab_loop() }}
+      </a>
+      {% endfor %}
+    </div>
+    <a class="audience-trigger text-link" href="schools/">
+      <span>{{ t.what_we_do.routes.schools }}</span><svg class="promo-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    </div>
+    <div class="audience-pane fellowship" id="fellowship" role="tabpanel" aria-labelledby="fellowship-title">
+      {# The pane is the offer of the open monthly program: its title is the
+         heading, its terms and a standalone Apply follow it,
+         then the old "Dear teachers" greeting opens the intro in the
+         scribble hand. #}
+      {% set current = t.programs.teachers[0] %}
+      <h2 class="display" id="fellowship-title">{{ current.title_html }}</h2>
+      {{ program_offer(current, 'fellowship-title', t.programs.apply_now) }}
+      {# The Tbilisi summer camp was the pilot of this course: the coordinators'
+         running card, set as a link down to the camp's own section, led by
+         "Summer Camp Tbilisi" in the neon peach scribble; the badge keeps
+         only the dates. #}
+      <a class="running-card pilot-link" href="#tbilisi-camp">
+        <span class="pilot-camp">{{ t.programs.pilot_camp }}</span>
+        <h3>{{ t.programs.pilot_title }}</h3>
+        <p class="running-badge"><bdi dir="ltr">{{ t.programs.tbilisi.dates }}</bdi></p>
+        <span class="running-status pilot-button text-link">{{ t.programs.check_results }}<svg class="promo-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
       <div class="prose fellowship-intro">
         {% for p in t.fellowship.intro %}
-        <p>{{ p }}</p>
+        <p>{% if loop.first %}{{ t.fellowship.title_html | striptags }} {% endif %}{{ p }}</p>
         {% endfor %}
       </div>
-      {{ programs('teachers') }}
-      <div class="benefits">
-        {% for b in t.fellowship.benefits %}
-        <article class="benefit{% if b.class %} {{ b.class }}{% endif %}">
-          <h3>{{ b.title }}</h3>
-          <p>{{ b.body }}</p>
-          {% if b.questions is defined %}
-          <div class="questions" aria-label="{{ b.questions_aria }}">
-            {% for q in b.questions %}
-            <span>{{ q }}</span>
-            {% endfor %}
-          </div>
-          {% endif %}
-        </article>
-        {% endfor %}
+      {# The practice reads as prose like the intro: the children's clubs
+         first (what we organise for the teacher), then the intensives with
+         their questions in the scribble hand. #}
+      {% set craft = t.fellowship.benefits | selectattr('class', 'equalto', 'craft') | first %}
+      {% set kids = t.fellowship.benefits | selectattr('prose_html', 'defined') | first %}
+      <div class="prose fellowship-practice">
+        <p>{{ kids.prose_html }}</p>
+        <p>{{ craft.body }}</p>
+        <div class="questions" aria-label="{{ craft.questions_aria }}">
+          {% for q in craft.questions %}
+          <span>{{ q }}</span>
+          {% endfor %}
+        </div>
       </div>
-    </section>
+      {% if t.programs.teachers | length > 1 %}{{ programs('teachers') }}{% endif %}
+    </div>
 
-    <section class="leaders panel" id="leaders" aria-labelledby="leaders-title">
-      <div class="floating-apply-rail" inert>
-        {{ apply_button('button apply-button floating-apply-button', t.programs.join) }}
-      </div>
-      <p class="eyebrow muted">{{ t.leaders.eyebrow }}</p>
-      <h2 class="display" id="leaders-title">{{ t.leaders.title_html }}</h2>
+    <div class="audience-pane leaders" id="leaders" role="tabpanel" aria-labelledby="leaders-title">
+      {# The same offer as the fellowship pane: the open coordinators' program
+         is the heading, its terms and Apply follow, then the running cohort,
+         then "Dear coordinators" opens the intro in the scribble hand. #}
+      {% set open_leaders = t.programs.leaders | rejectattr('closed') | first %}
+      <h2 class="display" id="leaders-title">{{ open_leaders.title_html }}</h2>
+      {{ program_offer(open_leaders, 'leaders-title', t.programs.apply_now) }}
+      {# The closed cohort under the Apply, as wide as the intro. The program
+         name is the pane heading just above, so the card names only its state. #}
+      {% for row in t.programs.leaders if row.closed %}
+      <article class="running-card" id="program-{{ row.id }}" data-closed>
+        <h3>{{ t.programs.pilot_title }}</h3>
+        <p class="running-status">{{ t.programs.results_soon }}</p>
+        <p class="running-badge running-now">{{ t.programs.running }}</p>
+      </article>
+      {% endfor %}
       <div class="prose leaders-intro">
         {% for p in t.leaders.intro %}
-        <p>{{ p }}</p>
+        <p>{% if loop.first %}{{ t.leaders.title_html | striptags }} {% endif %}{{ p }}</p>
         {% endfor %}
       </div>
-      {{ programs('leaders') }}
-      <div class="leader-benefits">
+      <div class="leader-benefits feature-cards">
         {% for b in t.leaders.benefits %}
         <article class="benefit">
           <h3>{{ b.title }}</h3>
@@ -349,34 +479,84 @@
         </article>
         {% endfor %}
       </div>
+    </div>
+
     </section>
   </div>
 
-  {# Schools, organisations with children, municipalities: what a partnership
-     is, the three shapes it takes, the pilot as proof, and how to start. #}
-  <section class="partners" id="partners" aria-labelledby="partners-title">
-    <h2 class="display" id="partners-title">{{ t.partners.title }}</h2>
-    <div class="prose partners-lead">
-      <p>{{ t.partners.lead }}</p>
-    </div>
-    <div class="wwd-beats partners-types">
-      {% for b in t.partners.types %}
-      <article class="wwd-beat">
-        <h3>{{ b.title }}</h3>
-        <p>{{ b.body }}</p>
-      </article>
+  {# The scholarship: a blue band of its own right after the audiences; the
+     scholarship word in either offer links here. The pen word is the band's
+     one heading, large, then the fellowship feature's two sentences (the
+     second set apart as the reason) and a row of terms.
+     The terms are placeholders pending Vlad: only "Monthly" comes from the
+     offers; who, how, what it asks and the amount are invented. #}
+  {% set grant = t.fellowship.benefits | selectattr('class', 'defined') | selectattr('class', 'equalto', 'scholarship') | first %}
+  <section class="scholarship-band" id="scholarship" aria-labelledby="scholarship-title">
+    <h2 class="scholarship-word" id="scholarship-title">{{ t.scholarship.title }}</h2>
+    <div class="scholarship-text">
+      {% for p in grant.body.split('<br>') %}
+      <p>{{ p }}</p>
       {% endfor %}
     </div>
-    <div class="partners-action">
-      <a class="button" href="{{ t.links.partners }}">{{ t.partners.cta }}</a>
-      <a class="partners-email" href="{{ t.links.email }}">{{ t.footer.email }}</a>
+    <dl class="scholarship-terms">
+      {% for term in t.scholarship.terms %}
+      <div><dt>{{ term.label }}</dt><dd>{{ term.value }}</dd></div>
+      {% endfor %}
+    </dl>
+  </section>
+
+  {# The Tbilisi camp: its own peach section after the audiences, apart from
+     the monthly offers. Copy and the survey figures on the start side, the
+     photo on the end side (above the copy on mobile). "Learn more" expands
+     the section in place with the pilot's story (js/disclosure.js); without
+     JS the story stays open and the control stays hidden.
+     Photo: session-photos/Day2 (Kids)/R0016143.JPG, the camp's children's
+     day (12 Aug 2026), centre square crop: a child over the alphabet
+     sheet. #}
+  {% set tb = t.programs.tbilisi %}
+  <section class="camp" id="tbilisi-camp" aria-labelledby="tbilisi-promo-title" data-program="{{ tb.id }}">
+    <div class="camp-copy">
+      <h2 id="tbilisi-promo-title">{{ tb.title_html }}</h2>
+      <p class="promo-meta"><span>{{ tb.where }}</span><span>{{ tb.when }}</span></p>
+      <ul class="camp-figures" role="list">
+        {% for s in tb.stats %}
+        <li class="camp-figure">
+          <span class="stat-value">{{ s.value_html }}</span>
+          <span class="stat-label">{{ s.label }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+      <button type="button" class="camp-more text-link" aria-expanded="false" aria-controls="tbilisi-details" data-expand hidden>
+        <span>{{ t.programs.learn_more }}</span><svg class="camp-more-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </div>
+    {{ photo('camp-photo', 'camp-square', [480, 720, 1080, 1440], '(max-width: 700px) 16rem, 26rem', '', 720, 720) }}
+    {# The story runs on the copy's column; the teacher's line sits beside
+       it under the photo, in the display face. #}
+    <div class="camp-details" id="tbilisi-details">
+      <div class="camp-story">
+        <div class="program-results-copy">
+          <h3 class="program-results-title">{{ tb.results_title }}</h3>
+          {% for p in tb.results %}
+          <p>{{ p }}</p>
+          {% endfor %}
+          {% for p in tb.results_after %}
+          <p>{{ p }}</p>
+          {% endfor %}
+          <p class="results-caveat">{{ tb.caveat }}</p>
+        </div>
+        <figure class="camp-voice">
+          <blockquote class="results-quote">{{ tb.quote }}</blockquote>
+          <figcaption class="results-note">{{ tb.quote_note }}</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
   <section class="team" id="team" aria-labelledby="team-title">
     <p class="eyebrow">{{ t.team.eyebrow }}</p>
     <h2 class="team-title" id="team-title">{{ t.team.title_html }}</h2>
-    <div class="team-track" tabindex="0" role="region" aria-label="{{ t.team.track_aria }}">
+    <div class="team-columns">
       {% for p in t.team.people %}
       <article class="person">
         {% if p.photo %}
@@ -384,15 +564,15 @@
         {% else %}
         <div class="portrait-placeholder" role="img" aria-label="{{ t.team.portrait_pending.replace('{name}', p.name) }}"></div>
         {% endif %}
-        <p class="person-role">{{ p.role }}</p>
         <h3>{% if p.href %}<a href="{{ p.href }}" target="_blank" rel="noreferrer">{{ p.name }}</a>{% else %}{{ p.name }}{% endif %}</h3>
+        <p class="person-role">{{ p.role }}</p>
         <p>{{ p.bio_html }}</p>
       </article>
       {% endfor %}
-      <article class="person person-note">
-        <h3>{{ t.team.note.title }}</h3>
-        <p>{{ t.team.note.body }}</p>
-      </article>
+    </div>
+    <div class="team-note">
+      <h3>{{ t.team.note.title }}</h3>
+      <p>{{ t.team.note.body }}</p>
     </div>
   </section>
 
@@ -403,7 +583,7 @@
       <details class="faq-item" data-state="closed">
         <summary class="faq-trigger">
           {{ item.q }}
-          <span class="faq-chevron" aria-hidden="true">›</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
         <div class="faq-answer">
           <div class="faq-answer-body">{{ item.a }}</div>
@@ -413,11 +593,17 @@
     </div>
   </section>
 
+  {% endif %}
+
   <footer id="contact" class="site-footer">
     <div class="footer-message">
       <h2>{{ t.footer.title }}</h2>
       <p class="footer-lead">{{ t.footer.lead_before }}<a href="{{ t.links.survey }}">{{ t.footer.lead_link }}</a>{{ t.footer.lead_after }}</p>
-      <a class="button rounded-button" href="{{ t.links.survey }}">{{ t.footer.cta }}</a>
+      {# Apply is the landing's action; the address is the one way to write,
+         on both pages (partners have their own button above). #}
+      {% if page != 'schools' %}
+      <p class="footer-actions">{{ apply_button('button footer-apply') }}</p>
+      {% endif %}
       <a class="footer-email" href="{{ t.links.email }}">{{ t.footer.email }}</a>
     </div>
     <div class="footer-links">
@@ -425,10 +611,9 @@
         <p class="footer-label">{{ t.footer.foundation_label }}</p>
         <nav aria-label="{{ t.footer.nav_aria }}">
           {% for item in t.nav %}
-          <a href="#{{ item.id }}">{{ item.label }}</a>
+          <a href="{{ home }}{{ item.href if item.href is defined else '#' ~ item.id }}">{{ item.label }}</a>
           {% endfor %}
         </nav>
-        {{ switcher('lang-switcher-footer') }}
       </div>
       <div>
         <p class="footer-label">{{ t.footer.socials_label }}</p>
@@ -438,10 +623,14 @@
           {% endfor %}
         </nav>
       </div>
-      <div class="footer-legal">
-        <a class="logo" href="#top" aria-label="{{ t.header.logo_aria }}">{{ t.header.logo }}</a>
-        <p>{{ t.footer.legal_html }}</p>
+      <div>
+        <p class="footer-label" aria-hidden="true">{{ t.switcher.label }}</p>
+        {{ switcher('lang-switcher-footer') }}
       </div>
+    </div>
+    <div class="footer-legal">
+      <a class="logo" href="{{ home }}#top" aria-label="{{ t.header.logo_aria }}">{{ t.header.logo }}</a>
+      <p>{{ t.footer.legal_html }}</p>
     </div>
   </footer>
 </main>
@@ -457,21 +646,6 @@
   </div>
 </dialog>
 
-<dialog class="mobile-menu-panel" id="mobile-menu" aria-labelledby="mobile-menu-title" aria-describedby="mobile-menu-desc">
-  <div class="mobile-menu-heading">
-    <h2 id="mobile-menu-title">{{ t.header.logo }}</h2>
-    <button type="button" class="mobile-menu-close" data-dialog-close aria-label="{{ t.header.menu_close }}">
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
-    </button>
-  </div>
-  <p id="mobile-menu-desc" class="sr-only">{{ t.header.menu_description }}</p>
-  <nav aria-label="{{ t.header.menu_nav_aria }}">
-    {% for item in t.mobile_nav %}
-    <a href="#{{ item.id }}">{{ item.label }}</a>
-    {% endfor %}
-  </nav>
-  {{ switcher('lang-switcher-menu') }}
-</dialog>
 
 <script type="module" src="{{ root }}js/main.js?v={{ v }}"></script>
 </body>

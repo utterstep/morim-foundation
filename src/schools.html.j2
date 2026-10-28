@@ -1,0 +1,24 @@
+{# For schools and partners: a page of its own (was a side panel on the
+   landing). Heading and lead on the start side, the three partner shapes
+   set as the landing's beats, then the form button with the email beside it.
+   Included into template.html.j2 when `page` is "schools"; the header, the
+   footer and the mobile menu stay the landing's. #}
+<section class="schools-page partners" id="partners" aria-labelledby="partners-title">
+  <div class="schools-head">
+    <h1 class="display" id="partners-title">{{ t.partners.title }}</h1>
+    <div class="prose partners-lead">
+      <p>{{ t.partners.lead }}</p>
+    </div>
+  </div>
+  <div class="wwd-beats partners-types">
+    {% for b in t.partners.types %}
+    <article class="wwd-beat">
+      <h3>{{ b.title }}</h3>
+      <p>{{ b.body }}</p>
+    </article>
+    {% endfor %}
+  </div>
+  <div class="partners-action">
+    <a class="button" href="{{ t.links.partners }}">{{ t.partners.cta }}</a>
+  </div>
+</section>

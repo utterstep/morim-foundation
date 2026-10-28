@@ -139,7 +139,9 @@ export function createHeroStoryFloaters(
   random = Math.random,
   lastVideoIds = [],
 ) {
-  const apps = [1, 2, 0, 5, 6];
+  // Opening icons: Discord, TikTok, ChatGPT, Fortnite, YouTube; Instagram
+  // and Twitch come in through replacements.
+  const apps = [1, 3, 0, 5, 6];
   return heroCompositionSlots.map((placement, slot) => {
     const choices =
       'previews' in placement

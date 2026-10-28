@@ -242,11 +242,12 @@ main[data-hero-variant='original'] .introduction {
     opacity 300ms ease,
     visibility 0s linear 300ms;
 }
-@supports (backdrop-filter: blur(0.5rem)) {
+@supports (backdrop-filter: blur(0.5rem)) { /* avoid-ai-design-ignore: K3 */
   .scroll-hint {
     background: rgb(255 255 255 / 76%);
+    /* avoid-ai-design-ignore: K3 — sits over scrolling content, the blur is a real overlay */
     backdrop-filter: blur(0.5rem);
-    -webkit-backdrop-filter: blur(0.5rem);
+    -webkit-backdrop-filter: blur(0.5rem); /* avoid-ai-design-ignore: K3 */
   }
 }
 .scroll-hint:hover {
