@@ -43,11 +43,14 @@ STATIC_DIRS = ("css", "js", "assets")
 # Everything else on the page stays relative so a preview still works anywhere.
 SITE = "https://morim.foundation/"
 
-# Order matters: it is the order of the language switcher.
+# Order matters: it is the order of the language switcher. A language with
+# "linked": False is still built and served at its URL, but the switchers on
+# the other languages' pages show it greyed out instead of linking to it
+# (its newest copy is waiting for a native review).
 LANGS = {
-    "en": {"dir": "ltr", "path": "", "name": "English"},
-    "ru": {"dir": "ltr", "path": "ru/", "name": "Русский"},
-    "he": {"dir": "rtl", "path": "he/", "name": "עברית"},
+    "en": {"dir": "ltr", "path": "", "name": "English", "linked": True},
+    "ru": {"dir": "ltr", "path": "ru/", "name": "Русский", "linked": False},
+    "he": {"dir": "rtl", "path": "he/", "name": "עברית", "linked": False},
 }
 
 # Pages per language, by their path under the language's own. The landing is
@@ -180,6 +183,8 @@ def render(out: Path) -> None:
                     "href": root + m["path"] + page_path,
                     "url": SITE + m["path"] + page_path,
                     "current": code == lang,
+                    # A page reached by its URL still names itself as current.
+                    "linked": m["linked"] or code == lang,
                 }
                 for code, m in LANGS.items()
             ],

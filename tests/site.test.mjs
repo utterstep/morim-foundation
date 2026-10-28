@@ -107,6 +107,32 @@ test('the header nav has only the language drop-down, no section anchors', () =>
   }
 });
 
+// build.py can list a language without linking to it (LANGS, "linked"): the
+// switchers keep it in place as a disabled link, and its pages are still built.
+test('every switcher entry is a link or a disabled placeholder; English always links', () => {
+  const all = { ...pages };
+  for (const [lang, page] of Object.entries(schoolPages)) all[`${lang}-schools`] = page;
+  for (const [key, page] of Object.entries(all)) {
+    const lang = key.slice(0, 2);
+    const html = read(page);
+    const footer = /<nav class="lang-switcher lang-switcher-footer"[^>]*>([\s\S]*?)<\/nav>/.exec(html)?.[1] ?? '';
+    const menu = /id="lang-menu-list"[\s\S]*?<\/ul>/.exec(html)?.[0] ?? '';
+    const entries = [...`${footer}${menu}`.matchAll(/<a ([^>]*)>/g)].map(([, attrs]) => attrs);
+    assert.equal(entries.length, 5, `${page}: three in the footer, the other two in the menu`);
+    for (const attrs of entries) {
+      const code = /\blang="([a-z]{2})"/.exec(attrs)?.[1];
+      if (/\bhref="/.test(attrs)) {
+        assert.match(attrs, new RegExp(`^href="[^"]*" hreflang="${code}" lang="${code}"`), `${page}: ${code} link`);
+        continue;
+      }
+      assert.match(attrs, new RegExp(`^role="link" aria-disabled="true" lang="${code}"`), `${page}: ${code} placeholder`);
+      assert.notEqual(code, lang, `${page}: its own language must stay a link`);
+      assert.notEqual(code, 'en', `${page}: English must stay a link`);
+      assert.ok(existsSync(join(site, pages[code])), `${page}: ${code} is unlinked but its page should still be built`);
+    }
+  }
+});
+
 test('native widgets are in the markup', () => {
   const html = read(pages.en);
   assert.equal((html.match(/<details class="faq-item"/g) ?? []).length, 5);

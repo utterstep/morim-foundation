@@ -14,9 +14,16 @@
 {% macro switcher(class, tag='nav') -%}
 <{{ tag }} class="lang-switcher {{ class }}"{% if tag != 'nav' %} role="group"{% endif %} aria-label="{{ t.switcher.label }}">
   {% for l in langs %}
-  <a href="{{ l.href }}" hreflang="{{ l.code }}" lang="{{ l.code }}"{% if l.current %} aria-current="page"{% endif %}{% if l.dir == 'rtl' %} dir="rtl"{% endif %}>{{ l.name }}</a>
+  <a {{ lang_target(l) }}{% if l.current %} aria-current="page"{% endif %}{% if l.dir == 'rtl' %} dir="rtl"{% endif %}>{{ l.name }}</a>
   {% endfor %}
 </{{ tag }}>
+{%- endmacro %}
+
+{# Where a switcher entry leads. A language not linked yet (build.py, LANGS)
+   keeps its place but loses its href: greyed out, not focusable, announced
+   as a disabled link. Its page still answers at its own URL. #}
+{% macro lang_target(l) -%}
+{% if l.linked %}href="{{ l.href }}" hreflang="{{ l.code }}"{% else %}role="link" aria-disabled="true"{% endif %} lang="{{ l.code }}"
 {%- endmacro %}
 
 {# Round flag icons for the language menu, drawn inline so no image ships.
@@ -47,7 +54,7 @@
 {% set short = {'en': 'Eng', 'ru': 'Рус', 'he': 'עברית'} %}
 {% call nav_menu('lang-menu', short[lang], 'lang-menu', flag(lang), t.switcher.label) %}
 {% for l in langs if not l.current %}
-<li><a href="{{ l.href }}" hreflang="{{ l.code }}" lang="{{ l.code }}"{% if l.dir == 'rtl' %} dir="rtl"{% endif %}>{{ flag(l.code) }}<span>{{ l.name }}</span></a></li>
+<li><a {{ lang_target(l) }}{% if l.dir == 'rtl' %} dir="rtl"{% endif %}>{{ flag(l.code) }}<span>{{ l.name }}</span></a></li>
 {% endfor %}
 {% endcall %}
 {%- endmacro %}

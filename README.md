@@ -124,7 +124,10 @@ Repo → Settings → Pages → Source: *Deploy from a branch*, branch `main`, f
 ## Open items before the redesign goes live
 
 - Russian and Hebrew copy are first-pass drafts and need a native review (see the
-  `_comment` and `_todo` keys in the JSON files).
+  `_comment` and `_todo` keys in the JSON files). Until then both pages are built
+  and answer at `/ru/` and `/he/`, but the switchers show them greyed out instead
+  of linking to them; set `"linked": True` for the language in `LANGS` in
+  `build.py` to link it again.
 - The school-leader cards were assembled from the previous site's coordinator copy;
   confirm with the team. Two team members are placeholders.
 - Webfont licences: GT Alpina and the ABC Stefan *trial* font are shipped as in the PR.

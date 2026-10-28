@@ -20,7 +20,9 @@ export function legacyLanguageRedirect(search, available) {
  */
 export function startLanguage(main) {
   const current = main.dataset.lang ?? 'en';
-  const switchers = Array.from(document.querySelectorAll('.lang-switcher a, .lang-menu a'));
+  // Linked languages only: one shown disabled is neither remembered nor a
+  // target for the old `?lang=` links.
+  const switchers = Array.from(document.querySelectorAll('.lang-switcher a[href], .lang-menu a[href]'));
   const others = switchers.map((a) => a.getAttribute('hreflang')).filter((code) => code && code !== current);
 
   if (current === 'en') {

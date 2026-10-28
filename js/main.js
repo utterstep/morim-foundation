@@ -1,21 +1,21 @@
 // Entry point. Wires the static page up in the same order the React tree
 // mounted its effects in PR #3 (website/app/home-content.tsx).
 
-import { startPageMotion } from './lib/page-motion.js?v=2b917f56';
-import { startCardDepth } from './lib/card-depth.js?v=2b917f56';
-import { watchApplyButtons } from './lib/floating-apply.js?v=2b917f56';
-import { startFloatingHeader } from './header.js?v=2b917f56';
-import { initDialogs } from './dialog.js?v=2b917f56';
-import { startMobileMenu } from './mobile-menu.js?v=2b917f56';
-import { initDetails, initExpander } from './disclosure.js?v=2b917f56';
-import { watchProgramMotionPreference } from './program-motion.js?v=2b917f56';
-import { startPrograms } from './programs.js?v=2b917f56';
-import { startHero } from './hero/hero.js?v=2b917f56';
-import { startLanguage } from './lang.js?v=2b917f56';
-import { startNavMenu } from './nav-menu.js?v=2b917f56';
-import { startScrollHint } from './scroll-hint.js?v=2b917f56';
-import { startAudiences } from './audiences.js?v=2b917f56';
-import { dealHandLetters } from './hand-a.js?v=2b917f56';
+import { startPageMotion } from './lib/page-motion.js?v=b3a925e7';
+import { startCardDepth } from './lib/card-depth.js?v=b3a925e7';
+import { watchApplyButtons } from './lib/floating-apply.js?v=b3a925e7';
+import { startFloatingHeader } from './header.js?v=b3a925e7';
+import { initDialogs } from './dialog.js?v=b3a925e7';
+import { startMobileMenu } from './mobile-menu.js?v=b3a925e7';
+import { initDetails, initExpander } from './disclosure.js?v=b3a925e7';
+import { watchProgramMotionPreference } from './program-motion.js?v=b3a925e7';
+import { startPrograms } from './programs.js?v=b3a925e7';
+import { startHero } from './hero/hero.js?v=b3a925e7';
+import { startLanguage } from './lang.js?v=b3a925e7';
+import { startNavMenu } from './nav-menu.js?v=b3a925e7';
+import { startScrollHint } from './scroll-hint.js?v=b3a925e7';
+import { startAudiences } from './audiences.js?v=b3a925e7';
+import { dealHandLetters } from './hand-a.js?v=b3a925e7';
 
 const EASING = 'cubic-bezier(0.22, 1, 0.36, 1)';
 const FAQ_MOTION = { duration: 250, easing: EASING, fade: 200 };

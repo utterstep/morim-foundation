@@ -16,7 +16,8 @@ export function startNavMenu(root) {
   const button = root.querySelector('button');
   const list = root.querySelector('ul');
   if (!(button && list)) return () => {};
-  const links = () => Array.from(list.querySelectorAll('a'));
+  // Only real links: a language not linked yet is an <a> without href.
+  const links = () => Array.from(list.querySelectorAll('a[href]'));
 
   const open = () => {
     list.hidden = false;
@@ -79,7 +80,9 @@ export function startNavMenu(root) {
     if (!root.contains(event.relatedTarget)) close({ refocus: false });
   };
   // Same-page links (#fellowship) do not reload, so the card closes itself.
-  const onLinkClick = () => close({ refocus: false });
+  const onLinkClick = (event) => {
+    if (event.target instanceof Element && event.target.closest('a[href]')) close({ refocus: false });
+  };
 
   button.addEventListener('click', onButtonClick);
   button.addEventListener('keydown', onButtonKey);
