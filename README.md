@@ -11,13 +11,15 @@ No bundler, no framework, no npm packages. Three languages at separate URLs:
 ```
 build.py               renders src/ into the repository root (Python, one dependency: Jinja2, via uv)
 src/template.html.j2   the page: plain HTML with Jinja loops over repeated blocks
+src/article.html.j2    the layout of an article page (src/css/article.css styles it)
+src/articles/          articles, one file per language: copy, charts, labels
 src/i18n/{en,ru,he}.json   every string on the page; values may contain inline HTML
 src/css/               stylesheets (logical properties, direction-agnostic)
 src/js/                ES modules loaded straight by the browser
 src/js/lib/            behaviour ported verbatim from PR #3 (hero maths, page motion, video autoplay, poof)
 src/js/hero/           the hero collage, rewritten from the React component
 src/assets/            images and fonts
-index.html, ru/, he/   generated pages, committed
+index.html, ru/, he/   generated pages, committed (and schools/, pisa-2025/)
 css/ js/ assets/       copied from src/ by the build, committed
 site/                  redirects from the old /site/ preview URLs to the root
 tests/                 node --test, zero dependencies
@@ -46,6 +48,29 @@ ES modules do not load from `file://`, so use `--serve` or any static server.
 - Structure and markup live in `src/template.html.j2`. Change it once for all languages.
 - After editing, run `uv run build.py` and commit the generated files along with `src/`.
   The build only ever touches `index.html`, `ru/`, `he/`, `css/`, `js/` and `assets/`.
+
+### Articles
+
+An article is a page of its own at `/<name>/`, built only in the languages it is
+written in. The first is the PISA 2025 note at `/pisa-2025/`, in English.
+
+- Its copy lives in `src/articles/<name>.<lang>.html.j2`: title, standfirst, the
+  section list, the text and the sources, as plain HTML with Jinja `set`s and
+  macros. `src/article.html.j2` lays it out; `src/css/article.css` styles it and
+  loads on article pages only.
+- List it in `PAGES` in `build.py` with its path and languages. Its head names
+  only the translations that exist; the switchers show the others greyed out.
+  A translation is one more file (`<name>.ru.html.j2`) and `"ru"` in `langs`.
+- Charts go in `src/assets/articles/<name>/` as a ladder of widths (480 to 1920,
+  never above the source) and are placed with `chart()` from
+  `src/articles/figure.html.j2`. Give each one alt text that carries its
+  numbers: the chart is an image, so the alt is all a screen reader gets.
+  `share.png` (1200×675, PNG because not every link preview reads WebP) is
+  the picture a shared link shows.
+- The landing can feature one article: `"feature"` on `home` in `PAGES`. Its
+  band sits between the intro and What we do, with copy from the article's
+  own `teaser`, and shows only on landings whose language has the article
+  (today: English). The article's Back pill then returns to the band.
 
 ### Typography
 

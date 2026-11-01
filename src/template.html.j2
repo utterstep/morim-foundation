@@ -186,6 +186,11 @@
   </div>
 </div>
 {%- endmacro %}
+{# An article page brings its own title, copy and labels (build.py, PAGES):
+   `a.title`, `a.body()` and the rest come from its file in src/articles/. #}
+{% if article %}{% import article as a with context %}{% endif %}
+{# The article the landing features: its band's copy is `f.teaser`. #}
+{% if feature %}{% import feature.file as f with context %}{% endif %}
 <!DOCTYPE html>
 <html lang="{{ lang }}" dir="{{ dir }}">
 <head>
@@ -194,20 +199,40 @@
   {% if page == 'schools' %}
   <title>{{ t.partners.title }} · Morim Foundation</title>
   <meta name="description" content="{{ t.partners.lead }}">
+  {% elif article %}
+  <title>{{ a.title }} · Morim Foundation</title>
+  <meta name="description" content="{{ a.description }}">
   {% else %}
   <title>{{ t.meta.title }}</title>
   <meta name="description" content="{{ t.meta.description }}">
   {% endif %}
+  {% if article %}
+  {# A shared link to an article shows its headline chart. PNG, not WebP:
+     not every link preview reads WebP; absolute, like canonical. #}
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{ a.title }}">
+  <meta property="og:description" content="{{ a.description }}">
+  <meta property="og:url" content="{{ canonical }}">
+  <meta property="og:image" content="{{ site }}{{ a.share_image }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="675">
+  <meta property="og:image:alt" content="{{ a.share_alt }}">
+  <meta property="og:site_name" content="Morim Foundation">
+  <meta property="og:locale" content="{{ t.meta.locale }}">
+  <meta name="twitter:card" content="summary_large_image">
+  {% else %}
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ t.meta.og_title }}">
   <meta property="og:description" content="{{ t.meta.description }}">
   <meta property="og:site_name" content="Morim Foundation">
   <meta property="og:locale" content="{{ t.meta.locale }}">
   <meta name="twitter:card" content="summary">
+  {% endif %}
   <meta name="theme-color" content="#f4f3f0">
   <link rel="canonical" href="{{ canonical }}">
-  {# Absolute by necessity: a relative hreflang is ignored outright. #}
-  {% for l in langs %}
+  {# Absolute by necessity: a relative hreflang is ignored outright. Only the
+     translations this page has (an article may exist in one language). #}
+  {% for l in langs if l.exists %}
   <link rel="alternate" hreflang="{{ l.code }}" href="{{ l.url }}">
   {% endfor %}
   <link rel="alternate" hreflang="x-default" href="{{ x_default }}">
@@ -259,6 +284,9 @@
   <link rel="stylesheet" href="{{ root }}css/hero.css?v={{ v }}">
   <link rel="stylesheet" href="{{ root }}css/widgets.css?v={{ v }}">
   <link rel="stylesheet" href="{{ root }}css/type.css?v={{ v }}">
+  {% if article %}
+  <link rel="stylesheet" href="{{ root }}css/article.css?v={{ v }}">
+  {% endif %}
   <script src="{{ root }}js/page-slide.js?v={{ v }}"></script>
   {# Without JS the side panels read in place as sections; their openers
      and close buttons have nothing to do. #}
@@ -275,10 +303,11 @@
       <header class="site-header">
         <a class="logo" href="{{ home }}#top" aria-label="{{ t.header.logo_aria }}">{{ t.header.logo }}</a>
       </header>
-      {# A page of its own (schools) gets a way back to the audiences it was
-         opened from, on a pill of its own beside the logo. #}
+      {# A page of its own gets a way back on a pill of its own beside the
+         logo: schools to the audiences it was opened from, the featured
+         article to its band, another article to the top (build.py, back). #}
       {% if page != 'home' %}
-      <a class="back-float" href="{{ home }}#audiences">
+      <a class="back-float" href="{{ home }}{{ back }}">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
         <span>{{ t.header.back }}</span>
       </a>
@@ -291,6 +320,8 @@
 
   {% if page == 'schools' %}
   {% include 'schools.html.j2' %}
+  {% elif article %}
+  {% include 'article.html.j2' %}
   {% else %}
   <section class="hero hero-editorial" aria-labelledby="hero-title"
            data-playing="false" data-looping="false" data-media-layout="static"
@@ -308,7 +339,7 @@
   {# A small fixed hint at the bottom of the first screen; js/scroll-hint.js
      hides it after the second scroll gesture, or at once if the page did not
      open at the top. #}
-  <a class="scroll-hint" href="#what-we-do" data-scroll-hint>
+  <a class="scroll-hint" href="#{{ feature_id if feature else 'what-we-do' }}" data-scroll-hint>
     <span>{{ t.hero.scroll_hint }}</span>
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
   </a>
@@ -325,6 +356,32 @@
       <p>{{ t.approach.help }}</p>
     </div>
   </section>
+
+  {# The evidence for the story's "…but", between it and the programs: a
+     finding from our research in three numbers against the OECD average,
+     with one link to the article. Its copy is the article's own (`teaser`
+     in src/articles/), so the band shows only on landings whose language
+     has the article. The numbers are figures, not a chart: they stay text
+     for translation and screen readers. #}
+  {% if feature %}
+  {% set tz = f.teaser %}
+  <section class="evidence" id="{{ feature_id }}" aria-labelledby="{{ feature_id }}-title">
+    <div class="evidence-card">
+      <p class="evidence-kicker">{{ tz.kicker }}</p>
+      <h2 class="evidence-title" id="{{ feature_id }}-title">{{ tz.title_html }}</h2>
+      <ul class="evidence-figures" role="list">
+        {% for s in tz.figures %}
+        <li class="evidence-figure">
+          <span class="evidence-value"><span class="evidence-number">{{ s.value }}</span><span class="evidence-oecd">{{ s.oecd }}</span></span>
+          <span class="evidence-label">{{ s.label }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+      <p class="beat-note evidence-note">{{ tz.note }}</p>
+      <a class="text-link evidence-link" href="{{ feature.href }}"><span>{{ tz.link }}</span><svg class="promo-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </section>
+  {% endif %}
 
   {# The answer to "what is this?", right after the story: the Foundation
      line beside the heading, one pilot photo edge to edge, three beats,

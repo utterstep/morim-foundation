@@ -14,3 +14,6 @@ Thumbs.db
 
 # Dependencies (none at runtime — static site)
 node_modules/
+
+# Python bytecode (build.py, deck/)
+__pycache__/

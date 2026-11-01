@@ -8,6 +8,9 @@ import { test } from 'node:test';
 const site = fileURLToPath(new URL('../', import.meta.url));
 const pages = { en: 'index.html', ru: 'ru/index.html', he: 'he/index.html' };
 const schoolPages = { en: 'schools/index.html', ru: 'ru/schools/index.html', he: 'he/schools/index.html' };
+// Articles are built only in the languages they are written in (build.py, PAGES).
+const articlePages = { 'pisa-2025': { en: 'pisa-2025/index.html' } };
+const articleList = Object.values(articlePages).flatMap((byLang) => Object.values(byLang));
 const read = (page) => readFileSync(join(site, page), 'utf8');
 
 test('all three pages exist with the right lang and dir', () => {
@@ -17,7 +20,7 @@ test('all three pages exist with the right lang and dir', () => {
 });
 
 test('no template syntax leaks into the output', () => {
-  for (const page of Object.values(pages)) {
+  for (const page of [...Object.values(pages), ...Object.values(schoolPages), ...articleList]) {
     const html = read(page);
     assert.doesNotMatch(html, /\{\{|\{%|\{root\}/, `${page} has unrendered template syntax`);
   }
@@ -49,7 +52,7 @@ test('canonical and hreflang URLs are absolute', () => {
 });
 
 test('every local href/src/srcset in the pages resolves to a file', () => {
-  for (const page of [...Object.values(pages), ...Object.values(schoolPages)]) {
+  for (const page of [...Object.values(pages), ...Object.values(schoolPages), ...articleList]) {
     const html = read(page);
     const dir = dirname(join(site, page));
     const urls = [...html.matchAll(/(?:href|src)="([^"#][^"]*)"/g)].map(([, url]) => url);
@@ -112,6 +115,9 @@ test('the header nav has only the language drop-down, no section anchors', () =>
 test('every switcher entry is a link or a disabled placeholder; English always links', () => {
   const all = { ...pages };
   for (const [lang, page] of Object.entries(schoolPages)) all[`${lang}-schools`] = page;
+  for (const [name, byLang] of Object.entries(articlePages)) {
+    for (const [lang, page] of Object.entries(byLang)) all[`${lang}-${name}`] = page;
+  }
   for (const [key, page] of Object.entries(all)) {
     const lang = key.slice(0, 2);
     const html = read(page);
@@ -335,5 +341,90 @@ test('one primary action: Apply in the offers and the footer, floating once the 
     assert.doesNotMatch(html, /data-apply|floating-apply|partners-email/, `${page}: no Apply for partners`);
     assert.equal((html.match(/class="button[^"]*"/g) ?? []).length, 1, `${page}: Partner with us is the one button`);
     assert.equal((html.match(/href="mailto:/g) ?? []).length, 2, `${page}: the button and the footer address`);
+  }
+});
+
+// An article: a page of its own, in its own languages only. Its head names
+// only the translations that exist; the switchers keep the others in place
+// as disabled entries; a shared link shows its headline chart.
+test('the PISA 2025 article is built in English only, and its head says so', () => {
+  const page = articlePages['pisa-2025'].en;
+  const html = read(page);
+  assert.match(html, /<html lang="en" dir="ltr">/);
+  for (const lang of ['ru', 'he']) {
+    assert.ok(!existsSync(join(site, lang, 'pisa-2025')), `no ${lang} build of the article`);
+  }
+  const url = 'https://morim.foundation/pisa-2025/';
+  assert.ok(html.includes(`<link rel="canonical" href="${url}">`));
+  const alternates = [...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)">/g)].map((m) => m.slice(1));
+  assert.deepEqual(alternates, [['en', url], ['x-default', url]]);
+  const menu = /id="lang-menu-list"[\s\S]*?<\/ul>/.exec(html)?.[0] ?? '';
+  assert.equal((menu.match(/role="link" aria-disabled="true"/g) ?? []).length, 2, 'ru and he greyed out');
+  assert.match(html, /<meta property="og:type" content="article">/);
+  const image = /<meta property="og:image" content="https:\/\/morim\.foundation\/([^"]+)">/.exec(html);
+  assert.ok(image && existsSync(join(site, image[1])), 'share image is published');
+  assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
+  assert.match(html, /<link rel="stylesheet" href="\.\.\/css\/article\.css\?v=[0-9a-f]{8}">/);
+  for (const landing of Object.values(pages)) assert.doesNotMatch(read(landing), /article\.css/, `${landing} loads article.css`);
+});
+
+test('the PISA 2025 article: one headline, a section list that matches its headings, six charts, sources', () => {
+  const html = read(articlePages['pisa-2025'].en);
+  assert.equal((html.match(/<h1[ >]/g) ?? []).length, 1);
+  assert.match(html, /<h1 class="article-title" id="article-title">[^<]+<mark>[^<]+<\/mark><\/h1>/);
+  assert.doesNotMatch(html, /class="hero|id="faq"|floating-apply|data-scroll-hint/, 'carries the landing');
+  assert.match(html, /<a class="logo" href="\.\.\/#top"/);
+  // Featured on the English landing, so Back returns to its band.
+  assert.match(html, /<\/header>\s*<a class="back-float" href="\.\.\/#evidence">/);
+  // The list in the rail leads to the h2s of the body, in order.
+  const nav = /<nav class="article-contents"[\s\S]*?<\/nav>/.exec(html)?.[0] ?? '';
+  const listed = [...nav.matchAll(/<a href="#([^"]+)">([^<]+)<\/a>/g)].map((m) => [m[1], m[2]]);
+  const body = /<div class="article-body">([\s\S]*?)<\/div>\s*<footer class="article-notes"/.exec(html)?.[1] ?? '';
+  const headings = [...body.matchAll(/<h2 id="([^"]+)">([^<]+)<\/h2>/g)].map((m) => [m[1], m[2]]);
+  assert.equal(listed.length, 4);
+  assert.deepEqual(listed, headings);
+  // Every chart: the full ladder, its box, alt text that carries the numbers,
+  // and a link to the full-size file.
+  const figures = [...body.matchAll(/<figure class="article-figure">([\s\S]*?)<\/figure>/g)].map((m) => m[1]);
+  assert.equal(figures.length, 6);
+  for (const figure of figures) {
+    const stem = /href="\.\.\/assets\/articles\/(pisa-2025\/[a-z-]+)-1920\.webp"/.exec(figure)?.[1];
+    assert.ok(stem, 'figure links to the full-size chart');
+    for (const w of [480, 720, 1080, 1440, 1920]) assert.ok(figure.includes(`${stem}-${w}.webp ${w}w`), `${stem} ${w}w`);
+    assert.match(figure, /width="1920" height="1080" loading="lazy"/);
+    const alt = /alt="([^"]*)"/.exec(figure)?.[1] ?? '';
+    assert.ok(alt.length > 60 && /\d/.test(alt), `${stem}: alt text should describe the chart`);
+  }
+  // The note mark and the sources lead to each other.
+  assert.match(body, /<sup class="article-ref"><a href="#sources" id="ref-1"/);
+  assert.match(html, /<footer class="article-notes" id="sources"[\s\S]*href="#ref-1"/);
+  assert.match(body, /<a class="button" href="mailto:contact@morim\.foundation\?subject=PISA%202025">Write to us<\/a>/);
+  assert.doesNotMatch(body, /https:\/\/morim\.foundation/, 'links to the site stay relative');
+});
+
+// The landing features the article: a band between the intro and What we
+// do, only where the article exists in the landing's language.
+test('the English landing carries the PISA evidence band between the intro and What we do', () => {
+  const html = read(pages.en);
+  const band = /<section class="evidence" id="evidence" aria-labelledby="evidence-title">([\s\S]*?)<\/section>/.exec(html);
+  assert.ok(band, 'band');
+  const order = ['class="approach"', 'id="evidence"', 'id="what-we-do"'].map((k) => html.indexOf(k));
+  assert.deepEqual([...order].sort((a, b) => a - b), order);
+  assert.match(band[1], /<h2 class="evidence-title" id="evidence-title">[^<]+<mark>give up sooner<\/mark><\/h2>/);
+  const figures = [...band[1].matchAll(/<span class="evidence-number">([^<]+)<\/span><span class="evidence-oecd">([^<]+)<\/span>/g)].map((m) => [m[1], m[2]]);
+  assert.deepEqual(figures, [['14%', 'OECD 7%'], ['34%', 'OECD 15%'], ['19.7%', 'OECD 8.9%']]);
+  // The same numbers stand in the article's text.
+  const article = read(articlePages['pisa-2025'].en);
+  for (const [value, oecd] of [['14%', '7%'], ['34%', '15%'], ['19.7%', '8.9%']]) {
+    assert.ok(article.includes(value) && article.includes(`OECD: ${oecd}`), `${value} vs ${oecd} in the article`);
+  }
+  assert.match(band[1], /<p class="beat-note evidence-note">/);
+  assert.match(band[1], /<a class="text-link evidence-link" href="pisa-2025\/">/);
+  assert.doesNotMatch(band[1], /class="button|data-apply/, 'no second call to action');
+  assert.match(html, /<a class="scroll-hint" href="#evidence"/);
+  for (const lang of ['ru', 'he']) {
+    const other = read(pages[lang]);
+    assert.doesNotMatch(other, /id="evidence"/, `${lang}: the article is English only`);
+    assert.match(other, /<a class="scroll-hint" href="#what-we-do"/);
   }
 });

@@ -1,8 +1,8 @@
 // DOM builders for the hero collage, ported from the JSX in PR #3
 // website/app/hero.tsx (`AppItem`, lines 588-770). No state lives here.
 
-import { heroAppSizes } from '../lib/hero-apps.js?v=b3a925e7';
-import { describeFloater, floaterLabel, floaterStyle, formatTemplate } from './hero-state.js?v=b3a925e7';
+import { heroAppSizes } from '../lib/hero-apps.js?v=12aecf5b';
+import { describeFloater, floaterLabel, floaterStyle, formatTemplate } from './hero-state.js?v=12aecf5b';
 
 /**
  * @typedef {{labelIcon: string, labelMediaDismiss: string, videoUnavailable: string}} HeroStrings

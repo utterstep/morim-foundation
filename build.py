@@ -53,9 +53,45 @@ LANGS = {
     "he": {"dir": "rtl", "path": "he/", "name": "עברית", "linked": False},
 }
 
-# Pages per language, by their path under the language's own. The landing is
-# one long page; schools and partners have a page of their own.
-PAGES = {"home": "", "schools": "schools/"}
+# Pages, by their path under each language's own. The landing is one long
+# page; schools and partners have a page of their own. An article is a page
+# of its own too, written in src/articles/<name>.<lang>.html.j2 and built only
+# in the languages listed for it: the switchers on it show the others greyed
+# out, and its head names only the translations that exist.
+#
+# The landing can feature one article: a band between the intro and What we
+# do, with copy from the article's own file (its `teaser`), on the landings
+# whose language has the article. `back` is where a page's Back pill leads
+# on its language's landing; a featured article leads back to its band.
+PAGES = {
+    "home": {"path": "", "feature": "pisa-2025"},
+    "schools": {"path": "schools/", "back": "#audiences"},
+    "pisa-2025": {"path": "pisa-2025/", "article": "articles/pisa-2025", "langs": ("en",)},
+}
+FEATURE_ID = "evidence"  # the band's id on the landing (template.html.j2)
+
+
+def page_langs(spec: dict) -> tuple[str, ...]:
+    """The languages a page is built in, in switcher order."""
+    return tuple(code for code in LANGS if code in spec.get("langs", LANGS))
+
+
+def featured(lang: str) -> dict | None:
+    """The article the landing features in this language, if it has one:
+    its file (for the band's copy) and its path relative to the landing."""
+    name = PAGES["home"].get("feature")
+    if not name or lang not in page_langs(PAGES[name]):
+        return None
+    spec = PAGES[name]
+    return {"name": name, "file": f"{spec['article']}.{lang}.html.j2", "href": spec["path"]}
+
+
+def back_target(page: str, spec: dict, lang: str) -> str:
+    """Where the Back pill of a page of its own leads on the landing."""
+    if "back" in spec:
+        return spec["back"]
+    feature = featured(lang)
+    return f"#{FEATURE_ID}" if feature and feature["name"] == page else "#top"
 
 
 def load_strings(lang: str, root: str) -> dict:
@@ -155,15 +191,25 @@ def render(out: Path) -> None:
     )
     template = env.get_template("template.html.j2")
     version = asset_version()
-    for (page, page_path), (lang, meta) in product(PAGES.items(), LANGS.items()):
+    for (page, spec), (lang, meta) in product(PAGES.items(), LANGS.items()):
+        built = page_langs(spec)
+        if lang not in built:
+            continue
         # Pages sit at /, /ru/, /he/ and their schools/ below; shared files are
         # addressed relative to the page so the output works at the domain
         # root, under /site/, or from any local static server.
+        page_path = spec["path"]
         path = meta["path"] + page_path
         root = "../" * path.count("/")
         html = template.render(
             t=load_strings(lang, root),
             page=page,
+            # The article's own file (title, copy, labels), in this language.
+            article=f"{spec['article']}.{lang}.html.j2" if "article" in spec else None,
+            # The article the landing features, if any (home only).
+            feature=featured(lang) if not page_path else None,
+            feature_id=FEATURE_ID,
+            back=back_target(page, spec, lang),
             # This language's landing, relative to the page ("" on the landing).
             home="../" if page_path else "",
             lang=lang,
@@ -183,8 +229,10 @@ def render(out: Path) -> None:
                     "href": root + m["path"] + page_path,
                     "url": SITE + m["path"] + page_path,
                     "current": code == lang,
+                    # Whether this page exists in that language at all.
+                    "exists": code in built,
                     # A page reached by its URL still names itself as current.
-                    "linked": m["linked"] or code == lang,
+                    "linked": (m["linked"] and code in built) or code == lang,
                 }
                 for code, m in LANGS.items()
             ],
@@ -199,9 +247,12 @@ def render(out: Path) -> None:
 
 def generated() -> list[str]:
     """Everything the build owns at the root; nothing else is ever touched."""
-    pages = [meta["path"].rstrip("/") or "index.html" for meta in LANGS.values()]
-    pages += [path.rstrip("/") for path in PAGES.values() if path]
-    return pages + list(STATIC_DIRS)
+    pages: dict[str, None] = {}
+    for spec in PAGES.values():
+        for lang in page_langs(spec):
+            path = LANGS[lang]["path"] + spec["path"]
+            pages[path.split("/")[0] if path else "index.html"] = None
+    return list(pages) + list(STATIC_DIRS)
 
 
 def build() -> None:

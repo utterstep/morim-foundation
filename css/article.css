@@ -1,0 +1,260 @@
+/* An article page (src/article.html.j2), loaded only there. Same canvas as
+   the landing: rem dimensions on the 1440 reference (base.css), text sizes
+   floored in px like the roles in type.css, one phone breakpoint at 700px.
+
+   Desktop: the headline sits over the text column; a 15rem rail beside the
+   text holds the byline and the section list and stays in view while the
+   text scrolls. Paragraphs keep a reading measure; the charts take the
+   whole column (58rem at 1440, the `sizes` in src/articles/figure.html.j2).
+   Phones: one column, the rail between the headline and the text, the
+   charts edge to edge. */
+.article {
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr);
+  grid-template-areas:
+    '. head'
+    'rail body'
+    '. notes';
+  column-gap: 5rem;
+  padding: 3rem var(--gutter) 5rem;
+  color: var(--ink);
+  background: var(--background);
+}
+
+/* The headline block: the pen word, the display headline with the peach
+   marker of the give-up chart, then the standfirst in the body face. */
+.article-head {
+  grid-area: head;
+  max-inline-size: 58rem;
+}
+.article-kicker {
+  inline-size: fit-content;
+  color: var(--scribble-blue);
+  font-family: var(--font-scribble);
+  font-size: max(2rem, 24px);
+  line-height: 1;
+  transform: rotate(-2deg);
+}
+[dir='rtl'] .article-kicker {
+  transform: rotate(2deg);
+}
+.article-title {
+  margin-block-start: 1.5rem;
+  font-size: max(5rem, 40px);
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+/* The site's marker stroke (type.css, .approach-name): a slanted shape
+   stretched to the words, which never wrap apart. */
+.article-title mark {
+  color: inherit;
+  white-space: nowrap;
+  padding-inline: 0.2em;
+  margin-inline: -0.2em;
+  background: url('../assets/highlight-peach.svg') center / 100% 100% no-repeat;
+}
+.article-dek {
+  max-inline-size: 44rem;
+  margin-block-start: 2.25rem;
+  color: #55554e;
+  font-size: max(1.5rem, 18px);
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  text-wrap: pretty;
+}
+
+/* The rail: who wrote it, then the sections. Sticky under the header pill. */
+.article-rail {
+  grid-area: rail;
+  align-self: start;
+  position: sticky;
+  top: 7.5rem;
+  margin-block-start: 6rem;
+}
+.article-byline {
+  padding-block-end: 1.25rem;
+  margin-block-end: 1.5rem;
+  border-block-end: 1px solid #1820221f;
+  font-size: var(--t-body);
+  line-height: 1.3;
+}
+.article-rail-label {
+  margin-block-end: 0.875rem;
+  color: #66685f;
+  font-family: var(--font-body);
+  font-size: var(--t-small);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+.article-contents ol {
+  display: grid;
+  gap: 0.75rem;
+}
+.article-contents a {
+  display: block;
+  font-size: var(--t-body);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* The text. */
+.article-body {
+  grid-area: body;
+  margin-block-start: 6rem;
+}
+.article-body > :is(p, ol) {
+  max-inline-size: min(100%, max(42rem, 28em));
+  font-size: max(1.25rem, 17px);
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+.article-body > :is(p, ol) + :is(p, ol) {
+  margin-block-start: 1.1em;
+}
+.article-body > h2 {
+  max-inline-size: 42rem;
+  margin-block: 5.5rem 1.75rem;
+  font-size: max(3rem, 28px);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.article-body strong {
+  font-weight: 600;
+}
+:is(.article-body, .article-notes) p a:not(.button) {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+:is(.article-body, .article-notes) p a:not(.button):hover {
+  color: var(--fellowship-bg);
+}
+/* The note mark after "reports": a small blue figure leading to Sources. */
+.article-ref {
+  font-size: 0.62em;
+  line-height: 0;
+}
+#top .article-ref a {
+  padding-inline: 0.15em;
+  color: var(--scribble-blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* The three areas of the programs, numbered in the pen hand like the steps
+   on the landing. */
+.article-list {
+  counter-reset: area;
+  display: grid;
+  gap: 1.1em;
+}
+.article-list li {
+  counter-increment: area;
+  position: relative;
+  padding-inline-start: 2.75rem;
+}
+.article-list li::before {
+  content: counter(area);
+  position: absolute;
+  inset-inline-start: 0.25rem;
+  top: -0.2em;
+  color: var(--scribble-blue);
+  font-family: var(--font-scribble);
+  font-size: 1.75em;
+  line-height: 1;
+  transform: rotate(-6deg);
+}
+
+/* The charts carry their own titles and sources: no frame, no caption. The
+   image opens full size, for reading the small print on a phone. */
+.article-figure {
+  margin-block: 3.5rem;
+}
+.article-figure a {
+  display: block;
+  cursor: zoom-in;
+}
+.article-figure img {
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.article-action {
+  margin-block-start: 2.5rem;
+}
+
+/* Sources: the footnote of the draft, under the text in the small size. */
+.article-notes {
+  grid-area: notes;
+  max-inline-size: 42rem;
+  margin-block-start: 6rem;
+  padding-block-start: 1.75rem;
+  border-block-start: 1px solid #1820221f;
+}
+.article-notes p {
+  color: #55554e;
+  font-size: var(--t-small);
+  line-height: 1.55;
+}
+.article-back {
+  text-decoration: none;
+}
+
+@media (max-width: 700px) {
+  .article {
+    display: block;
+    padding: 1.5rem var(--m-gutter) 4.5rem;
+  }
+  .article-kicker {
+    font-size: 1.625rem;
+  }
+  .article-title {
+    margin-block-start: 1rem;
+    font-size: min(2.375rem, 10.5vw);
+    line-height: 1.02;
+  }
+  .article-dek {
+    margin-block-start: 1.25rem;
+    font-size: 1.125rem;
+  }
+  .article-rail {
+    position: static;
+    margin-block-start: 2rem;
+    padding-block: 1.25rem;
+    border-block: 1px solid #1820221f;
+  }
+  .article-byline {
+    padding-block-end: 0;
+    margin-block-end: 1rem;
+    border: 0;
+  }
+  .article-contents a {
+    font-size: 1rem;
+  }
+  .article-body {
+    margin-block-start: 2.5rem;
+  }
+  .article-body > :is(p, ol) {
+    font-size: 1.0625rem;
+  }
+  .article-body > h2 {
+    margin-block: 3rem 1rem;
+    font-size: 1.875rem;
+  }
+  .article-list li {
+    padding-inline-start: 2.25rem;
+  }
+  .article-figure {
+    margin-block: 2rem;
+    margin-inline: calc(-1 * var(--m-gutter));
+  }
+  .article-notes {
+    margin-block-start: 3.5rem;
+  }
+}

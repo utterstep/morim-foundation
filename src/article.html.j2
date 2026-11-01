@@ -1,0 +1,34 @@
+{# An article: a page of its own for long-form writing (the PISA 2025 note
+   first). Included into template.html.j2 when the page has an `article`
+   file (build.py, PAGES); `a` is that file, imported with the page's
+   context, so its copy, figures and labels stay in its own language.
+
+   Desktop: the headline over the text column, a narrow rail beside it with
+   the byline and the section list (sticky while the text scrolls), and the
+   figures as wide as the column. Phones: one column, the list under the
+   headline. Header, footer and switchers stay the landing's. #}
+<article class="article" aria-labelledby="article-title">
+  <header class="article-head">
+    <p class="article-kicker">{{ a.kicker }}</p>
+    <h1 class="article-title" id="article-title">{{ a.title_html }}</h1>
+    <p class="article-dek">{{ a.dek }}</p>
+  </header>
+  <aside class="article-rail">
+    <p class="article-byline">{{ a.byline }}</p>
+    <nav class="article-contents" aria-labelledby="article-contents-title">
+      <p class="article-rail-label" id="article-contents-title">{{ a.contents_label }}</p>
+      <ol>
+        {% for id, heading in a.sections %}
+        <li><a href="#{{ id }}">{{ heading }}</a></li>
+        {% endfor %}
+      </ol>
+    </nav>
+  </aside>
+  <div class="article-body">
+    {{ a.body() }}
+  </div>
+  <footer class="article-notes" id="sources" aria-labelledby="sources-title">
+    <h2 class="article-rail-label" id="sources-title">{{ a.notes_label }}</h2>
+    {{ a.notes() }}
+  </footer>
+</article>

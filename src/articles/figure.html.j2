@@ -1,0 +1,17 @@
+{# A chart in an article: one image as wide as the text column (phones: edge
+   to edge). The charts are drawn at 1920×1080 with their own title, labels
+   and source line, so the figure carries no caption; `alt` says what the
+   chart shows, numbers included. The image links to the full-size file, so
+   the small print can be read on a phone. The ladder stops at the 1920px
+   source (README, "Photographs"); `sizes` is the column, 58rem of the 90rem
+   canvas on desktop — re-measure if article.css changes it. #}
+{% macro chart(stem, alt) -%}
+<figure class="article-figure">
+  <a href="{{ root }}assets/articles/{{ stem }}-1920.webp">
+  <img src="{{ root }}assets/articles/{{ stem }}-1080.webp"
+       srcset="{% for w in [480, 720, 1080, 1440, 1920] %}{{ root }}assets/articles/{{ stem }}-{{ w }}.webp {{ w }}w{{ ", " if not loop.last }}{% endfor %}"
+       sizes="(max-width: 700px) 100vw, 65vw"
+       alt="{{ alt }}" width="1920" height="1080" loading="lazy" decoding="async">
+  </a>
+</figure>
+{%- endmacro %}
