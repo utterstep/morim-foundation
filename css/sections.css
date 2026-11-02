@@ -798,134 +798,329 @@
     margin-bottom: 3.5rem;
   }
 }
-/* The evidence band between the intro and What we do: a finding from the
-   featured article (template.html.j2, build.py "feature"). A paper card on
-   the white like the FAQ list: the pen word, the headline with the peach
-   marker of the article's chart, three figures against the OECD average,
-   the pen note, one text link. Type sizes and their floors: type.css. */
-.evidence {
-  padding: 7.5rem var(--gutter) 0;
-  background: var(--background);
+/* The featured article's pen note in the margin of the intro (template,
+   js/margin-note.js). The claim it annotates gets a blue pen underline; the
+   note starts at the height of the claim's last line, in the end margin,
+   and the script draws the arrow from it to just past the claim's last
+   word. Phones: the note sits under the paragraph, centred, no arrow. */
+.introduction p:has(> .margin-note) {
+  position: relative;
 }
-.evidence-card {
+.introduction p:has(> .margin-note) .intro-claim {
+  padding-block-end: 0.12em;
+  background: url('../assets/pen-underline.svg') left bottom / 100% 0.3em no-repeat;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.margin-note {
+  position: absolute;
+  /* The top of the paragraph's last line: one line of the prose role
+     (type.css, 1.35 × --t-lead) up from its bottom. */
+  top: calc(100% - 1.35 * var(--t-lead));
+  inset-inline-start: calc(100% + 3.75rem);
+  inline-size: 15.5rem;
+  color: var(--scribble-blue);
+  font-family: var(--font-scribble);
+  font-size: 2rem;
+  line-height: 1.05;
+  letter-spacing: normal;
+  text-align: start;
+  text-decoration: none;
+  transform: rotate(-3deg);
+  transform-origin: left top;
+}
+[dir='rtl'] .margin-note {
+  transform: rotate(3deg);
+  transform-origin: right top;
+}
+#top .margin-note:hover {
+  text-decoration: none;
+  color: #123a9f;
+}
+.margin-note-link {
+  white-space: nowrap;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+.margin-note-arrow {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+  pointer-events: none;
+  fill: none;
+  stroke: var(--scribble-blue);
+  stroke-width: 0.125rem;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@media (max-width: 700px) {
+  .margin-note {
+    position: static;
+    display: block;
+    inline-size: auto;
+    max-inline-size: 18rem;
+    margin: 1.5rem auto 0;
+    font-size: 1.625rem;
+    text-align: center;
+    transform: rotate(-2deg);
+    transform-origin: center;
+  }
+  .margin-note-arrow {
+    display: none;
+  }
+}
+
+/* The featured article on a researcher's desk, before the team (template).
+   Copy on the start side; the desk on the end side, its far edge running
+   off the page. The scene is laid out in em on the 1440 reference (1em =
+   1rem = 16px there), so its font-size alone scales it: rem on desktop,
+   the phone's width on phones. The printed page is the article's own
+   headline, standfirst, chart and a paragraph of its text. */
+.desk {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 52.5rem;
+  column-gap: 4rem;
+  align-items: center;
+  padding-block-start: 9rem;
+  padding-inline-start: var(--gutter);
+  background: var(--background);
+  color: var(--ink);
+}
+.desk-copy {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 5rem 6rem 4.75rem;
-  border-radius: 2.5rem;
-  background: var(--paper);
-  color: var(--ink);
-  text-align: center;
+  align-items: flex-start;
 }
-.evidence-kicker {
+.desk-kicker {
   color: var(--scribble-blue);
   font-family: var(--font-scribble);
   font-size: 2rem;
   line-height: 1;
   transform: rotate(-2deg);
 }
-[dir='rtl'] .evidence-kicker {
+[dir='rtl'] .desk-kicker {
   transform: rotate(2deg);
 }
-.evidence-title {
-  max-inline-size: 61rem;
-  margin-block-start: 1.625rem;
-  font-size: 4.75rem;
+.desk-title {
+  margin-block-start: 1.375rem;
+  font-size: 4rem;
   font-weight: 400;
   line-height: 0.96;
   letter-spacing: -0.035em;
   text-wrap: balance;
 }
-/* The marker stroke of the headings (type.css, .approach-name). */
-.evidence-title mark {
+.desk-text {
+  margin-block-start: 1.5rem;
+  color: #55554e;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+.desk-link {
+  margin-block-start: 1.625rem;
+}
+.desk-scene {
+  position: relative;
+  block-size: 53em;
+  font-size: 1rem;
+  border-start-start-radius: 2.5rem;
+  border-end-start-radius: 2.5rem;
+  background-color: #ebe1d2;
+  background-image: repeating-linear-gradient(
+    176deg,
+    #7a5b3600 0,
+    #7a5b3600 2.875em,
+    #7a5b3612 2.9375em,
+    #7a5b3600 3.0625em,
+    #7a5b3600 7.375em,
+    #7a5b360d 7.4375em,
+    #7a5b3600 7.5625em
+  );
+}
+.desk-sheet {
+  position: absolute;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #fff;
+  color: var(--ink);
+  text-decoration: none;
+}
+.desk-sheet img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+.desk-sheet-back {
+  top: 4.375em;
+  inset-inline-start: 26.875em;
+  inline-size: 23.75em;
+  block-size: 33.125em;
+  padding: 1.875em 1.75em;
+  box-shadow:
+    0 0.125em 0.25em #3a2a1a1f,
+    0 1.375em 2.5em -1.125em #3a2a1a59;
+  transform: rotate(8deg);
+}
+.desk-sheet-back p {
+  margin-block-start: 0.875em;
+  color: #3d3f3a;
+  font-size: 0.5625em;
+  line-height: 1.55;
+}
+.desk-sheet-front {
+  top: 3.75em;
+  inset-inline-start: 5em;
+  inline-size: 29.375em;
+  block-size: 40.625em;
+  display: flex;
+  flex-direction: column;
+  padding: 2.125em 2.25em 0;
+  box-shadow:
+    0 0.125em 0.25em #3a2a1a24,
+    0 1.875em 3.125em -1.25em #3a2a1a66;
+  transform: rotate(-4deg);
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+#top .desk-sheet-front:hover {
+  text-decoration: none;
+  transform: rotate(-2.5deg) translateY(-0.375em);
+}
+.sheet-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-block-end: 0.625em;
+  border-block-end: 1px solid #1820222e;
+  color: #66685f;
+  font-size: 0.625em;
+}
+.sheet-brand {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.5em;
+  letter-spacing: -0.03em;
+}
+.sheet-title {
+  margin-block-start: 0.65em;
+  font-family: var(--font-display);
+  font-size: 1.6875em;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.sheet-title mark {
   color: inherit;
   white-space: nowrap;
   padding-inline: 0.2em;
   margin-inline: -0.2em;
   background: url('../assets/highlight-peach.svg') center / 100% 100% no-repeat;
 }
-.evidence-figures {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: 3.5rem;
-  inline-size: min(62.5rem, 100%);
-  margin: 4rem 0 0;
-  padding: 0;
-  list-style: none;
-  text-align: start;
-}
-.evidence-figure {
-  display: flex;
-  flex-direction: column;
-  gap: 0.625rem;
-  padding-block-start: 1.375rem;
-  border-block-start: 1px solid #18202233;
-}
-.evidence-value {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.25rem 0.75rem;
-}
-.evidence-number {
-  font-family: var(--font-display);
-  font-size: 4rem;
-  line-height: 1;
-  letter-spacing: -0.03em;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-:is(.evidence-oecd, .evidence-label) {
+.sheet-dek {
+  margin-block-start: 0.95em;
   color: #55554e;
+  font-size: 0.65625em;
+  line-height: 1.45;
 }
-.evidence-label {
-  line-height: 1.4;
-  text-wrap: pretty;
+.desk-sheet-front img {
+  margin-block-start: 0.875em;
 }
-/* The pen note keeps .beat-note's hand and its reveal (page-motion.js). */
-#top .evidence-note {
-  margin-block-start: 2.5rem;
-  font-size: 2.375rem;
+.sheet-text {
+  margin-block-start: 1.25em;
+  color: #3d3f3a;
+  font-size: 0.59375em;
+  line-height: 1.55;
+}
+/* On the free start side of the page's foot: the sticky covers its end. */
+.sheet-note {
+  align-self: flex-start;
+  margin-block-start: 0.4em;
+  border-block-end: 0.08em solid currentColor;
+  color: var(--scribble-blue);
+  font-family: var(--font-scribble);
+  font-size: 1.625em;
+  line-height: 1.1;
   transform: rotate(-3deg);
 }
-[dir='rtl'] #top .evidence-note {
-  transform: rotate(3deg);
+/* The clip grips the page's top edge in the gap of its header row, between
+   the wordmark and the label, clear of both and of the headline. */
+.desk-clip {
+  position: absolute;
+  top: 1.625em;
+  inset-inline-start: 17.25em;
+  inline-size: 2.25em;
+  block-size: 5.25em;
+  fill: none;
+  stroke: #8a8f92;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  transform: rotate(-4deg);
 }
-.evidence-link {
-  margin-block-start: 2.5rem;
+.desk-sticky {
+  position: absolute;
+  top: 29.375em;
+  inset-inline-start: 30.625em;
+  inline-size: 13.75em;
+  block-size: 13.125em;
+  box-sizing: border-box;
+  padding: 1.625em 1.375em;
+  background: #f8e58c;
+  box-shadow:
+    0 0.125em 0.1875em #3a2a1a1f,
+    0 1em 1.625em -0.875em #3a2a1a59;
+  color: var(--scribble-blue);
+  font-family: var(--font-scribble);
+  transform: rotate(6deg);
 }
+/* The hand on the sticky, in its own span so the note's box stays in the
+   scene's em. */
+.desk-sticky span {
+  display: block;
+  font-size: 1.9375em;
+  line-height: 1.08;
+}
+.desk-pencil {
+  position: absolute;
+  top: 47.5em;
+  inset-inline-start: 3.125em;
+  inline-size: 20.625em;
+  block-size: 2.5em;
+  transform: rotate(-14deg);
+}
+.pencil-body { fill: #f2c94c; }
+.pencil-shine { fill: #f6d97a; }
+.pencil-band { fill: #b8b8b0; }
+.pencil-eraser { fill: #ef8f8f; }
+.pencil-wood { fill: #e8c9a0; }
+.pencil-lead { fill: #3a3a3a; }
 @media (max-width: 700px) {
-  .evidence {
-    padding: 4rem var(--m-gutter) 0;
+  .desk {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 2.5rem;
+    padding-block-start: 5rem;
+    padding-inline-start: var(--m-gutter);
   }
-  .evidence-card {
-    padding: 2.75rem 1.25rem 2.5rem;
-    border-radius: 1.5rem;
+  .desk-copy {
+    padding-inline-end: var(--m-gutter);
   }
-  .evidence-kicker {
+  .desk-kicker {
     font-size: 1.625rem;
   }
-  .evidence-title {
-    margin-block-start: 1.125rem;
+  .desk-title {
+    margin-block-start: 1rem;
   }
-  .evidence-figures {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: 1.5rem;
-    margin-block-start: 2.25rem;
+  .desk-text {
+    margin-block-start: 1rem;
   }
-  .evidence-figure {
-    gap: 0.375rem;
-    padding-block-start: 1rem;
+  .desk-link {
+    margin-block-start: 1.25rem;
   }
-  .evidence-number {
-    font-size: 2.5rem;
-  }
-  #top .evidence-note {
-    margin-block-start: 2rem;
-    font-size: 1.875rem;
-  }
-  .evidence-link {
-    margin-block-start: 1.75rem;
+  /* The desk, scaled to the phone: 52.5em across what is left of the
+     screen after the start gutter. */
+  .desk-scene {
+    font-size: calc((100vw - var(--m-gutter)) / 52.5);
+    border-start-start-radius: 1.5rem;
+    border-end-start-radius: 1.5rem;
   }
 }
 

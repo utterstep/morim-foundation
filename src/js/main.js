@@ -16,6 +16,7 @@ import { startNavMenu } from './nav-menu.js';
 import { startScrollHint } from './scroll-hint.js';
 import { startAudiences } from './audiences.js';
 import { dealHandLetters } from './hand-a.js';
+import { startMarginNote } from './margin-note.js';
 
 const EASING = 'cubic-bezier(0.22, 1, 0.36, 1)';
 const FAQ_MOTION = { duration: 250, easing: EASING, fade: 200 };
@@ -56,6 +57,8 @@ if (root) {
 
   // The mobile menu dialog lives outside <main>, so look across the document.
   document.querySelectorAll('.nav-menu').forEach((menu) => startNavMenu(menu));
+  // The featured article's note in the margin of the intro draws its arrow.
+  root.querySelectorAll('.margin-note').forEach((note) => startMarginNote(note));
   const hint = root.querySelector('[data-scroll-hint]');
   if (hint) startScrollHint(hint);
   startLanguage(root);

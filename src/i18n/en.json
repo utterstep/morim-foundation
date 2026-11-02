@@ -64,7 +64,7 @@
   },
   "approach": {
     "aria": "Our approach",
-    "attention_html": "kids today are growing up inside an economy engineered to consume their attention. Wars. COVID. Zoom classes. Schools were never designed to handle&nbsp;that.",
+    "attention_html": "kids today are growing up inside an economy engineered to consume their attention. Wars. COVID. Zoom classes. <span class=\"intro-claim\">Schools were never designed to handle&nbsp;that.</span>",
     "help": "Our foundation is here to help.",
     "pilot_landscape_alt": "Teachers in discussion at the foundation’s Tbilisi pilot"
   },

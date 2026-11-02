@@ -2,7 +2,7 @@
 // website/app/hero.tsx (lines 774-815). The Messages icon counts up to 99+
 // while the hero is playing; other icons show a fixed number.
 
-import { notificationDuration, notificationLabel } from '../lib/hero-notification.js?v=12aecf5b';
+import { notificationDuration, notificationLabel } from '../lib/hero-notification.js?v=a4e2b7d4';
 
 /**
  * @param {number | '99+'} target

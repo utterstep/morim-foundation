@@ -59,16 +59,17 @@ LANGS = {
 # in the languages listed for it: the switchers on it show the others greyed
 # out, and its head names only the translations that exist.
 #
-# The landing can feature one article: a band between the intro and What we
-# do, with copy from the article's own file (its `teaser`), on the landings
-# whose language has the article. `back` is where a page's Back pill leads
-# on its language's landing; a featured article leads back to its band.
+# The landing can feature one article, with copy from the article's own file
+# (its `teaser`), on the landings whose language has the article: a pen note
+# in the margin of the intro, and the article as a page on a desk before the
+# team. `back` is where a page's Back pill leads on its language's landing;
+# a featured article leads back to its desk.
 PAGES = {
     "home": {"path": "", "feature": "pisa-2025"},
     "schools": {"path": "schools/", "back": "#audiences"},
     "pisa-2025": {"path": "pisa-2025/", "article": "articles/pisa-2025", "langs": ("en",)},
 }
-FEATURE_ID = "evidence"  # the band's id on the landing (template.html.j2)
+FEATURE_ID = "research"  # the desk section's id on the landing (template.html.j2)
 
 
 def page_langs(spec: dict) -> tuple[str, ...]:

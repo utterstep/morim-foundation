@@ -5,8 +5,8 @@
 //   renderSlot(slot)  content: rebuilds a slot's face when its appearance changed
 //   update()          derived flags: data-* attributes, players, badges (idempotent)
 
-import { createHeroStoryFloaters } from '../lib/hero-floating.js?v=12aecf5b';
-import { poofElement, clearPoofs, POOF_DURATION_MS } from '../lib/poof.js?v=12aecf5b';
+import { createHeroStoryFloaters } from '../lib/hero-floating.js?v=a4e2b7d4';
+import { poofElement, clearPoofs, POOF_DURATION_MS } from '../lib/poof.js?v=a4e2b7d4';
 import {
   LAST_VIDEOS_KEY,
   deriveHeroFlags,
@@ -14,12 +14,12 @@ import {
   finishDismiss,
   lastVideoIds,
   parseLastVideoIds,
-} from './hero-state.js?v=12aecf5b';
-import { buildItem, buildFace, updateItem } from './hero-dom.js?v=12aecf5b';
-import { createBadge } from './hero-badge.js?v=12aecf5b';
-import { createPlayer } from './hero-player.js?v=12aecf5b';
-import { attachDrag } from './hero-drag.js?v=12aecf5b';
-import { watchHeroEnvironment } from './hero-environment.js?v=12aecf5b';
+} from './hero-state.js?v=a4e2b7d4';
+import { buildItem, buildFace, updateItem } from './hero-dom.js?v=a4e2b7d4';
+import { createBadge } from './hero-badge.js?v=a4e2b7d4';
+import { createPlayer } from './hero-player.js?v=a4e2b7d4';
+import { attachDrag } from './hero-drag.js?v=a4e2b7d4';
+import { watchHeroEnvironment } from './hero-environment.js?v=a4e2b7d4';
 
 /**
  * @param {HTMLElement} section  the `.hero` element

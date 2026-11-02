@@ -374,8 +374,8 @@ test('the PISA 2025 article: one headline, a section list that matches its headi
   assert.match(html, /<h1 class="article-title" id="article-title">[^<]+<mark>[^<]+<\/mark><\/h1>/);
   assert.doesNotMatch(html, /class="hero|id="faq"|floating-apply|data-scroll-hint/, 'carries the landing');
   assert.match(html, /<a class="logo" href="\.\.\/#top"/);
-  // Featured on the English landing, so Back returns to its band.
-  assert.match(html, /<\/header>\s*<a class="back-float" href="\.\.\/#evidence">/);
+  // Featured on the English landing, so Back returns to its desk.
+  assert.match(html, /<\/header>\s*<a class="back-float" href="\.\.\/#research">/);
   // The list in the rail leads to the h2s of the body, in order.
   const nav = /<nav class="article-contents"[\s\S]*?<\/nav>/.exec(html)?.[0] ?? '';
   const listed = [...nav.matchAll(/<a href="#([^"]+)">([^<]+)<\/a>/g)].map((m) => [m[1], m[2]]);
@@ -402,29 +402,39 @@ test('the PISA 2025 article: one headline, a section list that matches its headi
   assert.doesNotMatch(body, /https:\/\/morim\.foundation/, 'links to the site stay relative');
 });
 
-// The landing features the article: a band between the intro and What we
-// do, only where the article exists in the landing's language.
-test('the English landing carries the PISA evidence band between the intro and What we do', () => {
+// The landing features the article twice, without a section between the
+// story and the programs: a pen note in the margin of the intro, and the
+// article as a page on a desk before the team. Only where the article
+// exists in the landing's language.
+test('the English landing notes the PISA article in the intro’s margin', () => {
   const html = read(pages.en);
-  const band = /<section class="evidence" id="evidence" aria-labelledby="evidence-title">([\s\S]*?)<\/section>/.exec(html);
-  assert.ok(band, 'band');
-  const order = ['class="approach"', 'id="evidence"', 'id="what-we-do"'].map((k) => html.indexOf(k));
-  assert.deepEqual([...order].sort((a, b) => a - b), order);
-  assert.match(band[1], /<h2 class="evidence-title" id="evidence-title">[^<]+<mark>give up sooner<\/mark><\/h2>/);
-  const figures = [...band[1].matchAll(/<span class="evidence-number">([^<]+)<\/span><span class="evidence-oecd">([^<]+)<\/span>/g)].map((m) => [m[1], m[2]]);
-  assert.deepEqual(figures, [['14%', 'OECD 7%'], ['34%', 'OECD 15%'], ['19.7%', 'OECD 8.9%']]);
-  // The same numbers stand in the article's text.
-  const article = read(articlePages['pisa-2025'].en);
-  for (const [value, oecd] of [['14%', '7%'], ['34%', '15%'], ['19.7%', '8.9%']]) {
-    assert.ok(article.includes(value) && article.includes(`OECD: ${oecd}`), `${value} vs ${oecd} in the article`);
-  }
-  assert.match(band[1], /<p class="beat-note evidence-note">/);
-  assert.match(band[1], /<a class="text-link evidence-link" href="pisa-2025\/">/);
-  assert.doesNotMatch(band[1], /class="button|data-apply/, 'no second call to action');
-  assert.match(html, /<a class="scroll-hint" href="#evidence"/);
+  const intro = /<p data-hero-story-end>([\s\S]*?)<\/p>/.exec(html)?.[1] ?? '';
+  // The claim the note annotates, then the note, then the arrow the script draws.
+  assert.match(intro, /<span class="intro-claim">Schools were never designed to handle&nbsp;that\.<\/span><a class="margin-note" href="pisa-2025\/">[^<]+<span class="margin-note-link">[^<]+<\/span><\/a><svg class="margin-note-arrow" aria-hidden="true" focusable="false"><path d=""\/><\/svg>$/);
+  assert.match(intro, /about twice as often/);
+  assert.match(read('js/main.js'), /from '\.\/margin-note\.js\?v=[0-9a-f]{8}'/);
+  assert.doesNotMatch(html, /id="evidence"|class="evidence/, 'the band is gone');
   for (const lang of ['ru', 'he']) {
-    const other = read(pages[lang]);
-    assert.doesNotMatch(other, /id="evidence"/, `${lang}: the article is English only`);
-    assert.match(other, /<a class="scroll-hint" href="#what-we-do"/);
+    assert.doesNotMatch(read(pages[lang]), /class="margin-note"/, `${lang}: the article is English only`);
   }
+});
+
+test('the English landing sets the PISA article on a desk between the camp and the team', () => {
+  const html = read(pages.en);
+  const desk = /<section class="desk" id="research" aria-labelledby="research-title">([\s\S]*?)<\/section>/.exec(html);
+  assert.ok(desk, 'desk');
+  const order = ['id="tbilisi-camp"', 'id="research"', 'id="team"'].map((k) => html.indexOf(k));
+  assert.deepEqual([...order].sort((a, b) => a - b), order);
+  assert.match(desk[1], /<h2 class="desk-title" id="research-title">[^<]+<\/h2>/);
+  assert.match(desk[1], /<a class="text-link desk-link" href="pisa-2025\/">/);
+  // The scene is decoration: hidden from assistive tech, its page out of the tab order.
+  assert.match(desk[1], /<div class="desk-scene" aria-hidden="true">/);
+  assert.match(desk[1], /<a class="desk-sheet desk-sheet-front" href="pisa-2025\/" tabindex="-1">/);
+  // The printed page carries the article's own headline and figures.
+  const article = read(articlePages['pisa-2025'].en);
+  const headline = /<h1 class="article-title" id="article-title">([\s\S]*?)<\/h1>/.exec(article)[1];
+  assert.ok(desk[1].includes(`<span class="sheet-title">${headline}</span>`));
+  for (const figure of ['14%', '(OECD: 7%)', '34%', '19.7%']) assert.ok(desk[1].includes(figure) && article.includes(figure), figure);
+  assert.doesNotMatch(desk[1], /class="button|data-apply/, 'no second call to action');
+  for (const lang of ['ru', 'he']) assert.doesNotMatch(read(pages[lang]), /class="desk"/, `${lang}: no desk`);
 });

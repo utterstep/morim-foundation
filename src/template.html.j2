@@ -189,7 +189,7 @@
 {# An article page brings its own title, copy and labels (build.py, PAGES):
    `a.title`, `a.body()` and the rest come from its file in src/articles/. #}
 {% if article %}{% import article as a with context %}{% endif %}
-{# The article the landing features: its band's copy is `f.teaser`. #}
+{# The article the landing features: its note's and desk's copy is `f.teaser`. #}
 {% if feature %}{% import feature.file as f with context %}{% endif %}
 <!DOCTYPE html>
 <html lang="{{ lang }}" dir="{{ dir }}">
@@ -339,7 +339,7 @@
   {# A small fixed hint at the bottom of the first screen; js/scroll-hint.js
      hides it after the second scroll gesture, or at once if the page did not
      open at the top. #}
-  <a class="scroll-hint" href="#{{ feature_id if feature else 'what-we-do' }}" data-scroll-hint>
+  <a class="scroll-hint" href="#what-we-do" data-scroll-hint>
     <span>{{ t.hero.scroll_hint }}</span>
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
   </a>
@@ -352,36 +352,15 @@
 
   <section class="approach" id="approach" aria-label="{{ t.approach.aria }}">
     <div class="prose introduction">
-      <p data-hero-story-end>{{ t.approach.attention_html }}</p>
+      {# The featured article's pen note sits in the margin at the height of
+         the claim's last line (its `.intro-claim`); js/margin-note.js draws
+         the arrow from the note to the end of the claim, measured, so it
+         runs through the blank end of that line and never across text.
+         Phones: the note drops under the paragraph, no arrow. #}
+      <p data-hero-story-end>{{ t.approach.attention_html }}{% if feature %}<a class="margin-note" href="{{ feature.href }}">{{ f.teaser.margin_html }}</a><svg class="margin-note-arrow" aria-hidden="true" focusable="false"><path d=""/></svg>{% endif %}</p>
       <p>{{ t.approach.help }}</p>
     </div>
   </section>
-
-  {# The evidence for the story's "…but", between it and the programs: a
-     finding from our research in three numbers against the OECD average,
-     with one link to the article. Its copy is the article's own (`teaser`
-     in src/articles/), so the band shows only on landings whose language
-     has the article. The numbers are figures, not a chart: they stay text
-     for translation and screen readers. #}
-  {% if feature %}
-  {% set tz = f.teaser %}
-  <section class="evidence" id="{{ feature_id }}" aria-labelledby="{{ feature_id }}-title">
-    <div class="evidence-card">
-      <p class="evidence-kicker">{{ tz.kicker }}</p>
-      <h2 class="evidence-title" id="{{ feature_id }}-title">{{ tz.title_html }}</h2>
-      <ul class="evidence-figures" role="list">
-        {% for s in tz.figures %}
-        <li class="evidence-figure">
-          <span class="evidence-value"><span class="evidence-number">{{ s.value }}</span><span class="evidence-oecd">{{ s.oecd }}</span></span>
-          <span class="evidence-label">{{ s.label }}</span>
-        </li>
-        {% endfor %}
-      </ul>
-      <p class="beat-note evidence-note">{{ tz.note }}</p>
-      <a class="text-link evidence-link" href="{{ feature.href }}"><span>{{ tz.link }}</span><svg class="promo-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
-  </section>
-  {% endif %}
 
   {# The answer to "what is this?", right after the story: the Foundation
      line beside the heading, one pilot photo edge to edge, three beats,
@@ -616,6 +595,42 @@
       </div>
     </div>
   </section>
+
+  {# The featured article on a researcher's desk, before the people: the
+     story runs problem, programs, pilot, then who reads the data. Copy on
+     the start side; the desk on the end side, bleeding off the page, with
+     the article as a printed page (a second way into it), a page behind
+     it, a sticky, a clip and a pencil. The scene is drawn in em, so one
+     font-size scales it; it is hidden from assistive tech, whose way in is
+     the copy's link. #}
+  {% if feature %}
+  {% set desk = f.teaser.desk %}
+  <section class="desk" id="{{ feature_id }}" aria-labelledby="{{ feature_id }}-title">
+    <div class="desk-copy">
+      <p class="desk-kicker">{{ desk.kicker }}</p>
+      <h2 class="desk-title" id="{{ feature_id }}-title">{{ desk.title }}</h2>
+      <p class="desk-text">{{ desk.text }}</p>
+      <a class="text-link desk-link" href="{{ feature.href }}"><span>{{ desk.link }}</span><svg class="promo-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="desk-scene" aria-hidden="true">
+      <div class="desk-sheet desk-sheet-back">
+        <img src="{{ root }}assets/articles/{{ desk.back_chart }}-720.webp" srcset="{% for w in [480, 720, 1080] %}{{ root }}assets/articles/{{ desk.back_chart }}-{{ w }}.webp {{ w }}w{{ ", " if not loop.last }}{% endfor %}" sizes="(max-width: 700px) 42vw, 23vw" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+        <p>{{ desk.back_text }}</p>
+      </div>
+      <a class="desk-sheet desk-sheet-front" href="{{ feature.href }}" tabindex="-1">
+        <span class="sheet-head"><span class="sheet-brand">{{ t.header.logo }}</span><span>{{ desk.page_kicker }}</span></span>
+        <span class="sheet-title">{{ f.title_html }}</span>
+        <span class="sheet-dek">{{ f.dek }}</span>
+        <img src="{{ root }}assets/articles/{{ desk.page_chart }}-720.webp" srcset="{% for w in [480, 720, 1080] %}{{ root }}assets/articles/{{ desk.page_chart }}-{{ w }}.webp {{ w }}w{{ ", " if not loop.last }}{% endfor %}" sizes="(max-width: 700px) 50vw, 28vw" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+        <span class="sheet-text">{{ desk.page_text }}</span>
+        <span class="sheet-note">{{ desk.page_note }}</span>
+      </a>
+      <svg class="desk-clip" viewBox="0 0 40 96" focusable="false"><path d="M14 74V18C14 10 26 10 26 18V80C26 92 6 92 6 80V24M20 70V26"/></svg>
+      <p class="desk-sticky"><span>{{ desk.sticky }}</span></p>
+      <svg class="desk-pencil" viewBox="0 0 330 40" focusable="false"><rect class="pencil-body" x="34" y="10" width="250" height="20" rx="2"/><rect class="pencil-shine" x="34" y="10" width="250" height="6"/><rect class="pencil-band" x="284" y="10" width="16" height="20"/><rect class="pencil-eraser" x="300" y="10" width="26" height="20" rx="5"/><path class="pencil-wood" d="M34 10 4 20l30 10Z"/><path class="pencil-lead" d="m12 17-8 3 8 3Z"/></svg>
+    </div>
+  </section>
+  {% endif %}
 
   <section class="team" id="team" aria-labelledby="team-title">
     <p class="eyebrow">{{ t.team.eyebrow }}</p>

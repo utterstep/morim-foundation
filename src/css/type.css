@@ -86,20 +86,16 @@ body,
   #top .stat-value {
     font-size: var(--t-num);
   }
-  /* The evidence band (sections.css): its headline between the item and
-     section sizes, its figures above the camp's, both floored like the
-     roles; labels, the OECD comparison and the link are body text. */
-  #top .evidence-title {
-    font-size: max(4.75rem, 36px);
-  }
-  #top .evidence-number {
+  /* The desk before the team (sections.css): its headline at the size of
+     the camp's, floored like the roles; its text and link are body text. */
+  #top .desk-title {
     font-size: max(4rem, 34px);
   }
-  #top :is(.evidence-oecd, .evidence-label, .evidence-link) {
+  #top :is(.desk-text, .desk-link) {
     font-size: var(--t-body);
     letter-spacing: -0.01em;
   }
-  #top .evidence-kicker {
+  #top .desk-kicker {
     font-size: max(2rem, 24px);
   }
 }
@@ -134,16 +130,16 @@ body,
 
   /* Mobile roles (AUDIT.md, T2-T4). Each role had drifted into its own
      line-height and a few sizes sat off the scale; one value per role. */
-  #top :is(.display, .what-we-do .display, .partners .display, .team-title, .faq h2, .footer-message h2, .evidence-title) {
+  #top :is(.display, .what-we-do .display, .partners .display, .team-title, .faq h2, .footer-message h2, .desk-title) {
     font-size: var(--m-title);
     line-height: 1.05;
     text-wrap: balance;
   }
-  #top :is(.evidence-oecd, .evidence-label) {
+  #top .desk-text {
     font-size: var(--m-body);
     line-height: 1.45;
   }
-  #top .evidence-link {
+  #top .desk-link {
     font-size: var(--m-item-title);
   }
   #top :is(.prose, .footer-lead, .eyebrow) {

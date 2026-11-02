@@ -25,19 +25,24 @@
 {% set notes_label = "Sources" %}
 {% set share_image = "assets/articles/pisa-2025/share.png" %}
 {% set share_alt = "Chart: Israeli students say they try as hard as anyone, then give up about twice as often as the OECD average." %}
-{# The band on the landing, between the intro and What we do (build.py,
-   PAGES "feature"): the persistence finding in three numbers against the
-   OECD average, each as the text below gives it. #}
+{# What the landing shows of this article (build.py, PAGES "feature"): the
+   pen note in the margin of the intro, and the desk before the team, with
+   this article as the printed page. Figures as the text below gives them. #}
 {% set teaser = {
-  "kicker": "from our reading of PISA 2025",
-  "title_html": "Israeli students don’t just score lower&nbsp;– they <mark>give up sooner</mark>",
-  "figures": [
-    {"value": "14%", "oecd": "OECD 7%", "label": "of tasks they gave up on in PISA’s new digital test"},
-    {"value": "34%", "oecd": "OECD 15%", "label": "of students stopped answering the questionnaire before its later sections"},
-    {"value": "19.7%", "oecd": "OECD 8.9%", "label": "of reading answers fast and wrong&nbsp;– a guess rather than an attempt"},
-  ],
-  "note": "first in the OECD on all three",
-  "link": "Read our PISA 2025 note",
+  "margin_html": "PISA 2025 measured it: Israeli 15-year-olds give up about twice as often as the OECD average. <span class=\"margin-note-link\">Read our note</span>",
+  "desk": {
+    "kicker": "on our desk",
+    "title": "We read the reports, and the raw data",
+    "text": dek,
+    "link": "Read our PISA 2025 note",
+    "page_kicker": "Research note · PISA 2025",
+    "page_chart": "pisa-2025/give-up",
+    "page_text": "By the self-reported numbers, Israeli students look like everyone else: 59% say they put in extra effort when work gets hard, against 60% across the OECD. In practice, they don’t. Israeli students gave up on 14% of tasks in the digital test (OECD: 7%); 34% stopped answering the questionnaire before its later sections (OECD: 15%); and 19.7% of their reading answers were fast and wrong (OECD: 8.9%). On all three measures, Israel is first in the OECD.",
+    "page_note": "so we start earlier",
+    "back_chart": "pisa-2025/curiosity",
+    "back_text": "PISA also asked about curiosity. Israeli students report a little less of it than their OECD peers: 68% say they are curious about many different things, against 73% across the OECD. And curiosity goes with results.",
+    "sticky": "14% vs 7% – first in the OECD on all three!",
+  },
 } %}
 {% set sections = [
   ("academic-performance", "Academic performance"),
