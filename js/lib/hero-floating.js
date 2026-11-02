@@ -1,5 +1,5 @@
 // Ported from PR #3 website/lib/hero-floating.ts (plain ES module, no build step).
-import { heroVideos, heroVideoPools } from './hero-videos.js?v=a4e2b7d4';
+import { heroVideos, heroVideoPools } from './hero-videos.js?v=fc229630';
 
 const HERO_VIDEO_COUNT = heroVideos.length;
 export const HERO_DISMISS_MS = 450;

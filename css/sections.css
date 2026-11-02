@@ -800,9 +800,10 @@
 }
 /* The featured article's pen note in the margin of the intro (template,
    js/margin-note.js). The claim it annotates gets a blue pen underline; the
-   note starts at the height of the claim's last line, in the end margin,
-   and the script draws the arrow from it to just past the claim's last
-   word. Phones: the note sits under the paragraph, centred, no arrow. */
+   note sits in the end margin, centred on the paragraph (one line: "Our
+   foundation is here to help."), and the script draws the arrow from it to
+   just past the claim's last word. Phones: the note sits under the
+   paragraph, centred, no arrow. */
 .introduction p:has(> .margin-note) {
   position: relative;
 }
@@ -814,9 +815,8 @@
 }
 .margin-note {
   position: absolute;
-  /* The top of the paragraph's last line: one line of the prose role
-     (type.css, 1.35 × --t-lead) up from its bottom. */
-  top: calc(100% - 1.35 * var(--t-lead));
+  top: 50%;
+  translate: 0 -50%;
   inset-inline-start: calc(100% + 3.75rem);
   inline-size: 15.5rem;
   color: var(--scribble-blue);
@@ -865,6 +865,7 @@
     margin: 1.5rem auto 0;
     font-size: 1.625rem;
     text-align: center;
+    translate: none;
     transform: rotate(-2deg);
     transform-origin: center;
   }
@@ -911,6 +912,14 @@
   line-height: 0.96;
   letter-spacing: -0.035em;
   text-wrap: balance;
+}
+/* "curiosity" carries the yellow marker it has in the What we do heading. */
+.desk-title mark {
+  color: inherit;
+  white-space: nowrap;
+  padding-inline: 0.3em;
+  margin-inline: -0.3em;
+  background: url('../assets/highlight-yellow.svg') center / 100% 100% no-repeat;
 }
 .desk-text {
   margin-block-start: 1.5rem;

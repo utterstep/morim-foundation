@@ -1,8 +1,8 @@
 // The pen arrow from the featured article's margin note to the end of the
 // sentence it annotates (the landing's intro, src/template.html.j2). The
-// note starts in the end margin at the height of the claim's last line; the
-// arrow runs from the note's near edge to just past the claim's last word,
-// through the blank end of that line, so it never crosses text. Measured,
+// note sits in the end margin beside the claim; the arrow runs from the
+// note's near edge to just past the claim's last word, through the blank
+// end of that line, so it never crosses text. Measured,
 // not drawn in CSS: the line breaks move with the viewport and the type
 // floors (type.css). Without the script there is no arrow; the note and the
 // claim's underline still pair up.
@@ -37,8 +37,9 @@ export function arrowPath(from, to, sag, head) {
 
 /**
  * Where the arrow starts and ends, in the paragraph's own coordinates: from
- * the note's edge facing the claim, at the middle of the note's first line,
- * to a little past the end of the claim's last line, at its middle.
+ * the note's edge facing the claim, at the note's line nearest the claim's
+ * last line (level with it when the note spans its height), to a little
+ * past the end of that line, at its middle.
  * @param {DOMRect} box  the paragraph
  * @param {DOMRect} note  the note
  * @param {DOMRect} last  the claim's last line box
@@ -47,9 +48,11 @@ export function arrowPath(from, to, sag, head) {
  */
 export function arrowEnds(box, note, last, noteLine, gap) {
   const rtl = note.right <= last.left;
-  const y = last.top + last.height / 2 - box.top;
+  const target = last.top + last.height / 2;
+  const start = Math.min(Math.max(target, note.top + noteLine / 2), note.bottom - noteLine / 2);
+  const y = target - box.top;
   return {
-    from: { x: (rtl ? note.right + gap : note.left - gap) - box.left, y: note.top + noteLine / 2 - box.top },
+    from: { x: (rtl ? note.right + gap : note.left - gap) - box.left, y: start - box.top },
     to: { x: (rtl ? last.left - gap : last.right + gap) - box.left, y },
   };
 }

@@ -408,10 +408,12 @@ test('the PISA 2025 article: one headline, a section list that matches its headi
 // exists in the landing's language.
 test('the English landing notes the PISA article in the intro’s margin', () => {
   const html = read(pages.en);
-  const intro = /<p data-hero-story-end>([\s\S]*?)<\/p>/.exec(html)?.[1] ?? '';
-  // The claim the note annotates, then the note, then the arrow the script draws.
-  assert.match(intro, /<span class="intro-claim">Schools were never designed to handle&nbsp;that\.<\/span><a class="margin-note" href="pisa-2025\/">[^<]+<span class="margin-note-link">[^<]+<\/span><\/a><svg class="margin-note-arrow" aria-hidden="true" focusable="false"><path d=""\/><\/svg>$/);
-  assert.match(intro, /about twice as often/);
+  const intro = /<div class="prose introduction">([\s\S]*?)<\/div>/.exec(html)?.[1] ?? '';
+  // The promise the note answers, then the note, then the arrow the script draws.
+  assert.match(intro, /<p>Our foundation is <span class="intro-claim">here to help\.<\/span><a class="margin-note" href="pisa-2025\/">[^<]+<span class="margin-note-link">[^<]+<\/span><\/a><svg class="margin-note-arrow" aria-hidden="true" focusable="false"><path d=""\/><\/svg><\/p>/);
+  // Hopeful, not a verdict on anyone.
+  assert.match(intro, /curiosity counts as much as family background/);
+  assert.doesNotMatch(intro, /give up|gave up/);
   assert.match(read('js/main.js'), /from '\.\/margin-note\.js\?v=[0-9a-f]{8}'/);
   assert.doesNotMatch(html, /id="evidence"|class="evidence/, 'the band is gone');
   for (const lang of ['ru', 'he']) {
@@ -425,7 +427,7 @@ test('the English landing sets the PISA article on a desk between the camp and t
   assert.ok(desk, 'desk');
   const order = ['id="tbilisi-camp"', 'id="research"', 'id="team"'].map((k) => html.indexOf(k));
   assert.deepEqual([...order].sort((a, b) => a - b), order);
-  assert.match(desk[1], /<h2 class="desk-title" id="research-title">[^<]+<\/h2>/);
+  assert.match(desk[1], /<h2 class="desk-title" id="research-title">Why <mark>curiosity<\/mark>, and why before&nbsp;15<\/h2>/);
   assert.match(desk[1], /<a class="text-link desk-link" href="pisa-2025\/">/);
   // The scene is decoration: hidden from assistive tech, its page out of the tab order.
   assert.match(desk[1], /<div class="desk-scene" aria-hidden="true">/);

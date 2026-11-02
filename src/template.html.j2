@@ -352,13 +352,14 @@
 
   <section class="approach" id="approach" aria-label="{{ t.approach.aria }}">
     <div class="prose introduction">
-      {# The featured article's pen note sits in the margin at the height of
-         the claim's last line (its `.intro-claim`); js/margin-note.js draws
-         the arrow from the note to the end of the claim, measured, so it
-         runs through the blank end of that line and never across text.
-         Phones: the note drops under the paragraph, no arrow. #}
-      <p data-hero-story-end>{{ t.approach.attention_html }}{% if feature %}<a class="margin-note" href="{{ feature.href }}">{{ f.teaser.margin_html }}</a><svg class="margin-note-arrow" aria-hidden="true" focusable="false"><path d=""/></svg>{% endif %}</p>
-      <p>{{ t.approach.help }}</p>
+      <p data-hero-story-end>{{ t.approach.attention_html }}</p>
+      {# The featured article's pen note answers the promise ("here to
+         help", its `.intro-claim`) with a hopeful finding. It sits in the
+         margin, centred on the line; js/margin-note.js draws the arrow from
+         it to just past the claim, measured, so it runs through the blank
+         end of the line and never across text. Phones: the note drops under
+         the line, no arrow. #}
+      <p>{{ t.approach.help }}{% if feature %}<a class="margin-note" href="{{ feature.href }}">{{ f.teaser.margin_html }}</a><svg class="margin-note-arrow" aria-hidden="true" focusable="false"><path d=""/></svg>{% endif %}</p>
     </div>
   </section>
 
@@ -608,7 +609,7 @@
   <section class="desk" id="{{ feature_id }}" aria-labelledby="{{ feature_id }}-title">
     <div class="desk-copy">
       <p class="desk-kicker">{{ desk.kicker }}</p>
-      <h2 class="desk-title" id="{{ feature_id }}-title">{{ desk.title }}</h2>
+      <h2 class="desk-title" id="{{ feature_id }}-title">{{ desk.title_html }}</h2>
       <p class="desk-text">{{ desk.text }}</p>
       <a class="text-link desk-link" href="{{ feature.href }}"><span>{{ desk.link }}</span><svg class="promo-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>

@@ -26,14 +26,18 @@
 {% set share_image = "assets/articles/pisa-2025/share.png" %}
 {% set share_alt = "Chart: Israeli students say they try as hard as anyone, then give up about twice as often as the OECD average." %}
 {# What the landing shows of this article (build.py, PAGES "feature"): the
-   pen note in the margin of the intro, and the desk before the team, with
-   this article as the printed page. Figures as the text below gives them. #}
+   pen note in the margin of the intro, answering "here to help" with the
+   hopeful finding, and the desk before the team, with this article as the
+   printed page; the desk says why the programs start from curiosity and
+   before 15. Figures as the text below gives them, and never as blame:
+   PISA counts for nothing, so the numbers measure keeping going when
+   nothing is at stake. #}
 {% set teaser = {
-  "margin_html": "PISA 2025 measured it: Israeli 15-year-olds give up about twice as often as the OECD average. <span class=\"margin-note-link\">Read our note</span>",
+  "margin_html": "there’s a lever: in Israel, curiosity counts as much as family background. <span class=\"margin-note-link\">PISA 2025, our note</span>",
   "desk": {
     "kicker": "on our desk",
-    "title": "We read the reports, and the raw data",
-    "text": dek,
+    "title_html": "Why <mark>curiosity</mark>, and why before&nbsp;15",
+    "text": "In PISA 2025, Israeli 15-year-olds said they try as hard as anyone. Yet on tasks that counted for nothing, they stopped about twice as often as their OECD peers. So we work with teachers of younger classes, before that sets in. And in Israel, curiosity goes with science scores as strongly as family background does, which is why our lessons start from it.",
     "link": "Read our PISA 2025 note",
     "page_kicker": "Research note · PISA 2025",
     "page_chart": "pisa-2025/give-up",
@@ -41,7 +45,7 @@
     "page_note": "so we start earlier",
     "back_chart": "pisa-2025/curiosity",
     "back_text": "PISA also asked about curiosity. Israeli students report a little less of it than their OECD peers: 68% say they are curious about many different things, against 73% across the OECD. And curiosity goes with results.",
-    "sticky": "14% vs 7% – first in the OECD on all three!",
+    "sticky": "curiosity counts as much as family background!",
   },
 } %}
 {% set sections = [

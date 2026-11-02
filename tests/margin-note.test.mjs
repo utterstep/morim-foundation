@@ -10,6 +10,7 @@ test('the arrow runs from the note to just past the claim, in the paragraph’s 
   const note = rect(1127, 1058, 240, 170);
   const { from, to } = arrowEnds(box, note, last, 34, 10);
   assert.deepEqual(to, { x: 870 + 10 - 385, y: 75 });
+  // The note's first line sits just below the claim's: the arrow starts there.
   assert.deepEqual(from, { x: 1127 - 10 - 385, y: 1058 + 17 - 1000 });
   // It never reaches back into the line: the tip is after the text's end.
   assert.ok(to.x > last.right - box.left);
@@ -31,4 +32,13 @@ test('the path is one stroke and an open head ending at the tip', () => {
   // Both arms sit behind the tip, on the stroke's side.
   const arms = [...d.matchAll(/[ML]([\d.]+) ([\d.]+)/g)].slice(1).map((m) => Number(m[1]));
   assert.ok(arms[0] > 100 && arms[2] > 100);
+});
+
+test('a note centred on the claim starts its arrow level with the claim', () => {
+  const box = rect(385, 1000, 670, 30); // one line: "Our foundation is here to help."
+  const last = rect(684, 1000, 120, 30);
+  const note = rect(1111, 930, 248, 170);
+  const { from, to } = arrowEnds(box, note, last, 34, 10);
+  assert.equal(from.y, to.y);
+  assert.equal(to.y, 15);
 });

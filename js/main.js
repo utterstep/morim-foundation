@@ -1,22 +1,22 @@
 // Entry point. Wires the static page up in the same order the React tree
 // mounted its effects in PR #3 (website/app/home-content.tsx).
 
-import { startPageMotion } from './lib/page-motion.js?v=a4e2b7d4';
-import { startCardDepth } from './lib/card-depth.js?v=a4e2b7d4';
-import { watchApplyButtons } from './lib/floating-apply.js?v=a4e2b7d4';
-import { startFloatingHeader } from './header.js?v=a4e2b7d4';
-import { initDialogs } from './dialog.js?v=a4e2b7d4';
-import { startMobileMenu } from './mobile-menu.js?v=a4e2b7d4';
-import { initDetails, initExpander } from './disclosure.js?v=a4e2b7d4';
-import { watchProgramMotionPreference } from './program-motion.js?v=a4e2b7d4';
-import { startPrograms } from './programs.js?v=a4e2b7d4';
-import { startHero } from './hero/hero.js?v=a4e2b7d4';
-import { startLanguage } from './lang.js?v=a4e2b7d4';
-import { startNavMenu } from './nav-menu.js?v=a4e2b7d4';
-import { startScrollHint } from './scroll-hint.js?v=a4e2b7d4';
-import { startAudiences } from './audiences.js?v=a4e2b7d4';
-import { dealHandLetters } from './hand-a.js?v=a4e2b7d4';
-import { startMarginNote } from './margin-note.js?v=a4e2b7d4';
+import { startPageMotion } from './lib/page-motion.js?v=fc229630';
+import { startCardDepth } from './lib/card-depth.js?v=fc229630';
+import { watchApplyButtons } from './lib/floating-apply.js?v=fc229630';
+import { startFloatingHeader } from './header.js?v=fc229630';
+import { initDialogs } from './dialog.js?v=fc229630';
+import { startMobileMenu } from './mobile-menu.js?v=fc229630';
+import { initDetails, initExpander } from './disclosure.js?v=fc229630';
+import { watchProgramMotionPreference } from './program-motion.js?v=fc229630';
+import { startPrograms } from './programs.js?v=fc229630';
+import { startHero } from './hero/hero.js?v=fc229630';
+import { startLanguage } from './lang.js?v=fc229630';
+import { startNavMenu } from './nav-menu.js?v=fc229630';
+import { startScrollHint } from './scroll-hint.js?v=fc229630';
+import { startAudiences } from './audiences.js?v=fc229630';
+import { dealHandLetters } from './hand-a.js?v=fc229630';
+import { startMarginNote } from './margin-note.js?v=fc229630';
 
 const EASING = 'cubic-bezier(0.22, 1, 0.36, 1)';
 const FAQ_MOTION = { duration: 250, easing: EASING, fade: 200 };

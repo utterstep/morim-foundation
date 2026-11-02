@@ -70,9 +70,10 @@ written in. The first is the PISA 2025 note at `/pisa-2025/`, in English.
 - The landing can feature one article: `"feature"` on `home` in `PAGES`. It
   shows twice, with copy from the article's own `teaser`, only on landings
   whose language has the article (today: English): a pen note in the margin
-  of the intro, pointing at the `.intro-claim` in `approach.attention_html`
-  (`src/js/margin-note.js` measures and draws the arrow, so it never crosses
-  the text), and the article as a printed page on a desk before the team.
+  of the intro, pointing at the `.intro-claim` in `approach.help` ("here to
+  help"; `src/js/margin-note.js` measures and draws the arrow, so it never
+  crosses the text), and the article as a printed page on a desk before the
+  team.
   The article's Back pill returns to the desk.
 
 ### Typography
