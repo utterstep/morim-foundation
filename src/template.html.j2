@@ -207,6 +207,7 @@
   <meta name="description" content="{{ t.meta.description }}">
   {% endif %}
   {% if article %}
+  <meta name="author" content="{{ a.author }}">
   {# A shared link to an article shows its headline chart. PNG, not WebP:
      not every link preview reads WebP; absolute, like canonical. #}
   <meta property="og:type" content="article">

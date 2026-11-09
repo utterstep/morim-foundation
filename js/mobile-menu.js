@@ -3,7 +3,7 @@
 // component had on top: close on link click, close when the viewport grows
 // past the mobile breakpoint.
 
-import { closeDialog } from './dialog.js?v=fc229630';
+import { closeDialog } from './dialog.js?v=fcb6593e';
 
 /**
  * @param {HTMLDialogElement} menu

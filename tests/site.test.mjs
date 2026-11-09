@@ -361,6 +361,7 @@ test('the PISA 2025 article is built in English only, and its head says so', () 
   const menu = /id="lang-menu-list"[\s\S]*?<\/ul>/.exec(html)?.[0] ?? '';
   assert.equal((menu.match(/role="link" aria-disabled="true"/g) ?? []).length, 2, 'ru and he greyed out');
   assert.match(html, /<meta property="og:type" content="article">/);
+  assert.match(html, /<meta name="author" content="Vlad Stepanov, Julia Khaleeva">/);
   const image = /<meta property="og:image" content="https:\/\/morim\.foundation\/([^"]+)">/.exec(html);
   assert.ok(image && existsSync(join(site, image[1])), 'share image is published');
   assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
@@ -374,6 +375,12 @@ test('the PISA 2025 article: one headline, a section list that matches its headi
   assert.match(html, /<h1 class="article-title" id="article-title">[^<]+<mark>[^<]+<\/mark><\/h1>/);
   assert.doesNotMatch(html, /class="hero|id="faq"|floating-apply|data-scroll-hint/, 'carries the landing');
   assert.match(html, /<a class="logo" href="\.\.\/#top"/);
+  // The authors under the standfirst, each with a portrait or initials.
+  const authors = /<header class="article-head">[\s\S]*?<ul class="article-authors" aria-label="Authors">([\s\S]*?)<\/ul>\s*<\/header>/.exec(html)?.[1] ?? '';
+  const names = [...authors.matchAll(/<span class="article-author-name">([^<]+)<\/span>/g)].map((m) => m[1]);
+  assert.deepEqual(names, ['Vlad Stepanov', 'Julia Khaleeva']);
+  assert.match(authors, /\.\.\/assets\/author-vlad-288\.webp 288w/);
+  assert.match(authors, /<span class="article-avatar is-initials" aria-hidden="true">JK<\/span>/);
   // Featured on the English landing, so Back returns to its desk.
   assert.match(html, /<\/header>\s*<a class="back-float" href="\.\.\/#research">/);
   // The list in the rail leads to the h2s of the body, in order.

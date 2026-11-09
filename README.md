@@ -58,6 +58,9 @@ written in. The first is the PISA 2025 note at `/pisa-2025/`, in English.
   section list, the text and the sources, as plain HTML with Jinja `set`s and
   macros. `src/article.html.j2` lays it out; `src/css/article.css` styles it and
   loads on article pages only.
+- Its authors are a list in the same file (`authors`): name, role and the
+  stem of a square avatar ladder (`src/assets/author-<name>-96…288.webp`,
+  cropped from the team portrait); an author without one gets initials.
 - List it in `PAGES` in `build.py` with its path and languages. Its head names
   only the translations that exist; the switchers show the others greyed out.
   A translation is one more file (`<name>.ru.html.j2`) and `"ru"` in `langs`.

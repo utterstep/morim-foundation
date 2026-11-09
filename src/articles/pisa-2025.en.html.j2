@@ -20,7 +20,15 @@
 {% set dek = "The September headlines were about the averages. We went back to the OECD and RAMA reports, and to the raw data, to see what the averages hide – and what it means for teaching." %}
 {% set description = dek %}
 {% set kicker = "Research note" %}
-{% set byline = "Morim Foundation" %}
+{# Who wrote it, shown under the standfirst. `photo` is the stem of a
+   square avatar ladder in src/assets (author-<name>-96…288.webp, cropped
+   from the team portrait); without one, the initials stand in. #}
+{% set authors = [
+  {"name": "Vlad Stepanov", "role": "Co-founder, CEO", "photo": "author-vlad"},
+  {"name": "Julia Khaleeva", "role": "Analyst", "photo": none},
+] %}
+{% set authors_label = "Authors" %}
+{% set author = authors | map(attribute="name") | join(", ") %}
 {% set contents_label = "In this article" %}
 {% set notes_label = "Sources" %}
 {% set share_image = "assets/articles/pisa-2025/share.png" %}

@@ -3,7 +3,7 @@
 // without JS every pane stays visible. Any same-page link into a hidden pane
 // (#leaders, #program-…) switches the pane first, so the browser can scroll to it.
 
-import { startTabs } from './tabs.js?v=fc229630';
+import { startTabs } from './tabs.js?v=fcb6593e';
 
 /**
  * @param {HTMLElement} root the .audiences section

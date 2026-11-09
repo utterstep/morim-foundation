@@ -3,18 +3,32 @@
    file (build.py, PAGES); `a` is that file, imported with the page's
    context, so its copy, figures and labels stay in its own language.
 
-   Desktop: the headline over the text column, a narrow rail beside it with
-   the byline and the section list (sticky while the text scrolls), and the
-   figures as wide as the column. Phones: one column, the list under the
-   headline. Header, footer and switchers stay the landing's. #}
+   Desktop: the headline over the text column with the authors under the
+   standfirst, a narrow rail beside the text with the section list (sticky
+   while the text scrolls), and the figures as wide as the column. Phones:
+   one column, the list under the authors. Header, footer and switchers
+   stay the landing's. #}
 <article class="article" aria-labelledby="article-title">
   <header class="article-head">
     <p class="article-kicker">{{ a.kicker }}</p>
     <h1 class="article-title" id="article-title">{{ a.title_html }}</h1>
     <p class="article-dek">{{ a.dek }}</p>
+    {# Medium-style: a round portrait, the name, the role under it. #}
+    <ul class="article-authors" aria-label="{{ a.authors_label }}">
+      {% for author in a.authors %}
+      <li class="article-author">
+        {% if author.photo %}
+        {{ photo('article-avatar', author.photo, [96, 144, 192, 288], '(max-width: 1200px) 40px, 3.4vw', '', 48, 48, loading='eager') }}
+        {% else %}
+        <span class="article-avatar is-initials" aria-hidden="true">{{ author.name.split() | map('first') | join }}</span>
+        {% endif %}
+        <span class="article-author-name">{{ author.name }}</span>
+        <span class="article-author-role">{{ author.role }}</span>
+      </li>
+      {% endfor %}
+    </ul>
   </header>
   <aside class="article-rail">
-    <p class="article-byline">{{ a.byline }}</p>
     <nav class="article-contents" aria-labelledby="article-contents-title">
       <p class="article-rail-label" id="article-contents-title">{{ a.contents_label }}</p>
       <ol>
