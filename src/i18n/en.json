@@ -224,6 +224,7 @@
     "next": "Next",
     "apply": "Apply",
     "apply_now": "Apply",
+    "learn_more": "Learn more",
     "teachers": [
       {
         "id": "tel-aviv",
@@ -289,6 +290,12 @@
           "value_html": "3<small>&nbsp;in&nbsp;</small>4",
           "label": "children surveyed would like lessons like these at school"
         }
+      ],
+      "_results": "Behind 'Learn more'. Only what the visible part does not already say: the pilot's opening sentences are `intro` now, and the children's figure is a stat.",
+      "results_title": "The first pilot",
+      "results": [
+        "Teachers’ responses changed noticeably after practice. On the fundamentals — what an inquiry lesson is for, how it differs from a merely engaging one, and what the teacher does — the share of answers at “I understand and can use it” rose from 40% to 81%. Fewer teachers reported being worried about having to adapt when a lesson went off plan.",
+        "Not everything became easier. Group dynamics remained difficult, and we’re adding more practice and mentoring around it."
       ],
       "quote": "“I’ve become noticeably less inclined to steer children toward the right answer, and more attentive to how they reason.”",
       "quote_note": "One of the teachers · that’s the change we’re looking for",

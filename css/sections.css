@@ -1795,8 +1795,9 @@
 /* Tbilisi camp: a peach section of its own before the offers, so the
    proof comes ahead of the ask. Copy and the survey figures on the start
    side, a small square photo centred in the end column (46% of the
-   width). The teacher's line and the caveat run under both, on the same
-   two columns. */
+   width). "Learn more" grows the section downward with the pilot's story;
+   the teacher's line and the caveat run under both, on the same two
+   columns, always open. */
 .camp {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 46%;
@@ -1908,12 +1909,55 @@
   line-height: 1.45;
   letter-spacing: -0.01em;
 }
-/* Under both columns: the teacher's line on the copy's column, the caveat
-   beside it under the photo, on the quote's last line. */
+/* "Learn more" reads as a text link: a word and a chevron, after the
+   figures at the copy's own gap. Semantically a disclosure button. */
+#top .camp-more {
+  margin-block-start: 2.5rem;
+  font-size: var(--t-body);
+  line-height: 1.3;
+}
+/* One way: open, the story stays; there is no "Show less". */
+#top .camp-more[aria-expanded='true'],
+#top .camp-more[hidden] {
+  display: none;
+}
+#top .camp-more:hover {
+  color: var(--camp-muted);
+}
+.camp-more-arrow {
+  flex: none;
+  inline-size: 1em;
+  block-size: 1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* The story row: its height is animated (js/disclosure.js), so the wrapper
+   has no padding of its own; the reading column sits on the copy's edge
+   and carries the space above it. */
 .camp-details {
   grid-column: 1 / -1;
+  overflow: hidden;
 }
+.program-results-copy {
+  max-inline-size: 41.25rem;
+  padding-block-start: 4rem;
+  text-align: start;
+}
+.program-results-copy p + p {
+  margin-top: 1.5rem;
+}
+.program-results-title {
+  margin: 0 0 1.5rem;
+  font-weight: 500;
+}
+/* Under both columns, open with or without the story: the teacher's line
+   on the copy's column, the caveat beside it under the photo, on the
+   quote's last line. */
 .camp-story {
+  grid-column: 1 / -1;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 46%;
   align-items: end;
@@ -1990,6 +2034,18 @@
   }
   #top .camp-intro {
     font-size: var(--m-body);
+  }
+  #top .camp-more {
+    margin-block-start: 1.5rem;
+    font-size: var(--m-body);
+  }
+  /* The grid's row gap would open under the collapsed story; the story
+     carries its own space above instead. */
+  .camp-details {
+    margin-block-start: -1.75rem;
+  }
+  .program-results-copy {
+    padding-block-start: 2.5rem;
   }
   .camp-story {
     grid-template-columns: minmax(0, 1fr);

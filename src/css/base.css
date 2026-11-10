@@ -450,7 +450,7 @@ main {
 }
 /* Text links: a word and an arrow, the size of their line, the arrow
    nudging along on hover: the schools link after the tabs, the desk's link
-   to the article. */
+   to the article; "Learn more" under the camp's figures, with a chevron. */
 .text-link {
   display: inline-flex;
   align-items: center;

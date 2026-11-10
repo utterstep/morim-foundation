@@ -246,7 +246,7 @@ test('the scholarship is its own blue band right after the audiences', () => {
   }
 });
 
-test('the Tbilisi camp is its own section before the offers, its story always open', () => {
+test('the Tbilisi camp is its own section before the offers, expanding its story in place', () => {
   for (const [lang, page] of Object.entries(pages)) {
     const html = read(page);
     const t = JSON.parse(readFileSync(new URL(`../src/i18n/${lang}.json`, import.meta.url), 'utf8'));
@@ -268,12 +268,23 @@ test('the Tbilisi camp is its own section before the offers, its story always op
     assert.equal(list[1].match(/<span class="stat-value">[^<]*\d/g)?.length, tb.stats.length);
     assert.deepEqual([...list[1].matchAll(/<span class="stat-label">([^<]+)/g)].map((m) => m[1]), tb.stats.map((stat) => stat.label));
     assert.match(tb.stats[0].value_html, /^60<small>%<\/small>.*25<small>%<\/small>$/, `${page}: the adapting figure leads`);
-    // The teacher's line and the caveat are in the page, not behind a control.
-    const story = /<div class="camp-details">([\s\S]*)$/.exec(camp[1])?.[1] ?? '';
-    assert.ok(story.includes(`<blockquote class="results-quote">${tb.quote}</blockquote>`), `${page}: quote`);
-    assert.ok(story.includes(`<p class="results-caveat">${tb.caveat}</p>`), `${page}: caveat`);
-    assert.doesNotMatch(camp[1], /<button|aria-expanded|data-expand|\bhidden\b|<dialog|data-dialog/, `${page}: nothing to open`);
-    assert.doesNotMatch(html, /id="tbilisi-results"|side-panel-promo|camp-more/);
+    // "Learn more": a disclosure control after the figures, not a dialog
+    // trigger; it names the story block, which ships open and is collapsed
+    // by the script that unhides the button.
+    assert.match(camp[1], /<\/ul>\s*<button type="button" class="camp-more text-link" aria-expanded="false" aria-controls="tbilisi-details" data-expand hidden>\s*<span>[^<]+<\/span>/);
+    assert.ok(camp[1].includes(`<span>${t.programs.learn_more}</span>`), `${page}: Learn more`);
+    const details = /<div class="camp-details" id="tbilisi-details">([\s\S]*?)<\/div>\s*<\/div>/.exec(camp[1])?.[1] ?? '';
+    assert.ok(details.includes(`<h3 class="program-results-title">${tb.results_title}</h3>`), `${page}: story heading`);
+    assert.deepEqual([...details.matchAll(/<p>([^<]+)<\/p>/g)].map((m) => m[1]), tb.results, `${page}: story`);
+    assert.match(read('js/main.js'), /button\[data-expand\]/);
+    // The teacher's line and the caveat are in the page, not behind the control.
+    assert.doesNotMatch(details, /results-quote|results-caveat/, `${page}: the quote stays outside the story`);
+    const voice = /<div class="camp-story">([\s\S]*)$/.exec(camp[1])?.[1] ?? '';
+    assert.ok(voice.includes(`<blockquote class="results-quote">${tb.quote}</blockquote>`), `${page}: quote`);
+    assert.ok(voice.includes(`<p class="results-caveat">${tb.caveat}</p>`), `${page}: caveat`);
+    assert.ok(camp[1].indexOf('id="tbilisi-details"') < camp[1].indexOf('class="camp-story"'), `${page}: story, then the quote`);
+    assert.doesNotMatch(camp[1], /<dialog|data-dialog/);
+    assert.doesNotMatch(html, /id="tbilisi-results"|side-panel-promo/);
     // The proof comes ahead of the ask: after the steps, before the audiences.
     const order = ['id="how-it-works"', 'id="tbilisi-camp"', 'id="audiences"', 'id="team"'].map((k) => html.indexOf(k));
     assert.ok(order.every((at) => at > 0), `${page}: sections`);
@@ -398,7 +409,7 @@ test('one primary action: Apply in the hero, the offers and the footer, floating
     assert.match(html, /<p class="footer-actions"><a class="button footer-apply" href="[^"]+" data-apply>[^<]+<\/a><\/p>\s*<a class="footer-email" href="mailto:[^"]+">[^<]+<\/a>/);
     assert.equal((html.match(/class="button[^"]*"/g) ?? []).length, 5, `${page}: four Apply and the floating one`);
     assert.equal((html.match(/href="mailto:/g) ?? []).length, 1, `${page}: the address is the one mailto`);
-    assert.match(html, /class="audience-trigger text-link"/, `${page}: the schools link is a text link`);
+    for (const link of ['audience-trigger', 'camp-more']) assert.match(html, new RegExp(`class="[^"]*${link} text-link"`), `${page}: ${link}`);
   }
   for (const [lang, page] of Object.entries(schoolPages)) {
     const html = read(page);

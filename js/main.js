@@ -1,24 +1,25 @@
 // Entry point. Wires the static page up in the same order the React tree
 // mounted its effects in PR #3 (website/app/home-content.tsx).
 
-import { startPageMotion } from './lib/page-motion.js?v=9be7db92';
-import { startCardDepth } from './lib/card-depth.js?v=9be7db92';
-import { watchApplyButtons } from './lib/floating-apply.js?v=9be7db92';
-import { startFloatingHeader } from './header.js?v=9be7db92';
-import { initDialogs } from './dialog.js?v=9be7db92';
-import { startMobileMenu } from './mobile-menu.js?v=9be7db92';
-import { initDetails } from './disclosure.js?v=9be7db92';
-import { watchProgramMotionPreference } from './program-motion.js?v=9be7db92';
-import { startPrograms } from './programs.js?v=9be7db92';
-import { startLanguage } from './lang.js?v=9be7db92';
-import { startNavMenu } from './nav-menu.js?v=9be7db92';
-import { startScrollHint } from './scroll-hint.js?v=9be7db92';
-import { startAudiences } from './audiences.js?v=9be7db92';
-import { dealHandLetters } from './hand-a.js?v=9be7db92';
-import { startMarginNote } from './margin-note.js?v=9be7db92';
+import { startPageMotion } from './lib/page-motion.js?v=94b7e6ab';
+import { startCardDepth } from './lib/card-depth.js?v=94b7e6ab';
+import { watchApplyButtons } from './lib/floating-apply.js?v=94b7e6ab';
+import { startFloatingHeader } from './header.js?v=94b7e6ab';
+import { initDialogs } from './dialog.js?v=94b7e6ab';
+import { startMobileMenu } from './mobile-menu.js?v=94b7e6ab';
+import { initDetails, initExpander } from './disclosure.js?v=94b7e6ab';
+import { watchProgramMotionPreference } from './program-motion.js?v=94b7e6ab';
+import { startPrograms } from './programs.js?v=94b7e6ab';
+import { startLanguage } from './lang.js?v=94b7e6ab';
+import { startNavMenu } from './nav-menu.js?v=94b7e6ab';
+import { startScrollHint } from './scroll-hint.js?v=94b7e6ab';
+import { startAudiences } from './audiences.js?v=94b7e6ab';
+import { dealHandLetters } from './hand-a.js?v=94b7e6ab';
+import { startMarginNote } from './margin-note.js?v=94b7e6ab';
 
 const EASING = 'cubic-bezier(0.22, 1, 0.36, 1)';
 const FAQ_MOTION = { duration: 250, easing: EASING, fade: 200 };
+const EXPAND_MOTION = { duration: 450, easing: EASING, fade: 300 };
 
 const root = document.getElementById('top');
 if (root) {
@@ -35,6 +36,8 @@ if (root) {
   if (menu instanceof HTMLDialogElement) startMobileMenu(menu);
 
   root.querySelectorAll('details.faq-item').forEach((details) => initDetails(details, FAQ_MOTION));
+  // "Learn more" under the camp's figures opens the pilot's story in place.
+  root.querySelectorAll('button[data-expand]').forEach((button) => initExpander(button, EXPAND_MOTION));
 
   watchProgramMotionPreference();
   root.querySelectorAll('.programs').forEach((programs) => startPrograms(programs));

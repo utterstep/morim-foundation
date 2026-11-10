@@ -93,3 +93,44 @@ export function initDetails(details, motion) {
     details.removeEventListener('toggle', onToggle);
   };
 }
+
+/**
+ * In-place expander: a button with aria-controls grows the block it names
+ * (the Tbilisi camp's story). The block ships open so it reads without JS;
+ * here it collapses to hidden="until-found", so find-in-page still reaches
+ * the text and opens it.
+ * @param {HTMLButtonElement} button
+ * @param {{duration: number, easing: string, fade: number}} motion
+ * @returns {() => void} stop
+ */
+export function initExpander(button, motion) {
+  const content = document.getElementById(button.getAttribute('aria-controls') ?? '');
+  if (!(content instanceof HTMLElement)) return () => {};
+  content.hidden = 'until-found';
+  button.hidden = false;
+
+  const onClick = async () => {
+    const open = button.getAttribute('aria-expanded') !== 'true';
+    button.setAttribute('aria-expanded', String(open));
+    if (open) {
+      content.hidden = false;
+      // A one-way expander hides its button once open (the camp has no
+      // "Show less"); focus moves to the story so it is not lost.
+      if (!button.checkVisibility()) {
+        content.tabIndex = -1;
+        content.focus({ preventScroll: true });
+      }
+      await animateHeight(content, true, motion);
+    } else {
+      await animateHeight(content, false, motion);
+      content.hidden = 'until-found';
+    }
+  };
+  const onMatch = () => button.setAttribute('aria-expanded', 'true');
+  button.addEventListener('click', onClick);
+  content.addEventListener('beforematch', onMatch);
+  return () => {
+    button.removeEventListener('click', onClick);
+    content.removeEventListener('beforematch', onMatch);
+  };
+}

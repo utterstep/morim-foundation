@@ -139,6 +139,7 @@ The PR used shadcn/Base UI components; here they are native elements plus small 
 | Widget | Element | Module |
 |---|---|---|
 | FAQ accordion | `<details>` with animated height | `src/js/disclosure.js` |
+| Tbilisi story ("Learn more") | button + `aria-expanded` region | `src/js/disclosure.js` |
 | Contact / social dialogs, mobile menu | `<dialog>` | `src/js/dialog.js`, `src/js/mobile-menu.js` |
 | Location filter | button + `role="listbox"` | `src/js/listbox.js`, `src/js/programs.js` |
 

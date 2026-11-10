@@ -433,8 +433,9 @@
      section before the offers, so the proof comes ahead of the ask. Copy
      and the survey figures on the start side, the photo on the end side
      (above the copy on mobile); the adapting figure leads, because that is
-     what the program is for. The teacher's line and the caveat sit under
-     both, always open.
+     what the program is for. "Learn more" under the figures opens the
+     pilot's story in place (js/disclosure.js; without JS it reads open);
+     the teacher's line and the caveat sit under both columns, always open.
      Photo: session-photos/Day2 (Kids)/R0016143.JPG, the camp's children's
      day (12 Aug 2026), centre square crop: a child over the alphabet
      sheet. #}
@@ -452,16 +453,26 @@
         </li>
         {% endfor %}
       </ul>
+      <button type="button" class="camp-more text-link" aria-expanded="false" aria-controls="tbilisi-details" data-expand hidden>
+        <span>{{ t.programs.learn_more }}</span><svg class="camp-more-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
     </div>
     {{ photo('camp-photo', 'camp-square', [480, 720, 1080, 1440], '(max-width: 700px) 16rem, 26rem', '', 720, 720) }}
-    <div class="camp-details">
-      <div class="camp-story">
-        <figure class="camp-voice">
-          <blockquote class="results-quote">{{ tb.quote }}</blockquote>
-          <figcaption class="results-note">{{ tb.quote_note }}</figcaption>
-        </figure>
-        <p class="results-caveat">{{ tb.caveat }}</p>
+    {# The story: what changed after practice, and what did not. #}
+    <div class="camp-details" id="tbilisi-details">
+      <div class="program-results-copy">
+        <h3 class="program-results-title">{{ tb.results_title }}</h3>
+        {% for p in tb.results %}
+        <p>{{ p }}</p>
+        {% endfor %}
       </div>
+    </div>
+    <div class="camp-story">
+      <figure class="camp-voice">
+        <blockquote class="results-quote">{{ tb.quote }}</blockquote>
+        <figcaption class="results-note">{{ tb.quote_note }}</figcaption>
+      </figure>
+      <p class="results-caveat">{{ tb.caveat }}</p>
     </div>
   </section>
 

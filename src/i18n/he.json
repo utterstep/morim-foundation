@@ -225,6 +225,7 @@
     "next": "מועד הבא",
     "apply": "להגשת מועמדות",
     "apply_now": "להגשת מועמדות",
+    "learn_more": "למידע נוסף",
     "teachers": [
       {
         "id": "tel-aviv",
@@ -287,9 +288,16 @@
           "label": "ציון ממוצע לנכונות להמליץ על התוכנית, מתוך 10"
         },
         {
-          "value_html": "3<small>&nbsp;מתוך&nbsp;</small>4",
+          "_value_html": "The figures run left to right in every language (before → after). This one is a Hebrew phrase, so &rlm; sets it right to left: 3, then the word, then 4.",
+          "value_html": "&rlm;3<small>&nbsp;מתוך&nbsp;</small>4",
           "label": "מהילדים שהשיבו לסקר היו רוצים שיעורים כאלה בבית הספר"
         }
+      ],
+      "_results": "Behind 'Learn more'. Only what the visible part does not already say: the pilot's opening sentences are `intro` now, and the children's figure is a stat.",
+      "results_title": "הפיילוט הראשון",
+      "results": [
+        "אחרי ההתנסות ראינו שינוי ברור בתשובות. בשאלות על יסודות השיטה — מה מטרת שיעור החקר, במה הוא שונה משיעור שהוא רק מעניין ומה תפקיד המורה בו — שיעור התשובות “אני מבין/ה ויכול/ה ליישם” עלה מ־40% ל־81%. פחות מורים דיווחו שהם מוטרדים מהצורך לשנות את מהלך השיעור כשהוא לא מתנהל כמתוכנן.",
+        "לא הכול נהיה קל יותר. ההתמודדות עם הדינמיקה בקבוצה עדיין הייתה קשה, ולכן אנחנו מוסיפים עוד תרגול וליווי בתחום הזה."
       ],
       "quote": "“אני נוטה הרבה פחות לכוון את הילדים לתשובה הנכונה, ושמה לב יותר לדרך שבה הם חושבים.”",
       "quote_note": "אחת המורות · זה בדיוק השינוי שאנחנו מחפשים",
