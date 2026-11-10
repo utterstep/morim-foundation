@@ -10,7 +10,6 @@ import { startMobileMenu } from './mobile-menu.js';
 import { initDetails, initExpander } from './disclosure.js';
 import { watchProgramMotionPreference } from './program-motion.js';
 import { startPrograms } from './programs.js';
-import { startHero } from './hero/hero.js';
 import { startLanguage } from './lang.js';
 import { startNavMenu } from './nav-menu.js';
 import { startScrollHint } from './scroll-hint.js';
@@ -20,7 +19,6 @@ import { startMarginNote } from './margin-note.js';
 
 const EASING = 'cubic-bezier(0.22, 1, 0.36, 1)';
 const FAQ_MOTION = { duration: 250, easing: EASING, fade: 200 };
-// The camp's story is a tall block: a slower height, the same curve.
 const EXPAND_MOTION = { duration: 450, easing: EASING, fade: 300 };
 
 const root = document.getElementById('top');
@@ -38,26 +36,17 @@ if (root) {
   if (menu instanceof HTMLDialogElement) startMobileMenu(menu);
 
   root.querySelectorAll('details.faq-item').forEach((details) => initDetails(details, FAQ_MOTION));
+  // "Learn more" under the camp's figures opens the pilot's story in place.
   root.querySelectorAll('button[data-expand]').forEach((button) => initExpander(button, EXPAND_MOTION));
-  // The teachers' pilot card leads to the camp and opens its story on the way.
-  const campMore = root.querySelector('.camp-more');
-  root.querySelectorAll('.pilot-link').forEach((link) =>
-    link.addEventListener('click', () => {
-      if (campMore instanceof HTMLButtonElement && campMore.getAttribute('aria-expanded') !== 'true') campMore.click();
-    }),
-  );
 
   watchProgramMotionPreference();
   root.querySelectorAll('.programs').forEach((programs) => startPrograms(programs));
   const audiences = root.querySelector('.audiences');
   if (audiences) startAudiences(audiences);
 
-  const hero = root.querySelector('.hero');
-  if (hero) startHero(hero);
-
   // The mobile menu dialog lives outside <main>, so look across the document.
   document.querySelectorAll('.nav-menu').forEach((menu) => startNavMenu(menu));
-  // The featured article's note in the margin of the intro draws its arrow.
+  // The featured article's pen note over the first row draws its arrow.
   root.querySelectorAll('.margin-note').forEach((note) => startMarginNote(note));
   const hint = root.querySelector('[data-scroll-hint]');
   if (hint) startScrollHint(hint);

@@ -38,12 +38,11 @@ body,
       .faq-answer-body,
       .wwd-beat p,
       .wwd-step p,
-      .mission-intro,
+      .program-results-copy p,
+      .program-results-title,
       .program-row > span,
       .program-row p > span,
       .program-row .cost-value,
-      .program-results-copy p,
-      .program-results-title,
       .results-caveat,
       .footer-lead,
       .footer-label,
@@ -62,7 +61,7 @@ body,
   }
   /* One size for every section title; the tabbed panel used to jump from
      120px (teachers, coordinators) to 88px (schools) on a tab switch. */
-  #top :is(.display, .what-we-do .display, .partners .display, .team-title, .faq h2) {
+  #top :is(.display, .partners .display, .team-title, .faq h2) {
     font-size: var(--t-section);
     line-height: 0.84;
   }
@@ -78,7 +77,7 @@ body,
   #top .faq-answer-body {
     max-inline-size: 48rem;
   }
-  #top :is(.wwd-photo figcaption, .wwd-stipend, .stat-label, .results-note, .footer-legal p, .scroll-hint span, .program-row > p, .program-scholarship) {
+  #top :is(.stat-label, .results-note, .footer-legal p, .scroll-hint span, .program-row > p, .program-scholarship) {
     font-size: var(--t-small);
     line-height: 1.35;
     letter-spacing: 0;
@@ -98,39 +97,34 @@ body,
   #top .desk-kicker {
     font-size: max(2rem, 24px);
   }
+  /* The stance rows, the year's cards and the steps' heading
+     (sections.css): display and pen sizes of their own, floored like the
+     roles; their running text is body text. */
+  #top .stance-label {
+    font-size: max(2.5rem, 26px);
+  }
+  #top :is(.stance-title, .how-title, .year-card h3) {
+    font-size: max(2.5rem, 24px);
+  }
+  #top .stance-title {
+    font-size: max(2.75rem, 24px);
+  }
+  #top :is(.year-kicker, .year-card > .year-next-note) {
+    font-size: max(2rem, 24px);
+  }
+  #top .margin-note {
+    font-size: max(1.875rem, 20px);
+  }
+  #top .year-icons img {
+    inline-size: max(2.75rem, 32px);
+    block-size: max(2.75rem, 32px);
+  }
 }
 
-/* The approaches line closes What-we-do as a display pull line; the named
-   approaches carry marker strokes. */
-#top .wwd-closing p {
-  font-family: var(--font-display);
-  font-size: var(--t-item);
-  line-height: 1.25;
-  max-width: 26em;
-  margin-inline: auto;
-  text-wrap: balance;
-}
-/* Each approach gets a marker stroke like the lead's "mentors", one hue
-   apiece: yellow, pen blue, peach. The phrase stays on one line. */
-#top :is(.wwd-closing, #what-we-do-title) .approach-name {
-  /* Inline, not inline-block: the comma after it stays on its line. */
-  white-space: nowrap;
-  padding-inline: 0.3em;
-  margin-inline: -0.3em;
-  background: url('../assets/highlight-yellow.svg') center / 100% 100% no-repeat;
-}
-#top :is(.wwd-closing, #what-we-do-title) .approach-name:nth-of-type(2) {
-  background-image: url('../assets/highlight-blue.svg');
-}
-#top :is(.wwd-closing, #what-we-do-title) .approach-name:nth-of-type(3) {
-  background-image: url('../assets/highlight-peach.svg');
-}
 @media (max-width: 700px) {
-  #top .wwd-closing p { font-size: 1.5rem; }
-
   /* Mobile roles (AUDIT.md, T2-T4). Each role had drifted into its own
      line-height and a few sizes sat off the scale; one value per role. */
-  #top :is(.display, .what-we-do .display, .partners .display, .team-title, .faq h2, .footer-message h2, .desk-title) {
+  #top :is(.display, .partners .display, .team-title, .faq h2, .footer-message h2, .desk-title) {
     font-size: var(--m-title);
     line-height: 1.05;
     text-wrap: balance;
@@ -153,7 +147,6 @@ body,
   #top :is(
       .wwd-beat > p,
       .wwd-step > p,
-      .mission-intro,
       .benefit > p,
       .person > p,
       .person-role,
@@ -163,17 +156,12 @@ body,
       .faq-answer-body,
       .footer-legal p,
       figcaption,
-      .wwd-stipend,
       .stat-label,
       .results-note,
       .footer-label
     ) {
     font-size: var(--m-body);
     line-height: 1.45;
-  }
-  /* The lead sits in .prose (-0.03em); as card body it tracks like the cards. */
-  #top .mission-intro {
-    letter-spacing: -0.02em;
   }
   /* The role under a name was 20px, larger than the 17px name above it. */
   #top .person-role {

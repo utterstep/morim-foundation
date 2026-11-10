@@ -16,8 +16,7 @@ src/articles/          articles, one file per language: copy, charts, labels
 src/i18n/{en,ru,he}.json   every string on the page; values may contain inline HTML
 src/css/               stylesheets (logical properties, direction-agnostic)
 src/js/                ES modules loaded straight by the browser
-src/js/lib/            behaviour ported verbatim from PR #3 (hero maths, page motion, video autoplay, poof)
-src/js/hero/           the hero collage, rewritten from the React component
+src/js/lib/            behaviour ported verbatim from PR #3 (page motion, card depth, the floating Apply)
 src/assets/            images and fonts
 index.html, ru/, he/   generated pages, committed (and schools/, pisa-2025/)
 css/ js/ assets/       copied from src/ by the build, committed
@@ -72,11 +71,11 @@ written in. The first is the PISA 2025 note at `/pisa-2025/`, in English.
   the picture a shared link shows.
 - The landing can feature one article: `"feature"` on `home` in `PAGES`. It
   shows twice, with copy from the article's own `teaser`, only on landings
-  whose language has the article (today: English): a pen note in the margin
-  of the intro, pointing at the `.intro-claim` in `approach.help` ("here to
-  help"; `src/js/margin-note.js` measures and draws the arrow, so it never
-  crosses the text), and the article as a printed page on a desk before the
-  team.
+  whose language has the article (today: English): a pen note over the first
+  row of the frame, pointing at the first `<mark>` of
+  `what_we_do.stance[0].title_html` ("Curious"; `src/js/margin-note.js`
+  measures and draws the arrow), and the article as a printed page on a desk
+  before the team.
   The article's Back pill returns to the desk.
 
 ### Typography
@@ -93,8 +92,9 @@ workshop scans, used in both the Tbilisi results and the pilot photo stack.
 `assets/camp-landscape-*.webp` is the Tbilisi camp section's photo, from
 `session-photos/Day2 (Kids)/R0016201.JPG` (the children's day, 12 Aug 2026). Each
 ships as a ladder of widths; the `photo()` macro emits them as a `srcset` of width
-descriptors with a `sizes` value per placement, and the hero app icons do the same
-through `icon()` in `src/js/lib/hero-apps.js`.
+descriptors with a `sizes` value per placement. The app icons on this year's
+theme cards (`assets/hero-app-*.webp`, named for the hero collage they came
+from) do the same inline.
 
 Width descriptors rather than `1x`/`2x` because above 701px the desktop layout is
 pure `vw` — `base.css` sets `html { font-size: calc(100vw / 90) }`, so every rem
@@ -107,15 +107,13 @@ Measured in Chromium across 360–3840px, the boxes settle at:
 |---|---|---|
 | pilot landscape / portrait | 58vw / 38vw | 37vw / 26vw |
 | results landscape / portrait | 50vw / 36vw | 26vw / 19vw |
-| hero app icon | ~14vw | ~6.4vw |
+| theme card app icon | 2.5rem | ~3.05vw |
 
 If those percentages change, re-measure and update the `sizes` strings — they are
 promises to the browser, and a wrong one is worse than none.
 
 The ladders stop at the resolution the artwork actually has, so nothing is upscaled.
-Two of the app icons are small at source (Messages 250px, Fortnite 258px) and will
-be soft on a 2x display above about 2200px wide; they need new artwork, not a new
-export. The full-resolution scans are in git history, before the commit that
+The full-resolution scans are in git history, before the commit that
 converted them — `src/assets/` is copied verbatim into the published site, so
 nothing larger than what a browser paints belongs there.
 
@@ -130,7 +128,7 @@ Their SIL Open Font Licenses are included beside the font files.
 node --test tests/*.test.mjs     # or: npm test
 ```
 
-The tests need only Node 22 or newer. They cover the ported hero and motion logic, the
+The tests need only Node 22 or newer. They cover the ported motion logic, the
 generated pages (three outputs, `hreflang`, every link resolves, every module import
 resolves), key parity across languages, and that no physical inline-axis CSS crept back in.
 
@@ -141,10 +139,9 @@ The PR used shadcn/Base UI components; here they are native elements plus small 
 | Widget | Element | Module |
 |---|---|---|
 | FAQ accordion | `<details>` with animated height | `src/js/disclosure.js` |
-| Tbilisi results | button + `aria-expanded` region | `src/js/disclosure.js` |
+| Tbilisi story ("Learn more") | button + `aria-expanded` region | `src/js/disclosure.js` |
 | Contact / social dialogs, mobile menu | `<dialog>` | `src/js/dialog.js`, `src/js/mobile-menu.js` |
 | Location filter | button + `role="listbox"` | `src/js/listbox.js`, `src/js/programs.js` |
-| Hero collage | built by JS into `.hero-accents` | `src/js/hero/` |
 
 Timings and easings match the PR; `src/css/widgets.css` holds the structural styles.
 
@@ -163,9 +160,9 @@ Repo → Settings → Pages → Source: *Deploy from a branch*, branch `main`, f
 - The school-leader cards were assembled from the previous site's coordinator copy;
   confirm with the team. Two team members are placeholders.
 - Webfont licences: GT Alpina and the ABC Stefan *trial* font are shipped as in the PR.
-- The hero embeds TikTok and YouTube players with muted autoplay. The "Twitch" card
-  plays self-hosted stock footage of streamers from `src/assets/video/` (the clip
-  embed stuttered badly, and copying a real channel's clips would not be licensed);
-  the source pages are in `src/js/lib/hero-videos.js`. Footage by Yan Krukau and
-  Alena Darmel under the Pexels licence, no attribution required. Review the chosen clips and any consent requirements.
+- The landing's copy follows the "adaptive teacher" frame: what the job is for,
+  what the classroom is up against this year, and adapting as a habit. The
+  dated parts are meant to be edited every year: `hero.years`,
+  `what_we_do.year`, `fellowship.questions`, and the kicker and title of the
+  open teachers' program. "Same job, new world" is a working title.
 - Footer social links open a "coming soon" dialog until the profiles exist.

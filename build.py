@@ -61,8 +61,8 @@ LANGS = {
 #
 # The landing can feature one article, with copy from the article's own file
 # (its `teaser`), on the landings whose language has the article: a pen note
-# in the margin of the intro, and the article as a page on a desk before the
-# team. `back` is where a page's Back pill leads on its language's landing;
+# over the first row of the frame, and the article as a page on a desk before
+# the team. `back` is where a page's Back pill leads on its language's landing;
 # a featured article leads back to its desk.
 PAGES = {
     "home": {"path": "", "feature": "pisa-2025"},
@@ -144,12 +144,10 @@ def stamp_imports(js: Path, version: str) -> None:
             file.write_text(stamped)
 
 
-def hero_hints(root: str) -> dict:
-    """Head hints so the hero collage is ready when the page is: the module
-    graph behind main.js (one modulepreload each, so the browser fetches them
-    in parallel instead of walking the import chain), the icons the opening
-    composition shows (preloaded with the same srcset/sizes the DOM uses) and
-    the stream posters. All read from the JS sources so the lists stay true."""
+def module_graph() -> list[str]:
+    """The module graph behind main.js, for one modulepreload each in the
+    landing's head, so the browser fetches the scripts in parallel instead of
+    walking the import chain. Read from the JS sources so the list stays true."""
     js = SRC / "js"
     modules: list[Path] = []
     todo = [js / "main.js"]
@@ -160,25 +158,7 @@ def hero_hints(root: str) -> dict:
         modules.append(module)
         for match in re.finditer(r"""(?:from|import)\s*['"](\.[^'"]+)['"]""", module.read_text()):
             todo.append((module.parent / match.group(1)).resolve())
-    apps_js = (js / "lib" / "hero-apps.js").read_text()
-    apps = re.findall(r"icon\('([a-z]+)', \[([\d, ]+)\]\)", apps_js)
-    sizes = re.search(r"heroAppSizes = '([^']+)'", apps_js).group(1)
-    opening = re.search(r"const apps = \[([\d, ]+)\]", (js / "lib" / "hero-floating.js").read_text())
-    icons = []
-    for index in (int(i) for i in opening.group(1).split(",")):
-        slug, widths = apps[index]
-        ws = [int(w) for w in widths.split(",")]
-        icons.append({
-            "href": f"{root}assets/hero-app-{slug}-{ws[-1]}.webp",
-            "srcset": ", ".join(f"{root}assets/hero-app-{slug}-{w}.webp {w}w" for w in ws),
-            "sizes": sizes,
-        })
-    posters = re.findall(r"poster: '([^']+)'", (js / "lib" / "hero-videos.js").read_text())
-    return {
-        "modules": [m.relative_to(js).as_posix() for m in modules],
-        "icons": icons,
-        "posters": [f"{root}assets/video/{p}" for p in posters],
-    }
+    return [m.relative_to(js).as_posix() for m in modules]
 
 
 def render(out: Path) -> None:
@@ -217,8 +197,8 @@ def render(out: Path) -> None:
             dir=meta["dir"],
             root=root,
             v=version,
-            # The collage lives on the landing only.
-            hero=hero_hints(root) if not page_path else None,
+            # The landing's scripts, preloaded in its head.
+            modules=module_graph() if not page_path else None,
             site=SITE,
             canonical=SITE + path,
             x_default=SITE + page_path,

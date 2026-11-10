@@ -419,8 +419,8 @@ main {
   letter-spacing: -0.03em;
 }
 /* Buttons: one pill, two colours. Primary is "Apply" to the form: ink on
-   the paper, white on the plum (.apply-button), in the offers and the
-   footer, floating once the hero has gone while none is in view; on the
+   the paper, white on the plum (.apply-button), in the hero, the offers
+   and the footer, floating once the hero has gone while none is in view; on the
    schools page the one button is "Partner with us" (a mailto). Writing to
    us is the address in the footer, a text link, once. A label is a verb and
    its object, three words at most; questions belong in headings. Everything
@@ -449,8 +449,8 @@ main {
   text-decoration: none;
 }
 /* Text links: a word and an arrow, the size of their line, the arrow
-   nudging along on hover. The schools link after the tabs, "Check results"
-   on the pilot card, "Learn more" under the camp. */
+   nudging along on hover: the schools link after the tabs, the desk's link
+   to the article; "Learn more" under the camp's figures, with a chevron. */
 .text-link {
   display: inline-flex;
   align-items: center;
@@ -470,126 +470,15 @@ main {
   block-size: 1em;
   transition: translate 200ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-:is(.text-link:hover, .pilot-link:hover .text-link) .promo-arrow {
+.text-link:hover .promo-arrow {
   translate: 0.2rem 0;
 }
-:is(.text-link:hover, .pilot-link:hover .text-link) .promo-arrow:dir(rtl) {
+.text-link:hover .promo-arrow:dir(rtl) {
   translate: -0.2rem 0;
 }
 .text-link:focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 3px;
-}
-.hero {
-  position: relative;
-  z-index: 1;
-  overflow-x: clip;
-  padding-top: 3rem;
-  padding-bottom: 6.25rem;
-  text-align: center;
-}
-.hero h1 {
-  font-size: 10rem;
-  line-height: 0.8125;
-  /* Five lines of height whatever the language breaks to: the floating
-     apps are placed against the hero box, so a shorter title would lift them. */
-  min-height: calc(5 * 0.8125em);
-  min-height: 5lh;
-  font-weight: 400;
-  letter-spacing: -0.03em;
-  max-width: 72rem;
-  margin: 0 auto;
-}
-.hero-line {
-  position: relative;
-  display: inline-block;
-  white-space: nowrap;
-}
-@media (min-width: 701px) {
-  .hero-editorial {
-    padding-top: 6rem;
-    padding-bottom: 5rem;
-  }
-}
-.hero-accents {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-.hero-app-item {
-  position: absolute;
-  z-index: 2;
-  width: max(2.75rem, 0.456em);
-  height: max(2.75rem, 0.456em);
-  padding: 0;
-  border: 0;
-  border-radius: 27%;
-  background: transparent;
-  font: inherit;
-  line-height: 1;
-  pointer-events: auto;
-  touch-action: none;
-  user-select: none;
-  cursor: grab;
-  translate: var(--drag-x, 0px) var(--drag-y, 0px);
-}
-.hero-app-item[data-dragging='true'] {
-  z-index: 10;
-  cursor: grabbing;
-}
-.hero-app-item:focus-visible {
-  z-index: 10;
-  outline: 2px solid #1c51e0;
-  outline-offset: 0.375rem;
-  translate: var(--drag-x, 0px) var(--drag-y, 0px);
-  rotate: 0deg;
-}
-.hero-app-face {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-  transform: rotate(var(--app-tilt));
-  box-shadow:
-    0 0.875rem 1.5rem -0.625rem #18202245,
-    0 3px 0.4375rem #18202220;
-}
-.hero-app-face img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: inherit;
-  pointer-events: none;
-  -webkit-user-drag: none;
-}
-.hero-notification {
-  position: absolute;
-  direction: ltr;
-  unicode-bidi: isolate;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  inset-inline-end: -0.6em;
-  top: -0.6em;
-  width: max-content;
-  min-width: 1.75em;
-  height: 1.75em;
-  padding: 0 0.42em;
-  white-space: nowrap;
-  border-radius: 2em;
-  color: white;
-  background: #ff3131;
-  font:
-    500 max(0.75rem, 0.075em) / 1 system-ui,
-    sans-serif;
-  letter-spacing: -0.03em;
-  text-align: center;
-  font-variant-numeric: tabular-nums;
-}
-/* Generated content, so the digits never read as the dismiss button's label. */
-.hero-notification::after {
-  content: attr(data-count);
 }
 .prose {
   width: min(41.875rem, 90%);
@@ -602,18 +491,12 @@ main {
 .prose p + p {
   margin-top: 2rem;
 }
-.introduction {
-  margin-top: 7.125rem;
-}
 figcaption {
   margin-top: 0.375rem;
   font-size: 1rem;
   line-height: 1.25rem;
   color: #77776f;
   letter-spacing: -0.03em;
-}
-.mission-intro {
-  position: relative;
 }
 .sr-only {
   position: absolute;
@@ -622,11 +505,6 @@ figcaption {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
-}
-@media (min-width: 1441px) {
-  .hero h1 {
-    font-size: 10rem;
-  }
 }
 @media (max-width: 700px) {
   .site-header {
@@ -657,25 +535,6 @@ figcaption {
     min-height: 2.75rem;
     padding: 0.875rem 1rem;
     font-size: 1rem;
-  }
-  .hero {
-    padding-top: 4rem;
-    padding-bottom: 5.5rem;
-  }
-  /* Fixed mobile kegl (56px) rather than the old per-language vw clamp: same
-     size on every language, so wrapping now depends on line-height/breaks
-     alone. Comfortably below the old clamp's ceiling, so it does not
-     overflow the panel on any measured width. */
-  .hero h1 {
-    /* 56px touched the edge of a 360px screen (1px in EN); cap by width. */
-    font-size: min(var(--m-hero), 13.9vw);
-    line-height: 0.93;
-    /* At 0.93 the last line's descenders leave the box by ~0.3em, and the
-       collage below starts 0.75rem early (hero.css); keep the two apart. */
-    margin-bottom: 0.5em;
-  }
-  .introduction {
-    margin-top: 4.375rem;
   }
   .prose {
     font-size: var(--m-lead);

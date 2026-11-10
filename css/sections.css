@@ -452,122 +452,180 @@
   color: white;
   text-underline-offset: 3px;
 }
-/* "What we do": the answer to "what is this?", right after the story.
-   Display heading, the Foundation line beside one pilot photo, three beats
-   (the funding one keeps the handwritten aside), the approaches paragraph
-   and the Tuesday-morning test, then the three routes. */
-.what-we-do {
-  /* The Tuesday line closes the section: three times the air it had under it. */
-  padding: 8rem 5% 7.5rem;
-  text-align: center;
+/* The stance: what the programs stand on, in three lines and three rows.
+   The heading is the three lines; each row names its line in the pen hand
+   on the start side, says it in the display face, and explains it in the
+   end column. Hairlines between rows, nothing else. */
+.stance {
+  padding: 1.5rem var(--gutter) 8.125rem;
   background: var(--background);
-}
-/* Heading on the left, the Foundation line on the right, on one 12-column
-   grid; the lead sits on the heading's last line. */
-.wwd-head {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: 2rem;
-  width: min(81rem, 100%);
-  margin: 0 auto;
   text-align: start;
 }
-/* The heading names the three approaches and wraps on its own; the
-   approach phrases keep nowrap so a marker never splits. */
-.what-we-do .display {
-  grid-column: 1 / 9;
-  font-size: 5.5rem;
+.stance .display {
   margin: 0;
-  text-align: start;
   white-space: normal;
+}
+.stance-lead {
+  /* Ends short of the pen note beside it (.margin-note, at 49rem), also
+     where the type floors make the line longer than the layout around it. */
+  max-inline-size: 45rem;
+  margin-block-start: 1.75rem;
+  font-size: var(--t-lead);
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+.stance-rows {
+  margin-block-start: 4.5rem;
+  border-block-start: 1px solid #e3e1da;
+}
+.stance-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 10.625rem minmax(0, 1.77fr) minmax(0, 1fr);
+  align-items: baseline;
+  column-gap: 3rem;
+  padding-block: 2.75rem;
+  border-block-end: 1px solid #e3e1da;
+}
+.stance-label {
+  color: var(--scribble-blue);
+  font-family: var(--font-scribble);
+  font-size: 2.5rem;
+  line-height: 1;
+  letter-spacing: normal;
+}
+.stance-title {
+  font-family: var(--font-display);
+  font-size: 2.75rem;
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
   text-wrap: balance;
 }
-.wwd-lead {
-  grid-column: 9 / 13;
-  /* The column spans the heading: the lead opens it on the cap line, the
-     stipend note closes it on the heading's last line; space-between pins
-     the two ends (George, 23.10: "стипендия это примечание"). The "12+
-     lessons" callout that used to open the column moved to the foot of
-     the section (George, 23.10: "внизу и только внизу"). */
-  align-self: stretch;
+/* What the job is for carries the marker, one hue a phrase, as it did in
+   the old heading; a phrase is one piece and never splits. The stroke is a
+   slanted shape stretched to the box, its empty edges a share of the
+   width, so the long phrases get more side room than the single word. */
+.stance-title mark {
+  color: inherit;
+  white-space: nowrap;
+  padding-inline: 0.4em;
+  margin-inline: -0.4em;
+  background: url('../assets/highlight-yellow.svg') center / 100% 100% no-repeat;
+}
+.stance-title mark:is(.blue, .peach) {
+  padding-inline: 0.7em;
+  margin-inline: -0.7em;
+}
+.stance-title mark.blue {
+  background-image: url('../assets/highlight-blue.svg');
+}
+.stance-title mark.peach {
+  background-image: url('../assets/highlight-peach.svg');
+}
+.stance-body {
+  font-size: var(--t-body);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+}
+/* This year's edition on the paper: the two themes as white cards, and a
+   third card left empty, dashed, with next year pencilled in. */
+.year {
+  padding: 8.125rem var(--gutter);
+  background: var(--paper);
+  text-align: start;
+}
+.year-kicker {
+  inline-size: fit-content;
+  color: var(--scribble-blue);
+  font-family: var(--font-scribble);
+  font-size: 2.125rem;
+  line-height: 1;
+  letter-spacing: normal;
+  transform: rotate(-2deg);
+}
+[dir='rtl'] .year-kicker {
+  transform: rotate(2deg);
+}
+.year-title {
+  max-inline-size: 12em;
+  margin-block-start: 0.875rem;
+  font-size: 5.5rem;
+  font-weight: 400;
+  line-height: 0.93;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.year-cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1.23fr) minmax(0, 1.23fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  margin-block-start: 4rem;
+}
+.year-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 1.5rem;
-  width: auto;
-  margin: 0;
-  text-align: start;
+  gap: 1rem;
+  padding: 2.25rem;
+  border-radius: 1.5rem;
+  background: #fff;
 }
-/* The stipend is a note: the note colour of the card bodies, the note
-   size (type.css), the handwritten link under it on the start edge. */
-.wwd-stipend {
-  margin: 0;
-  color: #55554e;
+.year-icons {
+  display: flex;
+  gap: 0.5rem;
 }
-.wwd-stipend .beat-note {
-  margin: 0.875rem 0 0;
-  font-size: 1.625rem;
+.year-icons img {
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  border-radius: 26%;
+  /* The white icons need an edge on the white card. */
+  box-shadow:
+    0 0.375rem 0.75rem -0.375rem rgb(24 32 34 / 28%),
+    0 0 0 1px rgb(24 32 34 / 6%);
+  rotate: -6deg;
 }
-/* Russian sets longer words in Spectral; one size down keeps the heading
-   near the English line count. */
+.year-icons img:nth-child(2) { rotate: 4deg; }
+.year-icons img:nth-child(3) { rotate: -3deg; }
+.year-icons img:nth-child(4) { rotate: 5deg; }
+.year-card h3 {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.year-card > p {
+  font-size: var(--t-body);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+}
+.year-card.year-card-next {
+  justify-content: flex-end;
+  border: 2px dashed #b9b6ac;
+  background: none;
+}
+.year-card-next h3 {
+  color: #66685f;
+}
+.year-card > .year-next-note {
+  inline-size: fit-content;
+  color: var(--scribble-blue);
+  font-family: var(--font-scribble);
+  font-size: 2rem;
+  line-height: 1.05;
+  letter-spacing: normal;
+  transform: rotate(-2deg);
+}
+[dir='rtl'] .year-card > .year-next-note {
+  transform: rotate(2deg);
+}
+/* Russian and Hebrew set longer words: one size down keeps the stance
+   heading and the year title to the English line count. */
 @media (min-width: 701px) {
-  html[lang='ru'] #top .what-we-do .display {
-    /* #top matches the type.css role rule, which an html[lang] selector alone loses to;
-       desktop only, phones keep the mobile title role. */
-    font-size: 5.25rem;
+  html:is([lang='ru'], [lang='he']) .year-title {
+    font-size: 4.75rem;
+    line-height: 1;
   }
-}
-/* The pilot photo, bled to both edges of the viewport, with hard edges.
-   The figure keeps the content box, so the
-   caption hangs on the section's edge; only the image bleeds (main clips
-   the overflow, so there is no horizontal scroll). */
-.wwd-photo {
-  margin: 5rem 0 0;
-  text-align: start;
-}
-/* The frame bleeds and clips; the image moves inside it. */
-.wwd-photo-frame {
-  width: 100vw;
-  margin-inline: calc(50% - 50vw);
-  aspect-ratio: 21 / 9;
-  overflow: hidden;
-  /* A 32px copy of the photo, inline, stretched under the real one: the
-     frame is never white while the file loads. */
-  background: #b3a79a url('data:image/webp;base64,UklGRugAAABXRUJQVlA4INwAAAAwBQCdASogABUAPwFsrU8rJiQiMAgBYCAJQBb3A8MtDtmMbeXpf2rZre8IrFmHxynoQAD+B/kPxpu1zZ6VngMYlIdtV/uCpf3W25bfvaYtXiDgmkvztl90OvXpCzzWuopMQ0P4PzRpaUKMgc3re4fV/7o9YvFgIRh6m0bJgMGKzwEgN+baBydosORcWul8EMljZ1XpR2VgVbxWkJ8BxzBczZDZ26WfymB577Z/R8OiPKGUE9jDSmvj5B9XALtSuXisVQaamCTQ4FpJFS9yQ5pbfZXgz8KVSmd+zSgA') center / cover no-repeat;
-  view-timeline-name: --wwd-photo;
-}
-.wwd-photo-img {
-  display: block;
-  width: 100%;
-  max-width: none;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 40%;
-}
-/* Parallax (George, 23.10): the image is taller than the frame and drifts
-   up as the frame crosses the viewport. It rides `transform`, so the entry
-   motion on translate/rotate/scale (page-motion.js) composes with it.
-   Browsers without scroll timelines keep the still photo.
-   The travel equals the overhang, so the overhang sets how strong the
-   effect reads: 18% was spread over the whole crossing and barely
-   registered (George, 23.10: "слишком маленький параллакс"). At 150% the
-   3:2 photo at full width is almost uncropped, so the drift shows more
-   of the frame rather than a zoomed crop. translateY is a share of the
-   image's own height: overhang / (100% + overhang). */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .wwd-photo-img {
-      --wwd-photo-drift: -33.333%;
-      height: 150%;
-      animation: wwd-photo-drift linear both;
-      animation-timeline: --wwd-photo;
-      animation-range: cover 0% cover 100%;
-    }
-  }
-}
-@keyframes wwd-photo-drift {
-  from { transform: translateY(0); }
-  to { transform: translateY(var(--wwd-photo-drift, -33.333%)); }
 }
 .wwd-beats {
   display: grid;
@@ -615,23 +673,27 @@
 [dir='rtl'] #top .prose p.wwd-note {
   transform: rotate(3deg);
 }
-.wwd-closing {
-  margin-top: 4.5rem;
-  margin-bottom: 6.5rem;
+/* "How the program works": four steps in a row, on the white after the
+   year's paper. Vlad, 23.10: the section read as "12 lessons and clubs"
+   because the sequence (intensive, clubs, mentor, own class) was spread
+   over the lead, the beats and the FAQ and nowhere stood as steps. The
+   number is set in the handwritten hand so the row belongs to the notes.
+   Subgrid rows keep number, title and body aligned across the four
+   columns. The pen line under the row says what holds still while the
+   year's themes change; the coordinators line closes the section. */
+.how {
+  padding: 7.5rem var(--gutter) 8.125rem;
+  background: var(--background);
+  text-align: start;
 }
-/* "How the program works": four steps in a row under the pilot photo.
-   Vlad, 23.10: the section read as "12 lessons and clubs" because the
-   sequence (intensive, clubs, mentor, own class) was spread over the lead,
-   the beats and the FAQ and nowhere stood as steps. The three beats went
-   the same day (George: they and the steps said the same thing). The
-   number is set in the handwritten hand so the row belongs to the notes;
-   the handwritten line under a step is the slot for the specifics (hours,
-   weeks). Subgrid rows keep number, title, body and detail aligned across
-   the four columns. The callout, the coordinators line and the stipend
-   line close the section under the row. */
+.how-title {
+  margin: 0 0 3.5rem;
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
 .wwd-steps {
-  width: min(72rem, 100%);
-  margin: 5.75rem auto 0;
   text-align: start;
 }
 .wwd-steps-list {
@@ -715,41 +777,84 @@
   margin-top: 1.75rem;
 }
 @media (max-width: 700px) {
-  .what-we-do {
-    padding: 4.5rem 5% 6.25rem;
+  .stance {
+    padding: 1rem var(--m-gutter) 4.5rem;
   }
-  /* Hard <br> breaks: "for teachers and" / "и координаторов" are the longest
-     lines, so the vw step is smaller than the wrapping displays above. */
-  .wwd-head {
-    grid-template-columns: 1fr;
+  .stance-lead {
+    max-inline-size: none;
+    margin-block-start: 1.25rem;
+    font-size: var(--m-lead);
+    line-height: 1.3;
   }
-  .what-we-do .display,
-  .wwd-lead {
-    grid-column: 1;
+  .stance-rows {
+    margin-block-start: 2.5rem;
   }
-  .wwd-lead {
-    gap: 1.75rem;
-    margin-top: 2.25rem;
+  .stance-row {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0.75rem;
+    padding-block: 1.75rem;
   }
-  .wwd-stipend .beat-note {
-    font-size: 1.5rem;
+  .stance-label {
+    font-size: 1.875rem;
+  }
+  /* A marked phrase is one piece: on the narrowest phones the type gives
+     way so the longest one (the Russian) still fits the line. */
+  .stance-title {
+    font-size: min(1.75rem, 8vw);
+    line-height: 1.12;
+  }
+  .stance-title mark:is(.blue, .peach) {
+    padding-inline: 0.5em;
+    margin-inline: -0.5em;
+  }
+  .stance-body {
+    font-size: var(--m-body);
+  }
+  .year {
+    padding: 4.5rem var(--m-gutter);
+  }
+  .year-kicker {
+    font-size: 1.625rem;
+  }
+  .year-title {
+    margin-block-start: 0.75rem;
+    font-size: var(--m-title);
+    line-height: 1.05;
+  }
+  .year-cards {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+    margin-block-start: 2rem;
+  }
+  .year-card {
+    gap: 0.75rem;
+    padding: 1.5rem;
+    border-radius: 1.25rem;
+  }
+  .year-icons img {
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+  }
+  .year-card h3 {
+    font-size: 1.75rem;
+  }
+  .year-card > p {
+    font-size: var(--m-body);
+  }
+  .year-card > .year-next-note {
+    font-size: 1.625rem;
+  }
+  .how {
+    padding: 4.5rem var(--m-gutter) 5rem;
+  }
+  .how-title {
+    margin-block-end: 2.25rem;
+    font-size: 1.75rem;
   }
   /* 3.5rem ran to six lines in Hebrew and into the gutter. */
   #top .prose p.wwd-note {
     margin-top: 2.5rem;
     font-size: 2.5rem;
-  }
-  .wwd-photo {
-    margin-top: 3rem;
-  }
-  .wwd-photo-frame {
-    aspect-ratio: 4 / 3;
-  }
-  /* The 4:3 frame is taller than the photo's own shape: 150% would zoom
-     into a crop, so phones take a smaller overhang. */
-  .wwd-photo-img {
-    --wwd-photo-drift: -23.077%;
-    height: 130%;
   }
   .wwd-beats {
     grid-template-columns: 1fr;
@@ -764,9 +869,6 @@
   }
   /* Phones stack the steps; the subgrid rows are no longer shared, so the
      gap between steps is a margin and the empty slot collapses. */
-  .wwd-steps {
-    margin-top: 4rem;
-  }
   .wwd-steps-list {
     grid-template-columns: 1fr;
   }
@@ -793,35 +895,20 @@
   .wwd-steps-close > p + p {
     margin-top: 1.25rem;
   }
-  .wwd-closing {
-    margin-top: 3rem;
-    margin-bottom: 3.5rem;
-  }
 }
-/* The featured article's pen note in the margin of the intro (template,
-   js/margin-note.js). The claim it annotates gets a blue pen underline; the
-   note sits in the end margin, centred on the paragraph (one line: "Our
-   foundation is here to help."), and the script draws the arrow from it to
-   just past the claim's last word. Phones: the note sits under the
-   paragraph, centred, no arrow. */
-.introduction p:has(> .margin-note) {
-  position: relative;
-}
-.introduction p:has(> .margin-note) .intro-claim {
-  padding-block-end: 0.12em;
-  background: url('../assets/pen-underline.svg') left bottom / 100% 0.3em no-repeat;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-}
+/* The featured article's pen note over the first stance row (template,
+   js/margin-note.js). It hangs above the row's top rule, in the blank
+   beside the section's lead, and the script draws the arrow from it down
+   to the marked word it is about. Phones: the note sits under the row's
+   text, no arrow. */
 .margin-note {
   position: absolute;
-  top: 50%;
-  translate: 0 -50%;
-  inset-inline-start: calc(100% + 3.75rem);
-  inline-size: 15.5rem;
+  inset-block-end: calc(100% + 0.75rem);
+  inset-inline-start: 49rem;
+  inline-size: 16.25rem;
   color: var(--scribble-blue);
   font-family: var(--font-scribble);
-  font-size: 2rem;
+  font-size: 1.875rem;
   line-height: 1.05;
   letter-spacing: normal;
   text-align: start;
@@ -861,13 +948,10 @@
     position: static;
     display: block;
     inline-size: auto;
-    max-inline-size: 18rem;
-    margin: 1.5rem auto 0;
-    font-size: 1.625rem;
-    text-align: center;
-    translate: none;
+    max-inline-size: 17rem;
+    margin-block-start: 0.5rem;
+    font-size: 1.5rem;
     transform: rotate(-2deg);
-    transform-origin: center;
   }
   .margin-note-arrow {
     display: none;
@@ -913,7 +997,7 @@
   letter-spacing: -0.035em;
   text-wrap: balance;
 }
-/* "curiosity" carries the yellow marker it has in the What we do heading. */
+/* "curiosity" carries the yellow marker "Curious" has in the frame's first row. */
 .desk-title mark {
   color: inherit;
   white-space: nowrap;
@@ -1255,49 +1339,6 @@
   margin-inline-end: 0.5rem;
   color: var(--fellowship-muted);
 }
-/* The teachers' past pilot: the coordinators' card as it is, the whole
-   card a link to the camp section. "Program Pilot", a muted bullet, the
-   dates and place in the badge yellow, then "Check results" with an arrow. */
-#top .pilot-link {
-  align-items: center;
-  column-gap: 0.5rem;
-  color: inherit;
-  text-decoration: none;
-}
-/* "Summer camp" in the peach scribble sits over the card's top edge,
-   out of its grid; the card keeps the coordinators' layout. */
-#top .pilot-link {
-  position: relative;
-}
-/* One line: title, dates and place, the link. */
-#top .pilot-link > h3,
-#top .pilot-link .running-badge,
-#top .pilot-button {
-  white-space: nowrap;
-}
-#top .pilot-camp {
-  position: absolute;
-  inset-block-start: -0.75em;
-  inset-inline-start: 0.5rem;
-  rotate: -4deg;
-  pointer-events: none;
-  color: var(--scribble-peach-on-plum);
-  /* A soft glow of its own colour reads as neon on the plum. */
-  text-shadow: 0 0 0.5em color-mix(in srgb, var(--scribble-peach-on-plum) 55%, transparent);
-  font-family: var(--font-scribble);
-  font-size: 2.4em;
-  line-height: 1;
-  white-space: nowrap;
-}
-#top .pilot-link .running-badge::before {
-  content: "•";
-  margin-inline-end: 0.5rem;
-  color: var(--fellowship-muted);
-}
-#top .pilot-button {
-  justify-self: end;
-  color: inherit;
-}
 @media (max-width: 700px) {
   #top .running-card {
     grid-template-columns: auto minmax(0, 1fr);
@@ -1312,26 +1353,6 @@
   }
   #top .running-status {
     margin-top: 0.25rem;
-  }
-}
-/* On a phone the card stacks like the coordinators', without the bullet. */
-@media (max-width: 700px) {
-  /* The rotated scribble needs more room above the first row. */
-  #top .pilot-link {
-    margin-top: 3rem;
-    padding-block-start: 1.375rem;
-  }
-  #top .pilot-camp {
-    rotate: -2deg;
-  }
-  #top .pilot-link .running-badge::before {
-    content: none;
-  }
-  #top .pilot-button {
-    justify-self: start;
-  }
-  #top .pilot-link .running-badge {
-    white-space: normal;
   }
 }
 .leaders .program-list {
@@ -1444,20 +1465,14 @@
 #top .feature-cards .benefit > h3 {
   align-self: end;
 }
-/* The scholarship word and the What-we-do note link down to its band: the scribble keeps its
+/* The scholarship word links down to its band: the scribble keeps its
    colour, a dotted underline is the only hint. */
-#top a.offer-scholarship,
-#top a.beat-note {
+#top a.offer-scholarship {
   text-decoration: underline dotted 1px;
   text-underline-offset: 0.2em;
 }
 #top a.offer-scholarship:focus-visible {
   outline: 2px solid var(--scribble-blue-on-plum);
-  outline-offset: 3px;
-  border-radius: 0.25rem;
-}
-#top a.beat-note:focus-visible {
-  outline: 2px solid var(--scribble-blue);
   outline-offset: 3px;
   border-radius: 0.25rem;
 }
@@ -1616,12 +1631,29 @@
   text-wrap: balance;
   max-inline-size: 16ch;
 }
+/* The edition over the program's name: the fellowship keeps its name, the
+   title under it changes with the year. */
+#top .offer-kicker {
+  display: block;
+  margin-block-end: 1rem;
+  color: var(--fellowship-muted);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
 /* "Dear teachers" opens the intro as a pen note, a little above the text. */
-/* The practice continues the intro's prose; the intensives' questions
-   stay in the handwritten face, in the scribble blue. */
+/* This year's questions close the pane: a small display heading, then the
+   questions in the handwritten face, in the scribble blue. */
 .fellowship-practice {
-  margin-top: 2rem;
+  margin-top: 5rem;
   width: min(41.625rem, 100%);
+}
+#top .prose p.questions-title {
+  font-family: var(--font-display);
+  font-size: var(--t-item);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 #top .fellowship-practice .questions {
   /* Wider than the prose column it sits in, centred on it. */
@@ -1641,6 +1673,16 @@
   transform: none;
 }
 @media (max-width: 700px) {
+  #top .offer-kicker {
+    margin-block-end: 0.625rem;
+    font-size: var(--m-body);
+  }
+  .fellowship-practice {
+    margin-top: 3rem;
+  }
+  #top .prose p.questions-title {
+    font-size: 1.5rem;
+  }
   #top .fellowship-practice .questions {
     width: auto;
     margin-inline: 0;
@@ -1750,20 +1792,20 @@
     padding-block-start: 1.5rem;
   }
 }
-/* Tbilisi camp: a peach section of its own after the audiences. Copy and
-   the survey figures on the start side, a small square photo centred in
-   the end column (46% of the width), inside the section's padding and vertically centred.
-   Square corners, as every other photo on the site. "Learn more" grows the
-   section downward with the pilot's story, full width under both columns. */
+/* Tbilisi camp: a peach section of its own before the offers, so the
+   proof comes ahead of the ask. Copy and the survey figures on the start
+   side, a small square photo centred in the end column (46% of the
+   width). "Learn more" grows the section downward with the pilot's story;
+   the teacher's line and the caveat run under both, on the same two
+   columns, always open. */
 .camp {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 46%;
   align-items: center;
   align-content: center;
   column-gap: 5rem;
-  min-block-size: 60rem;
   box-sizing: border-box;
-  padding-block: 5rem;
+  padding-block: 7rem;
   padding-inline: var(--gutter) 3.5rem;
   background: var(--promo-peach);
   color: var(--ink);
@@ -1815,10 +1857,6 @@
   /* The team portraits' corner. */
   border-radius: 1.25rem;
 }
-/* Open, the story needs twice the closing space below it. */
-.camp:has(.camp-more[aria-expanded='true']) {
-  padding-block-end: 10rem;
-}
 /* Key figures from the pilot survey, two by two: the number in the display
    face, its label under it in the muted ink. */
 .camp-figures {
@@ -1859,13 +1897,20 @@
   margin-top: 0.5rem;
   color: var(--camp-muted);
 }
-/* "Learn more" reads as a text link: underline, a chevron that turns over
-   when the story is open. Semantically a disclosure button. */
-/* The last row's spacing already sits under the figures; the link follows
-   them at the copy's own gap. */
 .camp-figure:nth-last-child(-n + 2) {
   margin-bottom: 0;
 }
+/* What the pilot was and how it was measured, between the meta line and
+   the figures, in the muted ink. */
+#top .camp-intro {
+  max-inline-size: 34em;
+  color: var(--camp-muted);
+  font-size: var(--t-body);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+}
+/* "Learn more" reads as a text link: a word and a chevron, after the
+   figures at the copy's own gap. Semantically a disclosure button. */
 #top .camp-more {
   margin-block-start: 2.5rem;
   font-size: var(--t-body);
@@ -1888,28 +1933,18 @@
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
-  transition: rotate 300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 /* The story row: its height is animated (js/disclosure.js), so the wrapper
-   has no padding of its own; the reading column sits on the copy's edge. */
+   has no padding of its own; the reading column sits on the copy's edge
+   and carries the space above it. */
 .camp-details {
   grid-column: 1 / -1;
   overflow: hidden;
 }
-/* Inside, the same two columns as the section above. */
-.camp-story {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 46%;
-  align-items: start;
-  column-gap: 5rem;
-  padding-block: 4rem 0.5rem;
-}
 .program-results-copy {
   max-inline-size: 41.25rem;
+  padding-block-start: 4rem;
   text-align: start;
-}
-.camp-voice {
-  margin: 0;
 }
 .program-results-copy p + p {
   margin-top: 1.5rem;
@@ -1917,6 +1952,23 @@
 .program-results-title {
   margin: 0 0 1.5rem;
   font-weight: 500;
+}
+/* Under both columns, open with or without the story: the teacher's line
+   on the copy's column, the caveat beside it under the photo, on the
+   quote's last line. */
+.camp-story {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 46%;
+  align-items: end;
+  column-gap: 5rem;
+  padding-block-start: 5.5rem;
+}
+.camp-voice {
+  margin: 0;
+}
+#top .results-caveat {
+  max-inline-size: 26rem;
 }
 .results-caveat {
   color: var(--camp-muted);
@@ -1929,12 +1981,11 @@
   font-size: var(--t-body);
   line-height: 1.3;
 }
-#top .promo-meta > span + span::before {
+/* The bullet rides at the end of the line it closes, so a wrapped line
+   never opens with one. */
+#top .promo-meta > span:not(:last-child)::after {
   content: '\00b7';
-  margin-inline-end: 0.75rem;
-}
-#top .camp-copy > .promo-meta {
-  font-size: var(--t-lead);
+  margin-inline-start: 0.75rem;
 }
 .promo-arrow {
   inline-size: 1.25rem;
@@ -1950,8 +2001,7 @@
   scale: -1 1;
 }
 @media (prefers-reduced-motion: reduce) {
-  .promo-arrow,
-  .camp-more-arrow {
+  .promo-arrow {
     transition: none;
   }
 }
@@ -1959,16 +2009,12 @@
   .camp {
     grid-template-columns: minmax(0, 1fr);
     row-gap: 1.75rem;
-    min-block-size: 0;
-    padding: 2rem var(--m-gutter) 3rem;
+    padding: 3rem var(--m-gutter) 3.5rem;
   }
   .camp-photo {
     order: -1;
     justify-self: start;
     inline-size: min(100%, 16rem);
-  }
-  .camp:has(.camp-more[aria-expanded='true']) {
-    padding-block-end: 6rem;
   }
   .camp-copy {
     gap: 0.75rem;
@@ -1979,9 +2025,6 @@
   #top .promo-meta {
     font-size: var(--m-body);
   }
-  #top .camp-copy > .promo-meta {
-    font-size: var(--m-body);
-  }
   .camp-figures {
     column-gap: 1rem;
     margin-top: 0.75rem;
@@ -1989,19 +2032,29 @@
   #top .camp-figures .stat-value {
     font-size: 2.5rem;
   }
+  #top .camp-intro {
+    font-size: var(--m-body);
+  }
   #top .camp-more {
-    margin-top: 1.75rem;
+    margin-block-start: 1.5rem;
     font-size: var(--m-body);
   }
   /* The grid's row gap would open under the collapsed story; the story
      carries its own space above instead. */
   .camp-details {
-    margin-top: -1.75rem;
+    margin-block-start: -1.75rem;
+  }
+  .program-results-copy {
+    padding-block-start: 2.5rem;
   }
   .camp-story {
     grid-template-columns: minmax(0, 1fr);
-    padding-top: 2.5rem;
-    row-gap: 2.25rem;
+    padding-block-start: 1.25rem;
+    row-gap: 1.5rem;
+  }
+  #top .results-caveat {
+    font-size: var(--m-body);
+    line-height: 1.45;
   }
 }
 
@@ -2498,7 +2551,6 @@
   /* Big enough that "dear teachers," wraps to two lines; the desktop
      nowrap is lifted here so nothing runs past the panel. */
   .display,
-  .what-we-do .display,
   .partners .display {
     font-size: var(--m-title);
     line-height: 1.1;
