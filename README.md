@@ -16,8 +16,7 @@ src/articles/          articles, one file per language: copy, charts, labels
 src/i18n/{en,ru,he}.json   every string on the page; values may contain inline HTML
 src/css/               stylesheets (logical properties, direction-agnostic)
 src/js/                ES modules loaded straight by the browser
-src/js/lib/            behaviour ported verbatim from PR #3 (hero maths, page motion, video autoplay, poof)
-src/js/hero/           the old hero collage, rewritten from the React component; the landing no longer loads it
+src/js/lib/            behaviour ported verbatim from PR #3 (page motion, card depth, the floating Apply)
 src/assets/            images and fonts
 index.html, ru/, he/   generated pages, committed (and schools/, pisa-2025/)
 css/ js/ assets/       copied from src/ by the build, committed
@@ -129,7 +128,7 @@ Their SIL Open Font Licenses are included beside the font files.
 node --test tests/*.test.mjs     # or: npm test
 ```
 
-The tests need only Node 22 or newer. They cover the ported hero and motion logic, the
+The tests need only Node 22 or newer. They cover the ported motion logic, the
 generated pages (three outputs, `hreflang`, every link resolves, every module import
 resolves), key parity across languages, and that no physical inline-axis CSS crept back in.
 
@@ -160,11 +159,6 @@ Repo → Settings → Pages → Source: *Deploy from a branch*, branch `main`, f
 - The school-leader cards were assembled from the previous site's coordinator copy;
   confirm with the team. Two team members are placeholders.
 - Webfont licences: GT Alpina and the ABC Stefan *trial* font are shipped as in the PR.
-- The old hero collage is off the page but its files are still in the tree: it
-  embedded TikTok and YouTube players with muted autoplay, and its "Twitch" card
-  played self-hosted stock footage of streamers from `src/assets/video/`; the
-  source pages are in `src/js/lib/hero-videos.js`. Footage by Yan Krukau and
-  Alena Darmel under the Pexels licence, no attribution required.
 - The landing's copy follows the "adaptive teacher" frame: what the job is for,
   what the classroom is up against this year, and adapting as a habit. The
   dated parts are meant to be edited every year: `hero.years`,
