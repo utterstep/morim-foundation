@@ -46,7 +46,7 @@
   letter-spacing: -0.035em;
   text-wrap: balance;
 }
-/* The site's marker stroke (type.css, .approach-name): a slanted shape
+/* The site's marker stroke (sections.css, .stance-title mark): a slanted shape
    stretched to the words, which never wrap apart. */
 .article-title mark {
   color: inherit;

@@ -1,4 +1,217 @@
-/* Ported from PR #3 website/app/hero-floating.css. Physical inline-axis properties were converted to logical ones for RTL. */
+/* The hero: the claim on the start side (headline, lead, the one Apply
+   above the fold), the years a teacher in Israel has just lived through on
+   the end side, as a stack of notes dealt a little askew. The last note is
+   left open on purpose. Nothing here moves or needs a script. The tilts
+   are decoration and stay the same in RTL; the offsets are logical. */
+.hero {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  align-items: center;
+  column-gap: 5rem;
+  /* The header above it is in the flow: with this the stack of notes ends
+     on the first screen of a 1440 by 900 window. */
+  padding: 1rem var(--gutter) 7rem;
+  text-align: start;
+}
+.hero h1 {
+  margin: 0;
+  font-size: 5.5rem;
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+/* The half of the claim that stays put carries the marker, in one piece
+   on its own line. On a phone the longer Russian and Hebrew claims wrap:
+   each line gets its own stroke. */
+.hero h1 mark {
+  color: inherit;
+  white-space: nowrap;
+  padding-inline: 0.4em;
+  margin-inline: -0.4em;
+  background: url('../assets/highlight-yellow.svg') center / 100% 100% no-repeat;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.hero-lead {
+  max-inline-size: 30em;
+  margin-block-start: 2.25rem;
+  font-size: var(--t-lead);
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.875rem 1.375rem;
+  margin-block-start: 2rem;
+}
+#top .hero-apply {
+  min-inline-size: 9rem;
+}
+.hero-next {
+  color: #55554e;
+  font-size: var(--t-small);
+  line-height: 1.35;
+}
+.hero-next a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+.hero-next a:hover {
+  color: var(--ink);
+}
+.hero-years {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.hero-year {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 0.75rem 1.125rem;
+  border-radius: 1.125rem;
+  background: #fff;
+  box-shadow:
+    0 0.625rem 1.875rem rgb(24 32 34 / 10%),
+    inset 0 0 0 1px rgb(24 32 34 / 5%);
+}
+.hero-year:nth-child(1) { margin-inline: 0 1.875rem; rotate: -1.2deg; }
+.hero-year:nth-child(2) { margin-inline: 1.875rem 0; rotate: 1deg; }
+.hero-year:nth-child(3) { margin-inline: 0.5rem 1rem; rotate: -0.6deg; }
+.hero-year:nth-child(4) { margin-inline: 2.25rem 0; rotate: 1.4deg; }
+.hero-year:nth-child(5) { margin-inline: 0.25rem 1.5rem; rotate: -1deg; }
+.hero-year:nth-child(6) { margin-inline: 1.75rem 0; rotate: 0.8deg; }
+.hero-year:nth-child(7) { margin-inline: 1.375rem 0; rotate: 0.6deg; }
+.hero-year-when {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 4.75rem;
+  min-block-size: 2.125rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.625rem;
+  background: var(--paper);
+  font-size: var(--t-small);
+  font-weight: 500;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+.hero-year[data-tint='peach'] .hero-year-when { background: var(--promo-peach); }
+.hero-year[data-tint='plum'] .hero-year-when { background: #e8dfe7; }
+.hero-year[data-tint='blue'] .hero-year-when { background: #cfe0ff; }
+.hero-year[data-tint='yellow'] .hero-year-when { background: #f8e58c; }
+.hero-year-text {
+  font-size: max(1rem, 13px);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+/* Next year: an empty slot, dashed, with the answer pencilled in. */
+.hero-year.hero-year-next {
+  margin-block-start: 0.375rem;
+  margin-inline: 0 1.875rem;
+  padding-block: 0.625rem;
+  border: 2px dashed #b9b6ac;
+  background: none;
+  box-shadow: none;
+  rotate: -1.5deg;
+}
+.hero-year-next .hero-year-when {
+  border: 1.5px solid #b9b6ac;
+  background: none;
+}
+.hero-year-next .hero-year-text {
+  color: var(--scribble-blue);
+  font-family: var(--font-scribble);
+  font-size: max(1.875rem, 22px);
+  line-height: 1;
+  letter-spacing: normal;
+}
+/* Russian sets longer words in Spectral: one size down keeps the headline
+   to the English line count. */
+@media (min-width: 701px) {
+  html[lang='ru'] .hero h1 {
+    font-size: 4.5rem;
+    line-height: 1;
+  }
+  html[lang='he'] .hero h1 {
+    line-height: 1;
+  }
+}
+@media (max-width: 700px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 2.75rem;
+    padding: 1.5rem var(--m-gutter) 4.5rem;
+  }
+  .hero h1 {
+    /* 56px touched the edge of a 360px screen; cap by width. */
+    font-size: min(var(--m-hero), 13.9vw);
+    line-height: 0.95;
+  }
+  /* The stroke's side room stays inside the gutter. */
+  .hero h1 mark {
+    padding-inline: 0.3em;
+    margin-inline: -0.3em;
+  }
+  /* The English claim fits a phone line in one piece; the Russian and
+     Hebrew ones are longer and wrap. */
+  html:not([lang='en']) .hero h1 mark {
+    white-space: normal;
+  }
+  .hero-lead {
+    margin-block-start: 1.5rem;
+    font-size: var(--m-lead);
+    line-height: 1.3;
+  }
+  .hero-actions {
+    margin-block-start: 1.75rem;
+  }
+  #top .hero-apply {
+    min-height: 3rem;
+  }
+  .hero-next {
+    font-size: var(--m-body);
+  }
+  .hero-years {
+    gap: 0.625rem;
+  }
+  .hero-year {
+    gap: 0.75rem;
+    padding: 0.75rem 0.875rem;
+    border-radius: 1rem;
+  }
+  /* A phone has no room to deal the notes sideways: half the offsets. */
+  .hero-year:nth-child(1) { margin-inline: 0 0.75rem; }
+  .hero-year:nth-child(2) { margin-inline: 0.75rem 0; }
+  .hero-year:nth-child(3) { margin-inline: 0.25rem 0.5rem; }
+  .hero-year:nth-child(4) { margin-inline: 1rem 0; }
+  .hero-year:nth-child(5) { margin-inline: 0 0.625rem; }
+  .hero-year:nth-child(6) { margin-inline: 0.75rem 0; }
+  .hero-year:nth-child(7) { margin-inline: 0.5rem 0; }
+  .hero-year.hero-year-next { margin-inline: 0 0.75rem; }
+  .hero-year-when {
+    min-inline-size: 4.25rem;
+    font-size: 0.8125rem;
+  }
+  .hero-year-text {
+    font-size: var(--m-body);
+  }
+  .hero-year-next .hero-year-text {
+    font-size: 1.625rem;
+  }
+}
+
+/* The hero collage these rules dressed is no longer built (the hero is
+   plain markup now); they stay until its scripts and assets go. */
 .hero-editorial .hero-app-item[data-slot] {
   --float-width: 4.5rem;
   --float-height: 4.5rem;

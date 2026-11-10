@@ -7,7 +7,12 @@
 
   Ported from PR #3 (website/app/home-content.tsx, sections.tsx, hero.tsx,
   mobile-menu.tsx). Interactive widgets are native elements wired up by
-  js/main.js; the hero collage is built entirely by JavaScript.
+  js/main.js; the hero is plain markup.
+
+  The landing runs: the claim and the years (hero), the frame the programs
+  stand on (three lines, three rows), this year's themes, the four steps,
+  the Tbilisi pilot, the offers by audience, the stipend, the desk, the
+  team, the FAQ.
 #}
 {# The footer's language list: every language by its own name, the current
    one marked. #}
@@ -260,20 +265,11 @@
   <link rel="preload" href="{{ root }}assets/fonts/Caveat-Regular.woff2" as="font" type="font/woff2" crossorigin>
   {% endif %}
   <link rel="preload" href="{{ root }}assets/fonts/GTAlpina-Medium.woff2" as="font" type="font/woff2" crossorigin>
-  {% if hero %}
-  {# The hero collage: its scripts, opening icons and stream posters are
-     requested with the page, so the first screen does not wait for the
-     module chain. The embeds come from two origins; warm them up. #}
-  <link rel="preconnect" href="https://www.youtube.com">
-  <link rel="preconnect" href="https://www.tiktok.com">
-  {% for m in hero.modules %}
+  {% if modules %}
+  {# The module graph behind main.js, one modulepreload each, so the browser
+     fetches the scripts in parallel instead of walking the import chain. #}
+  {% for m in modules %}
   <link rel="modulepreload" href="{{ root }}js/{{ m }}?v={{ v }}">
-  {% endfor %}
-  {% for i in hero.icons %}
-  <link rel="preload" as="image" href="{{ i.href }}" imagesrcset="{{ i.srcset }}" imagesizes="{{ i.sizes }}">
-  {% endfor %}
-  {% for p in hero.posters %}
-  <link rel="preload" as="image" href="{{ p }}">
   {% endfor %}
   {% endif %}
   {# Same order as the PR's layout.tsx imports: the cascade depends on it. #}
@@ -294,7 +290,7 @@
   <noscript><style>.side-panel{position:static;display:block;inline-size:auto;block-size:auto;max-block-size:none;overflow:visible;box-shadow:none;margin-block-start:1rem}.side-panel-close,[data-dialog]{display:none}</style></noscript>
 </head>
 <body>
-<main id="top" data-hero-variant="original" data-lang="{{ lang }}">
+<main id="top" data-lang="{{ lang }}">
 
   <div class="header-shell" data-compact="false">
     {# v4-bar: no menu. The logo sits alone on its white pill; the languages
@@ -324,18 +320,27 @@
   {% elif article %}
   {% include 'article.html.j2' %}
   {% else %}
-  <section class="hero hero-editorial" aria-labelledby="hero-title"
-           data-playing="false" data-looping="false" data-media-layout="static"
-           data-label-icon="{{ t.hero.label_icon }}"
-           data-label-media-dismiss="{{ t.hero.label_media_dismiss }}"
-           data-video-unavailable="{{ t.hero.video_unavailable }}"
-           data-help-desktop="{{ t.hero.help_desktop }}"
-           data-help-compact="{{ t.hero.help_compact }}">
-    <div class="hero-mobile-content">
-      <h1 id="hero-title" aria-label="{{ t.hero.title_aria }}">{{ t.hero.title_html }}</h1>
+  {# The hero says the claim once and shows why: on the start side the
+     headline, the lead and the one Apply above the fold; on the end side
+     the years a teacher in Israel has just lived through, as a stack of
+     notes, the last one left open. The cards are a list in order, read
+     once; nothing here moves or needs a script. #}
+  {% set current = t.programs.teachers[0] %}
+  <section class="hero hero-years-layout" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <h1 id="hero-title">{{ t.hero.title_html }}</h1>
+      <p class="hero-lead">{{ t.hero.lead }}</p>
+      <p class="hero-actions">
+        {{ apply_button('button hero-apply') }}
+        <span class="hero-next">{{ t.hero.next_label }} {{ current.next }} · <a href="#scholarship">{{ t.hero.next_terms }}</a></span>
+      </p>
     </div>
-    <span class="hero-accents" role="group" aria-label="{{ t.hero.group_aria }}"></span>
-    <span id="hero-app-help" class="sr-only">{{ t.hero.help_desktop }}</span>
+    <ol class="hero-years" aria-label="{{ t.hero.years_aria }}">
+      {% for y in t.hero.years %}
+      <li class="hero-year" data-tint="{{ y.tint }}"><span class="hero-year-when"><bdi>{{ y.when }}</bdi></span><span class="hero-year-text">{{ y.text }}</span></li>
+      {% endfor %}
+      <li class="hero-year hero-year-next"><span class="hero-year-when">{{ t.hero.next_year }}</span><span class="hero-year-text">{{ t.hero.next_year_text }}</span></li>
+    </ol>
   </section>
   {# A small fixed hint at the bottom of the first screen; js/scroll-hint.js
      hides it after the second scroll gesture, or at once if the page did not
@@ -345,73 +350,70 @@
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
   </a>
   {# The floating Apply: js/lib/floating-apply.js shows it once the hero has
-     scrolled off and no Apply (offers, footer) is in view. Not a [data-apply]
-     itself, or it would hide on its own appearance. #}
+     scrolled off and no Apply (hero, offers, footer) is in view. Not a
+     [data-apply] itself, or it would hide on its own appearance. #}
   <div class="floating-apply-rail" data-anchor=".hero" inert>
     <a class="button floating-apply-button" href="{{ t.links.survey }}">{{ t.programs.apply }}</a>
   </div>
 
-  <section class="approach" id="approach" aria-label="{{ t.approach.aria }}">
-    <div class="prose introduction">
-      <p data-hero-story-end>{{ t.approach.attention_html }}</p>
-      {# The featured article's pen note answers the promise ("here to
-         help", its `.intro-claim`) with a hopeful finding. It sits in the
-         margin, centred on the line; js/margin-note.js draws the arrow from
-         it to just past the claim, measured, so it runs through the blank
-         end of the line and never across text. Phones: the note drops under
-         the line, no arrow. #}
-      <p>{{ t.approach.help }}{% if feature %}<a class="margin-note" href="{{ feature.href }}">{{ f.teaser.margin_html }}</a><svg class="margin-note-arrow" aria-hidden="true" focusable="false"><path d=""/></svg>{% endif %}</p>
+  {# What the programs stand on, in three lines and three rows: what the
+     job is for (it stays), what the classroom is up against now (it
+     changes), and adapting as a practised habit. The featured article's
+     pen note hangs over the first row and points at the word it is about;
+     js/margin-note.js draws its arrow. Phones: the note drops under the
+     row's text, no arrow. #}
+  <section class="stance" id="what-we-do" aria-labelledby="what-we-do-title">
+    <div class="stance-head">
+      <h2 class="display" id="what-we-do-title">{{ t.what_we_do.title_html }}</h2>
+      <p class="stance-lead">{{ t.what_we_do.lead }}</p>
+    </div>
+    <div class="stance-rows">
+      {% for row in t.what_we_do.stance %}
+      <div class="stance-row">
+        <p class="stance-label">{{ row.label }}</p>
+        <h3 class="stance-title">{{ row.title_html }}</h3>
+        <p class="stance-body">{{ row.body }}</p>
+        {% if feature and loop.first %}
+        <a class="margin-note" href="{{ feature.href }}" data-claim=".stance-title mark" data-arrow="down">{{ f.teaser.margin_html }}</a><svg class="margin-note-arrow" aria-hidden="true" focusable="false"><path d=""/></svg>
+        {% endif %}
+      </div>
+      {% endfor %}
     </div>
   </section>
 
-  {# The answer to "what is this?", right after the story: the Foundation
-     line beside the heading, one pilot photo edge to edge, three beats,
-     the approaches paragraph, then where to start. The routes land on the
-     first teachers program and the first coordinators cohort still open. #}
-  <section class="what-we-do" id="what-we-do" aria-labelledby="what-we-do-title">
-    <div class="wwd-head">
-      <h2 class="display" id="what-we-do-title">{{ t.what_we_do.title_html }}</h2>
-      <div class="prose wwd-lead">
-        {# Two paragraphs in one box so space-between still pins the lead
-           to the cap line and the stipend to the last line. #}
-        <div class="wwd-lead-text">
-          <p class="mission-intro">{{ t.what_we_do.lead_html }}</p>
-          <p class="mission-intro">{{ t.what_we_do.lead_2_html }}</p>
-        </div>
-        {# The lead opens the column on the cap line; the stipend closes it
-           on the heading's last line as a note, in the note size (George,
-           23.10: "давай этот блок перенесем к первому, где Programs where
-           teachers" → "поменяй местами, стипендия это примечание"). #}
-        <p class="wwd-stipend">{{ t.what_we_do.stipend }}<a class="beat-note" href="{{ t.what_we_do.stipend_href }}">{{ t.what_we_do.stipend_note }}</a></p>
-      </div>
+  {# This year's two themes on the paper, and a third card left empty on
+     purpose: the list is dated, and it will change. The icons are the ones
+     the children's phones carry; decoration, so empty alt. Their box is
+     2.75rem, which above 701px is 3.05vw (see the photo macro on `sizes`). #}
+  {% set year = t.what_we_do.year %}
+  {% set theme_icons = [['tiktok', 'youtube', 'instagram', 'discord'], ['chatgpt']] %}
+  <section class="year" id="this-year" aria-labelledby="year-title">
+    <p class="year-kicker">{{ year.kicker }}</p>
+    <h2 class="year-title" id="year-title">{{ year.title }}</h2>
+    <div class="year-cards">
+      {% for theme in year.themes %}
+      <article class="year-card">
+        <p class="year-icons" aria-hidden="true">{% for slug in theme_icons[loop.index0] %}<img src="{{ root }}assets/hero-app-{{ slug }}-128.webp" srcset="{{ root }}assets/hero-app-{{ slug }}-128.webp 128w, {{ root }}assets/hero-app-{{ slug }}-256.webp 256w" sizes="(max-width: 700px) 2.5rem, 3.05vw" alt="" width="128" height="128" loading="lazy" decoding="async">{% endfor %}</p>
+        <h3>{{ theme.title }}</h3>
+        <p>{{ theme.body }}</p>
+      </article>
+      {% endfor %}
+      <article class="year-card year-card-next">
+        <h3>{{ year.next_title }}</h3>
+        <p class="year-next-note">{{ year.next_note }}</p>
+      </article>
     </div>
-    {# The program as a sequence (Vlad, 23.10): the lead, the beats and the
-       FAQ each told the mechanics in prose, and the one number on the page,
-       "12+ lessons", stood in for the whole program. Four steps in order,
-       the number in the handwritten hand; the theses ("more than half of
-       the program", "every week, in a small group") sit inside the body as
-       <mark> with the heading's marker stroke (George, 23.10: "включи
-       выноски в тело буллита и подчеркни эти же тезисы цветным фоном"); the
-       handwritten slots under a step went with that. The three beats
-       went (George, 23.10: they and the steps said the same thing); the
-       "12+ lessons" callout closes the section instead, and only here
-       (George: "внизу и только внизу"); the stipend line sits beside the
-       heading. The steps were briefly lifted above the photo and put back
-       the same day (George, 23.10: "отмени вынос шагов над фото"). #}
-    {# The pilot photo, edge to edge; its top edge fades into the paper. #}
-    <figure class="wwd-photo">
-      <div class="wwd-photo-frame">
-        {# Eager: the second screen, and lazy loading left a white frame when it
-           scrolled in (George, 27.10: "картинка группового фото грузилась долго
-           и была дыра"). Low priority keeps it behind the hero assets. #}
-        {{ photo('wwd-photo-img', 'photo-landscape', landscape_widths, '100vw', t.approach.pilot_landscape_alt, 511, 339, loading='eager') }}
-      </div>
-    </figure>
+  </section>
+
+  {# The program as a sequence (Vlad, 23.10): four steps in order, the number
+     in the handwritten hand; the theses ("more than half of the program",
+     "every week, in a small group") sit inside the body as <mark> with the
+     marker stroke (George, 23.10). The pen line under the steps says what
+     holds still while the year's themes change. #}
+  <section class="how" id="how-it-works" aria-labelledby="how-title">
     <div class="wwd-steps">
-      {# No visible heading (George, 23.10: "How the program works — убери
-         заголовок"): the row follows the photo on its own, the name stays
-         on the list for readers. #}
-      <ol class="wwd-steps-list" aria-label="{{ t.what_we_do.how_it_works.heading }}">
+      <h2 class="how-title" id="how-title">{{ t.what_we_do.how_it_works.heading }}</h2>
+      <ol class="wwd-steps-list">
         {% for s in t.what_we_do.how_it_works.steps %}
         <li class="wwd-step">
           <span class="wwd-step-num" aria-hidden="true">{{ loop.index }}</span>
@@ -425,13 +427,42 @@
         <p>{{ t.what_we_do.how_it_works.note }}</p>
       </div>
     </div>
-    {% if t.what_we_do.closing %}
-    <div class="prose wwd-closing">
-      {% for p in t.what_we_do.closing %}
-      <p>{{ p }}</p>
-      {% endfor %}
+  </section>
+
+  {# The Tbilisi camp, the pilot of the teachers' program: its own peach
+     section before the offers, so the proof comes ahead of the ask. Copy
+     and the survey figures on the start side, the photo on the end side
+     (above the copy on mobile); the adapting figure leads, because that is
+     what the program is for. The teacher's line and the caveat sit under
+     both, always open.
+     Photo: session-photos/Day2 (Kids)/R0016143.JPG, the camp's children's
+     day (12 Aug 2026), centre square crop: a child over the alphabet
+     sheet. #}
+  {% set tb = t.programs.tbilisi %}
+  <section class="camp" id="tbilisi-camp" aria-labelledby="tbilisi-promo-title" data-program="{{ tb.id }}">
+    <div class="camp-copy">
+      <h2 id="tbilisi-promo-title">{{ tb.title_html }}</h2>
+      <p class="promo-meta"><span>{{ tb.where }}</span><span><bdi dir="ltr">{{ tb.dates }}</bdi></span><span>{{ tb.finished }}</span></p>
+      <p class="camp-intro">{{ tb.intro }}</p>
+      <ul class="camp-figures" role="list">
+        {% for s in tb.stats %}
+        <li class="camp-figure">
+          <span class="stat-value">{{ s.value_html }}</span>
+          <span class="stat-label">{{ s.label }}</span>
+        </li>
+        {% endfor %}
+      </ul>
     </div>
-    {% endif %}
+    {{ photo('camp-photo', 'camp-square', [480, 720, 1080, 1440], '(max-width: 700px) 16rem, 26rem', '', 720, 720) }}
+    <div class="camp-details">
+      <div class="camp-story">
+        <figure class="camp-voice">
+          <blockquote class="results-quote">{{ tb.quote }}</blockquote>
+          <figcaption class="results-note">{{ tb.quote_note }}</figcaption>
+        </figure>
+        <p class="results-caveat">{{ tb.caveat }}</p>
+      </div>
+    </div>
   </section>
 
   {# Teachers, coordinators, schools: one panel, one audience at a time. The
@@ -457,37 +488,24 @@
     </div>
     <div class="audience-pane fellowship" id="fellowship" role="tabpanel" aria-labelledby="fellowship-title">
       {# The pane is the offer of the open monthly program: its title is the
-         heading, its terms and a standalone Apply follow it,
-         then the old "Dear teachers" greeting opens the intro in the
-         scribble hand. #}
+         heading, under the fellowship's own name and the edition (inside
+         the heading, so the two stay together when js/audiences.js evens
+         the panes' headings); its terms and a standalone Apply follow,
+         then "Dear teachers" opens the intro. #}
       {% set current = t.programs.teachers[0] %}
-      <h2 class="display" id="fellowship-title">{{ current.title_html }}</h2>
+      <h2 class="display" id="fellowship-title"><span class="offer-kicker">{{ current.kicker }}</span> {{ current.title_html }}</h2>
       {{ program_offer(current, 'fellowship-title', t.programs.apply_now) }}
-      {# The Tbilisi summer camp was the pilot of this course: the coordinators'
-         running card, set as a link down to the camp's own section, led by
-         "Summer Camp Tbilisi" in the neon peach scribble; the badge keeps
-         only the dates. #}
-      <a class="running-card pilot-link" href="#tbilisi-camp">
-        <span class="pilot-camp">{{ t.programs.pilot_camp }}</span>
-        <h3>{{ t.programs.pilot_title }}</h3>
-        <p class="running-badge"><bdi dir="ltr">{{ t.programs.tbilisi.dates }}</bdi></p>
-        <span class="running-status pilot-button text-link">{{ t.programs.check_results }}<svg class="promo-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
       <div class="prose fellowship-intro">
         {% for p in t.fellowship.intro %}
         <p>{% if loop.first %}{{ t.fellowship.title_html | striptags }} {% endif %}{{ p }}</p>
         {% endfor %}
       </div>
-      {# The practice reads as prose like the intro: the children's clubs
-         first (what we organise for the teacher), then the intensives with
-         their questions in the scribble hand. #}
-      {% set craft = t.fellowship.benefits | selectattr('class', 'equalto', 'craft') | first %}
-      {% set kids = t.fellowship.benefits | selectattr('prose_html', 'defined') | first %}
+      {# What the intensives work on this year, as questions in the scribble
+         hand; the list changes with the year's themes. #}
       <div class="prose fellowship-practice">
-        <p>{{ kids.prose_html }}</p>
-        <p>{{ craft.body }}</p>
-        <div class="questions" aria-label="{{ craft.questions_aria }}">
-          {% for q in craft.questions %}
+        <p class="questions-title">{{ t.fellowship.questions_title }}</p>
+        <div class="questions" aria-label="{{ t.fellowship.questions_aria }}">
+          {% for q in t.fellowship.questions %}
           <span>{{ q }}</span>
           {% endfor %}
         </div>
@@ -535,11 +553,10 @@
      second set apart as the reason) and a row of terms.
      The terms are placeholders pending Vlad: only "Monthly" comes from the
      offers; who, how, what it asks and the amount are invented. #}
-  {% set grant = t.fellowship.benefits | selectattr('class', 'defined') | selectattr('class', 'equalto', 'scholarship') | first %}
   <section class="scholarship-band" id="scholarship" aria-labelledby="scholarship-title">
     <h2 class="scholarship-word" id="scholarship-title">{{ t.scholarship.title }}</h2>
     <div class="scholarship-text">
-      {% for p in grant.body.split('<br>') %}
+      {% for p in t.scholarship.body %}
       <p>{{ p }}</p>
       {% endfor %}
     </div>
@@ -548,54 +565,6 @@
       <div><dt>{{ term.label }}</dt><dd>{{ term.value }}</dd></div>
       {% endfor %}
     </dl>
-  </section>
-
-  {# The Tbilisi camp: its own peach section after the audiences, apart from
-     the monthly offers. Copy and the survey figures on the start side, the
-     photo on the end side (above the copy on mobile). "Learn more" expands
-     the section in place with the pilot's story (js/disclosure.js); without
-     JS the story stays open and the control stays hidden.
-     Photo: session-photos/Day2 (Kids)/R0016143.JPG, the camp's children's
-     day (12 Aug 2026), centre square crop: a child over the alphabet
-     sheet. #}
-  {% set tb = t.programs.tbilisi %}
-  <section class="camp" id="tbilisi-camp" aria-labelledby="tbilisi-promo-title" data-program="{{ tb.id }}">
-    <div class="camp-copy">
-      <h2 id="tbilisi-promo-title">{{ tb.title_html }}</h2>
-      <p class="promo-meta"><span>{{ tb.where }}</span><span><bdi dir="ltr">{{ tb.dates }}</bdi></span></p>
-      <ul class="camp-figures" role="list">
-        {% for s in tb.stats %}
-        <li class="camp-figure">
-          <span class="stat-value">{{ s.value_html }}</span>
-          <span class="stat-label">{{ s.label }}</span>
-        </li>
-        {% endfor %}
-      </ul>
-      <button type="button" class="camp-more text-link" aria-expanded="false" aria-controls="tbilisi-details" data-expand hidden>
-        <span>{{ t.programs.learn_more }}</span><svg class="camp-more-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-    </div>
-    {{ photo('camp-photo', 'camp-square', [480, 720, 1080, 1440], '(max-width: 700px) 16rem, 26rem', '', 720, 720) }}
-    {# The story runs on the copy's column; the teacher's line sits beside
-       it under the photo, in the display face. #}
-    <div class="camp-details" id="tbilisi-details">
-      <div class="camp-story">
-        <div class="program-results-copy">
-          <h3 class="program-results-title">{{ tb.results_title }}</h3>
-          {% for p in tb.results %}
-          <p>{{ p }}</p>
-          {% endfor %}
-          {% for p in tb.results_after %}
-          <p>{{ p }}</p>
-          {% endfor %}
-          <p class="results-caveat">{{ tb.caveat }}</p>
-        </div>
-        <figure class="camp-voice">
-          <blockquote class="results-quote">{{ tb.quote }}</blockquote>
-          <figcaption class="results-note">{{ tb.quote_note }}</figcaption>
-        </figure>
-      </div>
-    </div>
   </section>
 
   {# The featured article on a researcher's desk, before the people: the

@@ -3,8 +3,8 @@
 // than hidden (so the floating Apply rail and the FLIP animation see the
 // same DOM React produced).
 
-import { startTabs } from './tabs.js?v=fcb6593e';
-import { captureProgramLayout, animateProgramLayout } from './program-motion.js?v=fcb6593e';
+import { startTabs } from './tabs.js?v=69496d6a';
+import { captureProgramLayout, animateProgramLayout } from './program-motion.js?v=69496d6a';
 
 /**
  * @param {HTMLElement} programs  the `.programs` element

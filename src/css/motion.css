@@ -39,11 +39,6 @@
   isolation: isolate;
   display: flow-root;
 }
-.approach,
-.what-we-do {
-  display: flow-root;
-  background: var(--background);
-}
 @media (prefers-reduced-motion: no-preference) {
   .story-stack > .panel {
     scale: var(--card-entry-scale, 1);

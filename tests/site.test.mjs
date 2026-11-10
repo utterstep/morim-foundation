@@ -184,8 +184,14 @@ test('the fellowship pane is the offer of the open program', () => {
     const html = read(page);
     const t = JSON.parse(readFileSync(new URL(`../src/i18n/${lang}.json`, import.meta.url), 'utf8'));
     const current = t.programs.teachers[0];
-    assert.ok(html.includes(`<h2 class="display" id="fellowship-title">${current.title_html}</h2>`), `${page}: heading`);
+    // The fellowship's name and the edition sit inside the heading, over the year's title.
+    assert.ok(html.includes(`<h2 class="display" id="fellowship-title"><span class="offer-kicker">${current.kicker}</span> ${current.title_html}</h2>`), `${page}: heading`);
     assert.match(html, /<div class="prose fellowship-intro">\s*<p>[^<]+, /);
+    // The pane closes on this year's questions, under their own small heading.
+    const practice = /<div class="prose fellowship-practice">([\s\S]*?)<\/div>\s*<\/div>/.exec(html)?.[1] ?? '';
+    assert.ok(practice.includes(`<p class="questions-title">${t.fellowship.questions_title}</p>`), `${page}: questions heading`);
+    assert.deepEqual([...practice.matchAll(/<span>([^<]+)<\/span>/g)].map((m) => m[1]), t.fellowship.questions, `${page}: questions`);
+    assert.doesNotMatch(html, /pilot-link|pilot-camp/, `${page}: the pilot card left the pane; the camp section comes first`);
     const row = new RegExp(`<article class="offer-terms" id="program-${current.id}"[^>]*aria-labelledby="fellowship-title">([\\s\\S]*?)</article>`).exec(html);
     assert.ok(row, `${page}: offer terms`);
     assertOfferTerms(row[1], current, t);
@@ -223,53 +229,55 @@ test('the scholarship is its own blue band right after the audiences', () => {
   for (const [lang, page] of Object.entries(pages)) {
     const html = read(page);
     const t = JSON.parse(readFileSync(new URL(`../src/i18n/${lang}.json`, import.meta.url), 'utf8'));
-    const grant = t.fellowship.benefits.find((b) => b.class === 'scholarship');
     const band = /<section class="scholarship-band" id="scholarship" aria-labelledby="scholarship-title">([\s\S]*?)<\/section>/.exec(html);
     assert.ok(band, `${page}: band`);
     // One heading: the pen word, large; the feature's title is gone.
     assert.ok(band[1].includes(`<h2 class="scholarship-word" id="scholarship-title">${t.scholarship.title}</h2>`), `${page}: heading`);
     assert.equal(band[1].match(/<h2/g).length, 1, `${page}: one heading`);
     const paras = [...band[1].matchAll(/<p>([^<]+)<\/p>/g)].map((m) => m[1]);
-    assert.deepEqual(paras, grant.body.split('<br>'), `${page}: text`);
+    assert.deepEqual(paras, t.scholarship.body, `${page}: text`);
     const terms = [...band[1].matchAll(/<dt>([^<]+)<\/dt><dd>([^<]+)<\/dd>/g)].map((m) => ({ label: m[1], value: m[2] }));
     assert.deepEqual(terms, t.scholarship.terms, `${page}: terms`);
-    // After the audiences panel, before the camp; every offer tag lands here.
+    // After the audiences panel, before the team; every offer tag lands here.
     assert.ok(html.indexOf('id="scholarship"') > html.lastIndexOf('id="leaders"'), `${page}: after the panes`);
-    assert.ok(html.indexOf('id="scholarship"') < html.indexOf('id="tbilisi-camp"'), `${page}: before the camp`);
-    assert.equal(html.match(/href="#scholarship"/g).length, 3, `${page}: both offers and the What-we-do note link`);
+    assert.ok(html.indexOf('id="scholarship"') < html.indexOf('id="team"'), `${page}: before the team`);
+    assert.equal(html.match(/href="#scholarship"/g).length, 3, `${page}: both offers and the hero's terms link`);
     assert.doesNotMatch(html, /offer-popover|popovertarget/, `${page}: no popover`);
   }
 });
 
-test('the Tbilisi camp is its own section after the audiences, expanding its results in place', () => {
-  const en = JSON.parse(readFileSync(new URL('../src/i18n/en.json', import.meta.url), 'utf8'));
-  const figures = en.programs.tbilisi.stats.length;
-  for (const page of Object.values(pages)) {
+test('the Tbilisi camp is its own section before the offers, its story always open', () => {
+  for (const [lang, page] of Object.entries(pages)) {
     const html = read(page);
+    const t = JSON.parse(readFileSync(new URL(`../src/i18n/${lang}.json`, import.meta.url), 'utf8'));
+    const tb = t.programs.tbilisi;
     const camp = /<section class="camp" id="tbilisi-camp" aria-labelledby="tbilisi-promo-title"[^>]*>([\s\S]*?)<\/section>/.exec(html);
     assert.ok(camp, `${page} has no camp section`);
     assert.match(camp[1], /<h2 id="tbilisi-promo-title">/);
-    // Where, then the same dates as the pilot card's badge.
-    const meta = /<p class="promo-meta"><span>[^<]+<\/span><span><bdi dir="ltr">([^<]+)<\/bdi><\/span><\/p>/.exec(camp[1]);
-    assert.ok(meta, `${page} camp meta should be the place and the dates`);
-    assert.equal(meta[1], /<p class="running-badge"><bdi dir="ltr">([^<]+)<\/bdi>/.exec(html)?.[1], `${page}: camp and badge dates differ`);
+    // Where, the dates, and how many finished; then what the pilot was.
+    const meta = /<p class="promo-meta"><span>([^<]+)<\/span><span><bdi dir="ltr">([^<]+)<\/bdi><\/span><span>([^<]+)<\/span><\/p>/.exec(camp[1]);
+    assert.deepEqual(meta?.slice(1), [tb.where, tb.dates, tb.finished], `${page} camp meta`);
     assert.doesNotMatch(camp[1], /promo-meta">[^\n]*(Free|Бесплатно|חינם)/);
+    assert.ok(camp[1].includes(`<p class="camp-intro">${tb.intro}</p>`), `${page} camp intro`);
     assert.match(camp[1], /<img class="camp-photo" src="[^"]*assets\/camp-square-720\.webp"/);
     assert.doesNotMatch(html, /class="program-row[^"]*"[^>]*data-program="tbilisi"|promo-banner/);
-    // Key figures from the survey, each a number with its label.
+    // Key figures from the survey, each a number with its label; the one
+    // about adapting when a lesson goes off plan leads.
     const list = /<ul class="camp-figures" role="list">([\s\S]*?)<\/ul>/.exec(camp[1]);
     assert.ok(list, `${page} has no camp figures`);
-    assert.equal(list[1].match(/<span class="stat-value">[^<]*\d/g)?.length, figures);
-    assert.equal(list[1].match(/<span class="stat-label">[^<]+/g)?.length, figures);
-    // A disclosure control, not a dialog trigger; it names the story block.
-    assert.match(camp[1], /<button type="button" class="camp-more text-link" aria-expanded="false" aria-controls="tbilisi-details" data-expand hidden>/);
-    assert.match(camp[1], /<div class="camp-details" id="tbilisi-details">[\s\S]*class="results-quote"/);
-    assert.doesNotMatch(camp[1], /<dialog|data-dialog/);
-    assert.doesNotMatch(html, /id="tbilisi-results"|side-panel-promo/);
-    // Outside the tab panes: after the audiences section, before the team.
-    assert.ok(html.indexOf('id="tbilisi-camp"') > html.lastIndexOf('id="audiences"'));
-    assert.ok(html.indexOf('id="tbilisi-camp"') > html.indexOf('id="partners"'));
-    assert.ok(html.indexOf('id="tbilisi-camp"') < html.indexOf('id="team"'));
+    assert.equal(list[1].match(/<span class="stat-value">[^<]*\d/g)?.length, tb.stats.length);
+    assert.deepEqual([...list[1].matchAll(/<span class="stat-label">([^<]+)/g)].map((m) => m[1]), tb.stats.map((stat) => stat.label));
+    assert.match(tb.stats[0].value_html, /^60<small>%<\/small>.*25<small>%<\/small>$/, `${page}: the adapting figure leads`);
+    // The teacher's line and the caveat are in the page, not behind a control.
+    const story = /<div class="camp-details">([\s\S]*)$/.exec(camp[1])?.[1] ?? '';
+    assert.ok(story.includes(`<blockquote class="results-quote">${tb.quote}</blockquote>`), `${page}: quote`);
+    assert.ok(story.includes(`<p class="results-caveat">${tb.caveat}</p>`), `${page}: caveat`);
+    assert.doesNotMatch(camp[1], /<button|aria-expanded|data-expand|\bhidden\b|<dialog|data-dialog/, `${page}: nothing to open`);
+    assert.doesNotMatch(html, /id="tbilisi-results"|side-panel-promo|camp-more/);
+    // The proof comes ahead of the ask: after the steps, before the audiences.
+    const order = ['id="how-it-works"', 'id="tbilisi-camp"', 'id="audiences"', 'id="team"'].map((k) => html.indexOf(k));
+    assert.ok(order.every((at) => at > 0), `${page}: sections`);
+    assert.deepEqual([...order].sort((a, b) => a - b), order, `${page}: order`);
   }
 });
 
@@ -301,37 +309,96 @@ test('the landing has no floating program bar', () => {
   for (const page of Object.values(pages)) assert.doesNotMatch(read(page), /program-banner/);
 });
 
-test('the landing preloads what the hero collage needs first', () => {
+test('the landing preloads its module graph, and nothing of the old collage', () => {
   const html = read('index.html');
   const [, version] = /<link rel="modulepreload" href="js\/main\.js\?v=([0-9a-f]{8})">/.exec(html);
-  assert.ok(html.includes(`<link rel="modulepreload" href="js/hero/hero.js?v=${version}">`));
-  // The preloaded URLs are the ones the stamped imports request.
-  assert.ok(read('js/main.js').includes(`from './hero/hero.js?v=${version}'`));
-  for (const slug of ['discord', 'tiktok', 'chatgpt', 'fortnite', 'youtube']) {
-    assert.ok(html.includes(`imagesrcset="assets/hero-app-${slug}-128.webp 128w`), `${slug} icon preload`);
-  }
-  assert.ok(html.includes('<link rel="preload" as="image" href="assets/video/stream-headset-neon.webp">'));
-  assert.ok(read('ru/index.html').includes(`<link rel="modulepreload" href="../js/hero/hero.js?v=${version}">`));
-  assert.ok(!read('schools/index.html').includes('modulepreload'), 'no collage on schools');
+  // Every preloaded URL is one a stamped import requests, and the other way round.
+  const preloaded = [...html.matchAll(/<link rel="modulepreload" href="js\/([^"?]+)\?v=([0-9a-f]{8})">/g)];
+  assert.ok(preloaded.every((m) => m[2] === version));
+  const names = preloaded.map((m) => m[1]);
+  const graph = new Set();
+  const walk = (name) => {
+    if (graph.has(name)) return;
+    graph.add(name);
+    for (const [, spec] of read(`js/${name}`).matchAll(/(?:from|import)\s*'(\.[^'?]+)\?v=[0-9a-f]{8}'/g)) {
+      walk(join(dirname(name), spec).replaceAll('\\', '/'));
+    }
+  };
+  walk('main.js');
+  assert.deepEqual([...names].sort(), [...graph].sort());
+  assert.ok(names.includes('margin-note.js') && names.includes('lib/page-motion.js'));
+  // The hero is markup and CSS now: no script, no image or video hints.
+  assert.ok(!names.some((name) => name.includes('hero')), 'no hero script');
+  assert.doesNotMatch(html, /rel="preload" as="image"|assets\/video\//);
+  assert.ok(read('ru/index.html').includes(`<link rel="modulepreload" href="../js/main.js?v=${version}">`));
+  assert.ok(!read('schools/index.html').includes('modulepreload'), 'no preloads on schools');
 });
 
-// The CTA system: Apply (to the form) in the offers and the footer plus the
-// floating pill; Write to us beside it in the footer; partners write to the
-// mailbox with a subject, not the teachers' form.
-test('one primary action: Apply in the offers and the footer, floating once the hero has gone', () => {
+// The hero says the claim and shows the years: a headline with the marker,
+// a lead, the one Apply above the fold with the next cohort beside it, and
+// the years as an ordered list ending on an open slot.
+test('the hero is the claim, one Apply, and the years as a list', () => {
+  for (const [lang, page] of Object.entries(pages)) {
+    const html = read(page);
+    const t = JSON.parse(readFileSync(new URL(`../src/i18n/${lang}.json`, import.meta.url), 'utf8'));
+    const hero = /<section class="hero hero-years-layout" aria-labelledby="hero-title">([\s\S]*?)<\/section>/.exec(html)?.[1] ?? '';
+    assert.ok(hero.includes(`<h1 id="hero-title">${t.hero.title_html}</h1>`), `${page}: headline`);
+    assert.match(t.hero.title_html, /<mark>[^<]+<\/mark>$/, `${page}: the half that stays carries the marker`);
+    assert.equal((html.match(/<h1[ >]/g) ?? []).length, 1, `${page}: one h1`);
+    assert.ok(hero.includes(`<p class="hero-lead">${t.hero.lead}</p>`), `${page}: lead`);
+    assert.ok(hero.includes(`<a class="button hero-apply" href="${t.links.survey}" data-apply>${t.programs.apply}</a>`), `${page}: Apply`);
+    assert.ok(hero.includes(`${t.hero.next_label} ${t.programs.teachers[0].next} · <a href="#scholarship">${t.hero.next_terms}</a>`), `${page}: next cohort`);
+    const list = new RegExp(`<ol class="hero-years" aria-label="${t.hero.years_aria}">([\\s\\S]*?)</ol>`).exec(hero)?.[1] ?? '';
+    const years = [...list.matchAll(/<li class="hero-year" data-tint="([a-z]+)"><span class="hero-year-when"><bdi>([^<]+)<\/bdi><\/span><span class="hero-year-text">([^<]+)<\/span><\/li>/g)];
+    assert.deepEqual(years.map((m) => ({ tint: m[1], when: m[2], text: m[3] })), t.hero.years.map(({ when, text, tint }) => ({ tint, when, text })), `${page}: years`);
+    assert.ok(list.trimEnd().endsWith(`<li class="hero-year hero-year-next"><span class="hero-year-when">${t.hero.next_year}</span><span class="hero-year-text">${t.hero.next_year_text}</span></li>`), `${page}: the open slot closes the list`);
+    // Nothing of the collage: no script-built accents, no variant switch.
+    assert.doesNotMatch(html, /hero-accents|class="hero-app|data-hero-variant|hero-editorial/, `${page}: collage`);
+  }
+});
+
+// The frame, the year, the steps: three sections between the hero and the proof.
+test('the frame, this year’s themes and the steps follow the hero in order', () => {
+  for (const [lang, page] of Object.entries(pages)) {
+    const html = read(page);
+    const t = JSON.parse(readFileSync(new URL(`../src/i18n/${lang}.json`, import.meta.url), 'utf8'));
+    const w = t.what_we_do;
+    const order = ['class="hero ', 'id="what-we-do"', 'id="this-year"', 'id="how-it-works"', 'id="tbilisi-camp"'].map((k) => html.indexOf(k));
+    assert.ok(order.every((at) => at > 0), `${page}: sections`);
+    assert.deepEqual([...order].sort((a, b) => a - b), order, `${page}: order`);
+    const stance = /<section class="stance" id="what-we-do" aria-labelledby="what-we-do-title">([\s\S]*?)<\/section>/.exec(html)?.[1] ?? '';
+    assert.ok(stance.includes(`<h2 class="display" id="what-we-do-title">${w.title_html}</h2>`), `${page}: frame heading`);
+    const rows = [...stance.matchAll(/<p class="stance-label">([^<]+)<\/p>\s*<h3 class="stance-title">([\s\S]*?)<\/h3>\s*<p class="stance-body">([^<]+)<\/p>/g)];
+    assert.deepEqual(rows.map((m) => ({ label: m[1], title_html: m[2], body: m[3] })), w.stance, `${page}: rows`);
+    const year = /<section class="year" id="this-year" aria-labelledby="year-title">([\s\S]*?)<\/section>/.exec(html)?.[1] ?? '';
+    assert.ok(year.includes(`<p class="year-kicker">${w.year.kicker}</p>`) && year.includes(`<h2 class="year-title" id="year-title">${w.year.title}</h2>`), `${page}: year heading`);
+    assert.deepEqual([...year.matchAll(/<h3>([^<]+)<\/h3>/g)].map((m) => m[1]), [...w.year.themes.map((theme) => theme.title), w.year.next_title], `${page}: two themes and the open card`);
+    // The theme icons are decoration.
+    for (const [img] of year.matchAll(/<img [^>]*>/g)) assert.match(img, / alt="" /, `${page}: ${img}`);
+    const how = /<section class="how" id="how-it-works" aria-labelledby="how-title">([\s\S]*?)<\/section>/.exec(html)?.[1] ?? '';
+    assert.ok(how.includes(`<h2 class="how-title" id="how-title">${w.how_it_works.heading}</h2>`), `${page}: steps heading`);
+    assert.deepEqual([...how.matchAll(/<h4>([^<]+)<\/h4>/g)].map((m) => m[1]), w.how_it_works.steps.map((step) => step.title), `${page}: steps`);
+    assert.ok(how.includes(`<p class="beat-note wwd-note">${w.practice_note}</p>`), `${page}: pen line`);
+  }
+});
+
+// The CTA system: Apply (to the form) in the hero, the offers and the footer
+// plus the floating pill; Write to us beside it in the footer; partners
+// write to the mailbox with a subject, not the teachers' form.
+test('one primary action: Apply in the hero, the offers and the footer, floating once the hero has gone', () => {
   for (const [lang, page] of Object.entries(pages)) {
     const html = read(page);
     const t = JSON.parse(readFileSync(new URL(`../src/i18n/${lang}.json`, import.meta.url), 'utf8'));
     const applies = html.match(/<a class="button[^"]*" href="[^"]+" data-apply>/g) ?? [];
-    assert.equal(applies.length, 3, `${page}: two offers, footer`);
+    assert.equal(applies.length, 4, `${page}: hero, two offers, footer`);
     assert.ok(applies.every((a) => a.includes(`href="${t.links.survey}"`)), `${page}: every Apply leads to the form`);
-    assert.doesNotMatch(html, /hero-cta|hero-apply/, `${page}: no button in the hero`);
+    assert.equal((html.match(/class="button hero-apply"/g) ?? []).length, 1, `${page}: one button in the hero`);
     assert.match(html, /<div class="floating-apply-rail" data-anchor="\.hero" inert>\s*<a class="button floating-apply-button" href="[^"]+">[^<]+<\/a>\s*<\/div>/);
     assert.doesNotMatch(html, /floating-apply-button" href="[^"]+" data-apply/);
     assert.match(html, /<p class="footer-actions"><a class="button footer-apply" href="[^"]+" data-apply>[^<]+<\/a><\/p>\s*<a class="footer-email" href="mailto:[^"]+">[^<]+<\/a>/);
-    assert.equal((html.match(/class="button[^"]*"/g) ?? []).length, 4, `${page}: three Apply and the floating one`);
+    assert.equal((html.match(/class="button[^"]*"/g) ?? []).length, 5, `${page}: four Apply and the floating one`);
     assert.equal((html.match(/href="mailto:/g) ?? []).length, 1, `${page}: the address is the one mailto`);
-    for (const link of ['audience-trigger', 'pilot-button', 'camp-more']) assert.match(html, new RegExp(`class="[^"]*${link} text-link"`), `${page}: ${link}`);
+    assert.match(html, /class="audience-trigger text-link"/, `${page}: the schools link is a text link`);
   }
   for (const [lang, page] of Object.entries(schoolPages)) {
     const html = read(page);
@@ -409,30 +476,33 @@ test('the PISA 2025 article: one headline, a section list that matches its headi
   assert.doesNotMatch(body, /https:\/\/morim\.foundation/, 'links to the site stay relative');
 });
 
-// The landing features the article twice, without a section between the
-// story and the programs: a pen note in the margin of the intro, and the
-// article as a page on a desk before the team. Only where the article
-// exists in the landing's language.
-test('the English landing notes the PISA article in the intro’s margin', () => {
+// The landing features the article twice, without a section of its own
+// between the story and the programs: a pen note over the first stance row,
+// pointing at the word it is about, and the article as a page on a desk
+// before the team. Only where the article exists in the landing's language.
+test('the English landing notes the PISA article over the first stance row', () => {
   const html = read(pages.en);
-  const intro = /<div class="prose introduction">([\s\S]*?)<\/div>/.exec(html)?.[1] ?? '';
-  // The promise the note answers, then the note, then the arrow the script draws.
-  assert.match(intro, /<p>Our foundation is <span class="intro-claim">here to help\.<\/span><a class="margin-note" href="pisa-2025\/">[^<]+<span class="margin-note-link">[^<]+<\/span><\/a><svg class="margin-note-arrow" aria-hidden="true" focusable="false"><path d=""\/><\/svg><\/p>/);
+  const rows = [...html.matchAll(/<div class="stance-row">([\s\S]*?)<\/div>/g)].map((m) => m[1]);
+  assert.equal(rows.length, 3);
+  // The word the note answers, then the note, then the arrow the script draws.
+  assert.match(rows[0], /<h3 class="stance-title"><mark>Curious<\/mark> /);
+  assert.match(rows[0], /<\/p>\s*<a class="margin-note" href="pisa-2025\/" data-claim="\.stance-title mark" data-arrow="down">[^<]+<span class="margin-note-link">[^<]+<\/span><\/a><svg class="margin-note-arrow" aria-hidden="true" focusable="false"><path d=""\/><\/svg>\s*$/);
+  for (const row of rows.slice(1)) assert.doesNotMatch(row, /margin-note/);
   // Hopeful, not a verdict on anyone.
-  assert.match(intro, /curiosity counts as much as family background/);
-  assert.doesNotMatch(intro, /give up|gave up/);
+  assert.match(rows[0], /curiosity counts as much as family background/);
+  assert.doesNotMatch(rows[0], /give up|gave up/);
   assert.match(read('js/main.js'), /from '\.\/margin-note\.js\?v=[0-9a-f]{8}'/);
-  assert.doesNotMatch(html, /id="evidence"|class="evidence/, 'the band is gone');
+  assert.doesNotMatch(html, /id="evidence"|class="evidence|intro-claim|class="prose introduction"/, 'the band and the intro are gone');
   for (const lang of ['ru', 'he']) {
     assert.doesNotMatch(read(pages[lang]), /class="margin-note"/, `${lang}: the article is English only`);
   }
 });
 
-test('the English landing sets the PISA article on a desk between the camp and the team', () => {
+test('the English landing sets the PISA article on a desk between the scholarship and the team', () => {
   const html = read(pages.en);
   const desk = /<section class="desk" id="research" aria-labelledby="research-title">([\s\S]*?)<\/section>/.exec(html);
   assert.ok(desk, 'desk');
-  const order = ['id="tbilisi-camp"', 'id="research"', 'id="team"'].map((k) => html.indexOf(k));
+  const order = ['id="tbilisi-camp"', 'id="scholarship"', 'id="research"', 'id="team"'].map((k) => html.indexOf(k));
   assert.deepEqual([...order].sort((a, b) => a - b), order);
   assert.match(desk[1], /<h2 class="desk-title" id="research-title">Why <mark>curiosity<\/mark>, and why before&nbsp;15<\/h2>/);
   assert.match(desk[1], /<a class="text-link desk-link" href="pisa-2025\/">/);

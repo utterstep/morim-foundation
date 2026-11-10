@@ -1,7 +1,7 @@
 // Pointer drag for one hero item, ported from `begin`/`move`/`end` and the
 // click guard in PR #3 website/app/hero.tsx (lines 528-584, 663-671).
 
-import { dragOffset, isDragGesture } from '../lib/hero-apps.js?v=fcb6593e';
+import { dragOffset, isDragGesture } from '../lib/hero-apps.js?v=69496d6a';
 
 /**
  * @param {HTMLElement} el  the `.hero-app-item`
