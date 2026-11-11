@@ -515,7 +515,7 @@ test('the English landing sets the PISA article on a desk between the scholarshi
   assert.ok(desk, 'desk');
   const order = ['id="tbilisi-camp"', 'id="scholarship"', 'id="research"', 'id="team"'].map((k) => html.indexOf(k));
   assert.deepEqual([...order].sort((a, b) => a - b), order);
-  assert.match(desk[1], /<h2 class="desk-title" id="research-title">Why <mark>curiosity<\/mark>, and why before&nbsp;15<\/h2>/);
+  assert.match(desk[1], /<h2 class="desk-title" id="research-title">Why <mark>curiosity<\/mark>, and why we start&nbsp;early<\/h2>/);
   assert.match(desk[1], /<a class="text-link desk-link" href="pisa-2025\/">/);
   // The scene is decoration: hidden from assistive tech, its page out of the tab order.
   assert.match(desk[1], /<div class="desk-scene" aria-hidden="true">/);
