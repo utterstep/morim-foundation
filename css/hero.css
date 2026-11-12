@@ -40,6 +40,8 @@
   font-size: var(--t-lead);
   line-height: 1.4;
   letter-spacing: -0.02em;
+  /* No last line of one word. */
+  text-wrap: pretty;
 }
 .hero-actions {
   display: flex;
