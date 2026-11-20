@@ -326,6 +326,10 @@
      notes, the last one left open. The cards are a list in order, read
      once; nothing here moves or needs a script. #}
   {% set current = t.programs.teachers[0] %}
+  {# The terms in two formal sentences, on phones only: there the line under
+     Apply that says "free" sits at the bottom of the first screen or below
+     it. Wider screens show that line beside the headline. #}
+  <p class="hero-note">{{ t.hero.note_html }}</p>
   <section class="hero hero-years-layout" aria-labelledby="hero-title">
     <div class="hero-copy">
       <h1 id="hero-title">{{ t.hero.title_html }}</h1>

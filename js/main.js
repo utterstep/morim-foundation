@@ -1,21 +1,21 @@
 // Entry point. Wires the static page up in the same order the React tree
 // mounted its effects in PR #3 (website/app/home-content.tsx).
 
-import { startPageMotion } from './lib/page-motion.js?v=e9e9f3c6';
-import { startCardDepth } from './lib/card-depth.js?v=e9e9f3c6';
-import { watchApplyButtons } from './lib/floating-apply.js?v=e9e9f3c6';
-import { startFloatingHeader } from './header.js?v=e9e9f3c6';
-import { initDialogs } from './dialog.js?v=e9e9f3c6';
-import { startMobileMenu } from './mobile-menu.js?v=e9e9f3c6';
-import { initDetails, initExpander } from './disclosure.js?v=e9e9f3c6';
-import { watchProgramMotionPreference } from './program-motion.js?v=e9e9f3c6';
-import { startPrograms } from './programs.js?v=e9e9f3c6';
-import { startLanguage } from './lang.js?v=e9e9f3c6';
-import { startNavMenu } from './nav-menu.js?v=e9e9f3c6';
-import { startScrollHint } from './scroll-hint.js?v=e9e9f3c6';
-import { startAudiences } from './audiences.js?v=e9e9f3c6';
-import { dealHandLetters } from './hand-a.js?v=e9e9f3c6';
-import { startMarginNote } from './margin-note.js?v=e9e9f3c6';
+import { startPageMotion } from './lib/page-motion.js?v=96e04836';
+import { startCardDepth } from './lib/card-depth.js?v=96e04836';
+import { watchApplyButtons } from './lib/floating-apply.js?v=96e04836';
+import { startFloatingHeader } from './header.js?v=96e04836';
+import { initDialogs } from './dialog.js?v=96e04836';
+import { startMobileMenu } from './mobile-menu.js?v=96e04836';
+import { initDetails, initExpander } from './disclosure.js?v=96e04836';
+import { watchProgramMotionPreference } from './program-motion.js?v=96e04836';
+import { startPrograms } from './programs.js?v=96e04836';
+import { startLanguage } from './lang.js?v=96e04836';
+import { startNavMenu } from './nav-menu.js?v=96e04836';
+import { startScrollHint } from './scroll-hint.js?v=96e04836';
+import { startAudiences } from './audiences.js?v=96e04836';
+import { dealHandLetters } from './hand-a.js?v=96e04836';
+import { startMarginNote } from './margin-note.js?v=96e04836';
 
 const EASING = 'cubic-bezier(0.22, 1, 0.36, 1)';
 const FAQ_MOTION = { duration: 250, easing: EASING, fade: 200 };
